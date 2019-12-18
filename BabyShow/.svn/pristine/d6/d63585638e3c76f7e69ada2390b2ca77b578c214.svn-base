@@ -1,0 +1,103 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/main_item_07_title"
+        layout="@layout/item_main_type06"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="0.6"
+        android:background="#fff"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="200dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="0.7"
+            android:background="#fff" >
+
+            <ImageView
+                android:id="@+id/main_item05_image01"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_launcher" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="200dp"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:background="#fff" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/main_item05_text01"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="TextView"
+                    android:textColor="#999999"
+                    android:textSize="@dimen/text_size_10" />
+
+                <TextView
+                    android:id="@+id/main_item05_text02"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:ellipsize="end"
+                    android:gravity="left"
+                    android:maxLines="2"
+                    android:text="TextViewTextVitVitViewTextView"
+                    android:textColor="#000"
+                    android:textSize="@dimen/hint_text_size" />
+
+                <TextView
+                    android:id="@+id/main_item05_text03"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:ellipsize="end"
+                    android:gravity="left"
+                    android:maxLines="3"
+                    android:text="TextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextView"
+                    android:textColor="#999999"
+                    android:textSize="@dimen/hint_text_size" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/main_item05_image02"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="30dp"
+                android:src="@drawable/main_item_07_showfrom" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:layout_alignLeft="@+id/main_item_number"
+        android:layout_below="@+id/main_item_number"
+        android:layout_marginTop="10dp"
+        android:background="#e8e8e8" />
+
+</LinearLayout>

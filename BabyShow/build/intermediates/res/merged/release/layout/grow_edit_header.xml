@@ -1,0 +1,212 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:id="@+id/ly_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingBottom="8dp"
+                android:paddingRight="5dp"
+                android:paddingTop="8dp"
+                android:text="添加标签"
+                android:textColor="#8A8A8A"
+                android:textSize="16dp" />
+
+            <HorizontalScrollView
+                android:id="@+id/tag"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_weight="1"
+                android:scrollbars="none" >
+
+                <LinearLayout
+                     android:id="@+id/tag_layout1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    
+                </LinearLayout>
+
+                <!--
+                  <TextView
+                    android:id="@+id/tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="3dp"
+                    android:background="@drawable/grow_biao_bg"
+                    android:gravity="center"
+                    android:text="自定义"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12dp" />
+                -->
+            </HorizontalScrollView>
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:background="#D5D5D5" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="修改时间"
+                android:textColor="#8A8A8A"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/title1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingBottom="8dp"
+                android:paddingRight="5dp"
+                android:paddingTop="8dp"
+                android:textColor="#3A3A3A"
+                android:textSize="16dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/sel_xia_hui" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:background="#D5D5D5" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_vertical"
+            android:layout_marginLeft="5dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="添加标题"
+                android:textColor="#8A8A8A"
+                android:textSize="16dp" />
+
+            <EditText
+                android:id="@+id/list_title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center"
+                android:paddingBottom="8dp"
+                android:paddingRight="5dp"
+                android:paddingTop="8dp"
+                android:textColor="#3A3A3A"
+                android:textColorHint="#8A8A8A"
+                android:textSize="16dp" />
+
+            <ImageView
+                android:id="@+id/grow_clear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/grow_clear" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view_line"
+        android:layout_width="fill_parent"
+        android:layout_height="5dp"
+        android:layout_below="@+id/ly_title"
+        android:background="#F3F3F3" />
+
+    <RelativeLayout
+        android:id="@+id/add_img"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/view_line"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@android:color/background_light" >
+
+        <RelativeLayout
+            android:id="@+id/view1"
+            android:layout_width="120dip"
+            android:layout_height="120dip"
+            android:layout_marginLeft="3dp"
+            android:background="#E7E7E7" >
+
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/grow_add" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/view"
+            android:layout_width="fill_parent"
+            android:layout_height="120dip"
+            android:layout_toRightOf="@+id/view1"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:maxLength="50"
+                android:text="点击添加图片"
+                android:textColor="#E84C3D"
+                android:textSize="18dp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/add_img"
+        android:background="#D5D5D5" />
+
+</RelativeLayout>

@@ -1,0 +1,406 @@
+package com.yyqq.code.toyslease;
+
+import java.util.ArrayList;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.ab.http.AbHttpUtil;
+import com.ab.http.AbRequestParams;
+import com.ab.http.AbStringHttpResponseListener;
+import com.umeng.analytics.MobclickAgent;
+import com.yyqq.babyshow.R;
+import com.yyqq.code.group.SuperGroupActivity;
+import com.yyqq.code.login.WebLoginActivity;
+import com.yyqq.commen.adapter.MainItemBodyAdapter;
+import com.yyqq.commen.model.MainItemBodyImgBean;
+import com.yyqq.commen.model.ToysDetailBean;
+import com.yyqq.commen.share.GroupSharedUtils;
+import com.yyqq.commen.utils.Config;
+import com.yyqq.commen.utils.RoundAngleImageView;
+import com.yyqq.commen.view.PullDownView.OnPullDownListener;
+import com.yyqq.commen.view.RecodeListView;
+import com.yyqq.framework.activity.BaseActivity;
+import com.yyqq.framework.application.MyApplication;
+import com.yyqq.framework.application.ServerMutualConfig;
+
+
+/**
+ * 待租、售物品详情
+ * */
+public class ToysLeaseDetailActivity extends BaseActivity implements OnPullDownListener{
+
+	private LinearLayout lease_detail_detail;
+	private LinearLayout lease_detail_support;
+	private LinearLayout lease_detail_des;
+	private RelativeLayout lease_detail_img_all;
+	private ImageView main_item_back;
+	private ImageView lease_detail_img;
+	private TextView lease_detail_name;
+	private TextView lease_detail_from;
+	private TextView lease_detail_support_text;
+	private TextView lease_detail_hint01_title;
+	private TextView lease_detail_hint01_text;
+	private TextView lease_detail_hint02_title;
+	private TextView lease_detail_hint02_text;
+	private TextView lease_detail_hint03_title;
+	private TextView lease_detail_hint03_text;
+	private TextView lease_detail_model_01title;
+	private TextView lease_user_name;
+	private TextView lease_detail_sunpei;
+	private TextView lease_detail_sunpeihint;
+	private TextView lease_detail_baozhang;
+	private RoundAngleImageView lease_user_icon;
+	private RecodeListView lease_detail_des_list;
+	private TextView lease_detail_monery;
+	private TextView lease_detail_originalprice;
+	private TextView lease_detail_pay;
+	private ScrollView lease_detail_sc;
+	private TextView lease_detail_hintqq;
+	private TextView lease_detail_addtext;
+	private TextView lease_detail_hintqqnumber;
+	private ImageView lease_detail_hint02_phone;
+	private ImageView toys_detial_shared;
+	
+	public static String TOYS_DETAIL_KEY = "toys_detail_key";
+	private AbHttpUtil ab;
+	private LayoutInflater inflater;
+	private ArrayList<MainItemBodyImgBean> bodyList = new ArrayList<MainItemBodyImgBean>();
+	private ArrayList<String> imgList = new ArrayList<String>();
+	private String business_id = "";
+	private String wayType = "";
+	private String phoneNumber = "";
+	private String shared_img = "";
+	private String shared_des = "";
+	private String shared_title = "";
+	public static ToysLeaseDetailActivity toysLeaseDetailActivity = null;
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_yoys_lease_detail);
+	}
+
+	@Override
+	protected void initView() {
+		toys_detial_shared = (ImageView) findViewById(R.id.toys_detial_shared);
+		lease_detail_baozhang = (TextView) findViewById(R.id.lease_detail_baozhang);
+		lease_detail_hint02_phone = (ImageView) findViewById(R.id.lease_detail_hint02_phone);
+		lease_user_name = (TextView) findViewById(R.id.lease_user_name);
+		lease_user_icon = (RoundAngleImageView) findViewById(R.id.lease_user_icon);
+		lease_detail_sc = (ScrollView) findViewById(R.id.lease_detail_sc);
+		lease_detail_detail = (LinearLayout) findViewById(R.id.lease_detail_detail);
+		lease_detail_support = (LinearLayout) findViewById(R.id.lease_detail_support);
+		lease_detail_des = (LinearLayout) findViewById(R.id.lease_detail_des);
+		lease_detail_img_all = (RelativeLayout) findViewById(R.id.lease_detail_img_all);
+		main_item_back = (ImageView) findViewById(R.id.main_item_back);
+		lease_detail_img = (ImageView) findViewById(R.id.lease_detail_img);
+		lease_detail_name = (TextView) findViewById(R.id.lease_detail_name);
+		lease_detail_from = (TextView) findViewById(R.id.lease_detail_from);
+		lease_detail_support_text = (TextView) findViewById(R.id.lease_detail_support_text);
+		lease_detail_hint01_title = (TextView) findViewById(R.id.lease_detail_hint01_title);
+		lease_detail_hint01_text = (TextView) findViewById(R.id.lease_detail_hint01_text);
+		lease_detail_hint02_title = (TextView) findViewById(R.id.lease_detail_hint02_title);
+		lease_detail_hint02_text = (TextView) findViewById(R.id.lease_detail_hint02_text);
+		lease_detail_hint03_title = (TextView) findViewById(R.id.lease_detail_hint03_title);
+		lease_detail_hint03_text = (TextView) findViewById(R.id.lease_detail_hint03_text);
+		lease_detail_model_01title = (TextView) findViewById(R.id.lease_detail_model_01title);
+		lease_detail_sunpei = (TextView) findViewById(R.id.lease_detail_sunpei);
+		lease_detail_sunpeihint = (TextView) findViewById(R.id.lease_detail_sunpeihint);
+		lease_detail_des_list = (RecodeListView) findViewById(R.id.lease_detail_des_list);
+		lease_detail_monery = (TextView) findViewById(R.id.lease_detail_monery);
+		lease_detail_originalprice = (TextView) findViewById(R.id.lease_detail_originalprice);
+		lease_detail_pay = (TextView) findViewById(R.id.lease_detail_pay);
+		lease_detail_hintqq = (TextView) findViewById(R.id.lease_detail_hintqq);
+		lease_detail_addtext = (TextView) findViewById(R.id.lease_detail_addtext);
+		lease_detail_hintqqnumber = (TextView) findViewById(R.id.lease_detail_hintqqnumber);
+		lease_detail_des_list.setFocusable(false); // 消除listview焦点
+		lease_detail_sc.smoothScrollTo(0,20); // scrollView置顶
+		lease_detail_support.setVisibility(View.GONE);
+	}
+
+	@Override
+	protected void initData() {
+		toysLeaseDetailActivity = this;
+		ab = AbHttpUtil.getInstance(ToysLeaseDetailActivity.this);
+		inflater = LayoutInflater.from(ToysLeaseDetailActivity.this);
+	}
+
+	@Override
+	protected void setListener() {
+		
+		toys_detial_shared.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				GroupSharedUtils.groupShareBean bean = new GroupSharedUtils.groupShareBean();
+				bean.setContext(ToysLeaseDetailActivity.this);
+				bean.setShare_img(shared_img);
+				bean.setShare_text(shared_des);
+				bean.setShare_title(shared_title);
+				bean.setShare_url("http://www.baobaoshowshow.com/fenxiang/play.html?"+"business_id="+business_id+"&login_user_id="+Config.getUser(ToysLeaseDetailActivity.this).uid);
+				GroupSharedUtils.SharedGroup(bean);
+			}
+		});
+		
+		lease_detail_hint02_phone.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				AlertDialog.Builder builder = new Builder(ToysLeaseDetailActivity.this);
+				builder.setTitle("确定联系对方吗？");
+				builder.setPositiveButton("拨号",
+						new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog,
+							int which) {
+						dialog.dismiss();
+						Intent intent = new Intent(Intent.ACTION_CALL);
+						intent.setData(Uri.parse("tel:" + phoneNumber));
+						startActivity(intent);
+					}
+				});
+				builder.setNegativeButton("取消",
+						new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog,
+							int which) {
+						dialog.dismiss();
+					}
+				});
+				builder.create().show();
+			}
+		});
+		
+		lease_detail_pay.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(!MyApplication.getVisitor().equals("0")  || Config.getUser(ToysLeaseDetailActivity.this).uid.equals("")){
+					Intent in = new Intent(ToysLeaseDetailActivity.this, WebLoginActivity.class);
+					startActivity(in);
+				}else{
+					if(wayType.isEmpty()){
+						return;
+					}else{
+						if(wayType.equals("0")){ // 不支持
+							AlertDialog.Builder builder = new Builder(ToysLeaseDetailActivity.this);
+							builder.setTitle("确定联系对方吗？");
+							builder.setPositiveButton("拨号",
+									new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									dialog.dismiss();
+									Intent intent = new Intent(Intent.ACTION_CALL);
+									intent.setData(Uri.parse("tel:" + phoneNumber));
+									startActivity(intent);
+								}
+							});
+							builder.setNegativeButton("取消",
+									new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									dialog.dismiss();
+								}
+							});
+							builder.create().show();
+						}else if(wayType.equals("1")){ // 支持
+							Intent intent = new Intent(ToysLeaseDetailActivity.this, ToysLeasePayActivity.class);
+							intent.putExtra(ToysLeasePayActivity.TOYS_ORDER_KEY, business_id);
+							startActivity(intent);
+						}
+					}
+				}
+			}
+		});
+		
+		main_item_back.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				ToysLeaseDetailActivity.this.finish();
+			}
+		});
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+		onRefresh();
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
+	
+	@Override
+	public void onRefresh() {
+		Config.showProgressDialog(ToysLeaseDetailActivity.this, false, null);
+		final AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(ToysLeaseDetailActivity.this).uid);
+		params.put("business_id", getIntent().getStringExtra(TOYS_DETAIL_KEY));
+		ab.get(ServerMutualConfig.GET_TOYS_DETAIL + "&" + params.toString(),new AbStringHttpResponseListener() {
+			@Override
+			public void onSuccess(int statusCode, String content) {
+				super.onSuccess(statusCode, content);
+				Config.dismissProgress();
+				try {
+					if(!content.isEmpty() && new JSONObject(content).getBoolean("success")){
+						initToysDetial(content);
+						initToysDetialList(content);
+					}else{
+						Toast.makeText(ToysLeaseDetailActivity.this, new JSONObject(content).getString("reMsg"), 2).show();
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			@Override
+			public void onFinish() {
+				super.onFinish();
+				Config.dismissProgress();
+			}
+			
+			@Override
+			public void onFailure(int statusCode, String content,
+					Throwable error) {
+				super.onFailure(statusCode, content, error);
+			}
+		});
+		
+	}
+
+	@Override
+	public void onMore() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+	/**
+	 * 初始化页面数据
+	 * */
+	private void initToysDetial(String resultStr){
+		try {
+			JSONObject json = new JSONObject(resultStr);
+			ToysDetailBean bean = new ToysDetailBean();
+			bean = bean.fromJson(json.getJSONObject("data"));
+			business_id = bean.getDetail().getBusiness_id();
+			MyApplication.getInstance().display(bean.getDetail().getImg_thumb(), lease_detail_img, R.drawable.def_image);
+			MyApplication.getInstance().display(bean.getDetail().getUserIconurl(), lease_user_icon, R.drawable.def_image);
+			lease_detail_name.setText(bean.getDetail().getMain_business_title());
+			lease_detail_from.setText(bean.getDetail().getSupport_name());
+			lease_detail_support_text.setText(bean.getDetail().getSupper_des());
+			lease_detail_hint01_title.setText(bean.getDetail().getAge_range());
+			lease_detail_hint01_text.setText(bean.getDetail().getAge());
+			lease_detail_hint02_title.setText("联系方式");
+			lease_detail_hint02_text.setText(bean.getDetail().getBusiness_contact());
+			lease_detail_hint03_title.setText("发布时间");
+			lease_detail_hint03_text.setText(bean.getDetail().getCreate_time());
+			lease_detail_model_01title.setText(bean.getToys_des());
+			lease_detail_monery.setText(bean.getPrice().getSell_price());
+			lease_detail_originalprice.setText(bean.getPrice().getMarket_price());
+			lease_detail_hintqqnumber.setText(bean.getDetail().getQq());
+			lease_detail_hintqq.setText(" QQ 号码");
+			lease_detail_addtext.setText(bean.getDetail().getAddText());
+			lease_user_name.setText(bean.getDetail().getUser_name());
+			lease_detail_pay.setText(bean.getPrice().getPrice_button());
+			lease_detail_sunpei.setText(bean.getDetail().getSunpei());
+			lease_detail_sunpeihint.setText(bean.getDetail().getSunpeiHint());
+			lease_detail_baozhang.setText(bean.getDetail().getBaozhang());
+			if(bean.getDetail().getSunpeiHint().isEmpty()){
+				lease_detail_sunpeihint.setVisibility(View.GONE);
+			}
+			lease_detail_sc.smoothScrollTo(0,20);
+			wayType = bean.getDetail().getIs_support();
+			phoneNumber = bean.getDetail().getBusiness_contact();
+			if(bean.getPrice().getMarket_price().isEmpty()){
+				lease_detail_originalprice.setVisibility(View.GONE);
+			}
+			if(bean.getDetail().getIs_support().equals("1")){
+				lease_detail_support.setVisibility(View.VISIBLE);
+			}else{
+				lease_detail_support.setVisibility(View.GONE);
+			}
+			
+			shared_img = bean.getDetail().getImg_thumb();
+			shared_des = bean.getDetail().getMain_business_title() + "-" +bean.getPrice().getSell_price();
+			shared_title = bean.getDetail().getMain_business_title() + "-" +bean.getPrice().getSell_price();
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 初始化图文详情
+	 * */
+	private void initToysDetialList(String resultStr){
+		try {
+			JSONObject json = new JSONObject(resultStr);
+			MainItemBodyImgBean infoBean;
+			
+			if(json.getJSONObject("data").getJSONArray("description").length() == 0){
+				lease_detail_model_01title.setVisibility(View.GONE);
+				return;
+			}
+			
+			for (int i = 0; i < json.getJSONObject("data").getJSONArray("description").length() ; i++) {
+				// 添加文字
+				if (!json.getJSONObject("data").getJSONArray("description").getJSONObject(i).getString("business_des").isEmpty()) {
+					infoBean = new MainItemBodyImgBean();
+					infoBean.setDescription(json.getJSONObject("data").getJSONArray("description").getJSONObject(i).getString("business_des"));
+					bodyList.add(infoBean);
+				}
+				// 添加图片信息
+				for (int j = 0; j < json.getJSONObject("data").getJSONArray("description").getJSONObject(i).getJSONArray("img").length(); j++) {
+					infoBean = new MainItemBodyImgBean();
+					infoBean.setImg_thumb(json.getJSONObject("data").getJSONArray("description").getJSONObject(i).getJSONArray("img").getJSONObject(j).getString("img_thumb"));
+					infoBean.setImg_thumb_height(json.getJSONObject("data").getJSONArray("description").getJSONObject(i).getJSONArray("img").getJSONObject(j).getString("img_thumb_height"));
+					infoBean.setImg_thumb_width(json.getJSONObject("data").getJSONArray("description").getJSONObject(i).getJSONArray("img").getJSONObject(j).getString("img_thumb_width"));
+					infoBean.setImg(json.getJSONObject("data").getJSONArray("description").getJSONObject(i).getJSONArray("img").getJSONObject(j).getString("img_thumb"));
+					infoBean.setImg_height(json.getJSONObject("data").getJSONArray("description").getJSONObject(i).getJSONArray("img").getJSONObject(j).getString("img_thumb_height"));
+					infoBean.setImg_width(json.getJSONObject("data").getJSONArray("description").getJSONObject(i).getJSONArray("img").getJSONObject(j).getString("img_thumb_width"));
+					infoBean.setImg_down(json.getJSONObject("data").getJSONArray("description").getJSONObject(i).getJSONArray("img").getJSONObject(j).getString("img_down"));
+					if(!infoBean.getImg_thumb().isEmpty()){
+						imgList.add(infoBean.getImg_thumb());
+						bodyList.add(infoBean);
+					}
+				}
+			}
+			
+			if(bodyList.size() != 0){
+				MainItemBodyAdapter BodyAdapter = new MainItemBodyAdapter(ToysLeaseDetailActivity.this, inflater, MyApplication.getInstance(), bodyList, imgList);
+				lease_detail_des_list.setAdapter(BodyAdapter);
+			}else{
+				lease_detail_des_list.setVisibility(View.GONE);
+				lease_detail_model_01title.setVisibility(View.GONE);
+			}
+			
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+	
+}

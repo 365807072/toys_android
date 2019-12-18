@@ -1,0 +1,55 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical" >
+
+        <TextView
+            android:id="@+id/item_group_category_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="1"
+            android:textSize="@dimen/text_size_14" />
+
+        <TextView
+            android:id="@+id/item_group_category_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="title"
+            android:textSize="@dimen/text_size_14" />
+
+        <ImageView
+            android:id="@+id/item_group_category_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_weight="0.5"
+            android:src="@drawable/group_category_edit" />
+
+        <ImageView
+            android:id="@+id/item_group_category_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_weight="0.5"
+            android:src="@drawable/group_category_delete" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="20dp"
+        android:background="#e4e4e4" />
+
+</LinearLayout>

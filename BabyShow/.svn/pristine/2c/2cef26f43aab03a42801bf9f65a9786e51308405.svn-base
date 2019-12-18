@@ -1,0 +1,136 @@
+package com.yyqq.commen.model;
+
+public class ToysLeaseOrderListBean {
+
+	private String business_id = "";
+	private String business_title = "";
+	private String img_thumb = "";
+	private String sell_price = "";
+	private String post_create_time = "";
+	private String status = "";
+	private String status_name = "";
+	private String order_id = "";
+	private String is_reset = "";
+	private String order_status = "";
+	private String is_del = "";
+
+	public ToysLeaseOrderListBean() {
+	}
+
+	public ToysLeaseOrderListBean(String business_id, String business_title,
+			String img_thumb, String sell_price, String post_create_time,
+			String status, String status_name, String order_id,
+			String is_reset, String order_status) {
+		super();
+		this.business_id = business_id;
+		this.business_title = business_title;
+		this.img_thumb = img_thumb;
+		this.sell_price = sell_price;
+		this.post_create_time = post_create_time;
+		this.status = status;
+		this.status_name = status_name;
+		this.order_id = order_id;
+		this.is_reset = is_reset;
+		this.order_status = order_status;
+	}
+
+	public String getBusiness_id() {
+		return business_id;
+	}
+
+	public void setBusiness_id(String business_id) {
+		this.business_id = business_id;
+	}
+
+	public String getBusiness_title() {
+		return business_title;
+	}
+
+	public void setBusiness_title(String business_title) {
+		this.business_title = business_title;
+	}
+
+	public String getImg_thumb() {
+		return img_thumb;
+	}
+
+	public void setImg_thumb(String img_thumb) {
+		this.img_thumb = img_thumb;
+	}
+
+	public String getSell_price() {
+		return sell_price;
+	}
+
+	public void setSell_price(String sell_price) {
+		this.sell_price = sell_price;
+	}
+
+	public String getPost_create_time() {
+		return post_create_time;
+	}
+
+	public void setPost_create_time(String post_create_time) {
+		this.post_create_time = post_create_time;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getStatus_name() {
+		return status_name;
+	}
+
+	public void setStatus_name(String status_name) {
+		this.status_name = status_name;
+	}
+
+	public String getOrder_id() {
+		return order_id;
+	}
+
+	public void setOrder_id(String order_id) {
+		this.order_id = order_id;
+	}
+
+	public String getIs_reset() {
+		return is_reset;
+	}
+
+	public void setIs_reset(String is_reset) {
+		this.is_reset = is_reset;
+	}
+
+	public String getOrder_status() {
+		return order_status;
+	}
+
+	public void setOrder_status(String order_status) {
+		this.order_status = order_status;
+	}
+
+	public String getIs_del() {
+		return is_del;
+	}
+
+	public void setIs_del(String is_del) {
+		this.is_del = is_del;
+	}
+
+	@Override
+	public String toString() {
+		return "ToysLeaseOrderListBean [business_id=" + business_id
+				+ ", business_title=" + business_title + ", img_thumb="
+				+ img_thumb + ", sell_price=" + sell_price
+				+ ", post_create_time=" + post_create_time + ", status="
+				+ status + ", status_name=" + status_name + ", order_id="
+				+ order_id + ", is_reset=" + is_reset + ", order_status="
+				+ order_status + ", is_del=" + is_del + "]";
+	}
+
+}

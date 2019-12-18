@@ -1,0 +1,110 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="180dp"
+        android:layout_weight="0.6"
+        android:background="#fff"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="180dp"
+            android:layout_marginRight="0.5dp"
+            android:layout_weight="0.6"
+            android:background="#fff" >
+
+            <ImageView
+                android:id="@+id/main_item05_image01"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_launcher" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="180dp"
+            android:layout_marginLeft="0.5dp"
+            android:layout_weight="1"
+            android:background="#fff"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/main_item05_image02"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginBottom="0.5dp"
+                android:layout_weight="1"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_launcher" />
+
+            <ImageView
+                android:id="@+id/main_item05_image03"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="0.5dp"
+                android:layout_weight="1"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_launcher" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:orientation="vertical"
+        android:paddingTop="10dp" >
+
+        <TextView
+            android:id="@+id/main_item_par_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="标题"
+            android:textColor="#000"
+            android:textSize="@dimen/title_text_size_corner" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="#fff"
+            android:orientation="horizontal"
+            android:visibility="gone" >
+
+            <TextView
+                android:id="@+id/main_item_par_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="标签"
+                android:textSize="@dimen/title_text_size_corner" />
+
+            <TextView
+                android:id="@+id/main_item_par_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="观看数量"
+                android:textSize="@dimen/title_text_size_corner"
+                android:visibility="gone" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:layout_alignLeft="@+id/main_item_number"
+        android:layout_below="@+id/main_item_number"
+        android:layout_marginTop="15dp"
+        android:background="#e8e8e8" />
+
+</LinearLayout>

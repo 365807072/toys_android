@@ -1,0 +1,96 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/title_height"
+        android:background="#fff" >
+
+        <ImageView
+            android:id="@+id/lease_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/back_show" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="我的押金"
+            android:textColor="#333333"
+            android:textSize="@dimen/title_text_size_center" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/toys_deposit_bg"
+        android:padding="10dp" >
+
+        <TextView
+            android:id="@+id/toys_deposit_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/toys_deposit_monery"
+            android:layout_marginBottom="10dp"
+            android:text="TextView"
+            android:textColor="#fff"
+            android:textSize="@dimen/text_size_14" />
+
+        <TextView
+            android:id="@+id/toys_deposit_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
+            android:text="TextView"
+            android:textColor="#fff"
+            android:textSize="@dimen/text_size_14" />
+
+        <TextView
+            android:id="@+id/toys_deposit_monery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/toys_deposit_title"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:text="TextView"
+            android:textColor="#fff"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/toys_deposit_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/toys_deposit_monery"
+            android:layout_alignBottom="@+id/toys_deposit_monery"
+            android:layout_alignParentRight="true"
+            android:text="TextView"
+            android:textColor="#fff"
+            android:textSize="@dimen/text_size_14" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/toys_deposit_submit"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/lease_tixian"
+        android:text="提现"
+        android:textColor="#fff" />
+
+</LinearLayout>

@@ -1,0 +1,940 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yyqq.babyshow"
+    android:versionCode="99"
+    android:versionName="8.9.5" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="19" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 连接互联网Internet权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.REORDER_TASKS" />
+    <uses-permission android:name="android.permission.Activity.NOTIFICATION_SERVICE" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" >
+    </uses-permission>
+
+    <!-- 第三方 -->
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+
+    <!-- 腾讯地图定位 -->
+    <!-- 通过GPS得到精确位置 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- 通过网络得到粗略位置 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 访问网络. 某些位置信息需要从网络服务器获取 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 访问WiFi状态. 需要WiFi信息用于网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 修改WiFi状态. 发起WiFi扫描, 需要WiFi信息用于网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <!-- 访问网络状态, 检测网络的可用性. 需要网络运营商相关信息用于网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 访问网络的变化, 需要某些信息用于网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <!-- 访问手机当前状态, 需要某些信息用于网络定位 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <!-- 手机注册 -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <!-- Required -->
+    <permission
+        android:name="com.yyqq.babyshow.permission.JPUSH_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <!-- Required  一些系统要求的权限，如访问网络等 -->
+    <uses-permission android:name="com.yyqq.babyshow.permission.JPUSH_MESSAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <!-- Optional for location -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+
+    <!-- 支付宝 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:name="com.yyqq.framework.application.MyApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".StartActivity"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="znn" />
+            </intent-filter>
+        </activity>
+
+        <!-- 支持全面屏 -->
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.1" />
+
+        <!-- 手机注册 -->
+        <meta-data
+            android:name="Mob-AppKey"
+            android:value="e429567eaf24" />
+        <meta-data
+            android:name="Mob-AppSecret"
+            android:value="9c17c627949764ff03ac1bf2b378891f" />
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="52dfb0fe56240b496d00b0be" >
+        </meta-data>
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="tongyong ID" />
+        <!-- tongyong ID -->
+        <!-- 手机注册 -->
+        <activity
+            android:name="com.mob.tools.MobUIShell"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+
+            <!--
+			如果集成QQ分享，或者使用QQ客户端来进行QQ空间的
+			分享，须要在此处添加一个对ACTION_VIEW事件的过滤器，
+			其中的scheme是“tencent”前缀再开发者应用的加上appId。
+			如果此过滤器不设置，则分享结束以后不能得到正确的回调
+            -->
+            <intent-filter>
+                <data android:scheme="tencent1101220810" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+        </activity>
+        <!-- Required -->
+        <service
+            android:name="cn.jpush.android.service.PushService"
+            android:enabled="true"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTER" />
+                <action android:name="cn.jpush.android.intent.REPORT" />
+                <action android:name="cn.jpush.android.intent.PushService" />
+                <action android:name="cn.jpush.android.intent.PUSH_TIME" />
+            </intent-filter>
+        </service>
+
+        <!-- Required -->
+        <receiver
+            android:name="cn.jpush.android.service.PushReceiver"
+            android:enabled="true" >
+            <intent-filter android:priority="1000" >
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
+
+                <category android:name="com.yyqq.babyshow" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <!-- Optional -->
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+        <!-- Required SDK核心功能 -->
+        <activity
+            android:name="cn.jpush.android.ui.PushActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:exported="false"
+            android:theme="@android:style/Theme.NoTitleBar" >
+            <intent-filter>
+                <action android:name="cn.jpush.android.ui.PushActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.yyqq.babyshow" />
+            </intent-filter>
+        </activity>
+
+        <!--
+             （3.1.0版本之后（包含3.1.0）才需要注册此Activity）如果集成QQ分享，或者使用QQ客户端来进行QQ空间的分享，
+        	须要在此处添加一个回调activity，对ACTION_VIEW事件的过滤器，其中的scheme是“tencent”前缀再开发者应用的加上appId。
+        	如果此Activity和过滤器不设置，则分享结束以后不能得到正确的回调。
+        -->
+        <activity
+            android:name="cn.sharesdk.tencent.qq.ReceiveActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent1101220810" />
+            </intent-filter>
+        </activity>
+
+        <!-- Required  SDK核心功能 -->
+        <service
+            android:name="cn.jpush.android.service.DownloadService"
+            android:enabled="true"
+            android:exported="false" >
+        </service>
+        <service
+            android:name="cn.jpush.android.service.DaemonService"
+            android:enabled="true"
+            android:exported="false" >
+        </service>
+
+        <!-- Required SDK 核心功能 -->
+        <!-- 可配置android:process参数将PushService放在其他进程中 -->
+        <service
+            android:name="cn.jpush.android.service.PushService"
+            android:enabled="true"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTER" />
+                <action android:name="cn.jpush.android.intent.REPORT" />
+                <action android:name="cn.jpush.android.intent.PushService" />
+                <action android:name="cn.jpush.android.intent.PUSH_TIME" />
+            </intent-filter>
+        </service>
+
+        <!-- Required SDK核心功能 -->
+        <receiver
+            android:name="cn.jpush.android.service.PushReceiver"
+            android:enabled="true"
+            android:exported="false" >
+            <intent-filter android:priority="1000" >
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
+                <!-- Required  显示通知栏 -->
+                <category android:name="com.yyqq.babyshow" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <!-- Optional -->
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Required SDK核心功能 -->
+        <receiver
+            android:name="cn.jpush.android.service.AlarmReceiver"
+            android:exported="false" />
+
+        <!-- User defined.  For test only  用户自定义的广播接收器 -->
+        <receiver
+            android:name="com.yyqq.commen.jpush.MyReceiver"
+            android:enabled="true"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTRATION" />
+                <!-- Required  用户注册SDK的intent -->
+                <action android:name="cn.jpush.android.intent.UNREGISTRATION" />
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
+                <!-- Required  用户接收SDK消息的intent -->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" />
+                <!-- Required  用户接收SDK通知栏信息的intent -->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
+                <!-- Required  用户打开自定义通知栏的intent -->
+                <action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK" />
+                <!-- Optional 用户接受Rich Push Javascript 回调函数的intent -->
+                <action android:name="cn.jpush.android.intent.CONNECTION" />
+                <!-- 接收网络变化 连接/断开 since 1.6.3 -->
+                <category android:name="com.yyqq.babyshow" />
+            </intent-filter>
+        </receiver>
+
+        <meta-data
+            android:name="JPUSH_CHANNEL"
+            android:value="developer-default" />
+        <!-- Required. AppKey copied from Portal -->
+        <meta-data
+            android:name="JPUSH_APPKEY"
+            android:value="3a1f80e8353c45353a9cdc8a" />
+
+        <service
+            android:name="com.umeng.update.net.DownloadingService"
+            android:process=":DownloadingService" >
+        </service>
+
+        <activity
+            android:name="com.umeng.update.UpdateDialogActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.main.MainTab"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.main.GoodLife"
+            android:configChanges="orientation|keyboardHidden" >
+        </activity>
+        <activity android:name="com.yyqq.code.main.ShowShowMainActivity" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.main.SpecialActivity"
+            android:configChanges="orientation|keyboardHidden" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.main.SpecialDetailList"
+            android:configChanges="orientation|keyboardHidden" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.main.SpecialDetailGrid"
+            android:configChanges="orientation|keyboardHidden" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.main.Release"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.code.main.Uploadpload"
+            android:configChanges="orientation|keyboardHidden" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.main.PhotoManager"
+            android:configChanges="orientation|keyboardHidden" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.personal.PersonalCenterActivity"
+            android:configChanges="orientation|keyboardHidden" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.personal.MessageList"
+            android:configChanges="orientation|keyboardHidden" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.personal.GrowList"
+            android:configChanges="orientation|keyboardHidden" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.personal.MessageFriendList"
+            android:configChanges="orientation|keyboardHidden" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.main.LoadDeviceImage"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.code.photo.PhoneAlbumActivity"
+            android:configChanges="orientation|keyboardHidden" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.photo.PhoneAlbumDetialActivity"
+            android:configChanges="orientation|keyboardHidden" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.main.AddNewPostActivity"
+            android:configChanges="orientation|keyboardHidden" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.main.AddNewPostContinueActivity"
+            android:configChanges="orientation|keyboardHidden" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.photo.PhotoActivity"
+            android:configChanges="orientation|keyboardHidden" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.photo.MoveImageList"
+            android:configChanges="orientation|keyboardHidden" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.photo.MovePhotoList"
+            android:configChanges="orientation|keyboardHidden" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.main.InitActivity"
+            android:configChanges="orientation|keyboardHidden" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.login.ChangePhone"
+            android:configChanges="orientation|keyboardHidden" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.login.ChangePhone2"
+            android:configChanges="orientation|keyboardHidden" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.login.ChangePwd"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.code.login.ResetPwd"
+            android:configChanges="orientation|keyboardHidden" />
+        <!-- 添加宝贝 -->
+        <activity
+            android:name="com.yyqq.code.login.AddBaby"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.code.personal.Bind"
+            android:configChanges="orientation|keyboardHidden" />
+        <!-- 拍照后显示图片为了旋转 -->
+        <activity
+            android:name="com.yyqq.code.photo.CropImage"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.code.main.ReviewList"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.code.photo.PhotoDetail"
+            android:configChanges="orientation|keyboardHidden" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.photo.PhotoList"
+            android:configChanges="orientation|keyboardHidden" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.photo.PhotoEdit"
+            android:configChanges="orientation|keyboardHidden" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.photo.PhotoBigImage"
+            android:configChanges="orientation|keyboardHidden" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.photo.ImageDetail"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.code.photo.PeoplePhotoList"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.code.photo.PeoplePhotoManager"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.code.personal.UserInfo"
+            android:configChanges="orientation|keyboardHidden" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.personal.UserSet"
+            android:configChanges="orientation|keyboardHidden" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.personal.FriendList"
+            android:configChanges="orientation|keyboard" />
+        <activity
+            android:name="com.yyqq.code.personal.EditBaby"
+            android:configChanges="orientation|keyboard" />
+
+        <service android:name="com.yyqq.commen.service.SystemService" >
+        </service>
+        <service
+            android:name="com.umeng.common.net.DownloadingService"
+            android:process=":DownloadingService" >
+        </service>
+        <service
+            android:name="com.yyqq.commen.service.AnimPlayerService"
+            android:process=":DownloadingService" >
+        </service>
+
+        <activity
+            android:name="com.yyqq.code.photo.ChangePhotoSize"
+            android:configChanges="orientation|keyboard" />
+        <activity
+            android:name="com.yyqq.code.personal.SharedList"
+            android:configChanges="orientation|keyboard" />
+        <activity
+            android:name="com.yyqq.code.photo.PhotoThem"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.code.photo.AnimPlayer"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.business.BusinessCooperateActivity"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.code.photo.Plaza_Detail"
+            android:configChanges="orientation|keyboardHidden" />
+
+        <!-- 热点 -->
+        <activity android:name="com.yyqq.code.postbar.PostBarActivity" />
+        <activity
+            android:name="com.yyqq.code.postbar.QunActivity"
+            android:configChanges="orientation|keyboardHidden|navigation" />
+        <activity
+            android:name="com.yyqq.code.postbar.QunList"
+            android:configChanges="orientation|keyboardHidden|navigation" />
+        <activity
+            android:name="com.yyqq.code.postbar.PostMyInterestDetail"
+            android:configChanges="orientation|keyboardHidden|navigation" />
+        <activity
+            android:name="com.yyqq.code.postbar.PostGongGaoActivity"
+            android:configChanges="orientation|keyboardHidden|navigation" />
+        <activity
+            android:name="com.yyqq.code.postbar.QunManageActivity"
+            android:configChanges="orientation|keyboardHidden|navigation" />
+        <activity android:name="com.yyqq.code.postbar.PostBarType" />
+        <activity
+            android:name="com.yyqq.code.postbar.PostBarDetail"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.code.postbar.PostBarAddActivity"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.commen.view.MyCollection"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.code.postbar.PostReviewList"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.code.business.BusinessDetailActivity"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.code.business.BusinessMsg"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.code.business.BusinessList"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.code.business.BusinessOderList"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.code.business.RedPacket"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.code.personal.PersonalBandPhoneActivity"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.code.business.BusinessReviewList"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.code.business.UserOderList"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.code.business.OderDetail"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.code.business.PayActivity"
+            android:configChanges="orientation|keyboardHidden" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="wxcf183faac658e9c5" />
+            </intent-filter>
+        </activity>
+        <!-- 值得买 -->
+        <activity
+            android:name="com.yyqq.code.buy.BuyDetailFragment"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.code.buy.BuyActivity"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.code.buy.BuyDetailList"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.code.buy.BuyShow"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.commen.utils.WebViewActivity"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.code.personal.BindList"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.code.grow.InsertHWActivity"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.code.grow.GrowSearch"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.code.grow.GrowAttention"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.code.grow.GrowAttention2"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.code.grow.GrowActivity"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.code.grow.Grow_Detail"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.code.grow.Grow_Synchronize"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.commen.utils.Rank"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.code.grow.MyShareList"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.code.grow.GrowReviewList"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.yyqq.code.grow.GrowEditActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="cn.sharesdk.framework.ShareSDKUIShell"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+            <intent-filter>
+                <data android:scheme="tencent100371282" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 微信分享回调 -->
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <!-- 支付宝 -->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" >
+        </activity>
+        <activity
+            android:name="com.alipay.sdk.auth.AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" >
+        </activity>
+
+        <!-- 微信支付 -->
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name="com.yyqq.code.map.TencetMapActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <!-- 腾讯地图 -->
+        <meta-data
+            android:name="TencentMapSDK"
+            android:value="2QTBZ-QFC24-D6AU5-DMELL-N33P6-LGFUE" />
+
+        <activity
+            android:name="com.yyqq.code.login.WebLoginActivity"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".AAATexActivity"
+            android:label="@string/title_activity_aaatex" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.main.MainItemDetialActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.video.VideoDetialActivity"
+            android:configChanges="orientation|keyboardHidden" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.photo.VideoList"
+            android:configChanges="orientation|keyboardHidden" >
+        </activity>
+
+        <!-- 视频压缩相关 -->
+
+        <activity
+            android:name="com.lkland.videocompressor.activities.CompressionOptionActivity"
+            android:label="@string/app_name" >
+        </activity>
+
+        <service android:name="com.lkland.videocompressor.services.CompressionService" >
+        </service>
+
+        <activity
+            android:name="com.yyqq.code.main.AddCheckActivity"
+            android:label="@string/title_activity_add_check" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.main.SearchResultActivity"
+            android:label="@string/title_activity_search_result" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.group.GroupMainActivity"
+            android:label="@string/title_activity_group_main" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.group.GroupDetialActivity"
+            android:label="@string/title_activity_group_main" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.video.VideoFullScreenActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_video_full_screen"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.group.GroupManagerHeadActivity"
+            android:label="@string/title_activity_group_edit_head" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.group.GroupManagerCategoryActivity"
+            android:label="@string/title_activity_group_category_manager" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.group.GroupManagerTopicActivity"
+            android:label="@string/title_activity_group_manager_topic" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.group.GroupManagerOptionActivity"
+            android:label="@string/title_activity_group_manager_option"
+            android:theme="@style/MyDialogStyleBottom" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.main.MyFollowGroupListActivity"
+            android:label="@string/title_activity_group_main" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.group.AddNewGroupActivity"
+            android:label="@string/title_activity_add_new_group" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.group.SuperGroupActivity"
+            android:label="@string/title_activity_super_group" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.toyslease.version_92.ToysLeaseMainAllActivity"
+            android:label="@string/title_activity_toys_lease_main" >
+        </activity>
+        <activity android:name="com.yyqq.code.toyslease.ToysLeaseDetailActivity" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.toyslease.AddNewToysLeaseActivity"
+            android:label="@string/title_activity_add_toys_lease" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.toyslease.ToysLeaseOrderConfirmActivity"
+            android:label="@string/title_activity_toys_lease_pay"
+            android:windowSoftInputMode="stateHidden|stateUnchanged" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.toyslease.ToysLeasePayConfirmActivity"
+            android:label="@string/title_activity_toys_lease_pay" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.toyslease.ToysLeaseOrderDetailActivity"
+            android:label="@string/title_activity_toys_lease_order_detail" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.toyslease.AccountWithdrawalsActivity"
+            android:label="@string/title_activity_account_withdrawals" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.main.APKUpdataActivity"
+            android:label="@string/title_activity_apkupdata"
+            android:theme="@android:style/Theme.Dialog" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.toyslease.ToysLeaseDepositActivity"
+            android:label="@string/title_activity_toys_lease_deposit" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.toyslease.ToysLeaseListActivity"
+            android:label="@string/title_activity_toys_lease_deposit" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.toyslease.ToysLeaseDepositDetailActivity"
+            android:label="@string/title_activity_toys_lease_deposit_detail" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.toyslease.version_92.ToysLeaseMainOrderActivity"
+            android:label="@string/title_activity_toys_lease_order_list" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.toyslease.version_92.ToysLeaseMainHomeActivity"
+            android:label="@string/title_activity_toys_lease_home" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.toyslease.ToysLeaseMainTabActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_toys_lease_home"
+            android:launchMode="singleTask" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.toyslease.version_92.ToysLeaseCategoryActivity"
+            android:label="@string/title_activity_toys_lease_home" >
+        </activity>
+        <activity
+            android:name=".DemoActivity"
+            android:label="@string/title_activity_demo" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.toyslease.version_92.ToysLeaseMainShoppingCartActivity"
+            android:label="@string/title_activity_shopping_cart" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.toyslease.version_92.ToysLeaseSearchActivity"
+            android:label="@string/title_activity_toys_lease_search" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.login.RegisterBandPhoneActivity"
+            android:label="@string/title_activity_toys_lease_search" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.toyslease.InviteFriendActivity"
+            android:label="@string/title_activity_invite_friend"
+            android:windowSoftInputMode="stateHidden|stateUnchanged" >
+        </activity>
+        <activity android:name="com.yyqq.code.main.MainItemDetialWebActivity" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.toyslease.InviteFriendWebActivity"
+            android:label="@string/title_activity_invite_friend"
+            android:windowSoftInputMode="stateHidden|stateUnchanged" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.toyslease.InviteDetailActivity"
+            android:label="@string/title_activity_invite_friend" >
+        </activity>
+
+        <service android:name="com.yyqq.commen.service.InviteStartService" >
+        </service>
+
+        <activity
+            android:name="com.yyqq.code.toyslease.ToysLeaseAddressSelectActivity"
+            android:label="@string/title_activity_toys_lease_address_select" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.toyslease.ToysLeaseFeedbackActivity"
+            android:label="@string/title_activity_toys_lease_feedback" >
+        </activity>
+        <activity
+            android:name=".Main01Activity"
+            android:label="@string/title_activity_main01" >
+        </activity>
+        <activity
+            android:name=".Main02Activity"
+            android:label="@string/title_activity_main02" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.main.MainToToysMainActivity"
+            android:label="@string/title_activity_toys_lease_feedback" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.toyslease.h5.ToysLeaseHtmlInterstActivity"
+            android:label="@string/title_activity_toys_lease_feedback" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.toyslease.h5.ToysLeaseHtmlCollectionActivity"
+            android:label="@string/title_activity_toys_lease_feedback" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.toyslease.ToysLeaseDelayActivity"
+            android:label="@string/title_activity_toys_lease_feedback" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.toyslease.ToysLeaseMyCardActivity"
+            android:label="@string/title_activity_toys_lease_feedback" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.toyslease.version_93.MainToysHomeActivity"
+            android:label="@string/title_activity_toys_lease_feedback" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.toyslease.version_93.MainToysAllActivity"
+            android:label="@string/title_activity_toys_lease_feedback" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.toyslease.version_93.MainToysCategoryActivity"
+            android:label="@string/title_activity_toys_lease_feedback" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.toyslease.version_93.SearchMainActivity"
+            android:label="@string/title_activity_toys_lease_feedback"
+            android:windowSoftInputMode="stateVisible|adjustPan" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.toyslease.version_93.SearchResultActivity"
+            android:label="@string/title_activity_toys_lease_feedback"
+            android:windowSoftInputMode="stateHidden|adjustPan" >
+        </activity>
+        <activity
+            android:name="com.yyqq.code.business.BusinessSelectedListActivity"
+            android:label="@string/title_activity_toys_lease_feedback" >
+        </activity>
+    </application>
+
+</manifest>

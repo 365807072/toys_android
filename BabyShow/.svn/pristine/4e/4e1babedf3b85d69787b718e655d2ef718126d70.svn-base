@@ -1,0 +1,237 @@
+<!doctype html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
+<meta content="telephone=no" name="format-detection" /> 
+<meta content="email=no" name="format-detection" />
+<script src="jquery.js" type="text/javascript"></script>
+<title>登录页</title>
+	<style>
+	body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
+		margin:0;
+		padding:0;
+	}
+    body{
+            background:#f5f5f5
+            }
+            
+	.header{
+		text-align:center;
+		width:100%;
+		margin-top:20px;
+		margin-bottom:10px;
+		}
+		
+	.center{
+		text-align:center;
+		width:100%;
+		}
+		
+	.footer{
+		text-align:center;
+		width:100%;
+		}
+		
+    #user_name{
+            width:80%;
+            height:40px;
+			border:none;
+			background-color:#fff;
+			font-size:16px;
+			margin-left:10px;
+			outline:0;
+                }
+                
+    #user_pwd{
+            width:80%;
+            height:40px;
+			border:none;
+			background-color:#fff;
+			font-size:16px;
+			margin-left:10px;
+			outline:0;
+                }
+                
+    #user_regist{
+     		width:100px;
+            height:30px; 
+            margin-top:10px;
+			outline:none;
+    }
+                
+    #user_login{
+            width:90%;
+            height:40px; 
+            margin-top:10px;
+			background-image:url(html_login.png);
+			background-repeat:no-repeat;
+			border:none;
+			-moz-border-radius:5px;      /* Gecko browsers */
+   			-webkit-border-radius:5px;   /* Webkit browsers */
+   			border-radius:5px;            /* W3C syntax */
+			border-color:#fff;
+			color:#a3d8f6;
+			font-size:16px;
+			margin-top:20px;
+			outline:none;
+            }
+			
+	#user_icon{
+			-moz-border-radius:50px;      /* Gecko browsers */
+			-webkit-border-radius:50px;   /* Webkit browsers */
+   			border-radius:50px;            /* W3C syntax */
+			border-color:#fff;
+		}
+    </style>
+      
+  <script type="text/javascript" language="javascript">
+  		
+		var phoneType = 0; // 手机类型， android = 1 ; iPhone = 2 ; windowsPhone = 3; outherPhone = 4;
+  
+  		// 获取操作系统类型
+		window.onload=function getSystemType() {
+			var u = navigator.userAgent;
+			if (u.indexOf('Android') > -1 || u.indexOf('Linux') > -1) {//安卓手机
+				phoneType = 1;
+			} else if (u.indexOf('iPhone') > -1) {//苹果手机
+				phoneType = 2;
+			} else if (u.indexOf('Windows Phone') > -1) {//winphone手机
+				phoneType = 3;
+			}else{
+				phoneType = 4;
+				}
+		}
+  
+  		 // 展示用户历史账号记录
+  		 function setUserNameAndPwdAndIconUrl(user_name,user_pwd,iconUrl){
+  		 	if(user_name != "" && user_pwd != ""){
+	  		 	document.getElementById("user_login").disabled = false;
+				document.getElementById("user_name").value = user_name;
+	  			document.getElementById("user_pwd").value = user_pwd;
+  		 	}else{
+  		 		document.getElementById("user_login").disabled = true;
+  		 	}
+			
+			if("" != iconUrl){
+				document.getElementById("user_icon").src = iconUrl;
+			}
+			
+  		 }
+         
+         // 注册按钮
+         function userRegist(){
+			 //setRegisterTitle();
+			 document.getElementById("user_regist").style.src = "html_button_pressed.png";
+         }
+         
+         // 输入框数值改变监听
+         function inputChange(){
+             if(document.getElementById("user_name").value != "" && document.getElementById("user_pwd").value != ""){
+                 document.getElementById("user_login").disabled = false;
+				 document.getElementById("user_login").style.color="#fff";
+                 }else{
+                     document.getElementById("user_login").disabled = true;
+					 document.getElementById("user_login").style.color="#a3d8f6";
+                     }
+             }
+			 
+		// 按钮点击效果
+		function changeButtonImage(){
+			 	 document.getElementById("user_login").style.backgroundImage = "html_sign_up.png";
+			 }
+		
+		// 用户点击登陆按钮的监听
+		function userLogin(){    
+			 var userName = document.getElementById("user_name").value;
+         	 var userPwd = document.getElementById("user_pwd").value;
+             if(userName==""){
+                  alert("请输入您的手机号/邮箱/用户名");
+                }else if(userPwd==""){
+                  alert("请输入密码");	
+                }else{
+        			if(phoneType == 1){
+						window.call.callMethodLogin(userName+"",userPwd+"");
+						}else{
+							callMethodLogin(userName+"",userPwd+"");
+							}
+		}}
+		
+		// 是否显示微博、微信登录图标  YES:显示，NO不显示
+		function iconShow(weiboShow,weixinShow){
+			
+			if(weiboShow == "NO"){
+				document.getElementById("weiboIcon").remove(0);
+				}
+				
+			if(weixinShow == "NO"){
+				document.getElementById("weiXinIcon").remove(0);
+				}
+			
+			}
+			
+		// 退出浏览器
+		function finishPage(){
+			if(phoneType == 1){
+				window.call.callMethodFinish();
+				}else{
+					callMethodFinish();
+				}
+			}
+			
+		// 微博登录
+		function authorLoginWeibo(){
+			if(phoneType == 1){
+				window.call.callMethodWeiboLogin();
+				}else{
+					callMethodWeiboLogin();
+				}
+			}
+			
+		// 微博登录
+		function authorLoginWeixin(){
+			if(phoneType == 1){
+				window.call.callMethodWeixinLogin();
+				}else{
+					callMethodWeixinLogin();
+				}
+			}
+		
+  </script>        
+        
+ 	
+</head>
+	
+<body background="#f5f5f5">
+    
+    <!-- 用户头像、找回密码-->
+    <img src="html_login_cancel.png" width="20px" height="20px" style=" margin-left:30px; margin-top:20px" onClick="finishPage()"/><a href="bbss_smsCheck.html"><font style="font-size:14px; float:right; margin-right:15px; margin-top:20px; color:#000;">登录遇到问题戳这里</font></a>
+    <header>
+    	<div id="header" class="header">
+      		<img src="html_icon.png" width="100px" height="100px" id="user_icon" onerror="this.src='html_icon.png'"/>
+      	</div>
+    </header>
+    
+     <!-- 输入框部分 -->
+    <center>
+    	<div class="center" style="vertical-align:middle; background-color:#fff;">
+      		<div style=" white-space:nowrap; padding-right:20px;">
+            	 <font style="font-size:16px; margin-left:20px">账 号</font><input id="user_name" type="text" placeholder="请输入手机号/邮箱/用户名" oninput="inputChange()"/><br/>
+            </div>
+            <div style="background-color:#e4e4e4; height:1px; margin-left:20px;"></div>
+            <div style=" white-space:nowrap; padding-right:20px;">
+            	  <font style="font-size:16px; margin-left:20px">密 码</font><input id="user_pwd" type="password"  placeholder="请输入密码" oninput="inputChange()"/><br/>
+            </div>
+      </div>
+    </center>
+    
+     <!-- 登录、注册、第三方登陆部分 -->
+    <footer>
+    	 <div class="footer" style="vertical-align:middle; text-align:center;">
+	  		<button type="button" id="user_login" onClick="userLogin()" disabled="true">登 录</button><br/>
+      		<a href="bbss_register.html"><img id="user_regist" onClick="userRegist()" onMouseOver="changeButtonImage()" onblur="changeButtonImage()" src="html_sign_up.png" width="100px" height="30px" style="margin-bottom:10px; margin-top:20px"/></a><br/>
+            <font style="font-size:14px; margin-top:20px;">使用第三方账号登录</font><br/>
+            <img src="html_weibo.png" id="weiboIcon" width="40px" height="40px" style="margin-right:10px; margin-top:20px" onClick="authorLoginWeibo()" /><img src="html_weixin.png" id="weiXinIcon" width="40px" height="40px" style="margin-left:10px; margin-top:20px" onClick="authorLoginWeixin()" /><br/>
+      	</div>
+    </footer>
+</body>
+</html>

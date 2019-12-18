@@ -1,0 +1,310 @@
+package com.yyqq.code.main;
+
+import java.util.ArrayList;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.content.Context;
+import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.ab.http.AbHttpUtil;
+import com.ab.http.AbRequestParams;
+import com.ab.http.AbStringHttpResponseListener;
+import com.yyqq.babyshow.R;
+import com.yyqq.commen.adapter.SearchBusinesListAdapter;
+import com.yyqq.commen.adapter.MainPopupAdapter;
+import com.yyqq.commen.adapter.SearchPostBarAdapter;
+import com.yyqq.commen.adapter.SearchUserListAdapter;
+import com.yyqq.commen.model.BusinessListItem;
+import com.yyqq.commen.model.PostBarTypeItem;
+import com.yyqq.commen.model.SearchItem;
+import com.yyqq.commen.utils.Config;
+import com.yyqq.commen.view.PullDownView;
+import com.yyqq.commen.view.PullDownView.OnPullDownListener;
+import com.yyqq.framework.activity.BaseActivity;
+import com.yyqq.framework.application.ServerMutualConfig;
+
+public class SearchResultActivity extends BaseActivity implements OnPullDownListener {
+
+	private EditText search_text;
+	private TextView search_title_search;
+	private LinearLayout search_option01;
+	private LinearLayout search_option02;
+	private LinearLayout search_option03;
+	private LinearLayout search_option04;
+	private ImageView search_option_type01;
+	private ImageView search_option_type02;
+	private ImageView search_option_type03;
+	private ImageView search_option_type04;
+	private PullDownView mPullDownView;
+	private ListView listView;
+	private ImageView search_finish;
+	
+	private SearchUserListAdapter userNameAdapter;
+	private SearchBusinesListAdapter businesMainListAdapter;
+	private SearchPostBarAdapter postBarMainListAdapter;
+	private ArrayList<SearchItem> searchData = new ArrayList<SearchItem>();
+	private ArrayList<BusinessListItem> dataBusinessList = new ArrayList<BusinessListItem>();
+	private ArrayList<PostBarTypeItem> dataPostInterestList = new ArrayList<PostBarTypeItem>();
+	private int searctIndex = 1;
+	private Context context;
+	private AbHttpUtil ab;
+	private JSONArray data_json;
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_search_result);
+	}
+	
+	@Override
+	protected void initView() {
+		search_finish = (ImageView) findViewById(R.id.search_finish);
+		search_title_search = (TextView) findViewById(R.id.search_title_search);
+		search_text = (EditText) findViewById(R.id.search_text);
+		search_option01 = (LinearLayout) findViewById(R.id.search_option01);
+		search_option02 = (LinearLayout) findViewById(R.id.search_option02);
+		search_option03 = (LinearLayout) findViewById(R.id.search_option03);
+		search_option04 = (LinearLayout) findViewById(R.id.search_option04);
+		search_option_type01 = (ImageView) findViewById(R.id.search_option_type01);
+		search_option_type02 = (ImageView) findViewById(R.id.search_option_type02);
+		search_option_type03 = (ImageView) findViewById(R.id.search_option_type03);
+		search_option_type04 = (ImageView) findViewById(R.id.search_option_type04);
+		mPullDownView = (PullDownView) findViewById(R.id.list);
+		listView = mPullDownView.getListView();
+		listView.setVisibility(View.GONE);
+		mPullDownView.setOnPullDownListener(this);
+		mPullDownView.setHideFooter();
+		mPullDownView.setHideHeader();
+	}
+	
+	@Override
+	protected void initData() {
+		ab = AbHttpUtil.getInstance(context);
+		context = this;
+		listView.setDivider(null);
+		userNameAdapter = new SearchUserListAdapter(context, searchData);
+		listView.setAdapter(userNameAdapter);
+		
+		businesMainListAdapter = new SearchBusinesListAdapter(context, dataBusinessList);
+		
+		postBarMainListAdapter = new SearchPostBarAdapter(context, dataPostInterestList);
+	}
+	
+	@Override
+	protected void setListener() {
+		
+		search_finish.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				SearchResultActivity.this.finish();
+			}
+		});
+		
+		search_text.setOnEditorActionListener(new TextView.OnEditorActionListener() { 
+			public boolean onEditorAction(TextView v, int actionId, KeyEvent event)  {                          
+				if (actionId==EditorInfo.IME_ACTION_SEARCH ||(event!=null&&event.getKeyCode()== KeyEvent.KEYCODE_ENTER)) 
+				{      
+					getSearchResult();       
+					return true;             
+				}               
+				return false;           
+			}       
+		});
+		
+		search_title_search.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				getSearchResult();       
+			}
+		});
+		
+		search_option01.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {	
+				searctIndex = 1;
+				getSearchResult();
+				search_option_type01.setBackground(getResources().getDrawable(R.drawable.search_option_down));
+				search_option_type02.setBackground(getResources().getDrawable(R.drawable.search_option_up));
+				search_option_type03.setBackground(getResources().getDrawable(R.drawable.search_option_up));
+				search_option_type04.setBackground(getResources().getDrawable(R.drawable.search_option_up));
+			}
+		});
+		
+		search_option02.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				searctIndex = 2;
+				getSearchResult();
+				search_option_type01.setBackground(getResources().getDrawable(R.drawable.search_option_up));
+				search_option_type02.setBackground(getResources().getDrawable(R.drawable.search_option_down));
+				search_option_type03.setBackground(getResources().getDrawable(R.drawable.search_option_up));
+				search_option_type04.setBackground(getResources().getDrawable(R.drawable.search_option_up));
+			}
+		});
+		
+		search_option03.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				searctIndex = 3;
+				getSearchResult();
+				search_option_type01.setBackground(getResources().getDrawable(R.drawable.search_option_up));
+				search_option_type02.setBackground(getResources().getDrawable(R.drawable.search_option_up));
+				search_option_type03.setBackground(getResources().getDrawable(R.drawable.search_option_down));
+				search_option_type04.setBackground(getResources().getDrawable(R.drawable.search_option_up));
+			}
+		});
+		
+		search_option04.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				searctIndex = 4;
+				getSearchResult();
+				search_option_type01.setBackground(getResources().getDrawable(R.drawable.search_option_up));
+				search_option_type02.setBackground(getResources().getDrawable(R.drawable.search_option_up));
+				search_option_type03.setBackground(getResources().getDrawable(R.drawable.search_option_up));
+				search_option_type04.setBackground(getResources().getDrawable(R.drawable.search_option_down));
+			}
+		});
+		
+	}
+	
+	/**
+	 * 开始搜索
+	 * */
+	private void getSearchResult() {
+		
+		listView.setVisibility(View.GONE);
+		
+		if(search_text.getText().toString().trim().isEmpty()){
+			Toast.makeText(context, "请输入您要搜索的内容", 2).show();
+		}else{
+			InputMethodManager inputMethodManager = (InputMethodManager) context.getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+			inputMethodManager.hideSoftInputFromWindow(search_text.getWindowToken(), 0);
+			Config.showProgressDialog(context, false, null);
+			AbRequestParams params = new AbRequestParams();
+			params.put("login_user_id", Config.getUser(context).uid);
+			params.put("search_word", search_text.getText().toString().trim());
+			params.put("search_class", searctIndex+"");
+			ab.setTimeout(10000);
+			ab.get(ServerMutualConfig.SEARCH_LIST + "&" + params.toString(), new AbStringHttpResponseListener() {
+				@Override
+				public void onSuccess(int statusCode, String content) {
+					super.onSuccess(statusCode, content);
+					
+					searchData.clear();
+					dataBusinessList.clear();
+					dataPostInterestList.clear();
+					
+					try {
+						JSONObject json = new JSONObject(content);
+						if (json.getBoolean("success")) {
+							data_json = new JSONArray();
+							if (json.getJSONArray("data").length() == 0) {
+								Toast.makeText(context, "未搜索到相关信息", Toast.LENGTH_SHORT).show();
+							} else {
+								
+								if(json.getJSONArray("data").length() == 0){
+									Toast.makeText(context, "未搜索到相关信息", Toast.LENGTH_LONG).show();
+									return;
+								}
+								
+								listView.setVisibility(View.VISIBLE);
+								
+								if(searctIndex == 1){
+									for (int i = 0; i < json.getJSONArray("data").length(); i++) {
+										SearchItem item = new SearchItem();
+										item.fromJson(json.getJSONArray("data").getJSONObject(i));
+										data_json.put(json.getJSONArray("data").getJSONObject(i));
+										searchData.add(item);
+									}
+									listView.setAdapter(userNameAdapter);
+									userNameAdapter.notifyDataSetChanged();
+								}
+								
+								if(searctIndex == 2){
+									for (int i = 0; i < json.getJSONArray("data").length(); i++) {
+										BusinessListItem item = new BusinessListItem();
+										item.fromJson(json.getJSONArray("data").getJSONObject(i));
+										dataBusinessList.add(item);
+									}
+									listView.setAdapter(businesMainListAdapter);
+									businesMainListAdapter.notifyDataSetChanged();
+								}
+								
+								if(searctIndex == 3){
+									for (int i = 0; i < json.getJSONArray("data").length(); i++) {
+										PostBarTypeItem item = new PostBarTypeItem();
+										item.fromJson(json.getJSONArray("data").getJSONObject(i));
+										dataPostInterestList.add(item);
+									}
+									listView.setAdapter(postBarMainListAdapter);
+									postBarMainListAdapter.notifyDataSetChanged();
+								}
+								
+								if(searctIndex == 4){
+									for (int i = 0; i < json.getJSONArray("data").length(); i++) {
+										PostBarTypeItem item = new PostBarTypeItem();
+										item.fromJson(json.getJSONArray("data").getJSONObject(i));
+										dataPostInterestList.add(item);
+									}
+									listView.setAdapter(postBarMainListAdapter);
+									postBarMainListAdapter.notifyDataSetChanged();
+								}
+							}
+						} else {
+							Toast.makeText(context,	json.getString("reMsg"), Toast.LENGTH_SHORT).show();
+						}
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				}
+				
+				@Override
+				public void onFinish() {
+					super.onFinish();
+					Config.dismissProgress();
+				}
+				
+				@Override
+				public void onFailure(int statusCode, String content,
+						Throwable error) {
+					super.onFailure(statusCode, content, error);
+					Config.showFiledToast(context);
+				}
+			});
+		}
+	}
+
+	@Override
+	public void onRefresh() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onMore() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

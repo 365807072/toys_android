@@ -1,0 +1,38 @@
+package com.yyqq.commen.model;
+
+public class ToysLeaseHomeHeadBean {
+
+	private String imgUrl = "";
+	private String id = "";
+
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+		return "ToysLeaseHomeHeadBean [imgUrl=" + imgUrl + ", id=" + id + "]";
+	}
+
+	public ToysLeaseHomeHeadBean() {
+	}
+
+	public ToysLeaseHomeHeadBean(String imgUrl, String id) {
+		super();
+		this.imgUrl = imgUrl;
+		this.id = id;
+	}
+
+}

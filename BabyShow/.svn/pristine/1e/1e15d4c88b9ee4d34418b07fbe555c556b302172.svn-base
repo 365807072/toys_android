@@ -1,0 +1,187 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#f5f6f5"
+    android:orientation="vertical"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:background="#ffffff" >
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"
+            android:background="#ffffff"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="220dp"
+                android:padding="10dp" >
+
+                <TextView
+                    android:id="@+id/item_hont_tv_01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="tViewTextextView" />
+
+                <TextView
+                    android:id="@+id/item_hont_pr_01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/item_hont_tv_01"
+                    android:layout_marginTop="5dp"
+                    android:text="TextView" />
+
+                <ImageView
+                    android:id="@+id/item_hont_iv_01"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_alignLeft="@+id/item_hont_pr_01"
+                    android:layout_below="@+id/item_hont_pr_01"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/ic_launcher" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#ffffff"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="110dp"
+                android:layout_weight="1"
+                android:padding="10dp" >
+
+                <TextView
+                    android:id="@+id/item_hont_tv_02"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="2.5dp"
+                    android:layout_toLeftOf="@+id/item_hont_iv_02"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="tViewTextextView" />
+
+                <ImageView
+                    android:id="@+id/item_hont_iv_02"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignTop="@+id/item_hont_tv_02"
+                    android:layout_marginLeft="2.5dp"
+                    android:src="@drawable/ic_launcher" />
+
+                <TextView
+                    android:id="@+id/item_hont_pr_02"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/item_hont_tv_02"
+                    android:layout_marginTop="5dp"
+                    android:text="TextView" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#ffffff"
+                android:orientation="horizontal" >
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="110dp"
+                    android:layout_weight="1"
+                    android:padding="10dp" >
+
+                    <TextView
+                        android:id="@+id/item_hont_tv_03"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:text="Textext" />
+
+                    <ImageView
+                        android:id="@+id/item_hont_iv_03"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignRight="@+id/item_hont_pr_03"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/ic_launcher" />
+
+                    <TextView
+                        android:id="@+id/item_hont_pr_03"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/item_hont_tv_03"
+                        android:layout_below="@+id/item_hont_tv_03"
+                        android:layout_marginTop="5dp"
+                        android:text="TextView" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="110dp"
+                    android:layout_weight="1"
+                    android:padding="10dp" >
+
+                    <TextView
+                        android:id="@+id/item_hont_tv_04"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:text="Textext" />
+
+                    <ImageView
+                        android:id="@+id/item_hont_iv_04"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/ic_launcher" />
+
+                    <TextView
+                        android:id="@+id/item_hont_pr_04"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignRight="@+id/item_hont_iv_04"
+                        android:layout_below="@+id/item_hont_tv_04"
+                        android:layout_marginTop="5dp"
+                        android:text="TextView" />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

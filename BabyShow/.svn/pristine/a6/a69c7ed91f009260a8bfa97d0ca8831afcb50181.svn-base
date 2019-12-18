@@ -1,0 +1,67 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#E6E6E6" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:background="@color/title_bg"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" >
+
+        <ImageView
+            android:id="@+id/search_finish"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:src="@drawable/grow_detail_backback" />
+
+        <EditText
+            android:id="@+id/search_text"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/view_to_shape"
+            android:ems="10"
+            android:gravity="center|left"
+            android:hint="玩具世界欢迎你"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingLeft="15dp"
+            android:paddingRight="10dp"
+            android:singleLine="true"
+            android:textColor="#000"
+            android:textSize="@dimen/text_size_12" />
+
+        <TextView
+            android:id="@+id/search_title_search"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:text="搜索"
+            android:textColor="#fff"
+            android:textSize="@dimen/text_size_14" />
+    </LinearLayout>
+
+    <com.yyqq.commen.view.PullDownView
+        android:id="@+id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="45dp"
+        android:cacheColorHint="#FFFFFF"
+        android:divider="#FFFFFF"
+        android:footerDividersEnabled="false"
+        android:hapticFeedbackEnabled="false"
+        android:listSelector="#FFFFFF"
+        android:scrollbars="none" >
+    </com.yyqq.commen.view.PullDownView>
+
+</RelativeLayout>

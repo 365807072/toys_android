@@ -1,0 +1,710 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#f5f6f5"
+    android:orientation="vertical"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/title_height"
+        android:background="@color/title_bg" >
+
+        <ImageView
+            android:id="@+id/lease_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/grow_detail_backback" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="确认订单"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/title_text_size_center" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/lease_pay_type_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/lease_pay_cancel_img"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/lease_pay_all"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/title"
+        android:background="#f5f6f5" >
+
+        <LinearLayout
+            android:id="@+id/cart_ntf"
+            android:layout_width="fill_parent"
+            android:layout_height="35dp"
+            android:layout_below="@+id/title"
+            android:background="#FFFDF6"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:visibility="gone" >
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/cart_ntf_icon" />
+
+            <TextView
+                android:id="@+id/shopping_car_hint_text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
+                android:textColor="#846943"
+                android:textSize="@dimen/text_size_12" />
+        </LinearLayout>
+
+        <ScrollView
+            android:id="@+id/lease_order_sc"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/cart_ntf"
+            android:scrollbars="none" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#f5f6f5"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical" >
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="40dp"
+                        android:background="#fff"
+                        android:gravity="left|center"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="5dp"
+                            android:text="您的姓名："
+                            android:textColor="#666666"
+                            android:textSize="@dimen/text_size_14" />
+
+                        <EditText
+                            android:id="@+id/lease_order_name"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_below="@+id/layout"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:layout_toRightOf="@+id/textView1"
+                            android:background="#fff"
+                            android:ems="10"
+                            android:gravity="left|center"
+                            android:textColor="#333333"
+                            android:textSize="@dimen/text_size_14" >
+                        </EditText>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="0.5dp"
+                        android:background="#f1f1f1" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="40dp"
+                        android:background="#fff"
+                        android:focusableInTouchMode="true"
+                        android:gravity="left|center"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="5dp"
+                            android:text="手机号码："
+                            android:textColor="#666666"
+                            android:textSize="@dimen/text_size_14" />
+
+                        <EditText
+                            android:id="@+id/lease_order_phone"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_below="@+id/layout"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:layout_toRightOf="@+id/textView1"
+                            android:background="#fff"
+                            android:ems="10"
+                            android:gravity="left|center"
+                            android:hint="这里必填哦···"
+                            android:inputType="phone"
+                            android:textColor="#333333"
+                            android:textSize="@dimen/text_size_14" >
+                        </EditText>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="0.5dp"
+                        android:background="#f1f1f1" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="40dp"
+                        android:background="#fff"
+                        android:focusableInTouchMode="true"
+                        android:gravity="left|center"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="5dp"
+                            android:paddingTop="10dp"
+                            android:text="收货地址："
+                            android:textColor="#666666"
+                            android:textSize="@dimen/text_size_14" />
+
+                        <EditText
+                            android:id="@+id/lease_order_address"
+                            android:layout_width="fill_parent"
+                            android:layout_height="40dp"
+                            android:layout_below="@+id/layout"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:layout_toRightOf="@+id/textView1"
+                            android:background="#fff"
+                            android:ems="10"
+                            android:gravity="left|center"
+                            android:hint="要写完善哦···"
+                            android:maxHeight="80dp"
+                            android:textColor="#333333"
+                            android:textSize="@dimen/text_size_14" >
+                        </EditText>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="0.5dp"
+                        android:background="#f1f1f1" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#fff"
+                        android:gravity="left|center"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="5dp"
+                            android:text="其他备注："
+                            android:textColor="#666666"
+                            android:textSize="@dimen/text_size_14" />
+
+                        <EditText
+                            android:id="@+id/lease_detail_addtext"
+                            android:layout_width="fill_parent"
+                            android:layout_height="40dp"
+                            android:layout_below="@+id/layout"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:layout_toRightOf="@+id/textView1"
+                            android:background="#fff"
+                            android:ems="10"
+                            android:gravity="left|center"
+                            android:hint="尽量满足哦···"
+                            android:textColor="#333333"
+                            android:textSize="@dimen/text_size_14" >
+                        </EditText>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="0.5dp"
+                        android:background="#f1f1f1" />
+
+                    <LinearLayout
+                        android:id="@+id/lease_order_zuqi"
+                        android:layout_width="fill_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="10dp"
+                        android:background="#fff"
+                        android:gravity="left|center"
+                        android:orientation="horizontal" >
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:gravity="left|center"
+                            android:orientation="vertical" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:text="选择租期："
+                                android:textColor="#666666"
+                                android:textSize="@dimen/text_size_14" />
+
+                            <TextView
+                                android:id="@+id/lease_order_hint01"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="5dp"
+                                android:textColor="#999999"
+                                android:textSize="@dimen/text_size_12" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:background="#fff"
+                            android:gravity="right|center"
+                            android:orientation="horizontal" >
+
+                            <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="50dp"
+                                android:layout_weight="1"
+                                android:gravity="right|center"
+                                android:orientation="vertical" >
+
+                                <TextView
+                                    android:id="@+id/lease_order_time"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#fc6262"
+                                    android:textSize="@dimen/text_size_14" />
+
+                                <TextView
+                                    android:id="@+id/lease_order_hint02"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:textColor="#999999"
+                                    android:textSize="@dimen/text_size_12" />
+                            </LinearLayout>
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                android:background="@drawable/lease_order_more" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="0.5dp"
+                        android:background="#f1f1f1" />
+
+                    <RelativeLayout
+                        android:id="@+id/lease_order_delivery"
+                        android:layout_width="fill_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="10dp"
+                        android:background="#fff" >
+
+                        <TextView
+                            android:id="@+id/lease_order_delivery_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_toLeftOf="@+id/imageView1"
+                            android:textColor="#fc6262"
+                            android:textSize="@dimen/text_size_14" />
+
+                        <TextView
+                            android:id="@+id/lease_order_hint03"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:textColor="#666666"
+                            android:textSize="@dimen/text_size_14" />
+
+                        <TextView
+                            android:id="@+id/lease_order_hint04"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_below="@+id/lease_order_hint03"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_toLeftOf="@+id/imageView1"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:textColor="#999999"
+                            android:textSize="@dimen/text_size_12" />
+
+                        <ImageView
+                            android:id="@+id/imageView1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="5dp"
+                            android:background="@drawable/lease_order_more" />
+                    </RelativeLayout>
+
+                    <com.yyqq.commen.view.MyListView
+                        android:id="@+id/lease_toys_vip"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="#000" >
+                    </com.yyqq.commen.view.MyListView>
+
+                    <LinearLayout
+                        android:id="@+id/lease_toys_list_hint"
+                        android:layout_width="fill_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="10dp"
+                        android:background="#fff"
+                        android:orientation="horizontal"
+                        android:padding="10dp" >
+
+                        <TextView
+                            android:id="@+id/lease_toys_title"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            android:textColor="#666666"
+                            android:textSize="@dimen/text_size_14" />
+
+                        <TextView
+                            android:id="@+id/lease_toys_price"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:textColor="#fc6262"
+                            android:textSize="@dimen/text_size_14" />
+                    </LinearLayout>
+
+                    <com.yyqq.commen.view.MyListView
+                        android:id="@+id/lease_toys_list"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#000" >
+                    </com.yyqq.commen.view.MyListView>
+
+                    <Button
+                        android:id="@+id/toys_confirm_order_bt"
+                        android:layout_width="fill_parent"
+                        android:layout_height="48dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/lease_tixian"
+                        android:text="确认订单"
+                        android:textColor="#fff"
+                        android:textSize="@dimen/text_size_14" />
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="0.5dp"
+                        android:background="#f1f1f1" />
+
+                    <RelativeLayout
+                        android:id="@+id/pay_packet"
+                        android:layout_width="fill_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@android:color/background_light"
+                        android:visibility="gone" >
+
+                        <TextView
+                            android:id="@+id/account_hint_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:text="可用余额"
+                            android:textColor="#666666"
+                            android:textSize="@dimen/text_size_14" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp" >
+
+                            <Button
+                                android:id="@+id/packet_pay"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/lease_order_more" />
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="0.5dp"
+                        android:background="#f1f1f1" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="#fff"
+                        android:orientation="horizontal" >
+
+                        <com.yyqq.commen.view.RecodeListView
+                            android:id="@+id/lease_order_list"
+                            android:layout_width="fill_parent"
+                            android:layout_height="100dp"
+                            android:divider="#fff"
+                            android:dividerHeight="0dp" >
+                        </com.yyqq.commen.view.RecodeListView>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="0.5dp"
+                        android:background="#f1f1f1" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="40dp"
+                        android:background="#fff"
+                        android:gravity="right|center"
+                        android:orientation="horizontal"
+                        android:visibility="gone" >
+
+                        <TextView
+                            android:id="@+id/lease_order_allMonery"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:textColor="#fc6262"
+                            android:textSize="@dimen/text_size_14" />
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/pay_zhifubao"
+                        android:layout_width="fill_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="10dp"
+                        android:background="#fff"
+                        android:visibility="gone" >
+
+                        <ImageView
+                            android:id="@+id/i1"
+                            android:layout_width="46dp"
+                            android:layout_height="27dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="16dp"
+                            android:background="@drawable/zhifubao_icon" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="13dp"
+                            android:layout_toRightOf="@+id/i1"
+                            android:text="支付宝支付"
+                            android:textColor="#000000"
+                            android:textSize="13dp" />
+
+                        <ImageView
+                            android:id="@+id/sel_pay1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="19dp"
+                            android:background="@drawable/sel_bt" />
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="0.5dp"
+                        android:background="#f1f1f1"
+                        android:visibility="gone" />
+
+                    <RelativeLayout
+                        android:id="@+id/pay_weixin"
+                        android:layout_width="fill_parent"
+                        android:layout_height="50dp"
+                        android:background="@android:color/background_light"
+                        android:visibility="gone" >
+
+                        <ImageView
+                            android:id="@+id/i2"
+                            android:layout_width="46dp"
+                            android:layout_height="27dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="16dp"
+                            android:background="@drawable/weixin_icon" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="13dp"
+                            android:layout_toRightOf="@+id/i2"
+                            android:text="微信支付"
+                            android:textColor="#000000"
+                            android:textSize="13dp" />
+
+                        <ImageView
+                            android:id="@+id/sel_pay2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="19dp"
+                            android:background="@drawable/sel_bt_no" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <RelativeLayout
+            android:id="@+id/lease_order_time_select"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentBottom="true"
+            android:background="#40000000"
+            android:visibility="gone" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="#40000000"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#f5f6f5"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/lease_order_time_no"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="left|center"
+                        android:padding="10dp"
+                        android:text="取消"
+                        android:textColor="#000"
+                        android:textSize="@dimen/text_size_14" />
+
+                    <TextView
+                        android:id="@+id/lease_order_time_yes"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right|center"
+                        android:padding="10dp"
+                        android:text="确定"
+                        android:textColor="#000"
+                        android:textSize="@dimen/text_size_14" />
+                </LinearLayout>
+
+                <com.yyqq.commen.view.SelectTimeView
+                    android:id="@+id/lease_order_select"
+                    android:layout_width="fill_parent"
+                    android:layout_height="200dp"
+                    android:background="#fff" >
+                </com.yyqq.commen.view.SelectTimeView>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/lease_order_delivery_select"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentBottom="true"
+            android:background="#40000000"
+            android:visibility="gone" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="#40000000"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#f5f6f5"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/lease_order_delivery_no"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="left|center"
+                        android:padding="10dp"
+                        android:text="取消"
+                        android:textColor="#000"
+                        android:textSize="@dimen/text_size_14" />
+
+                    <TextView
+                        android:id="@+id/lease_order_delivery_yes"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right|center"
+                        android:padding="10dp"
+                        android:text="确定"
+                        android:textColor="#000"
+                        android:textSize="@dimen/text_size_14" />
+                </LinearLayout>
+
+                <com.yyqq.commen.view.SelectDeliveryView
+                    android:id="@+id/lease_delivery_select"
+                    android:layout_width="fill_parent"
+                    android:layout_height="200dp"
+                    android:background="#fff" >
+                </com.yyqq.commen.view.SelectDeliveryView>
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

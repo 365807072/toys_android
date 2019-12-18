@@ -1,0 +1,422 @@
+package com.yyqq.commen.model;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.content.Context;
+
+import com.yyqq.commen.utils.ShoppingCartUtils;
+
+public class ToysDetailBean {
+	
+	private ToysDetial detail = new ToysDetial();
+	private ToysDescription description = new ToysDescription();
+	private ToysPrice price = new ToysPrice();
+	private String toys_des = "";
+	
+	public ToysDetailBean() {
+		super();
+	}
+	
+	public String getToys_des() {
+		return toys_des;
+	}
+
+	public void setToys_des(String toys_des) {
+		this.toys_des = toys_des;
+	}
+
+	public ToysDetial getDetail() {
+		return detail;
+	}
+
+	public void setDetail(ToysDetial detail) {
+		this.detail = detail;
+	}
+
+	public ToysDescription getDescription() {
+		return description;
+	}
+
+	public void setDescription(ToysDescription description) {
+		this.description = description;
+	}
+
+	public ToysPrice getPrice() {
+		return price;
+	}
+
+	public void setPrice(ToysPrice price) {
+		this.price = price;
+	}
+	
+	@Override
+	public String toString() {
+		return "ToysDetailBean [detail=" + detail + ", description="
+				+ description + ", price=" + price + ", toys_des=" + toys_des
+				+ "]";
+	}
+
+
+	/**
+	 * 详情
+	 * */
+	public class ToysDetial{
+		
+		private String business_id = "";
+		private String user_name = "";
+		private String main_business_title = "";
+		private String main_business_des = "";
+		private String business_contact = "";
+		private String way = "";
+		private String img_thumb = "";
+		private String is_support = "";
+		private String support_name = "";
+		private String order_status = "";
+		private String is_order = "";
+		private String create_time = "";
+		private String age_range = "";
+		private String age = "";
+		private String supper_des = "";
+		private String qq = "";
+		private String addText = "";
+		private String userIconurl = "";
+		private String sunpei = "";
+		private String sunpeiHint = "";
+		private String baozhang = "";
+		private String is_cart = "";
+		private String is_cart_number = "";
+		private String is_change = "";
+		private String cart_number = "";
+		private String category_icon_url = "";
+		
+		public String getCategory_icon_url() {
+			return category_icon_url;
+		}
+
+		public void setCategory_icon_url(String category_icon_url) {
+			this.category_icon_url = category_icon_url;
+		}
+
+		public String getOrder_status() {
+			return order_status;
+		}
+
+		public void setOrder_status(String order_status) {
+			this.order_status = order_status;
+		}
+
+		public String getIs_cart() {
+			return is_cart;
+		}
+
+		public void setIs_cart(String is_cart) {
+			this.is_cart = is_cart;
+		}
+
+		public String getIs_cart_number() {
+			return is_cart_number;
+		}
+
+		public void setIs_cart_number(String is_cart_number) {
+			this.is_cart_number = is_cart_number;
+		}
+
+		public String getIs_change() {
+			return is_change;
+		}
+
+		public void setIs_change(String is_change) {
+			this.is_change = is_change;
+		}
+
+		public String getCart_number() {
+			return cart_number;
+		}
+
+		public void setCart_number(String cart_number) {
+			this.cart_number = cart_number;
+		}
+
+		public String getBaozhang() {
+			return baozhang;
+		}
+
+		public void setBaozhang(String baozhang) {
+			this.baozhang = baozhang;
+		}
+
+		public String getSunpei() {
+			return sunpei;
+		}
+
+		public void setSunpei(String sunpei) {
+			this.sunpei = sunpei;
+		}
+
+		public String getSunpeiHint() {
+			return sunpeiHint;
+		}
+
+		public void setSunpeiHint(String sunpeiHint) {
+			this.sunpeiHint = sunpeiHint;
+		}
+
+		public String getUserIconurl() {
+			return userIconurl;
+		}
+
+		public void setUserIconurl(String userIconurl) {
+			this.userIconurl = userIconurl;
+		}
+
+		public String getAddText() {
+			return addText;
+		}
+
+		public void setAddText(String addText) {
+			this.addText = addText;
+		}
+
+		public String getQq() {
+			return qq;
+		}
+
+		public void setQq(String qq) {
+			this.qq = qq;
+		}
+
+		public String getSupper_des() {
+			return supper_des;
+		}
+
+		public void setSupper_des(String supper_des) {
+			this.supper_des = supper_des;
+		}
+
+		public ToysDetial() {
+		}
+
+		public String getBusiness_id() {
+			return business_id;
+		}
+
+		public void setBusiness_id(String business_id) {
+			this.business_id = business_id;
+		}
+
+		public String getUser_name() {
+			return user_name;
+		}
+
+		public void setUser_name(String user_name) {
+			this.user_name = user_name;
+		}
+
+		public String getMain_business_title() {
+			return main_business_title;
+		}
+
+		public void setMain_business_title(String main_business_title) {
+			this.main_business_title = main_business_title;
+		}
+
+		public String getMain_business_des() {
+			return main_business_des;
+		}
+
+		public void setMain_business_des(String main_business_des) {
+			this.main_business_des = main_business_des;
+		}
+
+		public String getBusiness_contact() {
+			return business_contact;
+		}
+
+		public void setBusiness_contact(String business_contact) {
+			this.business_contact = business_contact;
+		}
+
+		public String getWay() {
+			return way;
+		}
+
+		public void setWay(String way) {
+			this.way = way;
+		}
+
+		public String getImg_thumb() {
+			return img_thumb;
+		}
+
+		public void setImg_thumb(String img_thumb) {
+			this.img_thumb = img_thumb;
+		}
+
+		public String getIs_support() {
+			return is_support;
+		}
+
+		public void setIs_support(String is_support) {
+			this.is_support = is_support;
+		}
+
+		public String getSupport_name() {
+			return support_name;
+		}
+
+		public void setSupport_name(String support_name) {
+			this.support_name = support_name;
+		}
+
+		public String getIs_order() {
+			return is_order;
+		}
+
+		public void setIs_order(String is_order) {
+			this.is_order = is_order;
+		}
+
+		public String getCreate_time() {
+			return create_time;
+		}
+
+		public void setCreate_time(String create_time) {
+			this.create_time = create_time;
+		}
+
+		public String getAge_range() {
+			return age_range;
+		}
+
+		public void setAge_range(String age_range) {
+			this.age_range = age_range;
+		}
+
+		public String getAge() {
+			return age;
+		}
+
+		public void setAge(String age) {
+			this.age = age;
+		}
+
+		@Override
+		public String toString() {
+			return "ToysDetial [business_id=" + business_id + ", user_name="
+					+ user_name + ", main_business_title="
+					+ main_business_title + ", main_business_des="
+					+ main_business_des + ", business_contact="
+					+ business_contact + ", way=" + way + ", img_thumb="
+					+ img_thumb + ", is_support=" + is_support
+					+ ", support_name=" + support_name + ", order_status="
+					+ order_status + ", is_order=" + is_order
+					+ ", create_time=" + create_time + ", age_range="
+					+ age_range + ", age=" + age + ", supper_des=" + supper_des
+					+ ", qq=" + qq + ", addText=" + addText + ", userIconurl="
+					+ userIconurl + ", sunpei=" + sunpei + ", sunpeiHint="
+					+ sunpeiHint + ", baozhang=" + baozhang + ", is_cart="
+					+ is_cart + ", is_cart_number=" + is_cart_number
+					+ ", is_change=" + is_change + ", cart_number="
+					+ cart_number + ", category_icon_url=" + category_icon_url
+					+ "]";
+		}
+		
+	}
+	
+	/**
+	 * 简介
+	 * */
+	public class ToysDescription{
+		
+	}
+	
+	/**
+	 * 价格
+	 * */
+	public class ToysPrice{
+		private String sell_price = "";
+		private String market_price = "";
+		private String price_button = "";
+		public ToysPrice() {
+			super();
+		}
+		public String getSell_price() {
+			return sell_price;
+		}
+		public void setSell_price(String sell_price) {
+			this.sell_price = sell_price;
+		}
+		public String getMarket_price() {
+			return market_price;
+		}
+		public void setMarket_price(String market_price) {
+			this.market_price = market_price;
+		}
+		
+		public String getPrice_button() {
+			return price_button;
+		}
+		public void setPrice_button(String price_button) {
+			this.price_button = price_button;
+		}
+		@Override
+		public String toString() {
+			return "ToysPrice [sell_price=" + sell_price + ", market_price="
+					+ market_price + ", price_button=" + price_button + "]";
+		}
+		
+	}
+	
+	public ToysDetailBean fromJson(Context context, JSONObject json) {
+		ToysDetailBean toysDetailBean = new ToysDetailBean();
+		try {
+			ToysDetial detai = new ToysDetial();
+			detai.setBusiness_id(json.getJSONObject("detail").getString("business_id"));
+			detai.setUser_name(json.getJSONObject("detail").getString("user_name"));
+			detai.setMain_business_title(json.getJSONObject("detail").getString("main_business_title"));
+			detai.setMain_business_des(json.getJSONObject("detail").getString("main_business_des"));
+			detai.setBusiness_contact(json.getJSONObject("detail").getString("business_contact"));
+			detai.setWay(json.getJSONObject("detail").getString("way"));
+			detai.setImg_thumb(json.getJSONObject("detail").getString("img_thumb"));
+			detai.setIs_support(json.getJSONObject("detail").getString("is_support"));
+			detai.setSupport_name(json.getJSONObject("detail").getString("support_name"));
+			detai.setOrder_status(json.getJSONObject("detail").getString("order_status"));
+			detai.setIs_order(json.getJSONObject("detail").getString("is_order"));
+			detai.setCreate_time(json.getJSONObject("detail").getString("create_time"));
+			detai.setAge_range(json.getJSONObject("detail").getString("age_range"));
+			detai.setAge(json.getJSONObject("detail").getString("age"));
+			detai.setSupper_des(json.getJSONObject("detail").getString("support_des"));
+			detai.setQq(json.getJSONObject("detail").getString("qq"));
+			detai.setUserIconurl(json.getJSONObject("detail").getString("userIconUrl"));
+			detai.setAddText(json.getJSONObject("detail").getString("addtext"));
+			detai.setSunpei(json.getJSONObject("detail").getString("sunpei"));
+			detai.setSunpeiHint(json.getJSONObject("detail").getString("sunpeihint"));
+			detai.setBaozhang(json.getJSONObject("detail").getString("baozhang"));
+			detai.setIs_cart(json.getJSONObject("detail").getString("is_cart"));
+			detai.setIs_cart_number(json.getJSONObject("detail").getString("is_cart_number"));
+			detai.setIs_change(json.getJSONObject("detail").getString("is_change"));
+			detai.setCart_number(json.getJSONObject("detail").getString("cart_number"));
+			
+			ShoppingCartUtils.setCartNumber(context, Integer.parseInt(json.getJSONObject("detail").getString("cart_number")));
+			
+			ToysDescription description = new ToysDescription();
+			
+			ToysPrice price = new ToysPrice();
+			price.setSell_price(json.getJSONObject("price").getString("sell_price"));
+			price.setMarket_price(json.getJSONObject("price").getString("market_price"));
+			price.setPrice_button(json.getJSONObject("price").getString("price_button"));
+			
+			toysDetailBean.setDetail(detai);
+			toysDetailBean.setDescription(description);
+			toysDetailBean.setPrice(price);
+			
+			toysDetailBean.setToys_des(json.getString("toys_description"));
+			
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return toysDetailBean;
+	}
+	
+}

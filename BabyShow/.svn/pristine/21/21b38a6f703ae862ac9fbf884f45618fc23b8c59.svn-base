@@ -1,0 +1,180 @@
+package com.yyqq.commen.adapter;
+
+import java.util.ArrayList;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.ab.http.AbHttpUtil;
+import com.ab.http.AbRequestParams;
+import com.ab.http.AbStringHttpResponseListener;
+import com.yyqq.babyshow.R;
+import com.yyqq.code.toyslease.ShoppingCartActivity;
+import com.yyqq.code.toyslease.ToysLeaseDetailActivity;
+import com.yyqq.commen.model.ToysLeaseCartItemBean;
+import com.yyqq.commen.utils.Config;
+import com.yyqq.framework.application.MyApplication;
+import com.yyqq.framework.application.ServerMutualConfig;
+
+/**
+ * 购物车玩具item
+ * */
+public class ToysLeaseCartItemAdapter extends BaseAdapter {
+
+	private Activity context = null;
+	private LayoutInflater inflater = null;
+	private ArrayList<ToysLeaseCartItemBean> data = null;
+	
+	public ToysLeaseCartItemAdapter(Activity context, LayoutInflater inflater, ArrayList<ToysLeaseCartItemBean> data) {
+		super();
+		this.context = context;
+		this.inflater = inflater;
+		this.data = data;
+	}
+
+	@Override
+	public int getCount() {
+		return data.size() > 0 ? data.size() : 0;
+	}
+
+	@Override
+	public Object getItem(int position) {
+		return data.get(position);
+	}
+
+	@Override
+	public long getItemId(int position) {
+		return position;
+	}
+
+	@Override
+	public View getView(final int position, View convertView, ViewGroup parent) {
+		convertView = inflater.inflate(R.layout.item_cart_type03, null);
+		final ImageView item_cart_select = (ImageView) convertView.findViewById(R.id.item_cart_select);
+		ImageView item_cart_img = (ImageView) convertView.findViewById(R.id.item_cart_img);
+		TextView item_cart_name = (TextView) convertView.findViewById(R.id.item_cart_name);
+		TextView item_cart_price = (TextView) convertView.findViewById(R.id.item_cart_price);
+		TextView item_toys_order_hint = (TextView) convertView.findViewById(R.id.item_toys_order_hint);
+		ImageView item_toys_type_icon = (ImageView) convertView.findViewById(R.id.item_toys_type_icon);
+		
+		MyApplication.getInstance().display(data.get(position).getImg_thumb(), item_cart_img, R.drawable.def_image);
+		item_cart_name.setText(data.get(position).getBusiness_title());
+		item_cart_price.setText(data.get(position).getEvery_price());
+		item_toys_order_hint.setText(data.get(position).getDescription());
+		
+		// 是否显示小图标
+		if(!data.get(position).getSmall_img_thumb().isEmpty()){
+			MyApplication.getInstance().display(data.get(position).getSmall_img_thumb(), item_toys_type_icon, R.drawable.def_image);
+		}
+		
+		// 是否被选中
+		if(data.get(position).getCheck_state().equals("1")){
+			item_cart_select.setBackgroundResource(R.drawable.select_down);
+		}else{
+			item_cart_select.setBackgroundResource(R.drawable.select_up);
+		}
+		
+		// 是否可选
+		if(data.get(position).getIs_order().equals("0")){
+			item_cart_select.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					updateCartType(data.get(position), item_cart_select);
+				}
+			});
+		}else{
+			item_cart_select.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					AlertDialog.Builder dialog = new Builder(context);
+					dialog.setMessage(data.get(position).getDescription());
+					dialog.setNegativeButton("确定", new DialogInterface.OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+						}
+						
+					});
+					dialog.create().show();
+				}
+			});
+		}
+			
+		convertView.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(context, ToysLeaseDetailActivity.class);
+				intent.putExtra(ToysLeaseDetailActivity.TOYS_DETAIL_KEY, data.get(position).getBusiness_id());
+				context.startActivity(intent);
+			}
+		});
+		
+		return convertView;
+	}
+	
+	/**
+	 * 修改购物车状态
+	 * */
+	private void updateCartType(final ToysLeaseCartItemBean bean, final ImageView item_cart_select){
+		AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(context).uid);
+		params.put("cart_id", bean.getCart_id());
+		params.put("order_id", bean.getOrder_id());
+		AbHttpUtil.getInstance(context).get(ServerMutualConfig.UPDATE_CART_TYPE + "&" + params.toString(), new AbStringHttpResponseListener() {
+			
+			@Override
+			public void onSuccess(int statusCode, String content) {
+				super.onSuccess(statusCode, content);
+				try {
+					if(new JSONObject(content).getBoolean("success")){
+						
+						// 修改购物车中本item相关状态
+						bean.setIs_order(new JSONObject(content).getJSONObject("data").getString("is_order"));
+						bean.setCheck_state(new JSONObject(content).getJSONObject("data").getString("check_state"));
+						if(bean.getCheck_state().equals("1")){
+							item_cart_select.setBackgroundResource(R.drawable.select_down);
+						}else{
+							item_cart_select.setBackgroundResource(R.drawable.select_up);
+						}
+						
+						// 更新购物车底部总计金额
+						ShoppingCartActivity.changeCartBottomPage(context, new JSONObject(content).getJSONObject("data").getString("total_title"), new JSONObject(content).getJSONObject("data").getString("total_price"), new JSONObject(content).getJSONObject("data").getString("is_button"));
+					}else{
+						Toast.makeText(context, new JSONObject(content).getString("reMsg"), 3).show();
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+
+			@Override
+			public void onFinish() {
+				super.onFinish();
+			}
+
+			@Override
+			public void onFailure(int statusCode, String content,
+					Throwable error) {
+				super.onFailure(statusCode, content, error);
+			}
+		});
+	}
+	
+}

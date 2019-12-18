@@ -1,0 +1,338 @@
+package com.yyqq.code.toyslease;
+
+import java.util.ArrayList;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.ab.http.AbHttpUtil;
+import com.ab.http.AbRequestParams;
+import com.ab.http.AbStringHttpResponseListener;
+import com.umeng.analytics.MobclickAgent;
+import com.yyqq.babyshow.R;
+import com.yyqq.commen.adapter.ToysLeaseOrderDetailAdapter;
+import com.yyqq.commen.model.ToysLeaseOrderDetailBean;
+import com.yyqq.commen.utils.Config;
+import com.yyqq.commen.view.PullDownView;
+import com.yyqq.commen.view.PullDownView.OnPullDownListener;
+import com.yyqq.framework.activity.BaseActivity;
+import com.yyqq.framework.application.ServerMutualConfig;
+
+
+/**
+ * 我的玩具订单详情
+ * 
+ * */
+public class ToysLeaseOrderDetailActivity extends BaseActivity implements OnPullDownListener{
+	
+	public static final String ORDER_ID_KEY = "order_id_key";
+	private AbHttpUtil ab;
+	private ToysLeaseOrderDetailAdapter adapter;
+	private String business_id = "";
+	private boolean showServer = false;
+	public static ToysLeaseOrderDetailActivity toysLeaseOrderDetailActivity = null;
+	
+	private LayoutInflater inflater;
+	private PullDownView pullDownView;
+	private ListView listView;
+	private RelativeLayout mRelativeLayout;
+	private TextView lease_order_top;
+	private TextView lease_order_endtime;
+	private TextView lease_order_type;
+	private TextView lease_order_cancel;
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_toys_lease_order_detail);
+	}
+	
+	@Override
+	protected void initView() {
+		inflater = LayoutInflater.from(ToysLeaseOrderDetailActivity.this);
+		mRelativeLayout = (RelativeLayout) inflater.inflate(R.layout.item_lease_order_detailtop, null);
+		lease_order_top = (TextView) mRelativeLayout.findViewById(R.id.lease_order_top);
+		
+		pullDownView = (PullDownView) findViewById(R.id.list);
+		listView = pullDownView.getListView();
+		listView.setDivider(null);
+		lease_order_endtime = (TextView) findViewById(R.id.lease_order_endtime);
+		lease_order_type = (TextView) findViewById(R.id.lease_order_type);
+		lease_order_cancel = (TextView) findViewById(R.id.lease_order_cancel);
+		lease_order_cancel.setVisibility(View.GONE);
+	}
+
+	@Override
+	protected void initData() {
+		toysLeaseOrderDetailActivity = this;
+		ab = AbHttpUtil.getInstance(ToysLeaseOrderDetailActivity.this);
+		pullDownView.setOnPullDownListener(this);
+		pullDownView.enableAutoFetchMore(false, 1);// 设置不可以自动获取更多 滑到最后一个不会自动获取
+		pullDownView.setShowHeader();// 显示并且可以使用头部刷新
+		pullDownView.setHideFooter();
+		pullDownView.setShowHeaderLayout(mRelativeLayout);
+		
+		onRefresh();
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+	
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
+
+	@Override
+	protected void setListener() {
+		
+		findViewById(R.id.lease_back).setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				ToysLeaseOrderDetailActivity.this.finish();
+			}
+		});
+
+	}
+	
+	@Override
+	public void onRefresh() {
+		final AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(ToysLeaseOrderDetailActivity.this).uid);
+		params.put("order_id", getIntent().getStringExtra(ORDER_ID_KEY));
+		ab.get(ServerMutualConfig.GET_ORDER_DETAIL + "&" + params.toString(),new AbStringHttpResponseListener() {
+			@Override
+			public void onSuccess(int statusCode, final String content) {
+				super.onSuccess(statusCode, content);
+				try {
+					if(!content.isEmpty() && new JSONObject(content).getBoolean("success")){
+						lease_order_endtime.setText(new JSONObject(content).getJSONObject("data").getString("order_post_time"));
+						lease_order_top.setText(new JSONObject(content).getJSONObject("data").getString("orderdetail"));
+						lease_order_type.setText(new JSONObject(content).getJSONObject("data").getString("status_name"));
+						business_id = new JSONObject(content).getJSONObject("data").getString("business_id");
+						if(new JSONObject(content).getJSONObject("data").getString("is_refund").equals("1")){
+							lease_order_cancel.setVisibility(View.VISIBLE);
+							lease_order_cancel.setText(new JSONObject(content).getJSONObject("data").getString("refund_name"));
+							lease_order_cancel.setOnClickListener(new OnClickListener() {
+								
+								@Override
+								public void onClick(View v) {
+									try {
+										String refund_status = new JSONObject(content).getJSONObject("data").getString("refund_status");
+										if(refund_status.equals("1")){ // 去支付
+											Intent intent = new Intent(ToysLeaseOrderDetailActivity.this, ToysLeasePayActivity.class);
+											intent.putExtra(ToysLeasePayActivity.TOYS_ORDER_KEY, business_id);
+											startActivity(intent);
+										}else if(refund_status.equals("8")){ // 取消订单
+//											checkServer();
+											AlertDialog.Builder dialog = new Builder(ToysLeaseOrderDetailActivity.this);
+											dialog.setTitle("宝贝半径");
+											dialog.setMessage("确定取消订单吗？");
+											dialog.setNegativeButton("取消",
+													new DialogInterface.OnClickListener() {
+							
+														@Override
+														public void onClick(DialogInterface dialog,
+																int which) {
+														}
+							
+													});
+											dialog.setPositiveButton("确定",
+													new DialogInterface.OnClickListener() {
+							
+														@Override
+														public void onClick(DialogInterface arg0, int arg1) {
+															cancelOrder("8");
+														}
+													});
+											dialog.create().show();
+										}else if(refund_status.equals("11")){ // 退押金
+											AlertDialog.Builder dialog = new Builder(ToysLeaseOrderDetailActivity.this);
+											dialog.setTitle("宝贝半径");
+											dialog.setMessage("确定要退押金吗？");
+											dialog.setNegativeButton("取消",
+													new DialogInterface.OnClickListener() {
+							
+														@Override
+														public void onClick(DialogInterface dialog,
+																int which) {
+														}
+							
+													});
+											dialog.setPositiveButton("确定",
+													new DialogInterface.OnClickListener() {
+							
+														@Override
+														public void onClick(DialogInterface arg0, int arg1) {
+															cancelOrder("11");
+														}
+													});
+											dialog.create().show();
+										}
+									} catch (JSONException e) {
+										e.printStackTrace();
+									} 
+								}
+							});
+						}else{
+							lease_order_cancel.setVisibility(View.GONE);
+						}
+						
+						ArrayList<ToysLeaseOrderDetailBean> list = new ArrayList<ToysLeaseOrderDetailBean>();
+						ToysLeaseOrderDetailBean bean = null;
+						for(int i = 0 ; i < new JSONObject(content).getJSONObject("data").getJSONArray("order_listing").length() ; i++ ){
+							bean = new ToysLeaseOrderDetailBean();
+							bean.setImgUrl(new JSONObject(content).getJSONObject("data").getJSONArray("order_listing").getJSONObject(i).getString("img_thumb"));
+							bean.setTime(new JSONObject(content).getJSONObject("data").getJSONArray("order_listing").getJSONObject(i).getString("listing_create_time"));
+							bean.setType(new JSONObject(content).getJSONObject("data").getJSONArray("order_listing").getJSONObject(i).getString("listing_status_name"));
+							bean.setStyle(new JSONObject(content).getJSONObject("data").getJSONArray("order_listing").getJSONObject(i).getString("style"));
+							list.add(bean);
+						}
+						adapter = new ToysLeaseOrderDetailAdapter(inflater, list);
+						listView.setAdapter(adapter);
+					}else{
+						Toast.makeText(ToysLeaseOrderDetailActivity.this, new JSONObject(content).getString("reMsg"), 2).show();
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			@Override
+			public void onFinish() {
+				super.onFinish();
+				pullDownView.RefreshComplete();// 这个事线程安全的 可看源代码
+				pullDownView.notifyDidMore();
+			}
+			
+			@Override
+			public void onFailure(int statusCode, String content,
+					Throwable error) {
+				super.onFailure(statusCode, content, error);
+			}
+		});
+	}
+
+	@Override
+	public void onMore() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
+	 * 取消订单或退押金
+	 * */
+	private void cancelOrder(String type){
+		Config.showProgressDialog(ToysLeaseOrderDetailActivity.this, false, null);
+		final AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(ToysLeaseOrderDetailActivity.this).uid);
+		params.put("order_id", getIntent().getStringExtra(ORDER_ID_KEY));
+		params.put("source", "0");
+		params.put("refund_status", type);
+		ab.get(ServerMutualConfig.CANCEL_ORDER + "&" + params.toString(),new AbStringHttpResponseListener() {
+			
+			@Override
+			public void onSuccess(int statusCode, final String content) {
+				super.onSuccess(statusCode, content);
+				Config.dismissProgress();
+				try {
+					if(!content.isEmpty() && new JSONObject(content).getBoolean("success")){
+						onRefresh();
+						Toast.makeText(ToysLeaseOrderDetailActivity.this, "取消成功", 2).show();
+					}else{
+						Toast.makeText(ToysLeaseOrderDetailActivity.this, new JSONObject(content).getString("reMsg"), 2).show();
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			@Override
+			public void onFinish() {
+				super.onFinish();
+				Config.dismissProgress();
+			}
+			
+			@Override
+			public void onFailure(int statusCode, String content,
+					Throwable error) {
+				super.onFailure(statusCode, content, error);
+			}
+		});
+	}
+	
+	
+	/**
+	 * 查询是否需要收取服务费
+	 * */
+	private void checkServer(){
+		final AbRequestParams params = new AbRequestParams();
+		params.put("order_id", getIntent().getStringExtra(ORDER_ID_KEY));
+		ab.get(ServerMutualConfig.CHECK_SERVER + "&" + params.toString(),new AbStringHttpResponseListener() {
+			@Override
+			public void onSuccess(int statusCode, String content) {
+				super.onSuccess(statusCode, content);
+				try {
+					if(!content.isEmpty() && new JSONObject(content).getBoolean("success")){
+						AlertDialog.Builder dialog = new Builder(ToysLeaseOrderDetailActivity.this);
+						dialog.setTitle("宝贝半径");
+						dialog.setMessage("确定取消订单吗？");
+						dialog.setNegativeButton("取消",
+								new DialogInterface.OnClickListener() {
+		
+									@Override
+									public void onClick(DialogInterface dialog,
+											int which) {
+									}
+		
+								});
+						dialog.setPositiveButton("确定",
+								new DialogInterface.OnClickListener() {
+		
+									@Override
+									public void onClick(DialogInterface arg0, int arg1) {
+										cancelOrder("8");
+									}
+								});
+						dialog.create().show();
+					}else{
+						Toast.makeText(ToysLeaseOrderDetailActivity.this, new JSONObject(content).getString("reMsg"), 2).show();
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			@Override
+			public void onFinish() {
+				super.onFinish();
+			}
+			
+			@Override
+			public void onFailure(int statusCode, String content,
+					Throwable error) {
+				super.onFailure(statusCode, content, error);
+			}
+		});
+	}
+
+}

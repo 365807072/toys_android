@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg" >
+
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        android:background="@color/title_bg" >
+
+        <TextView
+            android:id="@+id/fride_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="10dp"
+            android:text="绑定账号"
+            android:textColor="#ffffff"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ly"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:text="请输入对方的用户名/邮箱和密码"
+            android:textSize="16dp"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_bg_sel"
+            android:hint="用户名/邮箱："
+            android:inputType="textEmailAddress"
+            android:singleLine="true"
+            android:textColor="#A5A5A5"
+            android:textColorHint="#A5A5A5"
+            android:textSize="15dp" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ly"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/wait_input_bg"
+        android:hint="@string/register_password"
+        android:inputType="textPassword"
+        android:maxLength="16"
+        android:singleLine="true"
+        android:textColor="#A5A5A5"
+        android:textColorHint="#A5A5A5"
+        android:textSize="15dp" />
+
+    <Button
+        android:id="@+id/bind"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/password"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="20dp"
+        android:background="#f46962"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textColor="#ffffff"
+        android:textSize="20dp" />
+
+</RelativeLayout>

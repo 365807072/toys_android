@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp">
+        <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/add_album_03" />
+
+        <ImageView
+            android:id="@+id/photo_defimg"
+            android:layout_width="107dp"
+            android:layout_height="107dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:paddingBottom="1dp"
+            android:paddingRight="1dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/def_head" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/photonum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#C479DD"
+        android:gravity="right|center_vertical"
+        android:paddingRight="4dp"
+        android:text="10"
+        android:textColor="#FFFFFF"
+        android:textSize="14dp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:text="描述"
+        android:textColor="#808080"
+        android:textSize="16dp"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/jiantou"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/jiantou"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="2013-12-26 15:50:39"
+        android:layout_below="@+id/name"
+        android:textColor="#bbaf9b"
+        android:textSize="14dp" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relativeLayout1"
+        android:layout_centerHorizontal="true"
+        android:text="0-1岁"
+        android:textColor="#8f826d"
+        android:textSize="18dp" />
+
+</RelativeLayout>

@@ -1,0 +1,249 @@
+package com.yyqq.code.personal;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import org.json.JSONException;
+import org.json.JSONObject;
+import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.PlatformActionListener;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.sina.weibo.SinaWeibo;
+import com.ab.http.AbHttpUtil;
+import com.ab.http.AbRequestParams;
+import com.ab.http.AbStringHttpResponseListener;
+import com.umeng.analytics.MobclickAgent;
+import com.yyqq.babyshow.R;
+import com.yyqq.commen.utils.Config;
+import com.yyqq.commen.utils.Log;
+import com.yyqq.framework.application.ServerMutualConfig;
+
+public class BindList extends Activity {
+	private Activity context;
+	private AbHttpUtil ab;
+	private ListView listview;
+	private MyAdapter adapter;
+	private ArrayList<BangDingItem> data = new ArrayList<BangDingItem>();
+	private TextView t;
+
+	public void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
+
+	public void onCreate(Bundle b) {
+		super.onCreate(b);
+		Config.setActivityState(this);
+		setContentView(R.layout.bangding);
+		context = this;
+		ShareSDK.initSDK(context);
+		t = (TextView) findViewById(R.id.t);
+		listview = (ListView) findViewById(R.id.list);
+		if (adapter == null) {
+			adapter = new MyAdapter();
+		}
+		ShareSDK.initSDK(context);
+		listview.setAdapter(adapter);
+		Config.showProgressDialog(context, false, null);
+		ab = AbHttpUtil.getInstance(context);
+		ab.setDebug(Log.isDebug);
+		getBangDingList();
+	}
+
+	private void getBangDingList() {
+		AbRequestParams params = new AbRequestParams();
+		params.put("user_id", Config.getUser(context).uid);
+//		 android.util.Log.e("fanfan", ServerMutualConfig.BindShowUserList +
+//		 "&"
+//		 + params.toString());
+		ab.get(ServerMutualConfig.BindShowUserList + "&" + params.toString(),
+				new AbStringHttpResponseListener() {
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						try {
+							JSONObject json = new JSONObject(content);
+							if (json.getBoolean("success")) {
+								for (int i = 0; i < json.getJSONArray("data")
+										.length(); i++) {
+									BangDingItem item = new BangDingItem();
+									item.fromJson(json.getJSONArray("data")
+											.getJSONObject(i));
+									data.add(item);
+								}
+								adapter.notifyDataSetChanged();
+								if (data.isEmpty()) {
+									t.setText("您当前没有绑定账号,如需绑定，请先登录微博或微信");
+								} else {
+									t.setVisibility(View.GONE);
+								}
+							} else {
+								Toast.makeText(context,
+										json.getString("reMsg"),
+										Toast.LENGTH_SHORT).show();
+							}
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+
+					@Override
+					public void onFinish() {
+						super.onFinish();
+						Config.dismissProgress();
+					}
+
+					@Override
+					public void onFailure(int statusCode, String content,
+							Throwable error) {
+						super.onFailure(statusCode, content, error);
+					}
+				});
+	}
+
+	public class BangDingItem {
+		public String nick_name;
+		public String user_type;
+
+		public void fromJson(JSONObject json) {
+			try {
+				if (json.has("nick_name")) {
+					nick_name = json.getString("nick_name");
+				}
+				if (json.has("user_type")) {
+					user_type = json.getString("user_type");
+				}
+			} catch (Exception e) {
+			}
+		}
+	}
+
+	public class MyAdapter extends BaseAdapter {
+		@Override
+		public int getCount() {
+			return data.size();
+		}
+
+		@Override
+		public Object getItem(int arg0) {
+			return data.get(arg0);
+		}
+
+		@Override
+		public long getItemId(int arg0) {
+			return arg0;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			LayoutInflater inflater = (LayoutInflater) context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			convertView = inflater.inflate(R.layout.bangding_item, null);
+			final BangDingItem item = data.get(position);
+			TextView name, logo_name;
+			ImageView logo, bindBt;
+			name = (TextView) convertView.findViewById(R.id.name);
+			logo_name = (TextView) convertView.findViewById(R.id.logo_name);
+			logo = (ImageView) convertView.findViewById(R.id.logo);
+			name.setText(item.nick_name);
+			bindBt = (ImageView) convertView.findViewById(R.id.bindBt);
+			bindBt.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View arg0) {
+					Config.showProgressDialog(context, false, null);
+					Platform weibo = ShareSDK.getPlatform(context, SinaWeibo.NAME);
+					if (weibo.isValid ()) {
+						  weibo.removeAccount(true);
+						  ShareSDK.removeCookieOnAuthorize(true);
+					}
+					AbRequestParams params = new AbRequestParams();
+					params.put("user_id", Config.getUser(context).uid);
+					params.put("user_type", item.user_type);
+					ab.post(ServerMutualConfig.CancelBind, params,
+							new AbStringHttpResponseListener() {
+								@Override
+								public void onSuccess(int statusCode,
+										String content) {
+									super.onSuccess(statusCode, content);
+									JSONObject json;
+									try {
+										json = new JSONObject(content);
+										if (json.getBoolean("success")) {
+											Toast.makeText(context,
+													json.getString("reMsg"),
+													Toast.LENGTH_SHORT).show();
+											finish();
+										}
+									} catch (JSONException e) {
+										e.printStackTrace();
+									}
+
+								}
+
+								@Override
+								public void onFinish() {
+									super.onFinish();
+									Config.dismissProgress();
+								}
+
+								@Override
+								public void onFailure(int statusCode,
+										String content, Throwable error) {
+									super.onFailure(statusCode, content, error);
+									Config.showFiledToast(context);
+								}
+							});
+				}
+			});
+
+			if ("1".equals(item.user_type)) {
+				logo.setBackgroundResource(R.drawable.weibo_logo);
+				logo_name.setText("新浪微博");
+			}
+			if ("2".equals(item.user_type)) {
+				logo.setBackgroundResource(R.drawable.weixin_logo);
+				logo_name.setText("微信账号");
+			}
+			return convertView;
+		}
+	}
+	
+	private PlatformActionListener paListener = new PlatformActionListener() {
+
+		@Override
+		public void onError(Platform arg0, int arg1, Throwable arg2) {
+//			android.util.Log.e("fff +onError: ", arg0.toString());
+
+		}
+
+		@Override
+		public void onComplete(final Platform arg0, int arg1,
+				HashMap<String, Object> arg2) {
+			Toast.makeText(context, "取消授权了", 0).show();
+		}
+
+		@Override
+		public void onCancel(Platform arg0, int arg1) {
+//			android.util.Log.e("fff +onCancel: ", arg0.toString());
+		}
+
+	};
+
+}

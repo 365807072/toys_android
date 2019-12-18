@@ -1,0 +1,40 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    tools:ignore="Orientation" >
+
+    <RelativeLayout
+        android:id="@+id/web_title"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="#ff6e6c"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/web_title_center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textColor="#fff"
+            android:textSize="18dp" />
+
+        <ImageView
+            android:id="@+id/web_title_left"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/web_back"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <WebView
+        android:id="@+id/toyslease_webview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+</LinearLayout>

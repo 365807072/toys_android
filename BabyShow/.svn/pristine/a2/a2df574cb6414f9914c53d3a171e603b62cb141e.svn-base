@@ -1,0 +1,64 @@
+package com.yyqq.commen.model;
+
+/**
+ * 押金使用详情
+ * 
+ * */
+public class ToysLeaseDepositDetailBean {
+
+	private String year;
+	private String hour;
+	private String monery;
+	private String detail;
+
+	public ToysLeaseDepositDetailBean() {
+	}
+
+	public ToysLeaseDepositDetailBean(String year, String hour, String monery,
+			String detail) {
+		super();
+		this.year = year;
+		this.hour = hour;
+		this.monery = monery;
+		this.detail = detail;
+	}
+
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+
+	public String getHour() {
+		return hour;
+	}
+
+	public void setHour(String hour) {
+		this.hour = hour;
+	}
+
+	public String getMonery() {
+		return monery;
+	}
+
+	public void setMonery(String monery) {
+		this.monery = monery;
+	}
+
+	public String getDetail() {
+		return detail;
+	}
+
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
+
+	@Override
+	public String toString() {
+		return "ToysLeaseDepositDetailBean [year=" + year + ", hour=" + hour
+				+ ", monery=" + monery + ", detail=" + detail + "]";
+	}
+
+}

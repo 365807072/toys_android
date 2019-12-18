@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pastTravelLineItemLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/background_light">
+    
+   <TextView 
+        android:id="@+id/AlbumName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+         android:layout_centerVertical="true"
+        android:text=""
+        android:padding="20dp"
+        android:textColor="@android:color/background_dark"/>
+    
+   <ImageView 
+        android:id="@+id/selAlbum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/gouxuan"/> 
+    
+</RelativeLayout>

@@ -1,0 +1,128 @@
+package com.yyqq.commen.adapter;
+
+import java.util.ArrayList;
+
+import android.app.Activity;
+import android.graphics.BitmapFactory;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.yyqq.babyshow.R;
+import com.yyqq.commen.model.ToysLeaseMainListBean;
+import com.yyqq.framework.application.MyApplication;
+
+public class ToysLeaseMainAdapter extends BaseAdapter {
+
+	private Activity context = null;
+	private LayoutInflater inflater = null;
+	private MyApplication app = null;
+	private ArrayList<ToysLeaseMainListBean> data = null;
+	private int showType = 0;  // 0 = 待租 ，1 = 已租，-1 = 自己
+	
+	public ToysLeaseMainAdapter(Activity context, LayoutInflater inflater,
+			MyApplication app, ArrayList<ToysLeaseMainListBean> data, int showType) {
+		super();
+		this.context = context;
+		this.inflater = inflater;
+		this.app = app;
+		this.data = data;
+		this.showType = showType;
+	}
+
+	@Override
+	public int getCount() {
+		return data.size() > 0 ? data.size() : 0;
+	}
+
+	@Override
+	public Object getItem(int position) {
+		return data.get(position);
+	}
+
+	@Override
+	public long getItemId(int position) {
+		return position;
+	}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		if(showType == 0){
+			convertView = inflater.inflate(R.layout.item_lease_main, null);
+			ImageView lease_item_img = (ImageView) convertView.findViewById(R.id.lease_item_img);
+			TextView lease_item_name = (TextView) convertView.findViewById(R.id.lease_item_name);
+			ImageView lease_user_icon = (ImageView) convertView.findViewById(R.id.lease_user_icon);
+			TextView lease_user_name = (TextView) convertView.findViewById(R.id.lease_user_name);
+			TextView lease_item_support = (TextView) convertView.findViewById(R.id.lease_item_suppor);
+			ImageView lease_item_type = (ImageView) convertView.findViewById(R.id.lease_item_type);
+			TextView lease_item_monery = (TextView) convertView.findViewById(R.id.lease_item_monery);
+			TextView lease_item_state = (TextView) convertView.findViewById(R.id.lease_item_state);
+			
+			MyApplication.getInstance().display(data.get(position).getImgUrl(), lease_item_img, R.drawable.def_image);
+			lease_item_name.setText(data.get(position).getLeaseName());
+			MyApplication.getInstance().display(data.get(position).getUserIconUrl(), lease_user_icon, R.drawable.def_head);
+			lease_user_name.setText(data.get(position).getUserName());
+			lease_item_support.setText(data.get(position).getLeaseStateName());
+			
+			if(data.get(position).getLeaseType().equals("1")){
+				lease_item_type.setImageBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.main_item_zu));
+			}else{
+				lease_item_type.setImageBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.main_item_mai));
+			}
+			
+			lease_item_monery.setText(data.get(position).getLeaseMonery());
+		}else if(showType == 1){
+			convertView = inflater.inflate(R.layout.item_lease_main, null);
+			ImageView lease_item_img = (ImageView) convertView.findViewById(R.id.lease_item_img);
+			TextView lease_item_name = (TextView) convertView.findViewById(R.id.lease_item_name);
+			ImageView lease_user_icon = (ImageView) convertView.findViewById(R.id.lease_user_icon);
+			TextView lease_user_name = (TextView) convertView.findViewById(R.id.lease_user_name);
+			TextView lease_item_support = (TextView) convertView.findViewById(R.id.lease_item_suppor);
+			ImageView lease_item_type = (ImageView) convertView.findViewById(R.id.lease_item_type);
+			TextView lease_item_monery = (TextView) convertView.findViewById(R.id.lease_item_monery);
+			TextView lease_item_state = (TextView) convertView.findViewById(R.id.lease_item_state);
+			
+			MyApplication.getInstance().display(data.get(position).getImgUrl(), lease_item_img, R.drawable.def_image);
+			lease_item_name.setText(data.get(position).getLeaseName());
+			MyApplication.getInstance().display(data.get(position).getUserIconUrl(), lease_user_icon, R.drawable.def_head);
+			lease_user_name.setText(data.get(position).getUserName());
+			lease_item_support.setText(data.get(position).getLeaseStateName());
+			
+			if(data.get(position).getLeaseType().equals("1")){
+				lease_item_type.setImageBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.main_item_zu));
+			}else{
+				lease_item_type.setImageBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.main_item_mai));
+			}
+			
+			lease_item_monery.setText(data.get(position).getLeaseMonery());
+		}else if(showType == -1){
+			convertView = inflater.inflate(R.layout.item_lease_main, null);
+			ImageView lease_item_img = (ImageView) convertView.findViewById(R.id.lease_item_img);
+			TextView lease_item_name = (TextView) convertView.findViewById(R.id.lease_item_name);
+			ImageView lease_user_icon = (ImageView) convertView.findViewById(R.id.lease_user_icon);
+			TextView lease_user_name = (TextView) convertView.findViewById(R.id.lease_user_name);
+			ImageView lease_item_type = (ImageView) convertView.findViewById(R.id.lease_item_type);
+			TextView lease_item_monery = (TextView) convertView.findViewById(R.id.lease_item_monery);
+			TextView lease_item_state = (TextView) convertView.findViewById(R.id.lease_item_state);
+			
+			MyApplication.getInstance().display(data.get(position).getImgUrl(), lease_item_img, R.drawable.def_image);
+			lease_item_name.setText(data.get(position).getLeaseName());
+			MyApplication.getInstance().display(data.get(position).getUserIconUrl(), lease_user_icon, R.drawable.def_head);
+			lease_user_name.setText(data.get(position).getUserName());
+			
+			if(data.get(position).getLeaseType().equals("1")){
+				lease_item_type.setImageBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.main_item_zu));
+			}else{
+				lease_item_type.setImageBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.main_item_mai));
+			}
+			
+			lease_item_monery.setText(data.get(position).getLeaseMonery());
+			lease_item_state.setText(data.get(position).getOrder_state());
+		}
+		return convertView;
+	}
+
+}

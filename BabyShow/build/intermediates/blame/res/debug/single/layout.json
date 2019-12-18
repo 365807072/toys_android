@@ -1,0 +1,1274 @@
+[
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_group_manager_topic.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_group_manager_topic.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/mypicture_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/mypicture_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/tb_munion_aditem.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/tb_munion_aditem.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/load_device_image.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/load_device_image.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/postshow_detail.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/postshow_detail.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_search_listviewcontext.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_search_listviewcontext.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_compression_options.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_compression_options.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_invite_detail.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_invite_detail.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_toys_lease_list.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_toys_lease_list.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_image_grid.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_image_grid.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/photo_detail.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/photo_detail.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/special_grid.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/special_grid.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_toys_lease_order.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_toys_lease_order.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/loadatagridview_layout.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/loadatagridview_layout.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/test_webview.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/test_webview.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/shaixuan.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/shaixuan.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/main_goodleft_hint_page.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/main_goodleft_hint_page.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_super_group.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_super_group.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_toys_lease_delay.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_toys_lease_delay.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_toys_lease_order_list.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_toys_lease_order_list.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/image_detail.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/image_detail.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/buy_detail_list.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/buy_detail_list.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/toys_home_head.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/toys_home_head.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/user_set.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/user_set.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/comment_no_data_layout.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/comment_no_data_layout.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/doing_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/doing_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/photo_move.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/photo_move.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/release.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/release.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_main_item_comment.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_main_item_comment.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/copy_of_business.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/copy_of_business.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/shaixuan_listview_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/shaixuan_listview_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_toys_lease_pay.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_toys_lease_pay.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_video_full_screen.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_video_full_screen.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/image_dialog.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/image_dialog.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/qun_manage_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/qun_manage_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/exchange_phone.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/exchange_phone.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/myspecial_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/myspecial_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/list_vision.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/list_vision.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_mycart.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_mycart.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_showshow_video.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_showshow_video.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_toys_lease_main.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_toys_lease_main.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_popupwindows.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_popupwindows.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/map_item_popupwindows.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/map_item_popupwindows.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/head_qunzhu.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/head_qunzhu.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_toys_main_img.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_toys_main_img.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/grow_attention.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/grow_attention.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/zhanbo.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/zhanbo.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/start.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/start.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/download_popupwindows.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/download_popupwindows.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/photo_changesize.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/photo_changesize.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/refresh_footer.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/refresh_footer.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_image_bucket.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_image_bucket.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_lease_order_detail02.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_lease_order_detail02.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_home_main.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_home_main.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_toys_deposit_detail.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_toys_deposit_detail.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/friend_list.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/friend_list.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/red_packet_list_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/red_packet_list_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_main_type05.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_main_type05.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/super_group_head.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/super_group_head.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/grow_edit_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/grow_edit_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/anim_buttons.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/anim_buttons.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/fragment_selection_launch.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/fragment_selection_launch.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/cropimage.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/cropimage.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/myshow_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/myshow_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_group_main.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_group_main.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/cooperate.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/cooperate.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_main_detial04.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_main_detial04.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/mypicture_jingxuan.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/mypicture_jingxuan.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_group_category.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_group_category.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_lease_main.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_lease_main.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/bangding_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/bangding_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/special_detail_list_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/special_detail_list_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/list_item_queue.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/list_item_queue.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/post_popupwindows.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/post_popupwindows.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_toys_all_select_02.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_toys_all_select_02.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_demo.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_demo.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/shared_list.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/shared_list.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_selectimg1.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_selectimg1.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_main_type04.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_main_type04.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/umeng_update_dialog.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/umeng_update_dialog.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/xiaoge.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/xiaoge.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/grow_detail.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/grow_detail.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_photo.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_photo.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/postshow_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/postshow_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/load_more_layout.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/load_more_layout.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/business_review_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/business_review_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_search_result.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_search_result.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_my_card_list.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_my_card_list.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_group_my_follow.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_group_my_follow.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_video_detail.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_video_detail.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/business_msg.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/business_msg.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_invite_start.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_invite_start.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_toys_main_new.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_toys_main_new.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_main_type03.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_main_type03.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/anim_player.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/anim_player.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/postbar_list_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/postbar_list_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_cart_type01.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_cart_type01.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_shoushow_video.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_shoushow_video.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_business_package_list.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_business_package_list.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/them_albm.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/them_albm.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/reset_pwd.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/reset_pwd.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/search_listview_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/search_listview_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/plaza_detail.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/plaza_detail.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/them_grida_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/them_grida_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/order_main_list.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/order_main_list.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_lease_order_detail03.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_lease_order_detail03.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/expandable_list_layout.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/expandable_list_layout.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/my_photo_manager.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/my_photo_manager.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_main.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_main.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/buy_head_bar.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/buy_head_bar.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_group_detial.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_group_detial.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/simple_control_layer.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/simple_control_layer.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/group_detial_head.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/group_detial_head.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/grow_baby_popupwindows.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/grow_baby_popupwindows.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_published_grida.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_published_grida.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/nav_radiogroup_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/nav_radiogroup_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/shared_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/shared_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/photo_more.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/photo_more.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/fragment_selection_common.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/fragment_selection_common.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_main_detial02_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_main_detial02_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/go_to_pay.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/go_to_pay.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/general_left_list.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/general_left_list.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/pulldown_footer.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/pulldown_footer.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/creat_album.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/creat_album.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_toys_all_screen.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_toys_all_screen.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/add_baby_info.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/add_baby_info.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_add_new_continue.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_add_new_continue.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/pull_down_head.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/pull_down_head.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/user_info.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/user_info.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_apkupdata.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_apkupdata.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/main_pag_tab.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/main_pag_tab.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/grow.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/grow.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/user_set_baby.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/user_set_baby.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/them_albm_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/them_albm_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/video_list_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/video_list_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/head_bar_grow.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/head_bar_grow.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/plaza_detail_listitem.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/plaza_detail_listitem.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_group_manager_option.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_group_manager_option.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_business_more_list.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_business_more_list.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_order_detailed_list.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_order_detailed_list.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/buy_listview_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/buy_listview_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/photo_edit_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/photo_edit_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_lease_order_info_detail.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_lease_order_info_detail.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/data_popupwindows.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/data_popupwindows.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/test_main.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/test_main.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_web_userlogin.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_web_userlogin.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_add_toys_lease.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_add_toys_lease.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_business_selected_list.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_business_selected_list.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_home_head_list.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_home_head_list.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/rank.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/rank.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/red_packet_pop.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/red_packet_pop.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/photo_big_image_viewpager.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/photo_big_image_viewpager.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/postbar_selectimg.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/postbar_selectimg.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/square_head.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/square_head.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/my_test_layer1.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/my_test_layer1.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/buy.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/buy.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_toys_main_more.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_toys_main_more.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_group_edit_head.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_group_edit_head.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/special_detail_grid_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/special_detail_grid_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/mysharelist_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/mysharelist_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_main_detial04_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_main_detial04_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_lease_order_detail01.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_lease_order_detail01.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/grid_loadmore_pulltorefresh.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/grid_loadmore_pulltorefresh.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_main_other.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_main_other.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/image_detail_xml.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/image_detail_xml.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/special_head.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/special_head.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/user_oder_list_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/user_oder_list_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/choose_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/choose_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_main_hint_title.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_main_hint_title.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/zan_list.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/zan_list.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/special_list.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/special_list.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/business.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/business.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_video_play_detail.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_video_play_detail.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_invite_friend.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_invite_friend.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_toys_all_select.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_toys_all_select.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/grow_baby_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/grow_baby_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_main_detial03_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_main_detial03_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_toys_lease_address_select.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_toys_lease_address_select.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/fragment_queue_list.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/fragment_queue_list.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_toys_lease_main_head.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_toys_lease_main_head.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_toys_confirm_cart.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_toys_confirm_cart.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/insert_h_w.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/insert_h_w.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/postbar.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/postbar.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_account_withdrawals.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_account_withdrawals.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_main_type09.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_main_type09.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/send_comment_layout_full_screen.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/send_comment_layout_full_screen.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_toys_lease_main_text.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_toys_lease_main_text.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_main_type02.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_main_type02.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_toys_main_hot.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_toys_main_hot.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_add_new_group.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_add_new_group.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/grow_tag.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/grow_tag.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_lease_order_info.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_lease_order_info.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/my_collection.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/my_collection.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_video_det.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_video_det.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/photo_layout.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/photo_layout.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/review_list.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/review_list.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/create_show.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/create_show.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/postbar_interest_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/postbar_interest_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/baby_popupwindows.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/baby_popupwindows.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/photo_detail_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/photo_detail_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/grow1.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/grow1.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_toys_lease_home.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_toys_lease_home.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_face.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_face.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_toys_lease_deposit.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_toys_lease_deposit.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_video_console_view.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_video_console_view.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/bind.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/bind.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/main_page.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/main_page.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_toys_lease_search.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_toys_lease_search.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_invite_friend.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_invite_friend.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/release_grida_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/release_grida_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_search_hint.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_search_hint.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/grow_detail_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/grow_detail_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/grow_edit.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/grow_edit.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/postbar_show.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/postbar_show.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/oder_detail.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/oder_detail.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_toys_all_list.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_toys_all_list.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_invite_select_toys.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_invite_select_toys.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_toys_lease_feedback.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_toys_lease_feedback.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/photoitem.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/photoitem.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/myshow_grida_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/myshow_grida_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/buy_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/buy_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_toys_lease_deposit_detail.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_toys_lease_deposit_detail.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/addbaby.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/addbaby.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_invite_toys.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_invite_toys.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_selectimg_1.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_selectimg_1.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/grow_edit_header.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/grow_edit_header.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/view_region.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/view_region.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/list_vision_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/list_vision_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/grow_attention2.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/grow_attention2.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/photo_theme_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/photo_theme_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/plaza_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/plaza_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/photo_big_image.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/photo_big_image.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/plaza_content.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/plaza_content.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/friend_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/friend_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/review_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/review_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_add_check.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_add_check.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/release_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/release_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/grow_sel_baby.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/grow_sel_baby.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/tencent_map.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/tencent_map.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_group_category_manager.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_group_category_manager.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_postbar_detail_grida.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_postbar_detail_grida.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/myindex.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/myindex.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/list.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/list.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/photo_edit.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/photo_edit.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/zan_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/zan_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/nullphotoitem.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/nullphotoitem.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_image_grid.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_image_grid.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_toys_pay_list.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_toys_pay_list.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/post_bar_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/post_bar_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_cart_type02.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_cart_type02.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/edit_baby.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/edit_baby.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_toys_all_sort.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_toys_all_sort.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/head_bar_post.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/head_bar_post.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/refresh_header.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/refresh_header.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/myshare_list.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/myshare_list.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_cart_type03.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_cart_type03.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_main_detial03.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_main_detial03.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/business_list_head.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/business_list_head.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/business_list_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/business_list_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_upload.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_upload.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/grow_list.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/grow_list.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/grow_search.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/grow_search.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_main_type06.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_main_type06.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/grow_search_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/grow_search_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/change_pwd.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/change_pwd.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/expandable_list_son.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/expandable_list_son.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_toys_lease_home_main.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_toys_lease_home_main.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_toys_order_list02.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_toys_order_list02.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/photo_grid_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/photo_grid_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/nav_radiogroup_item1.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/nav_radiogroup_item1.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/band_phone.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/band_phone.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/new_grida_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/new_grida_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_main_goodleft_hint.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_main_goodleft_hint.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/grow_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/grow_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/qun_manage.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/qun_manage.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_toys_lease_order_detail.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_toys_lease_order_detail.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_main_detial01.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_main_detial01.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/video_detial_head.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/video_detial_head.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/buy_detail_fragment.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/buy_detail_fragment.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/goodlife.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/goodlife.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_lease_order_detailtop.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_lease_order_detailtop.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/shaixuan_popupwindows.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/shaixuan_popupwindows.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/pay_result.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/pay_result.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_toys_main_home.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_toys_main_home.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/grow_synchroniz_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/grow_synchroniz_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/main.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/main.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_yoys_lease_detail.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_yoys_lease_detail.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/myspecial.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/myspecial.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/group_main_head.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/group_main_head.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/postbar_list.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/postbar_list.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_group_manager_category.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_group_manager_category.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/head_bar_business.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/head_bar_business.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/buy_show.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/buy_show.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_main_type01.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_main_type01.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_business_selected_list.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_business_selected_list.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_main_type07.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_main_type07.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/photo_manager.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/photo_manager.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_toys_lease_search_result.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_toys_lease_search_result.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/main_item_detail.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/main_item_detail.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/webview.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/webview.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_toys_order_list.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_toys_order_list.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/myshow.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/myshow.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_main_detial02.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_main_detial02.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/plaza_popupwindows.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/plaza_popupwindows.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/business_oder_list_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/business_oder_list_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/message_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/message_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/grow_item_popupwindows.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/grow_item_popupwindows.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_group_topic_edit.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_group_topic_edit.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/exchange_phone2.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/exchange_phone2.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/common_control_layer.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/common_control_layer.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/bangding.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/bangding.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_shopping_cart.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_shopping_cart.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_image_bucket.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_image_bucket.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/buy_guide.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/buy_guide.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/activity_main_item_detial_web.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/activity_main_item_detial_web.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/show_show.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/show_show.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/item_group_topic.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/item_group_topic.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/layout/expandable_list_parent.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/layout/expandable_list_parent.xml"
+    }
+]

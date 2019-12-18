@@ -1,0 +1,67 @@
+package com.yyqq.code.toyslease;
+
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.ListView;
+
+import com.yyqq.babyshow.R;
+import com.yyqq.commen.view.PullDownView;
+import com.yyqq.commen.view.PullDownView.OnPullDownListener;
+import com.yyqq.framework.activity.BaseActivity;
+
+public class ToysLeaseDepositDetailActivity extends BaseActivity implements OnPullDownListener{
+	
+	private PullDownView mPullDownView;
+	private ListView listview;
+	private ImageView lease_back;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_toys_lease_deposit_detail);
+	}
+
+	@Override
+	protected void initView() {
+		mPullDownView = (PullDownView) findViewById(R.id.lease_deposit_detail_list);
+		mPullDownView.setOnPullDownListener(this);
+		mPullDownView.setShowHeader();// 显示并且可以使用头部刷新
+		mPullDownView.RefreshComplete();
+		mPullDownView.notifyDidMore();
+		mPullDownView.requestFocus();
+		listview = mPullDownView.getListView();
+		listview.setDivider(null);
+		lease_back = (ImageView) findViewById(R.id.lease_back);
+	}
+
+	@Override
+	protected void initData() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void setListener() {
+		lease_back.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				ToysLeaseDepositDetailActivity.this.finish();
+			}
+		});
+	}
+
+	@Override
+	public void onRefresh() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onMore() {
+		// TODO Auto-generated method stub
+		
+	}
+}

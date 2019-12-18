@@ -1,0 +1,124 @@
+package com.yyqq.babyshow.wxapi;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.Toast;
+
+import com.tencent.mm.sdk.modelbase.BaseReq;
+import com.tencent.mm.sdk.modelbase.BaseResp;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
+import com.yyqq.babyshow.R;
+import com.yyqq.code.business.UserOderList;
+import com.yyqq.code.toyslease.ToysLeasePayConfirmActivity;
+import com.yyqq.framework.application.Constants;
+
+public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
+
+	private static final String TAG = "WXPayEntryActivity";
+
+	public static WXPayEntryActivity wXPayEntryActivity;
+	private IWXAPI api;
+	private Activity context;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.pay_result);
+		wXPayEntryActivity = this;
+		context = this;
+		// ab = AbHttpUtil.getInstance(context);
+		api = WXAPIFactory.createWXAPI(this, Constants.APP_ID);
+
+		api.handleIntent(getIntent(), this);
+	}
+
+	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
+		setIntent(intent);
+		api.handleIntent(intent, this);
+	}
+
+	// private AbHttpUtil ab;
+
+	// public void toPay() {
+	// AbRequestParams params = new AbRequestParams();
+	// params.put("login_user_id", Config.getUser(context).uid);
+	// params.put("order_id", Constants.order_id);
+	// params.put("payment", "2");
+	// params.put("price", Constants.price);
+	// // Log.e(TAG, ServerMutualConfig.PayOrder + "&" + params.toString());
+	// ab.setTimeout(5000);
+	// ab.get(ServerMutualConfig.PayOrder + "&" + params.toString(),
+	// new AbStringHttpResponseListener() {
+	//
+	// @Override
+	// public void onSuccess(int statusCode, String content) {
+	// super.onSuccess(statusCode, content);
+	// Intent intent = new Intent();
+	// intent.setClass(context, UserOderList.class);
+	// startActivity(intent);
+	// context.finish();
+	// }
+	//
+	// @Override
+	// public void onFinish() {
+	// super.onFinish();
+	// }
+	//
+	// @Override
+	// public void onFailure(int statusCode, String content,
+	// Throwable error) {
+	// super.onFailure(statusCode, content, error);
+	// }
+	//
+	// @Override
+	// public void sendSuccessMessage(int statusCode,
+	// String content) {
+	// super.sendSuccessMessage(statusCode, content);
+	// }
+	//
+	// });
+	// }
+
+	@Override
+	public void onReq(BaseReq req) {
+	}
+
+	@Override
+	public void onResp(BaseResp resp) {
+		// Log.d(TAG, "onPayFinish, errCode = " + resp.errCode);
+		if (BaseResp.ErrCode.ERR_OK == resp.errCode) {// 成功
+			// toPay();
+			Toast.makeText(context, "支付成功", 0).show();
+			if(null != ToysLeasePayConfirmActivity.payFrom){
+				if(ToysLeasePayConfirmActivity.payFrom.equals("weixin")){
+					ToysLeasePayConfirmActivity.finishOtherActivity(context);
+				}else{
+					Intent intent = new Intent();
+					intent.putExtra("showPacket", "showPacket");
+					intent.setClass(context, UserOderList.class);
+					startActivity(intent);
+					context.finish();
+				}
+			}else{
+				Intent intent = new Intent();
+				intent.putExtra("showPacket", "showPacket");
+				intent.setClass(context, UserOderList.class);
+				startActivity(intent);
+				context.finish();
+			}
+		} else if (BaseResp.ErrCode.ERR_USER_CANCEL == resp.errCode) {
+			Toast.makeText(context, "取消支付", 0).show();
+			context.finish();
+		} else {
+			Toast.makeText(context, "支付失败，请重新支付", 1).show();
+			//Toast.makeText(context, resp.toString(), 1).show();
+			context.finish();
+		}
+	}
+
+}

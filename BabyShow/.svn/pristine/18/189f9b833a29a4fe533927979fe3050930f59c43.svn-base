@@ -1,0 +1,199 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_marginBottom="10dp"
+    android:layout_marginTop="10dp"
+    android:orientation="vertical"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <RelativeLayout
+        android:id="@+id/item_hont_click_01"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="#ffffff" >
+
+        <TextView
+            android:id="@+id/item_hont_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:text="TextView"
+            android:textColor="#999999"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/item_hont_tv_title_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="25dp"
+            android:gravity="center"
+            android:text="TextView"
+            android:textColor="#999999"
+            android:textSize="14dp" />
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/toys_main_list_right" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#f5f5f5" />
+
+    <LinearLayout
+        android:id="@+id/item_hont_click_all"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="#ffffff"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:id="@+id/item_hont_click_02"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dp" >
+
+            <ImageView
+                android:id="@+id/item_hont_iv_01"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_launcher" />
+
+            <TextView
+                android:id="@+id/item_hont_tv_01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_hont_iv_01"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="tViewTextextView"
+                android:textColor="#999999"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/item_hont_pr_01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_hont_tv_01"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="TextView"
+                android:textColor="#fd6363"
+                android:textSize="14dp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="#f5f5f5" />
+
+        <RelativeLayout
+            android:id="@+id/item_hont_click_03"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dp" >
+
+            <TextView
+                android:id="@+id/item_hont_tv_02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_hont_iv_02"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="tViewTextextView"
+                android:textColor="#999999"
+                android:textSize="14dp" />
+
+            <ImageView
+                android:id="@+id/item_hont_iv_02"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_launcher" />
+
+            <TextView
+                android:id="@+id/item_hont_pr_02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_hont_tv_02"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="TextView"
+                android:textColor="#fd6363"
+                android:textSize="14dp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="#f5f5f5" />
+
+        <RelativeLayout
+            android:id="@+id/item_hont_click_04"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dp" >
+
+            <TextView
+                android:id="@+id/item_hont_tv_03"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_hont_iv_03"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="tViewTextextView"
+                android:textColor="#999999"
+                android:textSize="14dp" />
+
+            <ImageView
+                android:id="@+id/item_hont_iv_03"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_launcher" />
+
+            <TextView
+                android:id="@+id/item_hont_pr_03"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_hont_tv_03"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="TextView"
+                android:textColor="#fd6363"
+                android:textSize="14dp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

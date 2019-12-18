@@ -1,0 +1,165 @@
+package com.yyqq.code.toyslease;
+
+import java.util.ArrayList;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.ListView;
+
+import com.ab.http.AbHttpUtil;
+import com.ab.http.AbRequestParams;
+import com.ab.http.AbStringHttpResponseListener;
+import com.umeng.analytics.MobclickAgent;
+import com.yyqq.babyshow.R;
+import com.yyqq.commen.adapter.ToysLeaseDepositDetailAdapter;
+import com.yyqq.commen.model.ToysLeaseDepositDetailBean;
+import com.yyqq.commen.utils.Config;
+import com.yyqq.commen.view.PullDownView;
+import com.yyqq.commen.view.PullDownView.OnPullDownListener;
+import com.yyqq.framework.activity.BaseActivity;
+import com.yyqq.framework.application.ServerMutualConfig;
+
+/**
+ * 押金明细
+ * */
+public class ToysLeaseDepositDetailActivity extends BaseActivity implements OnPullDownListener{
+	
+	private PullDownView mPullDownView;
+	private ListView listview;
+	private ImageView lease_back;
+	
+	private AbHttpUtil ab;
+	private ArrayList<ToysLeaseDepositDetailBean> data = new ArrayList<ToysLeaseDepositDetailBean>();
+	private ToysLeaseDepositDetailAdapter adapter;
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		Config.setActivityState(this);
+		setContentView(R.layout.activity_toys_lease_deposit_detail);
+	}
+
+	@Override
+	protected void initView() {
+		mPullDownView = (PullDownView) findViewById(R.id.lease_deposit_detail_list);
+		mPullDownView.setOnPullDownListener(this);
+		mPullDownView.setShowHeader();// 显示并且可以使用头部刷新
+		mPullDownView.RefreshComplete();
+		mPullDownView.notifyDidMore();
+		mPullDownView.requestFocus();
+		listview = mPullDownView.getListView();
+		listview.setDivider(null);
+		lease_back = (ImageView) findViewById(R.id.lease_back);
+	}
+
+	@Override
+	protected void initData() {
+		ab = AbHttpUtil.getInstance(ToysLeaseDepositDetailActivity.this);
+		if(null == adapter){
+			adapter = new ToysLeaseDepositDetailAdapter(data, this);
+		}
+		listview.setAdapter(adapter);
+	}
+
+	@Override
+	protected void setListener() {
+		
+		lease_back.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				ToysLeaseDepositDetailActivity.this.finish();
+			}
+		});
+	}
+
+	@Override
+	public void onRefresh() {
+		getDepositDetail(false);
+	}
+
+	@Override
+	public void onMore() {
+		getDepositDetail(true);
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+		onRefresh();
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
+	
+	/**
+	 * 获取押金使用详情
+	 * */
+	private void getDepositDetail(final boolean isMore){
+		
+		final AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(ToysLeaseDepositDetailActivity.this).uid);
+		params.put("order_id", "-10");
+		
+		if(isMore && data.size() != 0){
+			params.put("post_create_time", data.get(data.size()-1).getPost_create_time());
+		}else{
+			data.clear();
+		}
+		
+		ab.get(ServerMutualConfig.GET_DEPOSIT_DETAIL_LIST + "&" + params.toString(),new AbStringHttpResponseListener() {
+			
+			@Override
+			public void onSuccess(int statusCode, final String content) {
+				super.onSuccess(statusCode, content);
+				try {
+					if(!content.isEmpty() && new JSONObject(content).getBoolean("success")){
+						
+						ToysLeaseDepositDetailBean bean = null;
+						for(int i = 0 ; i < new JSONObject(content).getJSONArray("data").length() ; i++){
+							bean = new ToysLeaseDepositDetailBean();
+							bean.setDetail(new JSONObject(content).getJSONArray("data").getJSONObject(i).getString("account_title"));
+							bean.setHour(new JSONObject(content).getJSONArray("data").getJSONObject(i).getString("account_time"));
+							bean.setMonery(new JSONObject(content).getJSONArray("data").getJSONObject(i).getString("price"));
+							bean.setPost_create_time(new JSONObject(content).getJSONArray("data").getJSONObject(i).getString("post_create_time"));
+							bean.setYear(new JSONObject(content).getJSONArray("data").getJSONObject(i).getString("year_account_time"));
+							data.add(bean);
+						}
+						adapter.notifyDataSetChanged();
+						
+						if(new JSONObject(content).getJSONArray("data").length() < 10){
+							mPullDownView.setHideFooter();
+						}else{
+							mPullDownView.setShowFooter();
+						}
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			@Override
+			public void onFinish() {
+				super.onFinish();
+				mPullDownView.RefreshComplete();
+				mPullDownView.notifyDidMore();
+			}
+			
+			@Override
+			public void onFailure(int statusCode, String content,
+					Throwable error) {
+				super.onFailure(statusCode, content, error);
+			}
+		});
+		
+	}
+}

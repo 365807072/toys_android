@@ -1,0 +1,58 @@
+package com.yyqq.framework.activity;
+
+import com.yyqq.commen.utils.Config;
+
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.view.View;
+import android.view.Window;
+import android.view.ViewGroup.LayoutParams;
+import android.view.WindowManager;
+
+/**
+ * 抽象父类，其余页面全部继承该类实现
+ * 
+ * @author 李勇利
+ */
+public abstract class BaseActivity extends FragmentActivity {
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		
+	}
+
+	@Override
+	public void setContentView(int layoutResID) {
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		super.setContentView(layoutResID);
+		initView();
+		initData();
+		setListener();
+	}
+
+	@Override
+	public void setContentView(View view) {
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		super.setContentView(view);
+		initView();
+		initData();
+		setListener();
+	}
+
+	@Override
+	public void setContentView(View view, LayoutParams params) {
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		super.setContentView(view, params);
+		initView();
+		initData();
+		setListener();
+	}
+
+	protected abstract void initView();
+
+	protected abstract void initData();
+
+	protected abstract void setListener();
+	
+}

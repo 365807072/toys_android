@@ -1,0 +1,50 @@
+package com.yyqq.code.toyslease;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.TextView;
+
+import com.yyqq.babyshow.R;
+import com.yyqq.framework.activity.BaseActivity;
+
+/**
+ * 押金详情
+ * */
+public class ToysLeaseDepositActivity extends BaseActivity {
+
+	private TextView toys_deposit_all;
+	
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_toys_lease_deposit);
+	}
+
+	@Override
+	protected void initView() {
+		toys_deposit_all = (TextView) findViewById(R.id.toys_deposit_all);
+		
+	}
+
+	@Override
+	protected void initData() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void setListener() {
+		toys_deposit_all.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(ToysLeaseDepositActivity.this, ToysLeaseDepositDetailActivity.class);
+				intent.putExtra("deposit_id", "0");
+				startActivity(intent);
+			}
+		});
+	}
+}

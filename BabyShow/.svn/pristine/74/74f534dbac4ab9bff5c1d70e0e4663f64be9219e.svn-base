@@ -1,0 +1,926 @@
+package com.yyqq.code.business;
+
+import java.util.ArrayList;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.BaseAdapter;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.ab.http.AbHttpUtil;
+import com.ab.http.AbRequestParams;
+import com.ab.http.AbStringHttpResponseListener;
+import com.umeng.analytics.MobclickAgent;
+import com.yyqq.babyshow.R;
+import com.yyqq.code.main.AddNewPostActivity;
+import com.yyqq.code.main.MainTab;
+import com.yyqq.commen.model.BusinessListItem;
+import com.yyqq.commen.model.SearchItem;
+import com.yyqq.commen.utils.Config;
+import com.yyqq.commen.utils.GPSLocationUtils;
+import com.yyqq.commen.utils.ImageDownloader;
+import com.yyqq.commen.view.ExpandTabView;
+import com.yyqq.commen.view.PullDownView;
+import com.yyqq.commen.view.PullDownView.OnPullDownListener;
+import com.yyqq.commen.view.ViewMiddle;
+import com.yyqq.framework.activity.BaseActivity;
+import com.yyqq.framework.application.MyApplication;
+import com.yyqq.framework.application.ServerMutualConfig;
+
+public class BusinessList extends BaseActivity implements LocationListener,
+		OnPullDownListener, OnClickListener {
+
+	private Activity context;
+	private String TAG = "fanfan_BusinessList";
+	private AbHttpUtil ab;
+	private PullDownView mPullDownView;
+	private ListView listview;
+	private MyAdapter adapter;
+	private MyApplication app;
+	private LinearLayout general_ly1;
+	private TextView general_title;
+	private static int indexitem = 0;// 记录选中的图片位置
+	private boolean indexitemfla;// 记录选中的图片位置
+
+	private RelativeLayout mRelativeLayout;
+	private LayoutInflater inflater;
+	private LinearLayout type1, type2, type3, type4;
+	private ImageView bs_img1, bs_img2, bs_img3, bs_img4;
+	private TextView bs_tv1, bs_tv2, bs_tv3, bs_tv4;
+	private int myType;
+	private int city_id;
+
+	private double latitude = 0.0;
+	private double longitude = 0.0;
+
+	/**
+	 * 搜索
+	 */
+	private ImageView search_btn, search_cancle;
+	private EditText search;
+	private LinearLayout search_root;
+	public static String SearchWord = "";
+	public static int sss; // s=0,表示搜索布局在
+	private ArrayList<SearchItem> searchData = new ArrayList<SearchItem>();
+	private JSONArray data_json;
+	private TextView bus_title_right_more;
+	private ExpandTabView expandTabView;
+	private ArrayList<View> mViewArray = new ArrayList<View>();
+	private ViewMiddle viewMiddle;
+
+	ArrayList<BusinessListItem> dataBusinessList = new ArrayList<BusinessListItem>();
+	private String tag_id = "";
+	private String img_ids = "";
+
+	public void onCreate(Bundle b) {
+		getWindow().setSoftInputMode(
+				WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+		super.onCreate(b);
+		Config.setActivityState(this);
+		context = this;
+		setContentView(R.layout.general_left_list);
+
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (viewMiddle.isShown()) {
+			expandTabView.onPressBack();
+			return false;
+		}
+
+		if (0 != myType || 0 != city_id) {
+			myType = 0;
+			city_id = 0;
+			bs_img1.setBackgroundResource(R.drawable.business_all);
+			bs_tv1.setTextColor(Color.parseColor("#FE6161"));
+
+			bs_img2.setBackgroundResource(R.drawable.business_qinzi_gray);
+			bs_tv2.setTextColor(Color.parseColor("#333333"));
+			bs_img3.setBackgroundResource(R.drawable.business_xingqu_gray);
+			bs_tv3.setTextColor(Color.parseColor("#333333"));
+			bs_img4.setBackgroundResource(R.drawable.business_study_gray);
+			bs_tv4.setTextColor(Color.parseColor("#333333"));
+			onRefresh();
+		} else {
+			if(tag_id.isEmpty() && img_ids.isEmpty()){
+				return Config.onKeyDown(keyCode, event, this);
+			}else{
+				this.finish();
+			}
+		}
+		return true;
+	}
+
+	public void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+		
+		// 修改底部栏文字颜色
+		MainTab.iconText.get(0).setTextColor(Color.parseColor("#000000"));
+		MainTab.iconText.get(1).setTextColor(Color.parseColor("#fe6363"));
+		MainTab.iconText.get(2).setTextColor(Color.parseColor("#000000"));
+		MainTab.iconText.get(3).setTextColor(Color.parseColor("#000000"));
+		
+		latitude = GPSLocationUtils.getLatitude(context);
+		longitude = GPSLocationUtils.getLongitude(context);
+		if (latitude == 0.0) {
+			getGps();
+		}
+		
+//		if(dataBusinessList.size() == 0){
+//			onRefresh();
+//		}
+		if (indexitemfla) {
+			indexitemfla = false;
+			adapter.notifyDataSetChanged();
+			listview.setSelection(indexitem);
+		}
+	}
+
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == 1) {
+			indexitemfla = true;
+			listview.setSelection(indexitem);
+		}
+	}
+
+	@Override
+	protected void initView() {
+		inflater = LayoutInflater.from(context);
+		/** 头部的view **/
+		initHeadbar();
+		// 搜索
+		search_root = (LinearLayout) findViewById(R.id.search_root);
+		// search_root.setVisibility(View.VISIBLE);
+		search_btn = (ImageView) findViewById(R.id.search_btn);
+		search_cancle = (ImageView) findViewById(R.id.search_cancle);
+		search = (EditText) findViewById(R.id.search);
+//		// 标题
+//		general_title = (TextView) findViewById(R.id.general_title);
+//		general_title.setText("商家列表");
+		// 返回
+		general_ly1 = (LinearLayout) findViewById(R.id.general_ly1);
+		general_ly1.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				if (viewMiddle.isShown()) {
+					expandTabView.onPressBack();
+				} else {
+					if (0 != myType || 0 != city_id) {
+						myType = 0;
+						city_id = 0;
+						bs_img1.setBackgroundResource(R.drawable.business_all);
+						bs_tv1.setTextColor(Color.parseColor("#FE6161"));
+
+						bs_img2.setBackgroundResource(R.drawable.business_qinzi_gray);
+						bs_tv2.setTextColor(Color.parseColor("#333333"));
+						bs_img3.setBackgroundResource(R.drawable.business_xingqu_gray);
+						bs_tv3.setTextColor(Color.parseColor("#333333"));
+						bs_img4.setBackgroundResource(R.drawable.business_study_gray);
+						bs_tv4.setTextColor(Color.parseColor("#333333"));
+						onRefresh();
+					} else {
+						context.finish();
+					}
+				}
+			}
+		});
+		// 筛选
+		expandTabView = (ExpandTabView) findViewById(R.id.expandtab_view);
+		viewMiddle = new ViewMiddle(this);
+		initVaule();
+
+	}
+
+	@Override
+	protected void initData() {
+		ab = AbHttpUtil.getInstance(context);
+		
+		app = (MyApplication) this.getApplication();
+		mPullDownView = (PullDownView) findViewById(R.id.list);
+		mPullDownView.setOnPullDownListener(this);
+		listview = mPullDownView.getListView();
+		listview.setDivider(null);
+		
+		Intent intent = getIntent();
+		
+		if(intent.hasExtra("tag_id")){
+			tag_id = intent.getStringExtra("tag_id");
+		}
+		
+		if(intent.hasExtra("img_ids")){
+			img_ids = intent.getStringExtra("img_ids");
+		}
+		
+		if(tag_id.isEmpty() && img_ids.isEmpty()){
+			general_ly1.setVisibility(View.INVISIBLE);
+			findViewById(R.id.bus_title_hint_line).setVisibility(View.VISIBLE);
+			mPullDownView.setShowHeaderLayout(mRelativeLayout);
+		}else{
+			TextView bus_title_hint_text = (TextView) findViewById(R.id.bus_title_hint_text);
+			bus_title_hint_text.setVisibility(View.GONE);
+			TextView bus_title_hint_text02 = (TextView) findViewById(R.id.bus_title_hint_text02);
+			bus_title_hint_text02.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					BusinessList.this.finish();
+				}
+			});
+			if(getIntent().hasExtra("img_title")){
+				bus_title_hint_text02.setText(getIntent().getStringExtra("img_title"));
+				bus_title_hint_text02.setVisibility(View.VISIBLE);
+			}else{
+				bus_title_hint_text02.setVisibility(View.GONE);
+			}
+			bus_title_right_more = (TextView) findViewById(R.id.bus_title_right_more);
+			bus_title_right_more.setVisibility(View.VISIBLE);
+			bus_title_right_more.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(BusinessList.this, MainTab.class);
+					intent.putExtra("tabid", 1);
+					startActivity(intent);
+					BusinessList.this.finish();
+				}
+			});
+			findViewById(R.id.bus_title_hint_line).setVisibility(View.INVISIBLE);
+			expandTabView.setVisibility(View.GONE);
+			viewMiddle.setVisibility(View.GONE);
+		}
+		
+		if (adapter == null) {
+			adapter = new MyAdapter();
+		}
+
+		listview.setAdapter(adapter);
+		// 设置可以自动获取更多 滑到最后一个自动获取 改成false将禁用自动获取更多
+		mPullDownView.enableAutoFetchMore(true, 1);
+		// 隐藏 并禁用尾部
+		// mPullDownView.setHideFooter();
+		// 显示并启用自动获取更多
+		mPullDownView.setShowFooter();
+		// 隐藏并且禁用头部刷新
+		mPullDownView.setHideHeader();
+		// listview.addHeaderView(mGallery);
+		// 显示并且可以使用头部刷新
+		mPullDownView.setShowHeader();
+		// mPullDownView.setPadding(0, 0, 0, 0);
+		
+		onRefresh();
+	}
+
+	@Override
+	protected void setListener() {
+		viewMiddle.setOnSelectListener(new ViewMiddle.OnSelectListener() {
+
+			@Override
+			public void getValue(String showText) {
+				String cityId = viewMiddle.getCityIDs().get(showText);
+				city_id = Integer.parseInt(cityId);
+				// Toast.makeText(context, cityId, 1).show();
+				onRefresh();
+			}
+		});
+
+		// 搜索
+		viewMiddle.search_start.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if (viewMiddle.isShown()) {
+					expandTabView.onPressBack();
+				}
+				showSearch();
+			}
+		});
+
+		// 取消搜索
+		search_cancle.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				search.setText("");
+				// InputMethodManager inputMethodManager = (InputMethodManager)
+				// context
+				// .getApplicationContext().getSystemService(
+				// Context.INPUT_METHOD_SERVICE);
+				// inputMethodManager.hideSoftInputFromWindow(
+				// search.getWindowToken(), 0);
+			}
+		});
+
+		viewMiddle.search_input
+				.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+					public boolean onEditorAction(TextView v, int actionId,
+							KeyEvent event) {
+						if (actionId == EditorInfo.IME_ACTION_SEND
+								|| (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+							showSearch();
+							return true;
+						}
+						return false;
+					}
+				});
+
+		// 搜索输入框变化监听
+		search.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void afterTextChanged(Editable arg0) {
+				if (search.length() < 1) {
+					search_cancle.setVisibility(View.VISIBLE);
+					search_btn.setVisibility(View.GONE);
+				} else {
+					search_cancle.setVisibility(View.GONE);
+					search_btn.setVisibility(View.VISIBLE);
+				}
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence arg0, int arg1,
+					int arg2, int arg3) {
+				if (search.length() < 1) {
+					search_cancle.setVisibility(View.VISIBLE);
+					search_btn.setVisibility(View.GONE);
+				} else {
+					search_cancle.setVisibility(View.GONE);
+					search_btn.setVisibility(View.VISIBLE);
+				}
+			}
+
+			@Override
+			public void onTextChanged(CharSequence arg0, int arg1, int arg2,
+					int arg3) {
+				if (search.length() < 1) {
+					search_cancle.setVisibility(View.VISIBLE);
+					search_btn.setVisibility(View.GONE);
+				} else {
+					search_cancle.setVisibility(View.GONE);
+					search_btn.setVisibility(View.VISIBLE);
+				}
+			}
+
+		});
+	}
+
+	/**
+	 * 头部的view
+	 */
+	@SuppressLint("ResourceAsColor")
+	private void initHeadbar() {
+		mRelativeLayout = (RelativeLayout) inflater.inflate(
+				R.layout.head_bar_business, null);
+		type1 = (LinearLayout) mRelativeLayout.findViewById(R.id.type1);
+		type2 = (LinearLayout) mRelativeLayout.findViewById(R.id.type2);
+		type3 = (LinearLayout) mRelativeLayout.findViewById(R.id.type3);
+		type4 = (LinearLayout) mRelativeLayout.findViewById(R.id.type4);
+		bs_img1 = (ImageView) mRelativeLayout.findViewById(R.id.bs_img1);
+		bs_img2 = (ImageView) mRelativeLayout.findViewById(R.id.bs_img2);
+		bs_img3 = (ImageView) mRelativeLayout.findViewById(R.id.bs_img3);
+		bs_img4 = (ImageView) mRelativeLayout.findViewById(R.id.bs_img4);
+		bs_tv1 = (TextView) mRelativeLayout.findViewById(R.id.bs_tv1);
+		bs_tv2 = (TextView) mRelativeLayout.findViewById(R.id.bs_tv2);
+		bs_tv3 = (TextView) mRelativeLayout.findViewById(R.id.bs_tv3);
+		bs_tv4 = (TextView) mRelativeLayout.findViewById(R.id.bs_tv4);
+		type1.setOnClickListener(this); // 成长活动
+		type2.setOnClickListener(this); // 成长活动
+		type3.setOnClickListener(this); // 育儿知识
+		type4.setOnClickListener(this); // 时尚情感
+	}
+
+	@Override
+	public void onRefresh() {
+		
+		Intent intent = getIntent();
+		
+		if(intent.hasExtra("tag_id")){
+			tag_id = intent.getStringExtra("tag_id");
+			Config.showProgressDialog(context, false, null);
+		}
+		
+		if(intent.hasExtra("img_ids")){
+			img_ids = intent.getStringExtra("img_ids");
+		}
+		
+		AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(context).uid);
+		params.put("business_category", myType + "");
+		params.put("city_id", city_id + "");
+		params.put("tag_id", tag_id + "");
+		params.put("img_ids", img_ids + "");
+		params.put("mapsign", GPSLocationUtils.getLatitude(context) + "," + GPSLocationUtils.getLongitude(context));
+		ab.setTimeout(300000);
+		ab.get(ServerMutualConfig.GetBusinessListV3 + "&" + params.toString(), new AbStringHttpResponseListener() {
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						Config.dismissProgress();
+						dataBusinessList.clear();
+						try {
+							JSONObject json = new JSONObject(content);
+							for (int i = 0; i < json.getJSONArray("data")
+									.length(); i++) {
+								BusinessListItem item = new BusinessListItem();
+								item.fromJson(json.getJSONArray("data")
+										.getJSONObject(i));
+								dataBusinessList.add(item);
+							}
+							// if (messageData.isEmpty()) {
+							// mPullDownView.setVisibility(View.GONE);
+							// Intent intent = new Intent();
+							// intent.setClass(context, MainTab.class);
+							// intent.putExtra("tabid", 1);
+							// startActivity(intent);
+							// context.finish();
+							// }
+							if (dataBusinessList.isEmpty()) {
+								mPullDownView.setHideFooter();
+							}else{
+								// 显示并启用自动获取更多
+								mPullDownView.setShowFooter();
+							}
+							mPullDownView.RefreshComplete();// 这个事线程安全的
+															// 可看源代码
+							adapter.notifyDataSetChanged();
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+
+					@Override
+					public void onFinish() {
+						super.onFinish();
+						mPullDownView.notifyDidMore();
+						mPullDownView.RefreshComplete();
+						Config.dismissProgress();
+					}
+
+					@Override
+					public void onFailure(int statusCode, String content,
+							Throwable error) {
+						super.onFailure(statusCode, content, error);
+					}
+
+					@Override
+					public void sendSuccessMessage(int statusCode,
+							String content) {
+						super.sendSuccessMessage(statusCode, content);
+						Config.dismissProgress();
+						mPullDownView.RefreshComplete();// 这个事线程安全的 可看源代码
+						mPullDownView.notifyDidMore();
+					}
+
+				});
+	}
+
+	@Override
+	public void onMore() {
+		if (dataBusinessList.size() == 0) {
+			mPullDownView.notifyDidMore();
+			mPullDownView.RefreshComplete();
+			return;
+		}
+		AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(context).uid);
+		params.put(
+				"post_create_time",
+				dataBusinessList.get(dataBusinessList.size() - 1).post_create_time
+						+ "");
+		params.put("business_category", myType + "");
+		params.put("city_id", city_id + "");
+		params.put("tag_id", tag_id + "");
+		params.put("img_ids", img_ids + "");
+		params.put("mapsign", GPSLocationUtils.getLatitude(context) + ","
+				+ GPSLocationUtils.getLongitude(context));
+		ab.setTimeout(300000);
+		ab.get(ServerMutualConfig.GetBusinessListV3 + "&" + params.toString(),
+				new AbStringHttpResponseListener() {
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						mPullDownView.RefreshComplete();// 这个事线程安全的 可看源代码
+						mPullDownView.notifyDidMore();
+						try {
+							JSONObject json = new JSONObject(content);
+							for (int i = 0; i < json.getJSONArray("data")
+									.length(); i++) {
+								BusinessListItem item = new BusinessListItem();
+								item.fromJson(json.getJSONArray("data")
+										.getJSONObject(i));
+								dataBusinessList.add(item);
+							}
+							adapter.notifyDataSetChanged();
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+
+					@Override
+					public void onFinish() {
+						super.onFinish();
+						mPullDownView.notifyDidMore();
+						mPullDownView.RefreshComplete();
+						Config.dismissProgress();
+					}
+
+					@Override
+					public void onFailure(int statusCode, String content,
+							Throwable error) {
+						super.onFailure(statusCode, content, error);
+					}
+				});
+	}
+
+	class ViewHolder {
+		TextView bs_subTitle;
+		ImageView bs_img;
+		TextView bs_distance;
+		TextView bs_name;
+		TextView xiu_price;
+		TextView price;
+		TextView count;
+	}
+
+	public class MyAdapter extends BaseAdapter {
+
+		@Override
+		public int getCount() {
+			return dataBusinessList.size();
+		}
+
+		@Override
+		public Object getItem(int arg0) {
+			return dataBusinessList.get(arg0);
+		}
+
+		@Override
+		public long getItemId(int arg0) {
+			return arg0;
+		}
+
+		@Override
+		public View getView(int index, View convertView, ViewGroup arg2) {
+			LayoutInflater inflater = (LayoutInflater) context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			convertView = inflater.inflate(R.layout.business_list_item, null);
+			ViewHolder holder = null;
+			holder = new ViewHolder();
+			// 商家名称
+			holder.bs_name = (TextView) convertView.findViewById(R.id.bs_name);
+			// 商家副标题
+			holder.bs_subTitle = (TextView) convertView
+					.findViewById(R.id.bs_subTitle);
+			holder.bs_distance = (TextView) convertView
+					.findViewById(R.id.bs_distance);
+			holder.bs_img = (ImageView) convertView.findViewById(R.id.bs_img);
+			// 秀秀价
+			holder.xiu_price = (TextView) convertView
+					.findViewById(R.id.xiu_price);
+			// 原价
+			holder.price = (TextView) convertView.findViewById(R.id.price);
+			holder.count = (TextView) convertView.findViewById(R.id.count);
+			convertView.setTag(holder);
+			final BusinessListItem item = dataBusinessList.get(index);
+
+			// 商家头像
+			app.getInstance().display(item.business_pic, holder.bs_img,
+					R.drawable.def_head);
+			// 标题
+			if (!TextUtils.isEmpty(item.business_title))
+				holder.bs_name.setText(item.business_title);
+			// 距离
+			if (!TextUtils.isEmpty(item.distance))
+				holder.bs_distance.setText(item.distance);
+			// 商家副标题
+			if (!TextUtils.isEmpty(item.subtitle))
+				holder.bs_subTitle.setText(item.subtitle);
+			// 秀秀价
+			if (!TextUtils.isEmpty(item.business_babyshow_price1))
+				holder.xiu_price.setText("¥" + item.business_babyshow_price1);
+			// 原价
+			if (!TextUtils.isEmpty(item.business_market_price1))
+				holder.price.setText("¥" + item.business_market_price1);
+			// 原价
+			if (!TextUtils.isEmpty(item.order_count))
+				holder.count.setText(item.order_count + "人购买");
+
+			holder.price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); // 删除线
+
+			convertView.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent();
+					intent.setClass(context, BusinessDetailActivity.class);
+					intent.putExtra("business_id", item.business_id);
+					indexitem = listview.getFirstVisiblePosition();
+					context.startActivityForResult(intent, 1);
+				}
+			});
+
+			return convertView;
+		}
+	}
+
+	@Override
+	public void onClick(View arg0) {
+		// TODO Auto-generated method stub
+		if (arg0 == type2) {
+			myType = 1;
+			bs_img2.setBackgroundResource(R.drawable.business_qinzi);
+			bs_tv2.setTextColor(Color.parseColor("#FE6161"));
+
+			bs_img1.setBackgroundResource(R.drawable.business_all_gray);
+			bs_tv1.setTextColor(Color.parseColor("#333333"));
+			bs_img3.setBackgroundResource(R.drawable.business_xingqu_gray);
+			bs_tv3.setTextColor(Color.parseColor("#333333"));
+			bs_img4.setBackgroundResource(R.drawable.business_study_gray);
+			bs_tv4.setTextColor(Color.parseColor("#333333"));
+			onRefresh();
+		} else if (arg0 == type3) {
+			myType = 2;
+			bs_img3.setBackgroundResource(R.drawable.business_xingqu);
+			bs_tv3.setTextColor(Color.parseColor("#FE6161"));
+
+			bs_img2.setBackgroundResource(R.drawable.business_qinzi_gray);
+			bs_tv2.setTextColor(Color.parseColor("#333333"));
+			bs_img1.setBackgroundResource(R.drawable.business_all_gray);
+			bs_tv1.setTextColor(Color.parseColor("#333333"));
+			bs_img4.setBackgroundResource(R.drawable.business_study_gray);
+			bs_tv4.setTextColor(Color.parseColor("#333333"));
+			onRefresh();
+		} else if (arg0 == type4) {
+			myType = 3;
+			bs_img4.setBackgroundResource(R.drawable.business_study);
+			bs_tv4.setTextColor(Color.parseColor("#FE6161"));
+
+			bs_img1.setBackgroundResource(R.drawable.business_all_gray);
+			bs_tv1.setTextColor(Color.parseColor("#333333"));
+			bs_img2.setBackgroundResource(R.drawable.business_qinzi_gray);
+			bs_tv2.setTextColor(Color.parseColor("#333333"));
+			bs_img3.setBackgroundResource(R.drawable.business_xingqu_gray);
+			bs_tv3.setTextColor(Color.parseColor("#333333"));
+			onRefresh();
+		} else {
+			myType = 0;
+			bs_img1.setBackgroundResource(R.drawable.business_all);
+			bs_tv1.setTextColor(Color.parseColor("#FE6161"));
+
+			bs_img2.setBackgroundResource(R.drawable.business_qinzi_gray);
+			bs_tv2.setTextColor(Color.parseColor("#333333"));
+			bs_img3.setBackgroundResource(R.drawable.business_xingqu_gray);
+			bs_tv3.setTextColor(Color.parseColor("#333333"));
+			bs_img4.setBackgroundResource(R.drawable.business_study_gray);
+			bs_tv4.setTextColor(Color.parseColor("#333333"));
+			onRefresh();
+		}
+	}
+
+	private void initVaule() {
+		mViewArray.add(viewMiddle);
+		expandTabView.setValue(viewMiddle);
+	}
+
+	LocationManager locationManager;
+	boolean mGPSflag = false;
+
+	private void getGps() {
+		locationManager = (LocationManager) context
+				.getSystemService(Context.LOCATION_SERVICE);
+		getl();
+	}
+
+	void getl() {
+		long minTime = -1;// 定位一次
+		if (locationManager.getProvider(LocationManager.NETWORK_PROVIDER) != null)
+			locationManager.requestLocationUpdates(
+					LocationManager.NETWORK_PROVIDER, minTime, 0, this);
+		else if (locationManager.getProvider(LocationManager.GPS_PROVIDER) != null)
+			locationManager.requestLocationUpdates(
+					LocationManager.GPS_PROVIDER, minTime, 0, this);
+	}
+
+	@Override
+	public void onLocationChanged(Location location) {
+		// TODO Auto-generated method stub
+		if (location != null) {
+			latitude = GPSLocationUtils.getLatitude(context);
+			longitude = GPSLocationUtils.getLongitude(context);
+		}
+	}
+
+	@Override
+	public void onProviderDisabled(String arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onProviderEnabled(String arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * 商家搜索
+	 * */
+	@SuppressLint("NewApi")
+	private void showSearch() {
+		SearchWord = viewMiddle.search_input.getText().toString().trim();
+		if (SearchWord.isEmpty()) {
+			Toast.makeText(context, "请输入商家名称", Toast.LENGTH_SHORT).show();
+			return;
+		}
+
+		Config.showProgressDialog(context, false, null);
+		AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(context).uid);
+		params.put("mapsign", GPSLocationUtils.getLatitude(context) + ","
+				+ GPSLocationUtils.getLongitude(context));
+		params.put("business_title", SearchWord);
+		ab.get(ServerMutualConfig.SearchBusinessList + "&" + params.toString(),
+				new AbStringHttpResponseListener() {
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						// mPullDownView.setHideFooter();
+						dataBusinessList.clear();
+						try {
+							JSONObject json = new JSONObject(content);
+							for (int i = 0; i < json.getJSONArray("data")
+									.length(); i++) {
+								BusinessListItem item = new BusinessListItem();
+								item.fromJson(json.getJSONArray("data")
+										.getJSONObject(i));
+								dataBusinessList.add(item);
+							}
+							mPullDownView.setHideFooter();
+							mPullDownView.RefreshComplete();// 这个事线程安全的
+							// 可看源代码
+							adapter.notifyDataSetChanged();
+							myType = 4;
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+
+					@Override
+					public void onFinish() {
+						super.onFinish();
+						Config.dismissProgress();
+					}
+
+					@Override
+					public void onFailure(int statusCode, String content,
+							Throwable error) {
+						super.onFailure(statusCode, content, error);
+						Config.showFiledToast(context);
+					}
+				});
+	}
+
+	ListView popList;
+	ImageDownloader mDownloader;
+
+	public class PopupWindows extends PopupWindow {
+		public PopupWindows(Context mContext, View parent) {
+			View view = View.inflate(mContext, R.layout.plaza_popupwindows,
+					null);
+			popList = (ListView) view.findViewById(R.id.popList);
+			setWidth(LayoutParams.FILL_PARENT);
+			setHeight(LayoutParams.FILL_PARENT);
+			setBackgroundDrawable(new BitmapDrawable());
+			setFocusable(true);
+			setOutsideTouchable(true);
+			setContentView(view);
+			showAsDropDown(parent);
+			popList.setAdapter(new PopupAdapter());
+			popList.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> arg0, View arg1,
+						int arg2, long arg3) {
+					search.setText("");
+					dismiss();
+				}
+			});
+			update();
+		}
+
+		@Override
+		public void dismiss() {
+			super.dismiss();
+		}
+
+	}
+
+	class PopupAdapter extends BaseAdapter {
+
+		@Override
+		public int getCount() {
+			return searchData.size();
+		}
+
+		@Override
+		public Object getItem(int position) {
+			return searchData.get(position);
+		}
+
+		@Override
+		public long getItemId(int position) {
+			return position;
+		}
+
+		@Override
+		public View getView(final int position, View convertView,
+				ViewGroup parent) {
+			LayoutInflater inflater = (LayoutInflater) context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+			ViewHolder1 holder1 = null;
+			if (convertView == null) {
+				convertView = inflater.inflate(R.layout.search_listview_item,
+						null);
+				holder1 = new ViewHolder1();
+				holder1.img = (ImageView) convertView.findViewById(R.id.head);
+				holder1.name = (TextView) convertView.findViewById(R.id.name);
+				convertView.setTag(holder1);
+
+			} else {
+				holder1 = (ViewHolder1) convertView.getTag();
+			}
+			holder1.img.setVisibility(View.GONE);
+			holder1.name.setText(searchData.get(position).business_title);
+			convertView.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View arg0) {
+					Intent intent = new Intent();
+					intent.setClass(context, BusinessDetailActivity.class);
+					intent.putExtra("business_id",
+							searchData.get(position).business_id);
+					indexitem = listview.getFirstVisiblePosition();
+					context.startActivityForResult(intent, 1);
+				}
+			});
+			return convertView;
+		}
+
+	}
+
+	class ViewHolder1 {
+		ImageView img;
+		TextView name;
+	}
+
+}

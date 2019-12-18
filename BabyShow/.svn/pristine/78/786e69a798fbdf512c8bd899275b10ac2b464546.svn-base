@@ -1,0 +1,817 @@
+package com.yyqq.code.photo;
+
+import java.util.ArrayList;
+import java.util.Date;
+import net.tsz.afinal.FinalHttp;
+import net.tsz.afinal.http.AjaxCallBack;
+import net.tsz.afinal.http.AjaxParams;
+import org.json.JSONException;
+import org.json.JSONObject;
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.framework.Platform.ShareParams;
+import cn.sharesdk.onekeyshare.OnekeyShare;
+import cn.sharesdk.onekeyshare.ShareContentCustomizeCallback;
+import com.ab.http.AbHttpUtil;
+import com.ab.http.AbRequestParams;
+import com.ab.http.AbStringHttpResponseListener;
+import com.umeng.analytics.MobclickAgent;
+import com.yyqq.babyshow.R;
+import com.yyqq.code.main.MyIndex;
+import com.yyqq.code.main.ReviewList;
+import com.yyqq.code.user.UserInfo;
+import com.yyqq.commen.model.PlazaItem;
+import com.yyqq.commen.model.PlazaItem.Review;
+import com.yyqq.commen.utils.Config;
+import com.yyqq.commen.utils.FaceConversionUtil;
+import com.yyqq.commen.utils.ImageDownloader;
+import com.yyqq.commen.utils.Log;
+import com.yyqq.commen.utils.OnImageDownload;
+import com.yyqq.commen.utils.Rank;
+import com.yyqq.commen.utils.RoundAngleImageView;
+import com.yyqq.commen.view.MyGridView;
+import com.yyqq.framework.application.MyApplication;
+import com.yyqq.framework.application.ServerMutualConfig;
+
+import android.app.Activity;
+import android.app.AlertDialog.Builder;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.TextUtils;
+import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ImageView.ScaleType;
+
+public class ImageDetail extends Activity {
+	private String TAG = "ImageDetail";
+	private Activity context;
+	private String img_id, uid;
+	private AbHttpUtil ab;
+	private ImageView img, zan, more, permission_relation, review;
+	private TextView name, time, msg, zanNum, check_reviewall, permission;
+	private RoundAngleImageView head;
+	private int width, height;
+	private RelativeLayout review_root;
+	private RelativeLayout reviews_root[] = new RelativeLayout[4];
+	private MyGridView mGridView;
+	ImageDownloader mDownloader;
+	int newW, newH;
+	private ImageView img_link;
+	private ImageView rank;
+	private LinearLayout ly_rank;
+	private ImageView share;
+	// 分享的4个参数fz
+	private String share_title = "";
+	private String share_img = "";
+	private String share_imgId = "";
+	private String share_userId = "";
+	private String cate_name, rsort;
+	
+	public void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+	
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
+
+	public void onCreate(Bundle b) {
+		super.onCreate(b);
+		Config.setActivityState(this);
+		context = this;
+		setContentView(R.layout.image_detail_xml);
+		mDownloader = new ImageDownloader();
+		initView();
+		getImageInfo();
+	}
+
+	private void initView() {
+		rank = (ImageView) findViewById(R.id.rank);
+		ly_rank = (LinearLayout) findViewById(R.id.ly_rank);
+		img_link = (ImageView) findViewById(R.id.img_link);
+		permission = (TextView) findViewById(R.id.permission);
+		permission_relation = (ImageView) findViewById(R.id.permission_relation);
+		mGridView = (MyGridView) findViewById(R.id.n_img);
+		review_root = (RelativeLayout) findViewById(R.id.review_root);
+		review = (ImageView) findViewById(R.id.review);
+		check_reviewall = (TextView) findViewById(R.id.check_reviewall);
+		zanNum = (TextView) findViewById(R.id.zan_num);
+		zan = (ImageView) findViewById(R.id.zan);
+		more = (ImageView) findViewById(R.id.more);
+		share = (ImageView) findViewById(R.id.share);
+		DisplayMetrics DM = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(DM);
+		width = DM.widthPixels;
+		height = DM.heightPixels;
+		img_id = getIntent().getStringExtra("img_id");
+		uid = getIntent().getStringExtra("uid");
+		ab = AbHttpUtil.getInstance(context);
+		ab.setDebug(Log.isDebug);
+		img = (ImageView) findViewById(R.id.img);
+		name = (TextView) findViewById(R.id.name);
+		head = (RoundAngleImageView) findViewById(R.id.head);
+		time = (TextView) findViewById(R.id.time);
+		msg = (TextView) findViewById(R.id.msg);
+		reviews_root[0] = (RelativeLayout) findViewById(R.id.review_1_root);
+		reviews_root[1] = (RelativeLayout) findViewById(R.id.review_2_root);
+		reviews_root[2] = (RelativeLayout) findViewById(R.id.review_3_root);
+		reviews_root[3] = (RelativeLayout) findViewById(R.id.review_4_root);
+		cate_name = getIntent().getStringExtra("cate_name");
+		rsort = getIntent().getStringExtra("rsort");
+		share = (ImageView) findViewById(R.id.share);
+		if (TextUtils.isEmpty(cate_name)) {
+			share.setVisibility(View.GONE);
+		}
+	}
+
+	public void getImageInfo() {
+		Config.showProgressDialog(context, false, null);
+		AbRequestParams params = new AbRequestParams();
+		params.put("img_id", img_id);
+		params.put("login_user_id", Config.getUser(context).uid);
+		// android.util.Log.e("fanfan", ServerMutualConfig.PostImgInfo + "&"
+		// + params.toString());
+		ab.get(ServerMutualConfig.PostImgInfo + "&" + params.toString(),
+				new AbStringHttpResponseListener() {
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						try {
+							JSONObject json = new JSONObject(content);
+							final PlazaItem item = new PlazaItem();
+							JSONObject info;
+							info = json.getJSONArray("data").getJSONObject(0);
+							item.fromJson(info);
+							name.setText(item.user_name);
+
+							if (item.imgs.size() == 1) {
+								mGridView.setVisibility(View.GONE);
+								img.setVisibility(View.VISIBLE);
+								mDownloader.imageDownload(
+										item.imaStrings.get(0), img,
+										"/Download/cache_files", context,
+										new OnImageDownload() {
+
+											@Override
+											public void onDownloadSucc(
+													Bitmap bitmap,
+													String c_url,
+													ImageView imageView) {
+												imageView
+														.setImageBitmap(bitmap);
+											}
+										});
+								img.setOnClickListener(new OnClickListener() {
+
+									@Override
+									public void onClick(View v) {
+										Intent intent = new Intent(context,
+												ChangePhotoSize.class);
+										intent.putExtra("img",
+												item.imaStrings.get(0));
+										context.startActivity(intent);
+									}
+								});
+							} else if (item.imgs.size() > 1) {
+								mGridView.setVisibility(View.VISIBLE);
+								img.setVisibility(View.GONE);
+								mGridView.setAdapter(new ImageAdapter(
+										item.imaStrings, mGridView,
+										item.imaBig, item.imaWid, item.imaHed));
+							} else {
+								mGridView.setVisibility(View.GONE);
+								img.setVisibility(View.GONE);
+							}
+
+							head.setOnClickListener(new OnClickListener() {
+								@Override
+								public void onClick(View v) {
+									Intent intent = new Intent();
+									if (item.user_id.equals(Config
+											.getUser(context).uid)) {
+										intent.setClass(context, MyIndex.class);
+									} else {
+										intent.setClass(context, UserInfo.class);
+										intent.putExtra("uid", item.user_id);
+									}
+									startActivity(intent);
+								}
+							});
+
+							if (TextUtils.isEmpty(item.post_url)) {
+								img_link.setVisibility(View.GONE);
+							} else {
+								img_link.setVisibility(View.VISIBLE);
+							}
+							img_link.setOnClickListener(new OnClickListener() {
+
+								@Override
+								public void onClick(View arg0) {
+									String strUri;
+									if (!TextUtils.isEmpty(item.post_url)) {
+										strUri = item.post_url;
+										if (!strUri.startsWith("http")) {
+											strUri = "http://" + strUri;
+										}
+										Intent intent = new Intent();
+										intent.setAction("android.intent.action.VIEW");
+										Uri content_url = Uri.parse(strUri);
+										intent.setData(content_url);
+										startActivity(intent);
+									} else {
+										Toast.makeText(context, "错误的网页", 0)
+												.show();
+									}
+								}
+
+							});
+
+							share.setOnClickListener(new OnClickListener() {
+
+								@Override
+								public void onClick(View arg0) {
+									share_title = "我在宝宝秀秀参与了【" + cate_name
+											+ "】活动，我是" + rsort
+											+ "号，请大家帮我投一票吧！爱你哟";
+									share_imgId = item.img_id;
+									share_userId = item.user_id;
+
+									showShare();
+								}
+
+							});
+							if (item.user_id.equals(Config.getUser(context).uid)) {
+								more.setOnClickListener(new OnClickListener() {
+									@Override
+									public void onClick(View v) {
+										Builder builder = new Builder(context);
+										builder.setMessage("确认要删除吗?");
+										builder.setNegativeButton(
+												"删除",
+												new DialogInterface.OnClickListener() {
+													@Override
+													public void onClick(
+															DialogInterface dialog,
+															int which) {
+														Config.showProgressDialog(
+																context, false,
+																null);
+														AjaxParams params = new AjaxParams();
+														params.put(
+																"user_id",
+																Config.getUser(context).uid);
+														params.put("img_ids",
+																item.img_id);
+														FinalHttp fh = new FinalHttp();
+														String del;
+														if (TextUtils
+																.isEmpty(getIntent()
+																		.getStringExtra(
+																				"cate_id"))) {
+//															del = ServerMutualConfig.DelShow;
+															del = "";
+														} else {
+															del = ServerMutualConfig.DelSpecial;
+														}
+														fh.post(del,
+																params,
+																new AjaxCallBack<String>() {
+																	@Override
+																	public void onFailure(
+																			Throwable t,
+																			String strMsg) {
+																		super.onFailure(
+																				t,
+																				strMsg);
+																		Config.dismissProgress();
+																		Config.showFiledToast(context);
+																	}
+
+																	@Override
+																	public void onSuccess(
+																			String t) {
+																		super.onSuccess(t);
+																		Config.dismissProgress();
+																		try {
+																			JSONObject json = new JSONObject(
+																					t);
+																			Toast.makeText(
+																					context,
+																					json.getString("reMsg"),
+																					Toast.LENGTH_SHORT)
+																					.show();
+																			context.finish();
+																		} catch (Exception e) {
+																		}
+																	}
+																});
+													}
+												});
+										builder.setNeutralButton("取消", null);
+										builder.create().show();
+									}
+								});
+							} else {
+								more.setVisibility(View.GONE);
+							}
+
+							MyApplication.getInstance().display(item.avatar,
+									head, R.drawable.def_head);
+							// 等级
+							if (!TextUtils.isEmpty(item.level_img)) {
+								MyApplication.getInstance().display(
+										item.level_img, rank, 0);
+								ly_rank.setOnClickListener(new View.OnClickListener() {
+
+									@Override
+									public void onClick(View arg0) {
+										Intent intent = new Intent();
+										intent.setClass(context, Rank.class);
+										startActivity(intent);
+									}
+								});
+							}
+							long dateTime = Config.getDateDays(
+									Config.sdf.format(new Date(System
+											.currentTimeMillis())), Config.sdf
+											.format(new Date(item.create_time)));
+							if (dateTime < 0) {
+								time.setText(Config.sdf.format(new Date(
+										item.create_time)));
+							}
+							/**
+							 * 大于5天
+							 */
+							else if (dateTime > 1000 * 60 * 60 * 24 * 5) {
+								time.setText(Config.sdf.format(new Date(
+										item.create_time)));
+							}
+							/**
+							 * 大于1天
+							 */
+							else if (dateTime > 1000 * 60 * 60 * 24) {
+								time.setText((dateTime / 1000 / 60 / 60 / 24)
+										+ "天前");
+							} else if (dateTime > 1000 * 60 * 60) {
+								time.setText((dateTime / 1000 / 60 / 60)
+										+ "小时前");
+							} else if (dateTime > 1000 * 60) {
+								time.setText((dateTime / 1000 / 60) + "分钟前");
+							} else {
+								time.setText((dateTime / 1000) + "秒前");
+							}
+							if (item.description.equals("")) {
+								msg.setVisibility(View.GONE);
+							} else {
+								msg.setText(item.description);
+							}
+							// 图片
+							if (null != item.imgs && item.imgs.size() != 0) {
+								int newW, newH;
+								if (item.imgs.get(0).img_thumb_width == item.imgs
+										.get(0).img_thumb_height) {
+									newW = width;
+									newH = width;
+								} else if (Float.parseFloat(item.imgs.get(0).img_thumb_width) > Float
+										.parseFloat(item.imgs.get(0).img_thumb_height)) {
+									float h = 0;
+									float sx = (float) ((float) width / (float) (Integer
+											.parseInt(item.imgs.get(0).img_thumb_width)));
+									h = (float) ((float) Float
+											.parseFloat(item.imgs.get(0).img_thumb_height) * (float) sx);
+									newW = width;
+									newH = (int) h;
+								} else {
+									float sx = (float) (width / 3 * 2)
+											/ (Float.parseFloat(item.imgs
+													.get(0).img_thumb_width));
+									newW = (int) ((float) (((Float
+											.parseFloat(item.imgs.get(0).img_thumb_width)) * sx)));
+									newH = (int) ((float) ((Float
+											.parseFloat(item.imgs.get(0).img_thumb_height)) * sx));
+								}
+								RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+										newW, newH);
+								params.addRule(RelativeLayout.BELOW, R.id.msg);
+								img.setLayoutParams(params);
+							}
+							// 赞
+							if (item.isZan) {
+								zan.setBackgroundResource(R.drawable.zan_pressed);
+							} else {
+								zan.setBackgroundResource(R.drawable.zan);
+							}
+							zan.setOnClickListener(new OnClickListener() {
+								@Override
+								public void onClick(View v) {
+									Config.showProgressDialog(context, false,
+											null);
+									if (!item.isZan) {
+										AbRequestParams params = new AbRequestParams();
+										params.put("user_id",
+												Config.getUser(context).uid);
+										params.put("admire_id", item.user_id);
+										params.put("img_id", item.img_id);
+										ab.post(ServerMutualConfig.Admire,
+												params,
+												new AbStringHttpResponseListener() {
+													@Override
+													public void onSuccess(
+															int statusCode,
+															String content) {
+														super.onSuccess(
+																statusCode,
+																content);
+														item.admire_count = (Integer
+																.parseInt(item.admire_count) + 1)
+																+ "";
+														zanNum.setText((item.admire_count)
+																+ "条赞");
+														item.isZan = true;
+														zan.setBackgroundResource(R.drawable.zan_pressed);
+													}
+
+													@Override
+													public void onFinish() {
+														super.onFinish();
+														Config.dismissProgress();
+													}
+
+													@Override
+													public void onFailure(
+															int statusCode,
+															String content,
+															Throwable error) {
+														super.onFailure(
+																statusCode,
+																content, error);
+														Config.showFiledToast(context);
+													}
+												});
+									} else {
+										AbRequestParams params = new AbRequestParams();
+										params.put("user_id",
+												Config.getUser(context).uid);
+										params.put("admire_id", item.user_id);
+										params.put("img_id", item.img_id);
+										ab.post(ServerMutualConfig.CancelAdmire,
+												params,
+												new AbStringHttpResponseListener() {
+													@Override
+													public void onSuccess(
+															int statusCode,
+															String content) {
+														super.onSuccess(
+																statusCode,
+																content);
+														item.admire_count = (Integer
+																.parseInt(item.admire_count) - 1)
+																+ "";
+														zanNum.setText((item.admire_count)
+																+ "条赞");
+														item.isZan = false;
+														zan.setBackgroundResource(R.drawable.zan);
+													}
+
+													@Override
+													public void onFinish() {
+														super.onFinish();
+														Config.dismissProgress();
+													}
+
+													@Override
+													public void onFailure(
+															int statusCode,
+															String content,
+															Throwable error) {
+														super.onFailure(
+																statusCode,
+																content, error);
+														Config.showFiledToast(context);
+													}
+												});
+									}
+								}
+							});
+							zanNum.setText(item.admire_count + "条赞");
+							review.setOnClickListener(new OnClickListener() {
+								@Override
+								public void onClick(View v) {
+									Intent intent;
+									intent = new Intent(context,
+											ReviewList.class);
+									intent.putExtra("img_id", item.img_id);
+									intent.putExtra("owner_id", item.user_id);
+									intent.putExtra("ismy",
+											item.user_id.equals(Config
+													.getUser(context).uid));
+									startActivity(intent);
+								}
+							});
+							if (item.reviews.size() > 0) {
+								reviews_root[0].setVisibility(View.GONE);
+								reviews_root[1].setVisibility(View.GONE);
+								reviews_root[2].setVisibility(View.GONE);
+								reviews_root[3].setVisibility(View.GONE);
+								if (item.reviews.size() >= 4) {
+									for (int i = 0; i < 4; i++) {
+										Review reviewitem = item.reviews.get(i);
+										SpannableString spannableString = FaceConversionUtil
+												.getInstace()
+												.getExpressionString(context,
+														reviewitem.review);
+										((TextView) (reviews_root[i]
+												.getChildAt(0)))
+												.setText(reviewitem.name);
+										((TextView) (reviews_root[i]
+												.getChildAt(1)))
+												.setText(spannableString);
+										reviews_root[i]
+												.setVisibility(View.VISIBLE);
+									}
+								} else if (item.reviews.size() < 4) {
+									for (int i = 0; i < item.reviews.size(); i++) {
+										Review reviewitem = item.reviews.get(i);
+										SpannableString spannableString = FaceConversionUtil
+												.getInstace()
+												.getExpressionString(context,
+														reviewitem.review);
+										((TextView) (reviews_root[i]
+												.getChildAt(0)))
+												.setText(reviewitem.name);
+										((TextView) (reviews_root[i]
+												.getChildAt(1)))
+												.setText(spannableString);
+										reviews_root[i]
+												.setVisibility(View.VISIBLE);
+									}
+								}
+								check_reviewall.setText("查看所有"
+										+ item.review_count + "评论");
+								check_reviewall
+										.setOnClickListener(new OnClickListener() {
+											@Override
+											public void onClick(View v) {
+												Intent intent = new Intent(
+														context,
+														ReviewList.class);
+												intent.putExtra("img_id",
+														item.img_id);
+												intent.putExtra(
+														"ismy",
+														item.user_id.equals(Config
+																.getUser(context).uid));
+												startActivity(intent);
+											}
+										});
+							} else {
+								review_root.setVisibility(View.GONE);
+							}
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+
+					@Override
+					public void onFinish() {
+						super.onFinish();
+						Config.dismissProgress();
+					}
+
+					@Override
+					public void onFailure(int statusCode, String content,
+							Throwable error) {
+						super.onFailure(statusCode, content, error);
+						Config.showFiledToast(context);
+						finish();
+					}
+				});
+	}
+
+	class ImageAdapter extends BaseAdapter {
+		ArrayList<String> imaStrings = null;
+		MyGridView myGridView;
+		ArrayList<String> imgBig = null;
+		ArrayList<String> imaWid = null;
+		ArrayList<String> imaHed = null;
+
+		public ImageAdapter(ArrayList<String> imaStrings,
+				MyGridView myGridView, ArrayList<String> imgBig,
+				ArrayList<String> imaWid, ArrayList<String> imaHed) {
+			this.imaStrings = imaStrings;
+			this.myGridView = myGridView;
+			this.imgBig = imgBig;
+			this.imaWid = imaWid;
+			this.imaHed = imaHed;
+		}
+
+		@Override
+		public int getCount() {
+
+			return imaStrings.size() < 7 ? imaStrings.size() : 6;
+		}
+
+		@Override
+		public Object getItem(int position) {
+			return imaStrings.get(position);
+		}
+
+		@Override
+		public long getItemId(int position) {
+			return 0;
+		}
+
+		@Override
+		public View getView(final int position, View convertView,
+				ViewGroup parent) {
+			LayoutInflater inflater = (LayoutInflater) context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+			ViewHolder holder = null;
+			if (convertView == null) {
+				convertView = inflater
+						.inflate(R.layout.photo_detail_item, null);
+				holder = new ViewHolder();
+				holder.img = (ImageView) convertView.findViewById(R.id.photo);
+
+				// 计算图片尺寸
+				int hi = width / 3;
+				holder.img.getLayoutParams().height = hi;
+				holder.img.getLayoutParams().width = hi;
+				holder.img.setScaleType(ScaleType.CENTER_CROP);
+				convertView.setTag(holder);
+			} else {
+				holder = (ViewHolder) convertView.getTag();
+			}
+
+			holder.img.setTag(imaStrings.get(position));
+			if (mDownloader == null) {
+				mDownloader = new ImageDownloader();
+			}
+			if (mDownloader != null && position != 5) {
+				mDownloader.imageDownload(imaStrings.get(position), holder.img,
+						"/Download/cache_files", context,
+						new OnImageDownload() {
+
+							@Override
+							public void onDownloadSucc(Bitmap bitmap,
+									String c_url, ImageView imageView) {
+								ImageView imageView1 = (ImageView) myGridView
+										.findViewWithTag(c_url);
+								if (imageView1 != null) {
+									imageView1.setImageBitmap(bitmap);
+									imageView1.setTag("");
+								}
+
+							}
+						});
+			} else {
+				holder.img.setBackgroundResource(R.drawable.more);
+			}
+			holder.img.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(context, ChangePhotoSize.class);
+					intent.putStringArrayListExtra("imgList", imgBig);
+					intent.putStringArrayListExtra("imaWid", imaWid);
+					intent.putStringArrayListExtra("imaHed", imaHed);
+					intent.putExtra("listIndex", position);
+					context.startActivity(intent);
+				}
+			});
+			return convertView;
+		}
+
+	}
+
+	class ViewHolder {
+		ImageView more;
+		ImageView img;
+		MyGridView mGridView;
+		TextView name;
+		RoundAngleImageView head;
+		TextView time;
+		TextView msg;
+		ImageView review;
+		TextView zanNum;
+		ImageView zan;
+		TextView check_reviewall;
+	}
+
+	private void showShare() {
+		ShareSDK.initSDK(context);
+		OnekeyShare oks = new OnekeyShare();
+		// 关闭sso授权
+		oks.disableSSOWhenAuthorize();
+		oks.setSilent(true);
+		oks.setNotification(R.drawable.icon, getString(R.string.app_name)); // 分享时Notification的图标和文字
+		// 去除注释，演示在九宫格设置自定义的图标
+		oks.setShareContentCustomizeCallback(new ShareContentCustomizeCallback() {
+
+			@Override
+			public void onShare(Platform platform, ShareParams paramsToShare) {
+				if ("Wechat".equals(platform.getName())) {
+					paramsToShare.setShareType(Platform.SHARE_TEXT);
+					paramsToShare.setText(share_title);
+					paramsToShare.setShareType(Platform.SHARE_WEBPAGE);
+					if (TextUtils.isEmpty(share_img)) {
+						paramsToShare
+								.setImageUrl("http://api.baobaoshowshow.com/static/defaultimg/0000000_thumb_640.jpg");
+					} else {
+						paramsToShare.setImageUrl(share_img);
+					}
+					paramsToShare
+							.setUrl("http://www.baobaoshowshow.com/share.php?"
+									+ "img_id=" + share_imgId + "&user_id="
+									+ share_userId);
+				} else if ("SinaWeibo".equals(platform.getName())) {
+					paramsToShare.setText(share_title
+							+ "http://www.baobaoshowshow.com/share.php?"
+							+ "img_id=" + share_imgId + "&user_id="
+							+ share_userId);
+					// android.util.Log.e("fanfan",
+					// "http://www.baobaoshowshow.com/share.php?"
+					// + "img_id=" + share_imgId + "&user_id="
+					// + share_userId);
+					if (TextUtils.isEmpty(share_img)) {
+						paramsToShare
+								.setImageUrl("http://api.baobaoshowshow.com/static/defaultimg/0000000_thumb_640.jpg");
+					} else {
+						paramsToShare.setImageUrl(share_img);
+					}
+				} else if ("QZone".equals(platform.getName())) {
+					paramsToShare.setTitle(""); // title微信、QQ空间
+					paramsToShare
+							.setTitleUrl("http://www.baobaoshowshow.com/share.php?"
+									+ "img_id="
+									+ share_imgId
+									+ "&user_id="
+									+ share_userId);
+					paramsToShare.setSite(getString(R.string.app_name)); // site是分享此内容的网站名称，仅在QQ空间使用
+					paramsToShare.setText(share_title);
+					if (TextUtils.isEmpty(share_img)) {
+						paramsToShare
+								.setImageUrl("http://api.baobaoshowshow.com/static/defaultimg/0000000_thumb_640.jpg");
+					} else {
+						paramsToShare.setImageUrl(share_img);
+					}
+					paramsToShare
+							.setSiteUrl("http://www.baobaoshowshow.com/share.php?"
+									+ "img_id="
+									+ share_imgId
+									+ "&user_id="
+									+ share_userId); // siteUrl是分享此内容的网站地址，仅在QQ空间使用
+				} else if ("QQ".equals(platform.getName())) {
+					paramsToShare.setTitle("");
+					paramsToShare
+							.setTitleUrl("http://www.baobaoshowshow.com/share.php?"
+									+ "img_id="
+									+ share_imgId
+									+ "&user_id="
+									+ share_userId);
+					paramsToShare.setText(share_title);
+					if (TextUtils.isEmpty(share_img)) {
+						paramsToShare
+								.setImageUrl("http://api.baobaoshowshow.com/static/defaultimg/0000000_thumb_640.jpg");
+					} else {
+						paramsToShare.setImageUrl(share_img);
+					}
+				} else if ("WechatMoments".equals(platform.getName())) {
+					paramsToShare.setShareType(Platform.SHARE_TEXT);
+					paramsToShare.setTitle(share_title);
+					paramsToShare.setShareType(Platform.SHARE_WEBPAGE);
+					if (TextUtils.isEmpty(share_img)) {
+						paramsToShare
+								.setImageUrl("http://api.baobaoshowshow.com/static/defaultimg/0000000_thumb_640.jpg");
+					} else {
+						paramsToShare.setImageUrl(share_img);
+					}
+					paramsToShare
+							.setUrl("http://www.baobaoshowshow.com/share.php?"
+									+ "img_id=" + share_imgId + "&user_id="
+									+ share_userId);
+				}
+
+			}
+		});
+		// 启动分享GUI
+		oks.show(context);
+	}
+}

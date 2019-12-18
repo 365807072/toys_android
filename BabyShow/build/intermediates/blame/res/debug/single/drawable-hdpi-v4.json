@@ -1,0 +1,46 @@
+[
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/drawable-hdpi-v4/order_mycard.jpg",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/drawable-hdpi/order_mycard.jpg"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/drawable-hdpi-v4/toys_detail_spc.jpg",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/drawable-hdpi/toys_detail_spc.jpg"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/drawable-hdpi-v4/face_del_icon.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/drawable-hdpi/face_del_icon.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/drawable-hdpi-v4/rank.jpg",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/drawable-hdpi/rank.jpg"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/drawable-hdpi-v4/hot_banner.jpg",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/drawable-hdpi/hot_banner.jpg"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/drawable-hdpi-v4/packet_go_share.jpg",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/drawable-hdpi/packet_go_share.jpg"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/drawable-hdpi-v4/order_deposit.jpg",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/drawable-hdpi/order_deposit.jpg"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/drawable-hdpi-v4/style_list_item.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/drawable-hdpi/style_list_item.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/drawable-hdpi-v4/cancel_button.xml",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/drawable-hdpi/cancel_button.xml"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/drawable-hdpi-v4/order_bespeak.jpg",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/drawable-hdpi/order_bespeak.jpg"
+    },
+    {
+        "merged": "/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/res/merged/debug/drawable-hdpi-v4/packet_cancle_share.jpg",
+        "source": "/Users/yanglin/Desktop/workspace/BabyShow/res/drawable-hdpi/packet_cancle_share.jpg"
+    }
+]

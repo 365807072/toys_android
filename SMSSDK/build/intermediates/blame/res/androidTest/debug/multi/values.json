@@ -1,0 +1,4279 @@
+[
+    {
+        "outputFile": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values/values.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endLine": 22,
+                    "endColumn": 19,
+                    "endOffset": 1197
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endLine": 22,
+                        "endColumn": 19,
+                        "endOffset": 1197
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 23,
+                    "startColumn": 4,
+                    "startOffset": 1202,
+                    "endLine": 49,
+                    "endColumn": 19,
+                    "endOffset": 2606
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 23,
+                        "startColumn": 4,
+                        "startOffset": 1202,
+                        "endLine": 49,
+                        "endColumn": 19,
+                        "endOffset": 2606
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 50,
+                    "startColumn": 4,
+                    "startOffset": 2611,
+                    "endLine": 53,
+                    "endColumn": 19,
+                    "endOffset": 2747
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 50,
+                        "startColumn": 4,
+                        "startOffset": 2611,
+                        "endLine": 53,
+                        "endColumn": 19,
+                        "endOffset": 2747
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 54,
+                    "startColumn": 4,
+                    "startOffset": 2752,
+                    "endLine": 61,
+                    "endColumn": 19,
+                    "endOffset": 3224
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 54,
+                        "startColumn": 4,
+                        "startOffset": 2752,
+                        "endLine": 61,
+                        "endColumn": 19,
+                        "endOffset": 3224
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 62,
+                    "startColumn": 4,
+                    "startOffset": 3229,
+                    "endLine": 65,
+                    "endColumn": 19,
+                    "endOffset": 3422
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 62,
+                        "startColumn": 4,
+                        "startOffset": 3229,
+                        "endLine": 65,
+                        "endColumn": 19,
+                        "endOffset": 3422
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 66,
+                    "startColumn": 4,
+                    "startOffset": 3427,
+                    "endLine": 73,
+                    "endColumn": 19,
+                    "endOffset": 3910
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 66,
+                        "startColumn": 4,
+                        "startOffset": 3427,
+                        "endLine": 73,
+                        "endColumn": 19,
+                        "endOffset": 3910
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 74,
+                    "startColumn": 4,
+                    "startOffset": 3915,
+                    "endLine": 88,
+                    "endColumn": 19,
+                    "endOffset": 4598
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 74,
+                        "startColumn": 4,
+                        "startOffset": 3915,
+                        "endLine": 88,
+                        "endColumn": 19,
+                        "endOffset": 4598
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 89,
+                    "startColumn": 4,
+                    "startOffset": 4603,
+                    "endLine": 97,
+                    "endColumn": 19,
+                    "endOffset": 5148
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 89,
+                        "startColumn": 4,
+                        "startOffset": 4603,
+                        "endLine": 97,
+                        "endColumn": 19,
+                        "endOffset": 5148
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 98,
+                    "startColumn": 4,
+                    "startOffset": 5153,
+                    "endLine": 100,
+                    "endColumn": 16,
+                    "endOffset": 5220
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 98,
+                        "startColumn": 4,
+                        "startOffset": 5153,
+                        "endLine": 100,
+                        "endColumn": 16,
+                        "endOffset": 5220
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 101,
+                    "startColumn": 4,
+                    "startOffset": 5225,
+                    "endLine": 113,
+                    "endColumn": 19,
+                    "endOffset": 5994
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 101,
+                        "startColumn": 4,
+                        "startOffset": 5225,
+                        "endLine": 113,
+                        "endColumn": 19,
+                        "endOffset": 5994
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 114,
+                    "startColumn": 4,
+                    "startOffset": 5999,
+                    "endLine": 124,
+                    "endColumn": 19,
+                    "endOffset": 6447
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 114,
+                        "startColumn": 4,
+                        "startOffset": 5999,
+                        "endLine": 124,
+                        "endColumn": 19,
+                        "endOffset": 6447
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 125,
+                    "startColumn": 4,
+                    "startOffset": 6452,
+                    "endLine": 138,
+                    "endColumn": 19,
+                    "endOffset": 7104
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 125,
+                        "startColumn": 4,
+                        "startOffset": 6452,
+                        "endLine": 138,
+                        "endColumn": 19,
+                        "endOffset": 7104
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 139,
+                    "startColumn": 4,
+                    "startOffset": 7109,
+                    "endLine": 162,
+                    "endColumn": 19,
+                    "endOffset": 8787
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 139,
+                        "startColumn": 4,
+                        "startOffset": 7109,
+                        "endLine": 162,
+                        "endColumn": 19,
+                        "endOffset": 8787
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 163,
+                    "startColumn": 4,
+                    "startOffset": 8792,
+                    "endLine": 172,
+                    "endColumn": 19,
+                    "endOffset": 9289
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 163,
+                        "startColumn": 4,
+                        "startOffset": 8792,
+                        "endLine": 172,
+                        "endColumn": 19,
+                        "endOffset": 9289
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 173,
+                    "startColumn": 4,
+                    "startOffset": 9294,
+                    "endLine": 175,
+                    "endColumn": 16,
+                    "endOffset": 9361
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 173,
+                        "startColumn": 4,
+                        "startOffset": 9294,
+                        "endLine": 175,
+                        "endColumn": 16,
+                        "endOffset": 9361
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 176,
+                    "startColumn": 4,
+                    "startOffset": 9366,
+                    "endLine": 179,
+                    "endColumn": 19,
+                    "endOffset": 9519
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 176,
+                        "startColumn": 4,
+                        "startOffset": 9366,
+                        "endLine": 179,
+                        "endColumn": 19,
+                        "endOffset": 9519
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 180,
+                    "startColumn": 4,
+                    "startOffset": 9524,
+                    "endLine": 181,
+                    "endColumn": 16,
+                    "endOffset": 9585
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 180,
+                        "startColumn": 4,
+                        "startOffset": 9524,
+                        "endLine": 181,
+                        "endColumn": 16,
+                        "endOffset": 9585
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 182,
+                    "startColumn": 4,
+                    "startOffset": 9590,
+                    "endLine": 186,
+                    "endColumn": 19,
+                    "endOffset": 10656
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 182,
+                        "startColumn": 4,
+                        "startOffset": 9590,
+                        "endLine": 186,
+                        "endColumn": 19,
+                        "endOffset": 10656
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 187,
+                    "startColumn": 4,
+                    "startOffset": 10661,
+                    "endLine": 210,
+                    "endColumn": 19,
+                    "endOffset": 11745
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 187,
+                        "startColumn": 4,
+                        "startOffset": 10661,
+                        "endLine": 210,
+                        "endColumn": 19,
+                        "endOffset": 11745
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 211,
+                    "startColumn": 4,
+                    "startOffset": 11750,
+                    "endLine": 222,
+                    "endColumn": 19,
+                    "endOffset": 12426
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 211,
+                        "startColumn": 4,
+                        "startOffset": 11750,
+                        "endLine": 222,
+                        "endColumn": 19,
+                        "endOffset": 12426
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 223,
+                    "startColumn": 4,
+                    "startOffset": 12431,
+                    "endLine": 225,
+                    "endColumn": 16,
+                    "endOffset": 12498
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 223,
+                        "startColumn": 4,
+                        "startOffset": 12431,
+                        "endLine": 225,
+                        "endColumn": 16,
+                        "endOffset": 12498
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 226,
+                    "startColumn": 4,
+                    "startOffset": 12503,
+                    "endLine": 228,
+                    "endColumn": 16,
+                    "endOffset": 12570
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 226,
+                        "startColumn": 4,
+                        "startOffset": 12503,
+                        "endLine": 228,
+                        "endColumn": 16,
+                        "endOffset": 12570
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 229,
+                    "startColumn": 4,
+                    "startOffset": 12575,
+                    "endLine": 240,
+                    "endColumn": 19,
+                    "endOffset": 13174
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 229,
+                        "startColumn": 4,
+                        "startOffset": 12575,
+                        "endLine": 240,
+                        "endColumn": 19,
+                        "endOffset": 13174
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 241,
+                    "startColumn": 4,
+                    "startOffset": 13179,
+                    "endLine": 250,
+                    "endColumn": 19,
+                    "endOffset": 13827
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 241,
+                        "startColumn": 4,
+                        "startOffset": 13179,
+                        "endLine": 250,
+                        "endColumn": 19,
+                        "endOffset": 13827
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 251,
+                    "startColumn": 4,
+                    "startOffset": 13832,
+                    "endLine": 264,
+                    "endColumn": 19,
+                    "endOffset": 16585
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 251,
+                        "startColumn": 4,
+                        "startOffset": 13832,
+                        "endLine": 264,
+                        "endColumn": 19,
+                        "endOffset": 16585
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 265,
+                    "startColumn": 4,
+                    "startOffset": 16590,
+                    "endLine": 273,
+                    "endColumn": 19,
+                    "endOffset": 17008
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 265,
+                        "startColumn": 4,
+                        "startOffset": 16590,
+                        "endLine": 273,
+                        "endColumn": 19,
+                        "endOffset": 17008
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 274,
+                    "startColumn": 4,
+                    "startOffset": 17013,
+                    "endColumn": 48,
+                    "endOffset": 17057
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 274,
+                        "startColumn": 4,
+                        "startOffset": 17013,
+                        "endColumn": 48,
+                        "endOffset": 17057
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 275,
+                    "startColumn": 4,
+                    "startOffset": 17062,
+                    "endColumn": 47,
+                    "endOffset": 17105
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 275,
+                        "startColumn": 4,
+                        "startOffset": 17062,
+                        "endColumn": 47,
+                        "endOffset": 17105
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 276,
+                    "startColumn": 4,
+                    "startOffset": 17110,
+                    "endColumn": 53,
+                    "endOffset": 17159
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 276,
+                        "startColumn": 4,
+                        "startOffset": 17110,
+                        "endColumn": 53,
+                        "endOffset": 17159
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 277,
+                    "startColumn": 4,
+                    "startOffset": 17164,
+                    "endColumn": 58,
+                    "endOffset": 17218
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 277,
+                        "startColumn": 4,
+                        "startOffset": 17164,
+                        "endColumn": 58,
+                        "endOffset": 17218
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 278,
+                    "startColumn": 4,
+                    "startOffset": 17223,
+                    "endColumn": 57,
+                    "endOffset": 17276
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 278,
+                        "startColumn": 4,
+                        "startOffset": 17223,
+                        "endColumn": 57,
+                        "endOffset": 17276
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 279,
+                    "startColumn": 4,
+                    "startOffset": 17281,
+                    "endColumn": 57,
+                    "endOffset": 17334
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 279,
+                        "startColumn": 4,
+                        "startOffset": 17281,
+                        "endColumn": 57,
+                        "endOffset": 17334
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 280,
+                    "startColumn": 4,
+                    "startOffset": 17339,
+                    "endColumn": 54,
+                    "endOffset": 17389
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 280,
+                        "startColumn": 4,
+                        "startOffset": 17339,
+                        "endColumn": 54,
+                        "endOffset": 17389
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 281,
+                    "startColumn": 4,
+                    "startOffset": 17394,
+                    "endColumn": 54,
+                    "endOffset": 17444
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 281,
+                        "startColumn": 4,
+                        "startOffset": 17394,
+                        "endColumn": 54,
+                        "endOffset": 17444
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 282,
+                    "startColumn": 4,
+                    "startOffset": 17449,
+                    "endColumn": 48,
+                    "endOffset": 17493
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 282,
+                        "startColumn": 4,
+                        "startOffset": 17449,
+                        "endColumn": 48,
+                        "endOffset": 17493
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 283,
+                    "startColumn": 4,
+                    "startOffset": 17498,
+                    "endColumn": 63,
+                    "endOffset": 17557
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 283,
+                        "startColumn": 4,
+                        "startOffset": 17498,
+                        "endColumn": 63,
+                        "endOffset": 17557
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 284,
+                    "startColumn": 4,
+                    "startOffset": 17562,
+                    "endColumn": 63,
+                    "endOffset": 17621
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 284,
+                        "startColumn": 4,
+                        "startOffset": 17562,
+                        "endColumn": 63,
+                        "endOffset": 17621
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 285,
+                    "startColumn": 4,
+                    "startOffset": 17626,
+                    "endColumn": 49,
+                    "endOffset": 17671
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 285,
+                        "startColumn": 4,
+                        "startOffset": 17626,
+                        "endColumn": 49,
+                        "endOffset": 17671
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 286,
+                    "startColumn": 4,
+                    "startOffset": 17676,
+                    "endColumn": 43,
+                    "endOffset": 17715
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 286,
+                        "startColumn": 4,
+                        "startOffset": 17676,
+                        "endColumn": 43,
+                        "endOffset": 17715
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 287,
+                    "startColumn": 4,
+                    "startOffset": 17720,
+                    "endColumn": 44,
+                    "endOffset": 17760
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 287,
+                        "startColumn": 4,
+                        "startOffset": 17720,
+                        "endColumn": 44,
+                        "endOffset": 17760
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 288,
+                    "startColumn": 4,
+                    "startOffset": 17765,
+                    "endColumn": 66,
+                    "endOffset": 17827
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 288,
+                        "startColumn": 4,
+                        "startOffset": 17765,
+                        "endColumn": 66,
+                        "endOffset": 17827
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 289,
+                    "startColumn": 4,
+                    "startOffset": 17832,
+                    "endColumn": 59,
+                    "endOffset": 17887
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 289,
+                        "startColumn": 4,
+                        "startOffset": 17832,
+                        "endColumn": 59,
+                        "endOffset": 17887
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 290,
+                    "startColumn": 4,
+                    "startOffset": 17892,
+                    "endColumn": 84,
+                    "endOffset": 17972
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 290,
+                        "startColumn": 4,
+                        "startOffset": 17892,
+                        "endColumn": 84,
+                        "endOffset": 17972
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 291,
+                    "startColumn": 4,
+                    "startOffset": 17977,
+                    "endColumn": 55,
+                    "endOffset": 18028
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 291,
+                        "startColumn": 4,
+                        "startOffset": 17977,
+                        "endColumn": 55,
+                        "endOffset": 18028
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 292,
+                    "startColumn": 4,
+                    "startOffset": 18033,
+                    "endColumn": 57,
+                    "endOffset": 18086
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 292,
+                        "startColumn": 4,
+                        "startOffset": 18033,
+                        "endColumn": 57,
+                        "endOffset": 18086
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 293,
+                    "startColumn": 4,
+                    "startOffset": 18091,
+                    "endColumn": 58,
+                    "endOffset": 18145
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 293,
+                        "startColumn": 4,
+                        "startOffset": 18091,
+                        "endColumn": 58,
+                        "endOffset": 18145
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 294,
+                    "startColumn": 4,
+                    "startOffset": 18150,
+                    "endColumn": 57,
+                    "endOffset": 18203
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 294,
+                        "startColumn": 4,
+                        "startOffset": 18150,
+                        "endColumn": 57,
+                        "endOffset": 18203
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 295,
+                    "startColumn": 4,
+                    "startOffset": 18208,
+                    "endColumn": 48,
+                    "endOffset": 18252
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 295,
+                        "startColumn": 4,
+                        "startOffset": 18208,
+                        "endColumn": 48,
+                        "endOffset": 18252
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 296,
+                    "startColumn": 4,
+                    "startOffset": 18257,
+                    "endColumn": 84,
+                    "endOffset": 18337
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 296,
+                        "startColumn": 4,
+                        "startOffset": 18257,
+                        "endColumn": 84,
+                        "endOffset": 18337
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 297,
+                    "startColumn": 4,
+                    "startOffset": 18342,
+                    "endColumn": 54,
+                    "endOffset": 18392
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 297,
+                        "startColumn": 4,
+                        "startOffset": 18342,
+                        "endColumn": 54,
+                        "endOffset": 18392
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 298,
+                    "startColumn": 4,
+                    "startOffset": 18397,
+                    "endColumn": 54,
+                    "endOffset": 18447
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 298,
+                        "startColumn": 4,
+                        "startOffset": 18397,
+                        "endColumn": 54,
+                        "endOffset": 18447
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 299,
+                    "startColumn": 4,
+                    "startOffset": 18452,
+                    "endColumn": 57,
+                    "endOffset": 18505
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 299,
+                        "startColumn": 4,
+                        "startOffset": 18452,
+                        "endColumn": 57,
+                        "endOffset": 18505
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 300,
+                    "startColumn": 4,
+                    "startOffset": 18510,
+                    "endColumn": 58,
+                    "endOffset": 18564
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 300,
+                        "startColumn": 4,
+                        "startOffset": 18510,
+                        "endColumn": 58,
+                        "endOffset": 18564
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 301,
+                    "startColumn": 4,
+                    "startOffset": 18569,
+                    "endColumn": 57,
+                    "endOffset": 18622
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 301,
+                        "startColumn": 4,
+                        "startOffset": 18569,
+                        "endColumn": 57,
+                        "endOffset": 18622
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 302,
+                    "startColumn": 4,
+                    "startOffset": 18627,
+                    "endColumn": 57,
+                    "endOffset": 18680
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 302,
+                        "startColumn": 4,
+                        "startOffset": 18627,
+                        "endColumn": 57,
+                        "endOffset": 18680
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 303,
+                    "startColumn": 4,
+                    "startOffset": 18685,
+                    "endColumn": 58,
+                    "endOffset": 18739
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 303,
+                        "startColumn": 4,
+                        "startOffset": 18685,
+                        "endColumn": 58,
+                        "endOffset": 18739
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 304,
+                    "startColumn": 4,
+                    "startOffset": 18744,
+                    "endColumn": 58,
+                    "endOffset": 18798
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 304,
+                        "startColumn": 4,
+                        "startOffset": 18744,
+                        "endColumn": 58,
+                        "endOffset": 18798
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 305,
+                    "startColumn": 4,
+                    "startOffset": 18803,
+                    "endColumn": 54,
+                    "endOffset": 18853
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 305,
+                        "startColumn": 4,
+                        "startOffset": 18803,
+                        "endColumn": 54,
+                        "endOffset": 18853
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 306,
+                    "startColumn": 4,
+                    "startOffset": 18858,
+                    "endColumn": 55,
+                    "endOffset": 18909
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 306,
+                        "startColumn": 4,
+                        "startOffset": 18858,
+                        "endColumn": 55,
+                        "endOffset": 18909
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 307,
+                    "startColumn": 4,
+                    "startOffset": 18914,
+                    "endColumn": 58,
+                    "endOffset": 18968
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 307,
+                        "startColumn": 4,
+                        "startOffset": 18914,
+                        "endColumn": 58,
+                        "endOffset": 18968
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 308,
+                    "startColumn": 4,
+                    "startOffset": 18973,
+                    "endColumn": 65,
+                    "endOffset": 19034
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 308,
+                        "startColumn": 4,
+                        "startOffset": 18973,
+                        "endColumn": 65,
+                        "endOffset": 19034
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 309,
+                    "startColumn": 4,
+                    "startOffset": 19039,
+                    "endColumn": 57,
+                    "endOffset": 19092
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 309,
+                        "startColumn": 4,
+                        "startOffset": 19039,
+                        "endColumn": 57,
+                        "endOffset": 19092
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 310,
+                    "startColumn": 4,
+                    "startOffset": 19097,
+                    "endColumn": 54,
+                    "endOffset": 19147
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 310,
+                        "startColumn": 4,
+                        "startOffset": 19097,
+                        "endColumn": 54,
+                        "endOffset": 19147
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 311,
+                    "startColumn": 4,
+                    "startOffset": 19152,
+                    "endColumn": 62,
+                    "endOffset": 19210
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 311,
+                        "startColumn": 4,
+                        "startOffset": 19152,
+                        "endColumn": 62,
+                        "endOffset": 19210
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 312,
+                    "startColumn": 4,
+                    "startOffset": 19215,
+                    "endColumn": 64,
+                    "endOffset": 19275
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 312,
+                        "startColumn": 4,
+                        "startOffset": 19215,
+                        "endColumn": 64,
+                        "endOffset": 19275
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 313,
+                    "startColumn": 4,
+                    "startOffset": 19280,
+                    "endColumn": 54,
+                    "endOffset": 19330
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 313,
+                        "startColumn": 4,
+                        "startOffset": 19280,
+                        "endColumn": 54,
+                        "endOffset": 19330
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 314,
+                    "startColumn": 4,
+                    "startOffset": 19335,
+                    "endColumn": 56,
+                    "endOffset": 19387
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 314,
+                        "startColumn": 4,
+                        "startOffset": 19335,
+                        "endColumn": 56,
+                        "endOffset": 19387
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 315,
+                    "startColumn": 4,
+                    "startOffset": 19392,
+                    "endColumn": 54,
+                    "endOffset": 19442
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 315,
+                        "startColumn": 4,
+                        "startOffset": 19392,
+                        "endColumn": 54,
+                        "endOffset": 19442
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 316,
+                    "startColumn": 4,
+                    "startOffset": 19447,
+                    "endColumn": 56,
+                    "endOffset": 19499
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 316,
+                        "startColumn": 4,
+                        "startOffset": 19447,
+                        "endColumn": 56,
+                        "endOffset": 19499
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 317,
+                    "startColumn": 4,
+                    "startOffset": 19504,
+                    "endColumn": 55,
+                    "endOffset": 19555
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 317,
+                        "startColumn": 4,
+                        "startOffset": 19504,
+                        "endColumn": 55,
+                        "endOffset": 19555
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 318,
+                    "startColumn": 4,
+                    "startOffset": 19560,
+                    "endColumn": 61,
+                    "endOffset": 19617
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 318,
+                        "startColumn": 4,
+                        "startOffset": 19560,
+                        "endColumn": 61,
+                        "endOffset": 19617
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 319,
+                    "startColumn": 4,
+                    "startOffset": 19622,
+                    "endColumn": 62,
+                    "endOffset": 19680
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 319,
+                        "startColumn": 4,
+                        "startOffset": 19622,
+                        "endColumn": 62,
+                        "endOffset": 19680
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 320,
+                    "startColumn": 4,
+                    "startOffset": 19685,
+                    "endColumn": 57,
+                    "endOffset": 19738
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 320,
+                        "startColumn": 4,
+                        "startOffset": 19685,
+                        "endColumn": 57,
+                        "endOffset": 19738
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 321,
+                    "startColumn": 4,
+                    "startOffset": 19743,
+                    "endColumn": 60,
+                    "endOffset": 19799
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 321,
+                        "startColumn": 4,
+                        "startOffset": 19743,
+                        "endColumn": 60,
+                        "endOffset": 19799
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 322,
+                    "startColumn": 4,
+                    "startOffset": 19804,
+                    "endColumn": 59,
+                    "endOffset": 19859
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 322,
+                        "startColumn": 4,
+                        "startOffset": 19804,
+                        "endColumn": 59,
+                        "endOffset": 19859
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 323,
+                    "startColumn": 4,
+                    "startOffset": 19864,
+                    "endColumn": 62,
+                    "endOffset": 19922
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 323,
+                        "startColumn": 4,
+                        "startOffset": 19864,
+                        "endColumn": 62,
+                        "endOffset": 19922
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 324,
+                    "startColumn": 4,
+                    "startOffset": 19927,
+                    "endColumn": 62,
+                    "endOffset": 19985
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 324,
+                        "startColumn": 4,
+                        "startOffset": 19927,
+                        "endColumn": 62,
+                        "endOffset": 19985
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 325,
+                    "startColumn": 4,
+                    "startOffset": 19990,
+                    "endColumn": 68,
+                    "endOffset": 20054
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 325,
+                        "startColumn": 4,
+                        "startOffset": 19990,
+                        "endColumn": 68,
+                        "endOffset": 20054
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 326,
+                    "startColumn": 4,
+                    "startOffset": 20059,
+                    "endColumn": 58,
+                    "endOffset": 20113
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 326,
+                        "startColumn": 4,
+                        "startOffset": 20059,
+                        "endColumn": 58,
+                        "endOffset": 20113
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 327,
+                    "startColumn": 4,
+                    "startOffset": 20118,
+                    "endColumn": 59,
+                    "endOffset": 20173
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 327,
+                        "startColumn": 4,
+                        "startOffset": 20118,
+                        "endColumn": 59,
+                        "endOffset": 20173
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 328,
+                    "startColumn": 4,
+                    "startOffset": 20178,
+                    "endColumn": 60,
+                    "endOffset": 20234
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 328,
+                        "startColumn": 4,
+                        "startOffset": 20178,
+                        "endColumn": 60,
+                        "endOffset": 20234
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 329,
+                    "startColumn": 4,
+                    "startOffset": 20239,
+                    "endColumn": 60,
+                    "endOffset": 20295
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 329,
+                        "startColumn": 4,
+                        "startOffset": 20239,
+                        "endColumn": 60,
+                        "endOffset": 20295
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 330,
+                    "startColumn": 4,
+                    "startOffset": 20300,
+                    "endColumn": 56,
+                    "endOffset": 20352
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 330,
+                        "startColumn": 4,
+                        "startOffset": 20300,
+                        "endColumn": 56,
+                        "endOffset": 20352
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 331,
+                    "startColumn": 4,
+                    "startOffset": 20357,
+                    "endColumn": 56,
+                    "endOffset": 20409
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 331,
+                        "startColumn": 4,
+                        "startOffset": 20357,
+                        "endColumn": 56,
+                        "endOffset": 20409
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 332,
+                    "startColumn": 4,
+                    "startOffset": 20414,
+                    "endColumn": 59,
+                    "endOffset": 20469
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 332,
+                        "startColumn": 4,
+                        "startOffset": 20414,
+                        "endColumn": 59,
+                        "endOffset": 20469
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 333,
+                    "startColumn": 4,
+                    "startOffset": 20474,
+                    "endColumn": 66,
+                    "endOffset": 20536
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 333,
+                        "startColumn": 4,
+                        "startOffset": 20474,
+                        "endColumn": 66,
+                        "endOffset": 20536
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 334,
+                    "startColumn": 4,
+                    "startOffset": 20541,
+                    "endColumn": 61,
+                    "endOffset": 20598
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 334,
+                        "startColumn": 4,
+                        "startOffset": 20541,
+                        "endColumn": 61,
+                        "endOffset": 20598
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 335,
+                    "startColumn": 4,
+                    "startOffset": 20603,
+                    "endColumn": 64,
+                    "endOffset": 20663
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 335,
+                        "startColumn": 4,
+                        "startOffset": 20603,
+                        "endColumn": 64,
+                        "endOffset": 20663
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 336,
+                    "startColumn": 4,
+                    "startOffset": 20668,
+                    "endColumn": 69,
+                    "endOffset": 20733
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 336,
+                        "startColumn": 4,
+                        "startOffset": 20668,
+                        "endColumn": 69,
+                        "endOffset": 20733
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 337,
+                    "startColumn": 4,
+                    "startOffset": 20738,
+                    "endColumn": 66,
+                    "endOffset": 20800
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 337,
+                        "startColumn": 4,
+                        "startOffset": 20738,
+                        "endColumn": 66,
+                        "endOffset": 20800
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 338,
+                    "startColumn": 4,
+                    "startOffset": 20805,
+                    "endColumn": 67,
+                    "endOffset": 20868
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 338,
+                        "startColumn": 4,
+                        "startOffset": 20805,
+                        "endColumn": 67,
+                        "endOffset": 20868
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 339,
+                    "startColumn": 4,
+                    "startOffset": 20873,
+                    "endColumn": 58,
+                    "endOffset": 20927
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 339,
+                        "startColumn": 4,
+                        "startOffset": 20873,
+                        "endColumn": 58,
+                        "endOffset": 20927
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 340,
+                    "startColumn": 4,
+                    "startOffset": 20932,
+                    "endColumn": 57,
+                    "endOffset": 20985
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 340,
+                        "startColumn": 4,
+                        "startOffset": 20932,
+                        "endColumn": 57,
+                        "endOffset": 20985
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 341,
+                    "startColumn": 4,
+                    "startOffset": 20990,
+                    "endColumn": 61,
+                    "endOffset": 21047
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 341,
+                        "startColumn": 4,
+                        "startOffset": 20990,
+                        "endColumn": 61,
+                        "endOffset": 21047
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 342,
+                    "startColumn": 4,
+                    "startOffset": 21052,
+                    "endColumn": 57,
+                    "endOffset": 21105
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 342,
+                        "startColumn": 4,
+                        "startOffset": 21052,
+                        "endColumn": 57,
+                        "endOffset": 21105
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 343,
+                    "startColumn": 4,
+                    "startOffset": 21110,
+                    "endColumn": 69,
+                    "endOffset": 21175
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 343,
+                        "startColumn": 4,
+                        "startOffset": 21110,
+                        "endColumn": 69,
+                        "endOffset": 21175
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 344,
+                    "startColumn": 4,
+                    "startOffset": 21180,
+                    "endColumn": 65,
+                    "endOffset": 21241
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 344,
+                        "startColumn": 4,
+                        "startOffset": 21180,
+                        "endColumn": 65,
+                        "endOffset": 21241
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 345,
+                    "startColumn": 4,
+                    "startOffset": 21246,
+                    "endColumn": 73,
+                    "endOffset": 21315
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 345,
+                        "startColumn": 4,
+                        "startOffset": 21246,
+                        "endColumn": 73,
+                        "endOffset": 21315
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 346,
+                    "startColumn": 4,
+                    "startOffset": 21320,
+                    "endColumn": 69,
+                    "endOffset": 21385
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 346,
+                        "startColumn": 4,
+                        "startOffset": 21320,
+                        "endColumn": 69,
+                        "endOffset": 21385
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 347,
+                    "startColumn": 4,
+                    "startOffset": 21390,
+                    "endColumn": 80,
+                    "endOffset": 21466
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 347,
+                        "startColumn": 4,
+                        "startOffset": 21390,
+                        "endColumn": 80,
+                        "endOffset": 21466
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 348,
+                    "startColumn": 4,
+                    "startOffset": 21471,
+                    "endColumn": 88,
+                    "endOffset": 21555
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 348,
+                        "startColumn": 4,
+                        "startOffset": 21471,
+                        "endColumn": 88,
+                        "endOffset": 21555
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 349,
+                    "startColumn": 4,
+                    "startOffset": 21560,
+                    "endColumn": 93,
+                    "endOffset": 21649
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 349,
+                        "startColumn": 4,
+                        "startOffset": 21560,
+                        "endColumn": 93,
+                        "endOffset": 21649
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 350,
+                    "startColumn": 4,
+                    "startOffset": 21654,
+                    "endColumn": 86,
+                    "endOffset": 21736
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 350,
+                        "startColumn": 4,
+                        "startOffset": 21654,
+                        "endColumn": 86,
+                        "endOffset": 21736
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 351,
+                    "startColumn": 4,
+                    "startOffset": 21741,
+                    "endColumn": 77,
+                    "endOffset": 21814
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 351,
+                        "startColumn": 4,
+                        "startOffset": 21741,
+                        "endColumn": 77,
+                        "endOffset": 21814
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 352,
+                    "startColumn": 4,
+                    "startOffset": 21819,
+                    "endColumn": 96,
+                    "endOffset": 21911
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 352,
+                        "startColumn": 4,
+                        "startOffset": 21819,
+                        "endColumn": 96,
+                        "endOffset": 21911
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 353,
+                    "startColumn": 4,
+                    "startOffset": 21916,
+                    "endColumn": 64,
+                    "endOffset": 21976
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 353,
+                        "startColumn": 4,
+                        "startOffset": 21916,
+                        "endColumn": 64,
+                        "endOffset": 21976
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 354,
+                    "startColumn": 4,
+                    "startOffset": 21981,
+                    "endColumn": 62,
+                    "endOffset": 22039
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 354,
+                        "startColumn": 4,
+                        "startOffset": 21981,
+                        "endColumn": 62,
+                        "endOffset": 22039
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 355,
+                    "startColumn": 4,
+                    "startOffset": 22044,
+                    "endColumn": 59,
+                    "endOffset": 22099
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 355,
+                        "startColumn": 4,
+                        "startOffset": 22044,
+                        "endColumn": 59,
+                        "endOffset": 22099
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 356,
+                    "startColumn": 4,
+                    "startOffset": 22104,
+                    "endColumn": 60,
+                    "endOffset": 22160
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 356,
+                        "startColumn": 4,
+                        "startOffset": 22104,
+                        "endColumn": 60,
+                        "endOffset": 22160
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 357,
+                    "startColumn": 4,
+                    "startOffset": 22165,
+                    "endColumn": 69,
+                    "endOffset": 22230
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 357,
+                        "startColumn": 4,
+                        "startOffset": 22165,
+                        "endColumn": 69,
+                        "endOffset": 22230
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 358,
+                    "startColumn": 4,
+                    "startOffset": 22235,
+                    "endColumn": 59,
+                    "endOffset": 22290
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 358,
+                        "startColumn": 4,
+                        "startOffset": 22235,
+                        "endColumn": 59,
+                        "endOffset": 22290
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 359,
+                    "startColumn": 4,
+                    "startOffset": 22295,
+                    "endColumn": 58,
+                    "endOffset": 22349
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 359,
+                        "startColumn": 4,
+                        "startOffset": 22295,
+                        "endColumn": 58,
+                        "endOffset": 22349
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 360,
+                    "startColumn": 4,
+                    "startOffset": 22354,
+                    "endColumn": 83,
+                    "endOffset": 22433
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 360,
+                        "startColumn": 4,
+                        "startOffset": 22354,
+                        "endColumn": 83,
+                        "endOffset": 22433
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 361,
+                    "startColumn": 4,
+                    "startOffset": 22438,
+                    "endColumn": 75,
+                    "endOffset": 22509
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 361,
+                        "startColumn": 4,
+                        "startOffset": 22438,
+                        "endColumn": 75,
+                        "endOffset": 22509
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 362,
+                    "startColumn": 4,
+                    "startOffset": 22514,
+                    "endColumn": 73,
+                    "endOffset": 22583
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 362,
+                        "startColumn": 4,
+                        "startOffset": 22514,
+                        "endColumn": 73,
+                        "endOffset": 22583
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 363,
+                    "startColumn": 4,
+                    "startOffset": 22588,
+                    "endColumn": 78,
+                    "endOffset": 22662
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 363,
+                        "startColumn": 4,
+                        "startOffset": 22588,
+                        "endColumn": 78,
+                        "endOffset": 22662
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 364,
+                    "startColumn": 4,
+                    "startOffset": 22667,
+                    "endColumn": 61,
+                    "endOffset": 22724
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 364,
+                        "startColumn": 4,
+                        "startOffset": 22667,
+                        "endColumn": 61,
+                        "endOffset": 22724
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 365,
+                    "startColumn": 4,
+                    "startOffset": 22729,
+                    "endColumn": 63,
+                    "endOffset": 22788
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 365,
+                        "startColumn": 4,
+                        "startOffset": 22729,
+                        "endColumn": 63,
+                        "endOffset": 22788
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 366,
+                    "startColumn": 4,
+                    "startOffset": 22793,
+                    "endColumn": 68,
+                    "endOffset": 22857
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 366,
+                        "startColumn": 4,
+                        "startOffset": 22793,
+                        "endColumn": 68,
+                        "endOffset": 22857
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 367,
+                    "startColumn": 4,
+                    "startOffset": 22862,
+                    "endColumn": 63,
+                    "endOffset": 22921
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 367,
+                        "startColumn": 4,
+                        "startOffset": 22862,
+                        "endColumn": 63,
+                        "endOffset": 22921
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 368,
+                    "startColumn": 4,
+                    "startOffset": 22926,
+                    "endColumn": 63,
+                    "endOffset": 22985
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 368,
+                        "startColumn": 4,
+                        "startOffset": 22926,
+                        "endColumn": 63,
+                        "endOffset": 22985
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 369,
+                    "startColumn": 4,
+                    "startOffset": 22990,
+                    "endColumn": 64,
+                    "endOffset": 23050
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 369,
+                        "startColumn": 4,
+                        "startOffset": 22990,
+                        "endColumn": 64,
+                        "endOffset": 23050
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 370,
+                    "startColumn": 4,
+                    "startOffset": 23055,
+                    "endColumn": 69,
+                    "endOffset": 23120
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 370,
+                        "startColumn": 4,
+                        "startOffset": 23055,
+                        "endColumn": 69,
+                        "endOffset": 23120
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 371,
+                    "startColumn": 4,
+                    "startOffset": 23125,
+                    "endColumn": 69,
+                    "endOffset": 23190
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 371,
+                        "startColumn": 4,
+                        "startOffset": 23125,
+                        "endColumn": 69,
+                        "endOffset": 23190
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 372,
+                    "startColumn": 4,
+                    "startOffset": 23195,
+                    "endColumn": 64,
+                    "endOffset": 23255
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 372,
+                        "startColumn": 4,
+                        "startOffset": 23195,
+                        "endColumn": 64,
+                        "endOffset": 23255
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 373,
+                    "startColumn": 4,
+                    "startOffset": 23260,
+                    "endColumn": 65,
+                    "endOffset": 23321
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 373,
+                        "startColumn": 4,
+                        "startOffset": 23260,
+                        "endColumn": 65,
+                        "endOffset": 23321
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 374,
+                    "startColumn": 4,
+                    "startOffset": 23326,
+                    "endColumn": 67,
+                    "endOffset": 23389
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 374,
+                        "startColumn": 4,
+                        "startOffset": 23326,
+                        "endColumn": 67,
+                        "endOffset": 23389
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 375,
+                    "startColumn": 4,
+                    "startOffset": 23394,
+                    "endColumn": 60,
+                    "endOffset": 23450
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 375,
+                        "startColumn": 4,
+                        "startOffset": 23394,
+                        "endColumn": 60,
+                        "endOffset": 23450
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 376,
+                    "startColumn": 4,
+                    "startOffset": 23455,
+                    "endColumn": 61,
+                    "endOffset": 23512
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 376,
+                        "startColumn": 4,
+                        "startOffset": 23455,
+                        "endColumn": 61,
+                        "endOffset": 23512
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 377,
+                    "startColumn": 4,
+                    "startOffset": 23517,
+                    "endColumn": 74,
+                    "endOffset": 23587
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 377,
+                        "startColumn": 4,
+                        "startOffset": 23517,
+                        "endColumn": 74,
+                        "endOffset": 23587
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 378,
+                    "startColumn": 4,
+                    "startOffset": 23592,
+                    "endColumn": 63,
+                    "endOffset": 23651
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 378,
+                        "startColumn": 4,
+                        "startOffset": 23592,
+                        "endColumn": 63,
+                        "endOffset": 23651
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 379,
+                    "startColumn": 4,
+                    "startOffset": 23656,
+                    "endColumn": 60,
+                    "endOffset": 23712
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 379,
+                        "startColumn": 4,
+                        "startOffset": 23656,
+                        "endColumn": 60,
+                        "endOffset": 23712
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 380,
+                    "startColumn": 4,
+                    "startOffset": 23717,
+                    "endColumn": 89,
+                    "endOffset": 23802
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 380,
+                        "startColumn": 4,
+                        "startOffset": 23717,
+                        "endColumn": 89,
+                        "endOffset": 23802
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 381,
+                    "startColumn": 4,
+                    "startOffset": 23807,
+                    "endColumn": 72,
+                    "endOffset": 23875
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 381,
+                        "startColumn": 4,
+                        "startOffset": 23807,
+                        "endColumn": 72,
+                        "endOffset": 23875
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 382,
+                    "startColumn": 4,
+                    "startOffset": 23880,
+                    "endColumn": 61,
+                    "endOffset": 23937
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 382,
+                        "startColumn": 4,
+                        "startOffset": 23880,
+                        "endColumn": 61,
+                        "endOffset": 23937
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 383,
+                    "startColumn": 4,
+                    "startOffset": 23942,
+                    "endColumn": 82,
+                    "endOffset": 24020
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 383,
+                        "startColumn": 4,
+                        "startOffset": 23942,
+                        "endColumn": 82,
+                        "endOffset": 24020
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 384,
+                    "startColumn": 4,
+                    "startOffset": 24025,
+                    "endColumn": 57,
+                    "endOffset": 24078
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 384,
+                        "startColumn": 4,
+                        "startOffset": 24025,
+                        "endColumn": 57,
+                        "endOffset": 24078
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 385,
+                    "startColumn": 4,
+                    "startOffset": 24083,
+                    "endColumn": 66,
+                    "endOffset": 24145
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 385,
+                        "startColumn": 4,
+                        "startOffset": 24083,
+                        "endColumn": 66,
+                        "endOffset": 24145
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 386,
+                    "startColumn": 4,
+                    "startOffset": 24150,
+                    "endColumn": 73,
+                    "endOffset": 24219
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 386,
+                        "startColumn": 4,
+                        "startOffset": 24150,
+                        "endColumn": 73,
+                        "endOffset": 24219
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 387,
+                    "startColumn": 4,
+                    "startOffset": 24224,
+                    "endColumn": 65,
+                    "endOffset": 24285
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 387,
+                        "startColumn": 4,
+                        "startOffset": 24224,
+                        "endColumn": 65,
+                        "endOffset": 24285
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 388,
+                    "startColumn": 4,
+                    "startOffset": 24290,
+                    "endColumn": 72,
+                    "endOffset": 24358
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 388,
+                        "startColumn": 4,
+                        "startOffset": 24290,
+                        "endColumn": 72,
+                        "endOffset": 24358
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 389,
+                    "startColumn": 4,
+                    "startOffset": 24363,
+                    "endColumn": 67,
+                    "endOffset": 24426
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 389,
+                        "startColumn": 4,
+                        "startOffset": 24363,
+                        "endColumn": 67,
+                        "endOffset": 24426
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 390,
+                    "startColumn": 4,
+                    "startOffset": 24431,
+                    "endColumn": 69,
+                    "endOffset": 24496
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 390,
+                        "startColumn": 4,
+                        "startOffset": 24431,
+                        "endColumn": 69,
+                        "endOffset": 24496
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 391,
+                    "startColumn": 4,
+                    "startOffset": 24501,
+                    "endColumn": 67,
+                    "endOffset": 24564
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 391,
+                        "startColumn": 4,
+                        "startOffset": 24501,
+                        "endColumn": 67,
+                        "endOffset": 24564
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 392,
+                    "startColumn": 4,
+                    "startOffset": 24569,
+                    "endColumn": 70,
+                    "endOffset": 24635
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 392,
+                        "startColumn": 4,
+                        "startOffset": 24569,
+                        "endColumn": 70,
+                        "endOffset": 24635
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 393,
+                    "startColumn": 4,
+                    "startOffset": 24640,
+                    "endColumn": 68,
+                    "endOffset": 24704
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 393,
+                        "startColumn": 4,
+                        "startOffset": 24640,
+                        "endColumn": 68,
+                        "endOffset": 24704
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 394,
+                    "startColumn": 4,
+                    "startOffset": 24709,
+                    "endColumn": 73,
+                    "endOffset": 24778
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 394,
+                        "startColumn": 4,
+                        "startOffset": 24709,
+                        "endColumn": 73,
+                        "endOffset": 24778
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 395,
+                    "startColumn": 4,
+                    "startOffset": 24783,
+                    "endColumn": 63,
+                    "endOffset": 24842
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 395,
+                        "startColumn": 4,
+                        "startOffset": 24783,
+                        "endColumn": 63,
+                        "endOffset": 24842
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 396,
+                    "startColumn": 4,
+                    "startOffset": 24847,
+                    "endColumn": 70,
+                    "endOffset": 24913
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 396,
+                        "startColumn": 4,
+                        "startOffset": 24847,
+                        "endColumn": 70,
+                        "endOffset": 24913
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 397,
+                    "startColumn": 4,
+                    "startOffset": 24918,
+                    "endColumn": 65,
+                    "endOffset": 24979
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 397,
+                        "startColumn": 4,
+                        "startOffset": 24918,
+                        "endColumn": 65,
+                        "endOffset": 24979
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 398,
+                    "startColumn": 4,
+                    "startOffset": 24984,
+                    "endColumn": 69,
+                    "endOffset": 25049
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 398,
+                        "startColumn": 4,
+                        "startOffset": 24984,
+                        "endColumn": 69,
+                        "endOffset": 25049
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 399,
+                    "startColumn": 4,
+                    "startOffset": 25054,
+                    "endColumn": 62,
+                    "endOffset": 25112
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 399,
+                        "startColumn": 4,
+                        "startOffset": 25054,
+                        "endColumn": 62,
+                        "endOffset": 25112
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 400,
+                    "startColumn": 4,
+                    "startOffset": 25117,
+                    "endColumn": 69,
+                    "endOffset": 25182
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 400,
+                        "startColumn": 4,
+                        "startOffset": 25117,
+                        "endColumn": 69,
+                        "endOffset": 25182
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 401,
+                    "startColumn": 4,
+                    "startOffset": 25187,
+                    "endColumn": 68,
+                    "endOffset": 25251
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 401,
+                        "startColumn": 4,
+                        "startOffset": 25187,
+                        "endColumn": 68,
+                        "endOffset": 25251
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 402,
+                    "startColumn": 4,
+                    "startOffset": 25256,
+                    "endColumn": 68,
+                    "endOffset": 25320
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 402,
+                        "startColumn": 4,
+                        "startOffset": 25256,
+                        "endColumn": 68,
+                        "endOffset": 25320
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 403,
+                    "startColumn": 4,
+                    "startOffset": 25325,
+                    "endColumn": 63,
+                    "endOffset": 25384
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 403,
+                        "startColumn": 4,
+                        "startOffset": 25325,
+                        "endColumn": 63,
+                        "endOffset": 25384
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 404,
+                    "startColumn": 4,
+                    "startOffset": 25389,
+                    "endColumn": 66,
+                    "endOffset": 25451
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 404,
+                        "startColumn": 4,
+                        "startOffset": 25389,
+                        "endColumn": 66,
+                        "endOffset": 25451
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 405,
+                    "startColumn": 4,
+                    "startOffset": 25456,
+                    "endColumn": 97,
+                    "endOffset": 25549
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 405,
+                        "startColumn": 4,
+                        "startOffset": 25456,
+                        "endColumn": 97,
+                        "endOffset": 25549
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 406,
+                    "startColumn": 4,
+                    "startOffset": 25554,
+                    "endColumn": 87,
+                    "endOffset": 25637
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 406,
+                        "startColumn": 4,
+                        "startOffset": 25554,
+                        "endColumn": 87,
+                        "endOffset": 25637
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 407,
+                    "startColumn": 4,
+                    "startOffset": 25642,
+                    "endColumn": 81,
+                    "endOffset": 25719
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 407,
+                        "startColumn": 4,
+                        "startOffset": 25642,
+                        "endColumn": 81,
+                        "endOffset": 25719
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 408,
+                    "startColumn": 4,
+                    "startOffset": 25724,
+                    "endColumn": 60,
+                    "endOffset": 25780
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 408,
+                        "startColumn": 4,
+                        "startOffset": 25724,
+                        "endColumn": 60,
+                        "endOffset": 25780
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 409,
+                    "startColumn": 4,
+                    "startOffset": 25785,
+                    "endColumn": 75,
+                    "endOffset": 25856
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 409,
+                        "startColumn": 4,
+                        "startOffset": 25785,
+                        "endColumn": 75,
+                        "endOffset": 25856
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 410,
+                    "startColumn": 4,
+                    "startOffset": 25861,
+                    "endColumn": 71,
+                    "endOffset": 25928
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 410,
+                        "startColumn": 4,
+                        "startOffset": 25861,
+                        "endColumn": 71,
+                        "endOffset": 25928
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 411,
+                    "startColumn": 4,
+                    "startOffset": 25933,
+                    "endColumn": 60,
+                    "endOffset": 25989
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 411,
+                        "startColumn": 4,
+                        "startOffset": 25933,
+                        "endColumn": 60,
+                        "endOffset": 25989
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 412,
+                    "startColumn": 4,
+                    "startOffset": 25994,
+                    "endColumn": 71,
+                    "endOffset": 26061
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 412,
+                        "startColumn": 4,
+                        "startOffset": 25994,
+                        "endColumn": 71,
+                        "endOffset": 26061
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 413,
+                    "startColumn": 4,
+                    "startOffset": 26066,
+                    "endColumn": 67,
+                    "endOffset": 26129
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 413,
+                        "startColumn": 4,
+                        "startOffset": 26066,
+                        "endColumn": 67,
+                        "endOffset": 26129
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 414,
+                    "startColumn": 4,
+                    "startOffset": 26134,
+                    "endColumn": 75,
+                    "endOffset": 26205
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 414,
+                        "startColumn": 4,
+                        "startOffset": 26134,
+                        "endColumn": 75,
+                        "endOffset": 26205
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 415,
+                    "startColumn": 4,
+                    "startOffset": 26210,
+                    "endColumn": 71,
+                    "endOffset": 26277
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 415,
+                        "startColumn": 4,
+                        "startOffset": 26210,
+                        "endColumn": 71,
+                        "endOffset": 26277
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 416,
+                    "startColumn": 4,
+                    "startOffset": 26282,
+                    "endColumn": 82,
+                    "endOffset": 26360
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 416,
+                        "startColumn": 4,
+                        "startOffset": 26282,
+                        "endColumn": 82,
+                        "endOffset": 26360
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 417,
+                    "startColumn": 4,
+                    "startOffset": 26365,
+                    "endColumn": 90,
+                    "endOffset": 26451
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 417,
+                        "startColumn": 4,
+                        "startOffset": 26365,
+                        "endColumn": 90,
+                        "endOffset": 26451
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 418,
+                    "startColumn": 4,
+                    "startOffset": 26456,
+                    "endColumn": 95,
+                    "endOffset": 26547
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 418,
+                        "startColumn": 4,
+                        "startOffset": 26456,
+                        "endColumn": 95,
+                        "endOffset": 26547
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 419,
+                    "startColumn": 4,
+                    "startOffset": 26552,
+                    "endColumn": 88,
+                    "endOffset": 26636
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 419,
+                        "startColumn": 4,
+                        "startOffset": 26552,
+                        "endColumn": 88,
+                        "endOffset": 26636
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 420,
+                    "startColumn": 4,
+                    "startOffset": 26641,
+                    "endColumn": 79,
+                    "endOffset": 26716
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 420,
+                        "startColumn": 4,
+                        "startOffset": 26641,
+                        "endColumn": 79,
+                        "endOffset": 26716
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 421,
+                    "startColumn": 4,
+                    "startOffset": 26721,
+                    "endColumn": 98,
+                    "endOffset": 26815
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 421,
+                        "startColumn": 4,
+                        "startOffset": 26721,
+                        "endColumn": 98,
+                        "endOffset": 26815
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 422,
+                    "startColumn": 4,
+                    "startOffset": 26820,
+                    "endColumn": 66,
+                    "endOffset": 26882
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 422,
+                        "startColumn": 4,
+                        "startOffset": 26820,
+                        "endColumn": 66,
+                        "endOffset": 26882
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 423,
+                    "startColumn": 4,
+                    "startOffset": 26887,
+                    "endColumn": 64,
+                    "endOffset": 26947
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 423,
+                        "startColumn": 4,
+                        "startOffset": 26887,
+                        "endColumn": 64,
+                        "endOffset": 26947
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 424,
+                    "startColumn": 4,
+                    "startOffset": 26952,
+                    "endColumn": 61,
+                    "endOffset": 27009
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 424,
+                        "startColumn": 4,
+                        "startOffset": 26952,
+                        "endColumn": 61,
+                        "endOffset": 27009
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 425,
+                    "startColumn": 4,
+                    "startOffset": 27014,
+                    "endColumn": 62,
+                    "endOffset": 27072
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 425,
+                        "startColumn": 4,
+                        "startOffset": 27014,
+                        "endColumn": 62,
+                        "endOffset": 27072
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 426,
+                    "startColumn": 4,
+                    "startOffset": 27077,
+                    "endColumn": 71,
+                    "endOffset": 27144
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 426,
+                        "startColumn": 4,
+                        "startOffset": 27077,
+                        "endColumn": 71,
+                        "endOffset": 27144
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 427,
+                    "startColumn": 4,
+                    "startOffset": 27149,
+                    "endColumn": 61,
+                    "endOffset": 27206
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 427,
+                        "startColumn": 4,
+                        "startOffset": 27149,
+                        "endColumn": 61,
+                        "endOffset": 27206
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 428,
+                    "startColumn": 4,
+                    "startOffset": 27211,
+                    "endColumn": 60,
+                    "endOffset": 27267
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 428,
+                        "startColumn": 4,
+                        "startOffset": 27211,
+                        "endColumn": 60,
+                        "endOffset": 27267
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 429,
+                    "startColumn": 4,
+                    "startOffset": 27272,
+                    "endColumn": 85,
+                    "endOffset": 27353
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 429,
+                        "startColumn": 4,
+                        "startOffset": 27272,
+                        "endColumn": 85,
+                        "endOffset": 27353
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 430,
+                    "startColumn": 4,
+                    "startOffset": 27358,
+                    "endColumn": 77,
+                    "endOffset": 27431
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 430,
+                        "startColumn": 4,
+                        "startOffset": 27358,
+                        "endColumn": 77,
+                        "endOffset": 27431
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 431,
+                    "startColumn": 4,
+                    "startOffset": 27436,
+                    "endColumn": 75,
+                    "endOffset": 27507
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 431,
+                        "startColumn": 4,
+                        "startOffset": 27436,
+                        "endColumn": 75,
+                        "endOffset": 27507
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 432,
+                    "startColumn": 4,
+                    "startOffset": 27512,
+                    "endColumn": 80,
+                    "endOffset": 27588
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 432,
+                        "startColumn": 4,
+                        "startOffset": 27512,
+                        "endColumn": 80,
+                        "endOffset": 27588
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 433,
+                    "startColumn": 4,
+                    "startOffset": 27593,
+                    "endColumn": 63,
+                    "endOffset": 27652
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 433,
+                        "startColumn": 4,
+                        "startOffset": 27593,
+                        "endColumn": 63,
+                        "endOffset": 27652
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 434,
+                    "startColumn": 4,
+                    "startOffset": 27657,
+                    "endColumn": 98,
+                    "endOffset": 27751
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 434,
+                        "startColumn": 4,
+                        "startOffset": 27657,
+                        "endColumn": 98,
+                        "endOffset": 27751
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 435,
+                    "startColumn": 4,
+                    "startOffset": 27756,
+                    "endColumn": 77,
+                    "endOffset": 27829
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 435,
+                        "startColumn": 4,
+                        "startOffset": 27756,
+                        "endColumn": 77,
+                        "endOffset": 27829
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 436,
+                    "startColumn": 4,
+                    "startOffset": 27834,
+                    "endColumn": 52,
+                    "endOffset": 27882
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 436,
+                        "startColumn": 4,
+                        "startOffset": 27834,
+                        "endColumn": 52,
+                        "endOffset": 27882
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 437,
+                    "startColumn": 4,
+                    "startOffset": 27887,
+                    "endColumn": 44,
+                    "endOffset": 27927
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 437,
+                        "startColumn": 4,
+                        "startOffset": 27887,
+                        "endColumn": 44,
+                        "endOffset": 27927
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 438,
+                    "startColumn": 4,
+                    "startOffset": 27932,
+                    "endColumn": 102,
+                    "endOffset": 28030
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 438,
+                        "startColumn": 4,
+                        "startOffset": 27932,
+                        "endColumn": 102,
+                        "endOffset": 28030
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 439,
+                    "startColumn": 4,
+                    "startOffset": 28035,
+                    "endColumn": 77,
+                    "endOffset": 28108
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 439,
+                        "startColumn": 4,
+                        "startOffset": 28035,
+                        "endColumn": 77,
+                        "endOffset": 28108
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 440,
+                    "startColumn": 4,
+                    "startOffset": 28113,
+                    "endColumn": 121,
+                    "endOffset": 28230
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 440,
+                        "startColumn": 4,
+                        "startOffset": 28113,
+                        "endColumn": 121,
+                        "endOffset": 28230
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 441,
+                    "startColumn": 4,
+                    "startOffset": 28235,
+                    "endColumn": 62,
+                    "endOffset": 28293
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 441,
+                        "startColumn": 4,
+                        "startOffset": 28235,
+                        "endColumn": 62,
+                        "endOffset": 28293
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 442,
+                    "startColumn": 4,
+                    "startOffset": 28298,
+                    "endColumn": 62,
+                    "endOffset": 28356
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 442,
+                        "startColumn": 4,
+                        "startOffset": 28298,
+                        "endColumn": 62,
+                        "endOffset": 28356
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 443,
+                    "startColumn": 4,
+                    "startOffset": 28361,
+                    "endColumn": 59,
+                    "endOffset": 28416
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 443,
+                        "startColumn": 4,
+                        "startOffset": 28361,
+                        "endColumn": 59,
+                        "endOffset": 28416
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 444,
+                    "startColumn": 4,
+                    "startOffset": 28421,
+                    "endColumn": 43,
+                    "endOffset": 28460
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 444,
+                        "startColumn": 4,
+                        "startOffset": 28421,
+                        "endColumn": 43,
+                        "endOffset": 28460
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 445,
+                    "startColumn": 4,
+                    "startOffset": 28465,
+                    "endColumn": 100,
+                    "endOffset": 28561
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 445,
+                        "startColumn": 4,
+                        "startOffset": 28465,
+                        "endColumn": 100,
+                        "endOffset": 28561
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 446,
+                    "startColumn": 4,
+                    "startOffset": 28566,
+                    "endColumn": 39,
+                    "endOffset": 28601
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 446,
+                        "startColumn": 4,
+                        "startOffset": 28566,
+                        "endColumn": 39,
+                        "endOffset": 28601
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 447,
+                    "startColumn": 4,
+                    "startOffset": 28606,
+                    "endColumn": 104,
+                    "endOffset": 28706
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 447,
+                        "startColumn": 4,
+                        "startOffset": 28606,
+                        "endColumn": 104,
+                        "endOffset": 28706
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 448,
+                    "startColumn": 4,
+                    "startOffset": 28711,
+                    "endColumn": 50,
+                    "endOffset": 28757
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 448,
+                        "startColumn": 4,
+                        "startOffset": 28711,
+                        "endColumn": 50,
+                        "endOffset": 28757
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 449,
+                    "startColumn": 4,
+                    "startOffset": 28762,
+                    "endColumn": 63,
+                    "endOffset": 28821
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 449,
+                        "startColumn": 4,
+                        "startOffset": 28762,
+                        "endColumn": 63,
+                        "endOffset": 28821
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 450,
+                    "startColumn": 4,
+                    "startOffset": 28826,
+                    "endColumn": 44,
+                    "endOffset": 28866
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 450,
+                        "startColumn": 4,
+                        "startOffset": 28826,
+                        "endColumn": 44,
+                        "endOffset": 28866
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 451,
+                    "startColumn": 4,
+                    "startOffset": 28871,
+                    "endColumn": 54,
+                    "endOffset": 28921
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 451,
+                        "startColumn": 4,
+                        "startOffset": 28871,
+                        "endColumn": 54,
+                        "endOffset": 28921
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 452,
+                    "startColumn": 4,
+                    "startOffset": 28926,
+                    "endColumn": 55,
+                    "endOffset": 28977
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 452,
+                        "startColumn": 4,
+                        "startOffset": 28926,
+                        "endColumn": 55,
+                        "endOffset": 28977
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 453,
+                    "startColumn": 4,
+                    "startOffset": 28982,
+                    "endColumn": 116,
+                    "endOffset": 29094
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 453,
+                        "startColumn": 4,
+                        "startOffset": 28982,
+                        "endColumn": 116,
+                        "endOffset": 29094
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 454,
+                    "startColumn": 4,
+                    "startOffset": 29099,
+                    "endColumn": 55,
+                    "endOffset": 29150
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 454,
+                        "startColumn": 4,
+                        "startOffset": 29099,
+                        "endColumn": 55,
+                        "endOffset": 29150
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 455,
+                    "startColumn": 4,
+                    "startOffset": 29155,
+                    "endColumn": 101,
+                    "endOffset": 29252
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 455,
+                        "startColumn": 4,
+                        "startOffset": 29155,
+                        "endColumn": 101,
+                        "endOffset": 29252
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 456,
+                    "startColumn": 4,
+                    "startOffset": 29257,
+                    "endColumn": 64,
+                    "endOffset": 29317
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 456,
+                        "startColumn": 4,
+                        "startOffset": 29257,
+                        "endColumn": 64,
+                        "endOffset": 29317
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 457,
+                    "startColumn": 4,
+                    "startOffset": 29322,
+                    "endColumn": 67,
+                    "endOffset": 29385
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 457,
+                        "startColumn": 4,
+                        "startOffset": 29322,
+                        "endColumn": 67,
+                        "endOffset": 29385
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 458,
+                    "startColumn": 4,
+                    "startOffset": 29390,
+                    "endColumn": 70,
+                    "endOffset": 29456
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 458,
+                        "startColumn": 4,
+                        "startOffset": 29390,
+                        "endColumn": 70,
+                        "endOffset": 29456
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 459,
+                    "startColumn": 4,
+                    "startOffset": 29461,
+                    "endColumn": 44,
+                    "endOffset": 29501
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 459,
+                        "startColumn": 4,
+                        "startOffset": 29461,
+                        "endColumn": 44,
+                        "endOffset": 29501
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 460,
+                    "startColumn": 4,
+                    "startOffset": 29506,
+                    "endColumn": 113,
+                    "endOffset": 29615
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 460,
+                        "startColumn": 4,
+                        "startOffset": 29506,
+                        "endColumn": 113,
+                        "endOffset": 29615
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 461,
+                    "startColumn": 4,
+                    "startOffset": 29620,
+                    "endColumn": 61,
+                    "endOffset": 29677
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 461,
+                        "startColumn": 4,
+                        "startOffset": 29620,
+                        "endColumn": 61,
+                        "endOffset": 29677
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 462,
+                    "startColumn": 4,
+                    "startOffset": 29682,
+                    "endColumn": 65,
+                    "endOffset": 29743
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 462,
+                        "startColumn": 4,
+                        "startOffset": 29682,
+                        "endColumn": 65,
+                        "endOffset": 29743
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 463,
+                    "startColumn": 4,
+                    "startOffset": 29748,
+                    "endColumn": 72,
+                    "endOffset": 29816
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 463,
+                        "startColumn": 4,
+                        "startOffset": 29748,
+                        "endColumn": 72,
+                        "endOffset": 29816
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 464,
+                    "startColumn": 4,
+                    "startOffset": 29821,
+                    "endColumn": 43,
+                    "endOffset": 29860
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 464,
+                        "startColumn": 4,
+                        "startOffset": 29821,
+                        "endColumn": 43,
+                        "endOffset": 29860
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 465,
+                    "startColumn": 4,
+                    "startOffset": 29865,
+                    "endColumn": 60,
+                    "endOffset": 29921
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 465,
+                        "startColumn": 4,
+                        "startOffset": 29865,
+                        "endColumn": 60,
+                        "endOffset": 29921
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 466,
+                    "startColumn": 4,
+                    "startOffset": 29926,
+                    "endColumn": 61,
+                    "endOffset": 29983
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 466,
+                        "startColumn": 4,
+                        "startOffset": 29926,
+                        "endColumn": 61,
+                        "endOffset": 29983
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 467,
+                    "startColumn": 4,
+                    "startOffset": 29988,
+                    "endColumn": 70,
+                    "endOffset": 30054
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 467,
+                        "startColumn": 4,
+                        "startOffset": 29988,
+                        "endColumn": 70,
+                        "endOffset": 30054
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 468,
+                    "startColumn": 4,
+                    "startOffset": 30059,
+                    "endColumn": 63,
+                    "endOffset": 30118
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 468,
+                        "startColumn": 4,
+                        "startOffset": 30059,
+                        "endColumn": 63,
+                        "endOffset": 30118
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 469,
+                    "startColumn": 4,
+                    "startOffset": 30123,
+                    "endLine": 483,
+                    "endColumn": 9,
+                    "endOffset": 30710
+                },
+                "from": {
+                    "file": "/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 469,
+                        "startColumn": 4,
+                        "startOffset": 30123,
+                        "endLine": 483,
+                        "endColumn": 9,
+                        "endOffset": 30710
+                    }
+                }
+            }
+        ]
+    }
+]

@@ -1,0 +1,697 @@
+package com.yyqq.code.toyslease;
+
+import java.io.File;
+import java.io.IOException;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.provider.MediaStore;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.ab.http.AbHttpUtil;
+import com.ab.http.AbRequestParams;
+import com.ab.http.AbStringHttpResponseListener;
+import com.umeng.analytics.MobclickAgent;
+import com.yyqq.babyshow.R;
+import com.yyqq.code.login.WebLoginActivity;
+import com.yyqq.code.main.PhotoManager;
+import com.yyqq.code.photo.BitmapCache;
+import com.yyqq.code.photo.CropImage;
+import com.yyqq.code.photo.PhoneAlbumActivity;
+import com.yyqq.commen.utils.BimpUtil;
+import com.yyqq.commen.utils.Config;
+import com.yyqq.commen.utils.FileUtils;
+import com.yyqq.framework.activity.BaseActivity;
+import com.yyqq.framework.application.MyApplication;
+import com.yyqq.framework.application.ServerMutualConfig;
+
+public class AddNewToysLeaseActivity extends BaseActivity {
+	
+	// 调用相册后返回标记
+	public static final String AddNewToysLeaseActivity_TAG = "AddNewToysLeaseActivity_TAG";
+
+	private ImageView main_item_back;
+	private LinearLayout lease_add_img;
+	private LinearLayout lease_detail_support;
+	private LinearLayout layout;
+	private TextView main_item_add;
+	private TextView lease_add_zujin_hint;
+	private TextView lease_add_yajin_hint;
+	private TextView lease_detail_from;
+	private TextView lease_detail_support_text;
+	private TextView lease_add_compant;
+	private TextView lease_add_support_hint;
+	private Button lease_add_zu;
+	private Button lease_add_mai;
+	private Button lease_add_need;
+	private Button lease_add_no_need;
+	private EditText lease_add_title;
+	private EditText lease_add_des;
+	private EditText lease_add_zujin;
+	private EditText lease_add_yajin;
+	private EditText lease_add_age;
+	private EditText lease_add_phone;
+	private EditText lease_add_qq;
+	private EditText lease_add_dizhi;
+	private EditText lease_add_addtext;
+	private GridView noScrollgridview;
+	
+	private AbHttpUtil ab;
+	private LayoutInflater inflater;
+	private String toysType = "1"; // 0 = 卖，1 = 租
+	private String needSupport = "1"; // 0 = 不支持， 1 = 支持
+	private static String path = "";
+	private static int imgNum;
+	private static final int TAKE_PICTURE = 0x000000;
+	private static final int IMAGE_CROP_RETURN = 4;
+	public static String titleMsg = "";
+	public static String desMsg = "";
+	public static String supportMsg = "";
+	public static String toysMsg = "";
+	public static String zujinMsg = "";
+	public static String yajinMsg = "";
+	public static String ageMsg = "";
+	public static String phoneMsg = "";
+	public static String qqMsg = "";
+	public static String dizhiMsg = "";
+	public static String addMsg = "";
+	private GridAdapter adapter;
+	public static AddNewToysLeaseActivity addNewToysLeaseActivity;
+	private SharedPreferences sp;
+	private Editor ed;
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_add_toys_lease);
+		if (savedInstanceState != null) {
+			path = savedInstanceState.getString("path");
+			imgNum = savedInstanceState.getInt("imgNum");
+		}
+	}
+	
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putString("path", path);
+		outState.putInt("imgNum", imgNum);
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		
+		if(!MyApplication.getVisitor().equals("0")  || Config.getUser(AddNewToysLeaseActivity.this).uid.equals("")){
+			Intent in = new Intent(AddNewToysLeaseActivity.this, WebLoginActivity.class);
+			startActivity(in);
+		}
+		
+		// 隐藏软键盘
+		layout.requestFocus();
+		// 包含“showImage”表示是从相册系列跳转过来的，就需要恢复之前页面填写的数据
+		if(getIntent().hasExtra("showImage")){
+			lease_add_title.setText(titleMsg);
+			lease_add_des.setText(desMsg);
+			lease_add_zujin.setText(zujinMsg);
+			lease_add_yajin.setText(yajinMsg);
+			lease_add_age.setText(ageMsg);
+			lease_add_phone.setText(phoneMsg);
+			lease_add_qq.setText(qqMsg);
+			lease_add_dizhi.setText(dizhiMsg);
+			lease_add_addtext.setText(addMsg);
+			if(toysMsg.equals("0")){ // 卖
+				toysType = "0";
+				lease_add_zujin_hint.setText("出售价格：");
+				lease_add_yajin_hint.setText("市场价格：");
+				lease_add_zujin.setHint("如：200");
+				lease_add_yajin.setHint("如：400");
+				lease_add_compant.setText("元");
+				lease_add_zu.setBackgroundResource(R.drawable.sel_bt_no);
+				lease_add_mai.setBackgroundResource(R.drawable.sel_bt);
+			}else if(toysType.equals("1")){ // 租
+				toysType = "1";
+				lease_add_zujin_hint.setText("日收租金：");
+				lease_add_yajin_hint.setText("最高损赔：");
+				lease_add_zujin.setHint("如：3");
+				lease_add_yajin.setHint("如：100");
+				lease_add_compant.setText("元/天");
+				lease_add_zu.setBackgroundResource(R.drawable.sel_bt);
+				lease_add_mai.setBackgroundResource(R.drawable.sel_bt_no);
+			}
+			
+			if(supportMsg.equals("0")){ // 不支持
+				needSupport = "0";
+				lease_detail_support.setVisibility(View.GONE);
+				lease_add_no_need.setBackgroundResource(R.drawable.sel_bt);
+				lease_add_need.setBackgroundResource(R.drawable.sel_bt_no);
+			}else if(toysType.equals("1")){ // 支持
+				needSupport = "1";
+				lease_detail_support.setVisibility(View.VISIBLE);
+				lease_add_no_need.setBackgroundResource(R.drawable.sel_bt_no);
+				lease_add_need.setBackgroundResource(R.drawable.sel_bt);
+			}
+			
+			adapter.notifyDataSetChanged();
+			lease_add_img.setVisibility(View.GONE);
+			noScrollgridview.setVisibility(View.VISIBLE);
+			if(BimpUtil.drr.size() > 4){
+				ViewGroup.LayoutParams params = noScrollgridview.getLayoutParams();  
+		        params.height = 290;  
+		        noScrollgridview.setLayoutParams(params);  
+			}else{
+				ViewGroup.LayoutParams params = noScrollgridview.getLayoutParams();  
+		        params.height = 150;  
+		        noScrollgridview.setLayoutParams(params);  
+			}
+			
+			InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+			imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
+		}else{
+			lease_add_img.setVisibility(View.VISIBLE);
+			noScrollgridview.setVisibility(View.GONE);
+			BimpUtil.drr.clear();
+		}
+		
+	}
+	
+	@Override
+	protected void onPause() {
+		titleMsg = lease_add_title.getText().toString().trim();
+		desMsg = lease_add_des.getText().toString().trim();
+		supportMsg = needSupport;
+		toysMsg = toysType;
+		zujinMsg = lease_add_zujin.getText().toString().trim();
+		yajinMsg = lease_add_yajin.getText().toString().trim();
+		ageMsg = lease_add_age.getText().toString().trim();
+		phoneMsg = lease_add_phone.getText().toString().trim();
+		qqMsg = lease_add_qq.getText().toString().trim();
+		dizhiMsg = lease_add_dizhi.getText().toString().trim();
+		addMsg = lease_add_addtext.getText().toString().trim();
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
+
+	@Override
+	protected void initView() {
+		main_item_back = (ImageView) findViewById(R.id.main_item_back);
+		layout = (LinearLayout) findViewById(R.id.layout);
+		lease_add_img = (LinearLayout) findViewById(R.id.lease_add_img);
+		lease_detail_support = (LinearLayout) findViewById(R.id.lease_detail_support);
+		main_item_add = (TextView) findViewById(R.id.main_item_add);
+		lease_detail_from = (TextView) findViewById(R.id.lease_detail_from);
+		lease_add_zujin_hint = (TextView) findViewById(R.id.lease_add_zujin_hint);
+		lease_add_yajin_hint = (TextView) findViewById(R.id.lease_add_yajin_hint);
+		lease_detail_support_text = (TextView) findViewById(R.id.lease_detail_support_text);
+		lease_add_compant = (TextView) findViewById(R.id.lease_add_compant);
+		lease_add_support_hint = (TextView) findViewById(R.id.lease_add_support_hint);
+		lease_add_zu = (Button) findViewById(R.id.lease_add_zu);
+		lease_add_mai = (Button) findViewById(R.id.lease_add_mai);
+		lease_add_need = (Button) findViewById(R.id.lease_add_need);
+		lease_add_no_need = (Button) findViewById(R.id.lease_add_no_need);
+		lease_add_title = (EditText) findViewById(R.id.lease_add_title);
+		lease_add_des = (EditText) findViewById(R.id.lease_add_des);
+		lease_add_zujin = (EditText) findViewById(R.id.lease_add_zujin);
+		lease_add_yajin = (EditText) findViewById(R.id.lease_add_yajin);
+		lease_add_age = (EditText) findViewById(R.id.lease_add_age);
+		lease_add_phone = (EditText) findViewById(R.id.lease_add_phone);
+		lease_add_qq = (EditText) findViewById(R.id.lease_add_qq);
+		lease_add_dizhi = (EditText) findViewById(R.id.lease_add_dizhi);
+		lease_add_addtext = (EditText) findViewById(R.id.lease_add_addtext);
+		noScrollgridview = (GridView) findViewById(R.id.noScrollgridview);
+	}
+
+	@Override
+	protected void initData() {
+		sp = getSharedPreferences("support_text", 0);
+		ed = sp.edit();
+		addNewToysLeaseActivity = AddNewToysLeaseActivity.this;
+		ab = AbHttpUtil.getInstance(AddNewToysLeaseActivity.this);
+		inflater = LayoutInflater.from(AddNewToysLeaseActivity.this);
+		initSupportText();
+		
+		adapter = new GridAdapter(this);
+		noScrollgridview.setAdapter(adapter);
+	}
+
+	@Override
+	protected void setListener() {
+		
+		main_item_add.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				submitNewToys();
+			}
+		});
+		
+		main_item_back.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				AddNewToysLeaseActivity.this.finish();
+			}
+		});
+		
+		noScrollgridview.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				if (BimpUtil.drr.size() >= 6) {
+					Toast.makeText(AddNewToysLeaseActivity.this, "最多可选择6张", 1).show();
+				} else {
+					titleMsg = lease_add_title.getText().toString().trim();
+					desMsg = lease_add_des.getText().toString().trim();
+					new PopupWindows(AddNewToysLeaseActivity.this, noScrollgridview);
+				}
+			}
+		});
+		
+		lease_add_img.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+				imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
+				lease_add_img.setVisibility(View.GONE);
+				noScrollgridview.setVisibility(View.VISIBLE);
+				titleMsg = lease_add_title.getText().toString().trim();
+				desMsg = lease_add_des.getText().toString().trim();
+				new PopupWindows(AddNewToysLeaseActivity.this, noScrollgridview);
+			}
+		});
+		
+		lease_add_zu.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				toysType = "1";
+				lease_add_zujin_hint.setText("日收租金：");
+				lease_add_yajin_hint.setText("最高损赔：");
+				lease_add_zujin.setHint("如：3");
+				lease_add_yajin.setHint("如：100");
+				lease_add_compant.setText("元/天");
+				lease_add_zu.setBackgroundResource(R.drawable.sel_bt);
+				lease_add_mai.setBackgroundResource(R.drawable.sel_bt_no);
+			}
+		});
+		
+		lease_add_mai.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				toysType = "0";
+				lease_add_zujin_hint.setText("出售价格：");
+				lease_add_yajin_hint.setText("市场价格：");
+				lease_add_zujin.setHint("如：200");
+				lease_add_yajin.setHint("如：400");
+				lease_add_compant.setText("元");
+				lease_add_zu.setBackgroundResource(R.drawable.sel_bt_no);
+				lease_add_mai.setBackgroundResource(R.drawable.sel_bt);
+			}
+		});
+		
+
+		lease_add_need.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				needSupport = "1";
+				lease_detail_support.setVisibility(View.VISIBLE);
+				lease_add_no_need.setBackgroundResource(R.drawable.sel_bt_no);
+				lease_add_need.setBackgroundResource(R.drawable.sel_bt);
+			}
+		});
+		
+
+		lease_add_no_need.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				needSupport = "0";
+				lease_detail_support.setVisibility(View.GONE);
+				lease_add_no_need.setBackgroundResource(R.drawable.sel_bt);
+				lease_add_need.setBackgroundResource(R.drawable.sel_bt_no);
+			}
+		});
+	}
+	
+	/**
+	 * 获取豌豆苗支持详情
+	 * */
+	private void initSupportText(){
+		
+		if(!sp.getString("content", "").isEmpty()){
+			try {
+				lease_detail_from.setText(new JSONObject(sp.getString("content", "")).getJSONObject("data").getString("support_name"));
+				lease_detail_support_text.setText(new JSONObject(sp.getString("content", "")).getJSONObject("data").getString("support_des"));
+				lease_add_support_hint.setText(new JSONObject(sp.getString("content", "")).getJSONObject("data").getString("service_title"));
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		final AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(AddNewToysLeaseActivity.this).uid);
+		ab.get(ServerMutualConfig.GET_SUPPORT_TEXT + "&" + params.toString(),new AbStringHttpResponseListener() {
+			@Override
+			public void onSuccess(int statusCode, String content) {
+				super.onSuccess(statusCode, content);
+				try {
+					if(!content.isEmpty() && new JSONObject(content).getBoolean("success")){
+						ed.clear();
+						ed.commit();
+						ed.putString("content", content);
+						ed.commit();
+						lease_detail_from.setText(new JSONObject(content).getJSONObject("data").getString("support_name"));
+						lease_detail_support_text.setText(new JSONObject(content).getJSONObject("data").getString("support_des"));
+						lease_add_support_hint.setText(new JSONObject(content).getJSONObject("data").getString("service_title"));
+					}else{
+						Toast.makeText(AddNewToysLeaseActivity.this, new JSONObject(content).getString("reMsg"), 2).show();
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			@Override
+			public void onFinish() {
+				super.onFinish();
+			}
+			
+			@Override
+			public void onFailure(int statusCode, String content,
+					Throwable error) {
+				super.onFailure(statusCode, content, error);
+			}
+		});
+	}
+	
+	/**
+	 * 发布新玩具
+	 * */
+	private void submitNewToys(){
+		Config.showProgressDialog(AddNewToysLeaseActivity.this, false, null);
+		final AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(AddNewToysLeaseActivity.this).uid);
+		params.put("business_title", lease_add_title.getText().toString().trim());
+		params.put("business_des", lease_add_des.getText().toString().trim());
+		params.put("way", toysType);
+		params.put("is_support", needSupport);
+		params.put("market_price", lease_add_yajin.getText().toString().trim());
+		params.put("sell_price", lease_add_zujin.getText().toString().trim());
+		params.put("business_contact", lease_add_phone.getText().toString().trim());
+		params.put("qq", lease_add_qq.getText().toString().trim());
+		params.put("business_location", lease_add_dizhi.getText().toString().trim());
+		params.put("age", lease_add_age.getText().toString().trim());
+		params.put("addtext", lease_add_addtext.getText().toString().trim());
+		
+		File mFile = null;
+		if (BimpUtil.drr.size() > 0) {
+			for (int i = 0; i < BimpUtil.drr.size(); i++) {
+				if (!BimpUtil.drr.get(i).startsWith("http")) {
+					if (BimpUtil.drr.size() == 1) {
+						mFile = BitmapCache.getimageyang(BimpUtil.drr.get(i), "img_" + i + ".jpg", "dan");
+					} else {
+						mFile = BitmapCache.getimageyang(BimpUtil.drr.get(i), "img_" + i + ".jpg", "duo");
+					}
+					params.put("img" + (i + 1), mFile);
+				}
+			}
+		}
+		
+		ab.post(ServerMutualConfig.ADD_TOYS, params,new AbStringHttpResponseListener() {
+			@Override
+			public void onSuccess(int statusCode, String content) {
+				super.onSuccess(statusCode, content);
+				Config.dismissProgress();
+				try {
+					if(!content.isEmpty() && new JSONObject(content).getBoolean("success")){
+						AddNewToysLeaseActivity.this.finish();
+					}else{
+						Toast.makeText(AddNewToysLeaseActivity.this, new JSONObject(content).getString("reMsg"), 2).show();
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			@Override
+			public void onFinish() {
+				super.onFinish();
+				Config.dismissProgress();
+			}
+			
+			@Override
+			public void onFailure(int statusCode, String content,
+					Throwable error) {
+				super.onFailure(statusCode, content, error);
+			}
+		});
+	}
+	
+	public class PopupWindows extends PopupWindow {
+		public PopupWindows(Context mContext, View parent) {
+			Button album, Photo, camera, cancel;
+			View view = View.inflate(mContext, R.layout.item_popupwindows, null);
+			view.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.fade_in));
+			LinearLayout ll_popup = (LinearLayout) view.findViewById(R.id.ll_popup);
+			ll_popup.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.push_bottom_in_1));
+			setWidth(LayoutParams.FILL_PARENT);
+			setHeight(LayoutParams.FILL_PARENT);
+			setBackgroundDrawable(new BitmapDrawable());
+			setFocusable(true);
+			setOutsideTouchable(true);
+			setContentView(view);
+			showAtLocation(parent, Gravity.BOTTOM, 0, 0);
+			update();
+			camera = (Button) view.findViewById(R.id.item_popupwindows_camera);
+			Photo = (Button) view.findViewById(R.id.item_popupwindows_Photo);
+			cancel = (Button) view.findViewById(R.id.item_popupwindows_cancel);
+			album = (Button) view.findViewById(R.id.item_popupwindows_album);
+			/**
+			 * 拍摄一张
+			 */
+			camera.setOnClickListener(new OnClickListener() {
+				public void onClick(View v) {
+					photo();
+					dismiss();
+				}
+			});
+			/**
+			 * 从手机相册里选
+			 */
+			Photo.setOnClickListener(new OnClickListener() {
+				public void onClick(View v) {
+					Intent intent = new Intent(AddNewToysLeaseActivity.this, PhoneAlbumActivity.class);
+					intent.putExtra("tag", AddNewToysLeaseActivity_TAG);
+					intent.putExtra(Config.SELECTNAME, 6);
+					startActivity(intent);
+					dismiss();
+				}
+			});
+			/**
+			 * 取消
+			 */
+			cancel.setOnClickListener(new OnClickListener() {
+				public void onClick(View v) {
+					if(BimpUtil.drr.size() == 0){
+						lease_add_img.setVisibility(View.VISIBLE);
+						noScrollgridview.setVisibility(View.GONE);
+					}
+					dismiss();
+				}
+			});
+			/**
+			 * 从秀秀相册里选
+			 */
+			album.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View arg0) {
+					Intent intent = new Intent(AddNewToysLeaseActivity.this,
+							PhotoManager.class);
+					intent.putExtra("isAlbum", "isAlbum");
+					intent.putExtra("tag", AddNewToysLeaseActivity_TAG);
+					Config.SELECTEDIMAGECOUNT = 6;
+					startActivity(intent);
+					dismiss();
+				}
+			});
+		}
+	}
+	
+	
+	public void photo() {
+		Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		imgNum++;
+		path = "temp_image_" + imgNum + ".jpg";
+		Uri imageUri = Uri.parse("file:///sdcard/yyqq/babyshow/image/" + path);
+		i.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, imageUri);
+		startActivityForResult(i, TAKE_PICTURE);
+	}
+	
+	// @SuppressLint("HandlerLeak")
+		public class GridAdapter extends BaseAdapter {
+			private LayoutInflater inflater; // 视图容器
+			private int selectedPosition = -1;// 选中的位置
+			private boolean shape;
+
+			public boolean isShape() {
+				return shape;
+			}
+
+			public void setShape(boolean shape) {
+				this.shape = shape;
+			}
+
+			public GridAdapter(Context context) {
+				inflater = LayoutInflater.from(context);
+			}
+
+			public void update() {
+				loading();
+			}
+
+			public int getCount() {
+				return (BimpUtil.drr.size() + 1);
+			}
+
+			public Object getItem(int arg0) {
+				return null;
+			}
+
+			public long getItemId(int arg0) {
+				return 0;
+			}
+
+			public void setSelectedPosition(int position) {
+				selectedPosition = position;
+			}
+
+			public int getSelectedPosition() {
+				return selectedPosition;
+			}
+
+			/**
+			 * ListView Item设置
+			 */
+			public View getView(int position, View convertView, ViewGroup parent) {
+				noScrollgridview.setVisibility(View.VISIBLE);
+				final int coord = position;
+				ViewHolder holder = null;
+				if (convertView == null) {
+					convertView = inflater.inflate(R.layout.item_published_grida,parent, false);
+					holder = new ViewHolder();
+					holder.image = (ImageView) convertView.findViewById(R.id.item_grida_image);
+					convertView.setTag(holder);
+				} else {
+					holder = (ViewHolder) convertView.getTag();
+				}
+				if (position == 0) {
+					holder.image.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.lease_add_clickimg));
+				} else {
+					if (BimpUtil.drr.get(position - 1).startsWith("http")) {
+						MyApplication.getInstance().display(BimpUtil.drr.get(position - 1), holder.image, R.drawable.def_image);
+					} else {
+						String path = BimpUtil.drr.get(position - 1);
+						try {
+							Bitmap bm = BitmapCache.revitionImageSize(null, path);
+							holder.image.setImageBitmap(bm);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+				return convertView;
+			}
+
+			public class ViewHolder {
+				public ImageView image;
+			}
+
+			Handler handler = new Handler() {
+				public void handleMessage(Message msg) {
+					switch (msg.what) {
+					case 1:
+						adapter.notifyDataSetChanged();
+						break;
+					}
+					super.handleMessage(msg);
+				}
+			};
+
+			public void loading() {
+				new Thread(new Runnable() {
+					public void run() {
+						while (true) {
+							if (BimpUtil.max == BimpUtil.drr.size()) {
+								Message message = new Message();
+								message.what = 1;
+								handler.sendMessage(message);
+								break;
+							} else {
+								try {
+									String path = BimpUtil.drr.get(BimpUtil.max);
+									Bitmap bm = BitmapCache.revitionImageSize(null, path);
+									BimpUtil.bmp.add(bm);
+									String newStr = path.substring(path.lastIndexOf("/") + 1, path.lastIndexOf("."));
+									FileUtils.saveBitmap(bm, "" + newStr);
+									BimpUtil.max += 1;
+									Message message = new Message();
+									message.what = 1;
+									handler.sendMessage(message);
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+							}
+						}
+					}
+				}).start();
+			}
+		}
+		
+		
+		@SuppressLint("NewApi")
+		protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+			switch (requestCode) {
+			case TAKE_PICTURE:
+				Intent intent2 = new Intent();
+				intent2.setClass(AddNewToysLeaseActivity.this, CropImage.class);
+				intent2.putExtra("tag", AddNewToysLeaseActivity_TAG);
+				intent2.putExtra("path", Config.ImageFile + path);
+				startActivityForResult(intent2, IMAGE_CROP_RETURN);
+				break;
+			}
+		}
+
+}

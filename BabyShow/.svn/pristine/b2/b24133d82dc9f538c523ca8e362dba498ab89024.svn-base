@@ -1,0 +1,1736 @@
+package com.yyqq.code.main;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
+import android.view.animation.TranslateAnimation;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+import cn.sharesdk.framework.ShareSDK;
+
+import com.ab.http.AbHttpUtil;
+import com.ab.http.AbRequestParams;
+import com.ab.http.AbStringHttpResponseListener;
+import com.umeng.analytics.MobclickAgent;
+import com.yyqq.babyshow.R;
+import com.yyqq.code.business.BusinessDetailActivity;
+import com.yyqq.code.buy.BuyActivity;
+import com.yyqq.code.photo.ChangePhotoSize;
+import com.yyqq.code.postbar.PostBarActivity;
+import com.yyqq.code.video.VideoDetialActivity;
+import com.yyqq.commen.adapter.MainFollowListAdapter;
+import com.yyqq.commen.adapter.MainGoodleftHintAdapter;
+import com.yyqq.commen.adapter.MainImageListApapter;
+import com.yyqq.commen.adapter.MainInfoListAdapter;
+import com.yyqq.commen.model.HeadListItem;
+import com.yyqq.commen.model.MainListItemBean;
+import com.yyqq.commen.model.PictureItem;
+import com.yyqq.commen.model.PostBarTypeItem;
+import com.yyqq.commen.model.SearchItem;
+import com.yyqq.commen.utils.APKUpdataUtils;
+import com.yyqq.commen.utils.Config;
+import com.yyqq.commen.utils.GPSLocationUtils;
+import com.yyqq.commen.utils.GroupRelevantUtils;
+import com.yyqq.commen.utils.RoundAngleImageView;
+import com.yyqq.commen.utils.UGallery;
+import com.yyqq.commen.utils.WebViewActivity;
+import com.yyqq.commen.view.MainPopWindowsView;
+import com.yyqq.commen.view.MyGridView;
+import com.yyqq.commen.view.PullDownView;
+import com.yyqq.commen.view.PullDownView.OnPullDownListener;
+import com.yyqq.commen.view.RoundRectImageView;
+import com.yyqq.framework.activity.BaseActivity;
+import com.yyqq.framework.application.Constants;
+import com.yyqq.framework.application.MyApplication;
+import com.yyqq.framework.application.ServerMutualConfig;
+
+public class GoodLife extends BaseActivity implements OnPullDownListener {
+
+	// 将页面锁定为“最新”
+	public static Boolean TO_NEWEST = false;
+	// 将页面锁定为“热门”
+	public static Boolean TO_HONT = false;
+	// 将页面锁定为“关注”
+	public static Boolean TO_FOLLOW = false;
+
+	private ListView listview;
+	private UGallery mGallery;
+	private ImageView[] myPoints;
+	private LinearLayout mGroup;
+	private ImageView mPointImg;
+	private ImageView search;
+//	private ImageView main_add_xiuxiu;
+	private RelativeLayout search_root;
+	private LinearLayout main_kind_fist;
+	private RelativeLayout title, ly_title;
+	private PullDownView mPullDownView;
+	private RelativeLayout mRelativeLayout;
+	private RelativeLayout search_btn;
+	private ImageView search_cancle, find;
+	private LinearLayout type1, type2, type3, type4, type5;
+	private LinearLayout main_type1, main_type2, main_type3, main_type4, main_type5;
+	private RelativeLayout main_page;
+	private ImageView search_hint;
+	private LinearLayout main_item_newest; // 最新
+	private LinearLayout main_item_hot; // 热门
+	private LinearLayout main_item_follow; // 关注
+	private LinearLayout main_gone_hint;
+	private LinearLayout main_gone_item_newest; // 最新
+	private LinearLayout main_gone_item_hot; // 热门
+	private LinearLayout main_gone_item_follow; // 关注
+	private ImageView main_item_newest_point;
+	private ImageView main_item_hot_point;
+	private ImageView main_item_follow_point;
+	private ImageView main_gone_item_newest_point;
+	private ImageView main_gone_item_hot_point;
+	private ImageView main_gone_item_follow_point;
+	private ImageView main_item_newest_img;
+	private ImageView main_item_hot_img;
+	private ImageView main_item_follow_img;
+	private ImageView main_gone_item_newest_img;
+	private ImageView main_gone_item_hot_img;
+	private ImageView main_gone_item_follow_img;
+	private LinearLayout main_top_from;
+	private LinearLayout main_top_01;
+	private LinearLayout main_top_02;
+	private RoundAngleImageView main_top_img_01;
+	private RoundAngleImageView main_top_img_02;
+	private TextView main_top_title_01;
+	private TextView main_top_des_01;
+	private TextView main_top_title_02;
+	private TextView main_top_des_02;
+	private TextView main_top_more;
+
+	private AbHttpUtil ab;
+	private Activity context;
+	private int dataIndex = 0;
+	private MyApplication app;
+	private JSONArray data_json;
+	private LayoutInflater inflater;
+	private MainInfoListAdapter adapter;
+	private MainInfoListAdapter hotAdapter;
+	private MainFollowListAdapter followAdapter;
+	private MainImageListApapter mImageAdapter;
+	private ArrayList<MainListItemBean> data02 = new ArrayList<MainListItemBean>();
+	private ArrayList<MainListItemBean> data = new ArrayList<MainListItemBean>();
+	private ArrayList<MainListItemBean> hotData = new ArrayList<MainListItemBean>();
+	private ArrayList<PictureItem> followData = new ArrayList<PictureItem>();
+	private ArrayList<HeadListItem> headData = new ArrayList<HeadListItem>();
+	private ArrayList<SearchItem> searchData = new ArrayList<SearchItem>();
+
+	private int windowWidth;
+	private int windowHeight;
+	public int ADD_POINT = -1;
+	public static String SearchWord = "";
+	public static int sss; // s=0,表示搜索布局在
+//	private String fileName = "SpecialFragment.txt";
+	private int downIndex = 200;
+	private Timer videoTimer = new Timer();
+	private int number = 1000;
+	private int USER_CLICK_INDEX = -1;
+	private int showIndex = 0;
+
+	private boolean isFirse01 = true;
+	private boolean isFirse02 = true;
+	private boolean isFirse03 = true;
+
+	private boolean init01Data = false;
+	private boolean init02Data = false;
+	private boolean init03Data = false;
+	
+	// 推荐页相关
+	private RoundRectImageView main_goodleft_img;
+	private RelativeLayout main_hint_page;
+	private MyGridView main_goodleft_list;
+	private MainGoodleftHintAdapter hintAdapter = null;
+	private ArrayList<HeadListItem> hintList = new ArrayList<HeadListItem>();
+	private TextView main_goodleft_hint;
+	private RelativeLayout search_show_hint;
+	private int index = 0;
+	private HeadListItem hintBean01 = null;
+	
+	private SharedPreferences sp_main_list;
+	private Editor ed_main_list;
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		return Config.onKeyDown(keyCode, event, this);
+	}
+
+	public void onCreate(Bundle b) {
+		super.onCreate(b);
+		context = this;
+		inflater = LayoutInflater.from(context);
+		Config.setActivityState(this);
+		setContentView(R.layout.goodlife);
+	}
+
+	@Override
+	protected void initView() {
+		
+		DisplayMetrics DM = new DisplayMetrics();
+		context.getWindowManager().getDefaultDisplay().getMetrics(DM);
+		windowWidth = DM.widthPixels;
+		windowHeight = DM.heightPixels;
+		
+		initHeadbar();
+		
+		search_show_hint = (RelativeLayout) findViewById(R.id.search_show_hint);
+		main_goodleft_img = (RoundRectImageView) findViewById(R.id.main_goodleft_img);
+		main_hint_page = (RelativeLayout) findViewById(R.id.main_hint_page);
+		main_goodleft_list = (MyGridView) findViewById(R.id.main_goodleft_list);
+		main_goodleft_hint = (TextView) findViewById(R.id.main_goodleft_hint);
+		if(null == hintAdapter){
+			
+			// 计算推荐页面头部大图高度
+			RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) main_goodleft_img.getLayoutParams();
+			params.height = (windowHeight / 5) + 10;
+			main_goodleft_img.setLayoutParams(params);
+			
+			hintAdapter = new MainGoodleftHintAdapter(context, hintList, (windowHeight / 7) + 10, windowWidth);
+		}
+		main_goodleft_list.setAdapter(hintAdapter);
+		
+		main_gone_item_newest_point = (ImageView) findViewById(R.id.main_gone_item_newest_point);
+		main_gone_item_hot_point = (ImageView) findViewById(R.id.main_gone_item_hot_point);
+		main_gone_item_follow_point = (ImageView) findViewById(R.id.main_gone_item_follow_point);
+		main_gone_item_newest_img = (ImageView) findViewById(R.id.main_gone_item_newest_img);
+		main_gone_item_hot_img = (ImageView) findViewById(R.id.main_gone_item_hot_img);
+		main_gone_item_follow_img = (ImageView) findViewById(R.id.main_gone_item_follow_img);
+		main_gone_item_newest = (LinearLayout) findViewById(R.id.main_gone_item_newest);
+		main_gone_item_hot = (LinearLayout) findViewById(R.id.main_gone_item_hot);
+		main_gone_item_follow = (LinearLayout) findViewById(R.id.main_gone_item_follow);
+		main_gone_hint = (LinearLayout) findViewById(R.id.main_gone_hint);
+//		main_add_xiuxiu = (ImageView) findViewById(R.id.main_add_xiuxiu);
+		main_type1 = (LinearLayout) findViewById(R.id.main_type1);
+		main_type2 = (LinearLayout) findViewById(R.id.main_type2);
+		main_type3 = (LinearLayout) findViewById(R.id.main_type3);
+		main_type4 = (LinearLayout) findViewById(R.id.main_type4);
+		main_type5 = (LinearLayout) findViewById(R.id.main_type5);
+		main_kind_fist = (LinearLayout) findViewById(R.id.main_kind_fist);
+		ly_title = (RelativeLayout) findViewById(R.id.ly_title);
+		search_root = (RelativeLayout) findViewById(R.id.search_root);
+		title = (RelativeLayout) findViewById(R.id.title);
+		find = (ImageView) findViewById(R.id.find);
+		search_cancle = (ImageView) findViewById(R.id.search_cancle);
+		search = (ImageView) findViewById(R.id.search);
+		mPullDownView = (PullDownView) findViewById(R.id.list);
+		search_hint = (ImageView) findViewById(R.id.search_hint);
+		mPullDownView.setOnPullDownListener(this);
+		mPullDownView.setShowHeader();// 显示并且可以使用头部刷新
+		search_btn = (RelativeLayout) findViewById(R.id.search_btn);
+		main_item_newest_img.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.main_item_newest_down));
+		main_gone_item_newest_img.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.main_item_newest_down));
+		main_item_hot_img.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.main_item_hot));
+		main_gone_item_hot_img.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.main_item_hot));
+		main_item_follow_img.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.main_item_follow));
+		main_gone_item_follow_img.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.main_item_follow));
+	}
+
+	@SuppressLint("NewApi")
+	@Override
+	protected void initData() {
+
+		// 初始化缓存
+		sp_main_list = getSharedPreferences("goodlist_main_list", Context.MODE_PRIVATE);
+		ed_main_list = sp_main_list.edit();
+		
+		// 清除下载的安装包
+		File file = new File("/sdcard/" + "宝贝半径.apk");
+		if(null != file){
+			file.delete();
+		}
+		
+		// 检查是否需要更新版本
+		APKUpdataUtils.checkUpdata(context);
+		
+		ShareSDK.initSDK(context);
+		app = (MyApplication) context.getApplication();
+		ab = AbHttpUtil.getInstance(context);
+		DisplayMetrics DM = new DisplayMetrics();
+		listview = mPullDownView.getListView();
+		listview.setDivider(null);
+
+		if (adapter == null) {
+			adapter = new MainInfoListAdapter(GoodLife.this, data);
+		}
+
+		if (hotAdapter == null) {
+			hotAdapter = new MainInfoListAdapter(GoodLife.this, hotData);
+		}
+
+		if (followAdapter == null) {
+			followAdapter = new MainFollowListAdapter(GoodLife.this, followData, ab);
+		}
+
+		listview.setAdapter(adapter);
+		mPullDownView.enableAutoFetchMore(true, 1);// 设置可以自动获取更多 滑到最后一个自动获取
+		mPullDownView.setShowHeaderLayout(mRelativeLayout);
+		
+		getWechatApiKey(ab);
+		
+//		// 网络良好
+//		if(Config.isConn(context)){
+			onRefresh();
+//		}else{
+//			// 获取主列表缓存
+//			if(!sp_main_list.getString("goodlist_main_list", "").isEmpty()){
+//				getlistData(sp_main_list.getString("goodlist_main_list", ""));
+//			}
+//			
+//			// 入口页缓存
+//			getHintListData();
+//		}
+	}
+
+	@Override
+	protected void setListener() {
+		
+		search_show_hint.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				showHindView();
+			}
+		});
+		
+		main_goodleft_hint.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(main_hint_page.isShown()){
+					HindView();
+				}
+			}
+		});
+		
+		main_goodleft_hint.setOnTouchListener(new OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if(main_hint_page.isShown()){
+					HindView();
+				}
+				return true;
+			}
+		});
+		
+		main_hint_page.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				HindView();
+			}
+		});
+
+		main_item_newest.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				main_item_newest_img.setImageBitmap(BitmapFactory
+						.decodeResource(getResources(),
+								R.drawable.main_item_newest_down));
+				main_gone_item_newest_img.setImageBitmap(BitmapFactory
+						.decodeResource(getResources(),
+								R.drawable.main_item_newest_down));
+				main_item_hot_img.setImageBitmap(BitmapFactory.decodeResource(
+						getResources(), R.drawable.main_item_hot));
+				main_gone_item_hot_img.setImageBitmap(BitmapFactory
+						.decodeResource(getResources(),
+								R.drawable.main_item_hot));
+				main_item_follow_img.setImageBitmap(BitmapFactory
+						.decodeResource(getResources(),
+								R.drawable.main_item_follow));
+				main_gone_item_follow_img.setImageBitmap(BitmapFactory
+						.decodeResource(getResources(),
+								R.drawable.main_item_follow));
+				main_item_newest_point.setVisibility(View.VISIBLE);
+				main_item_hot_point.setVisibility(View.INVISIBLE);
+				main_item_follow_point.setVisibility(View.INVISIBLE);
+				main_gone_item_newest_point.setVisibility(View.VISIBLE);
+				main_gone_item_hot_point.setVisibility(View.INVISIBLE);
+				main_gone_item_follow_point.setVisibility(View.INVISIBLE);
+				USER_CLICK_INDEX = 0;
+				// if(data.size() != 0){
+				// }
+				listview.setAdapter(adapter);
+				isFirse01 = true;
+				main_top_from.setVisibility(View.VISIBLE);
+				initNewestData("");
+			}
+		});
+
+		main_gone_item_newest.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				main_item_newest_img.setImageBitmap(BitmapFactory
+						.decodeResource(getResources(),
+								R.drawable.main_item_newest_down));
+				main_gone_item_newest_img.setImageBitmap(BitmapFactory
+						.decodeResource(getResources(),
+								R.drawable.main_item_newest_down));
+				main_item_hot_img.setImageBitmap(BitmapFactory.decodeResource(
+						getResources(), R.drawable.main_item_hot));
+				main_gone_item_hot_img.setImageBitmap(BitmapFactory
+						.decodeResource(getResources(),
+								R.drawable.main_item_hot));
+				main_item_follow_img.setImageBitmap(BitmapFactory
+						.decodeResource(getResources(),
+								R.drawable.main_item_follow));
+				main_gone_item_follow_img.setImageBitmap(BitmapFactory
+						.decodeResource(getResources(),
+								R.drawable.main_item_follow));
+				main_item_newest_point.setVisibility(View.VISIBLE);
+				main_item_hot_point.setVisibility(View.INVISIBLE);
+				main_item_follow_point.setVisibility(View.INVISIBLE);
+				main_gone_item_newest_point.setVisibility(View.VISIBLE);
+				main_gone_item_hot_point.setVisibility(View.INVISIBLE);
+				main_gone_item_follow_point.setVisibility(View.INVISIBLE);
+				USER_CLICK_INDEX = 0;
+				// if(data.size() != 0){
+				// }
+				listview.setAdapter(adapter);
+				isFirse01 = true;
+				main_top_from.setVisibility(View.VISIBLE);
+				initNewestData("");
+			}
+		});
+
+		main_item_hot.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				main_item_newest_img.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.main_item_newest));
+				main_gone_item_newest_img.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.main_item_newest));
+				main_item_hot_img.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.main_item_hot_down));
+				main_gone_item_hot_img.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.main_item_hot_down));
+				main_item_follow_img.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.main_item_follow));
+				main_gone_item_follow_img.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.main_item_follow));
+				main_item_newest_point.setVisibility(View.INVISIBLE);
+				main_item_hot_point.setVisibility(View.VISIBLE);
+				main_item_follow_point.setVisibility(View.INVISIBLE);
+				main_gone_item_newest_point.setVisibility(View.INVISIBLE);
+				main_gone_item_hot_point.setVisibility(View.VISIBLE);
+				main_gone_item_follow_point.setVisibility(View.INVISIBLE);
+				USER_CLICK_INDEX = 1;
+				listview.setAdapter(hotAdapter);
+				isFirse02 = true;
+				main_top_from.setVisibility(View.GONE);
+				initHotData("");
+			}
+		});
+
+		main_gone_item_hot.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				main_item_newest_img.setImageBitmap(BitmapFactory
+						.decodeResource(getResources(),
+								R.drawable.main_item_newest));
+				main_gone_item_newest_img.setImageBitmap(BitmapFactory
+						.decodeResource(getResources(),
+								R.drawable.main_item_newest));
+				main_item_hot_img.setImageBitmap(BitmapFactory.decodeResource(
+						getResources(), R.drawable.main_item_hot_down));
+				main_gone_item_hot_img.setImageBitmap(BitmapFactory
+						.decodeResource(getResources(),
+								R.drawable.main_item_hot_down));
+				main_item_follow_img.setImageBitmap(BitmapFactory
+						.decodeResource(getResources(),
+								R.drawable.main_item_follow));
+				main_gone_item_follow_img.setImageBitmap(BitmapFactory
+						.decodeResource(getResources(),
+								R.drawable.main_item_follow));
+				main_item_newest_point.setVisibility(View.INVISIBLE);
+				main_item_hot_point.setVisibility(View.VISIBLE);
+				main_item_follow_point.setVisibility(View.INVISIBLE);
+				main_gone_item_newest_point.setVisibility(View.INVISIBLE);
+				main_gone_item_hot_point.setVisibility(View.VISIBLE);
+				main_gone_item_follow_point.setVisibility(View.INVISIBLE);
+				USER_CLICK_INDEX = 1;
+				// if(hotData.size() != 0){
+				// }
+				listview.setAdapter(hotAdapter);
+				isFirse02 = true;
+				main_top_from.setVisibility(View.GONE);
+				initHotData("");
+			}
+		});
+
+		main_item_follow.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				main_item_newest_img.setImageBitmap(BitmapFactory
+						.decodeResource(getResources(),
+								R.drawable.main_item_newest));
+				main_gone_item_newest_img.setImageBitmap(BitmapFactory
+						.decodeResource(getResources(),
+								R.drawable.main_item_newest));
+				main_item_hot_img.setImageBitmap(BitmapFactory.decodeResource(
+						getResources(), R.drawable.main_item_hot));
+				main_gone_item_hot_img.setImageBitmap(BitmapFactory
+						.decodeResource(getResources(),
+								R.drawable.main_item_hot));
+				main_item_follow_img.setImageBitmap(BitmapFactory
+						.decodeResource(getResources(),
+								R.drawable.main_item_follow_down));
+				main_gone_item_follow_img.setImageBitmap(BitmapFactory
+						.decodeResource(getResources(),
+								R.drawable.main_item_follow_down));
+				main_item_newest_point.setVisibility(View.INVISIBLE);
+				main_item_hot_point.setVisibility(View.INVISIBLE);
+				main_item_follow_point.setVisibility(View.VISIBLE);
+				main_gone_item_newest_point.setVisibility(View.INVISIBLE);
+				main_gone_item_hot_point.setVisibility(View.INVISIBLE);
+				main_gone_item_follow_point.setVisibility(View.VISIBLE);
+				USER_CLICK_INDEX = 2;
+				// if(followData.size() != 0){
+				// }
+				listview.setAdapter(followAdapter);
+				isFirse03 = true;
+				main_top_from.setVisibility(View.GONE);
+				initFollowData("");
+			}
+		});
+
+		main_gone_item_follow.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				main_item_newest_img.setImageBitmap(BitmapFactory
+						.decodeResource(getResources(),
+								R.drawable.main_item_newest));
+				main_gone_item_newest_img.setImageBitmap(BitmapFactory
+						.decodeResource(getResources(),
+								R.drawable.main_item_newest));
+				main_item_hot_img.setImageBitmap(BitmapFactory.decodeResource(
+						getResources(), R.drawable.main_item_hot));
+				main_gone_item_hot_img.setImageBitmap(BitmapFactory
+						.decodeResource(getResources(),
+								R.drawable.main_item_hot));
+				main_item_follow_img.setImageBitmap(BitmapFactory
+						.decodeResource(getResources(),
+								R.drawable.main_item_follow_down));
+				main_gone_item_follow_img.setImageBitmap(BitmapFactory
+						.decodeResource(getResources(),
+								R.drawable.main_item_follow_down));
+				main_item_newest_point.setVisibility(View.INVISIBLE);
+				main_item_hot_point.setVisibility(View.INVISIBLE);
+				main_item_follow_point.setVisibility(View.VISIBLE);
+				main_gone_item_newest_point.setVisibility(View.INVISIBLE);
+				main_gone_item_hot_point.setVisibility(View.INVISIBLE);
+				main_gone_item_follow_point.setVisibility(View.VISIBLE);
+				USER_CLICK_INDEX = 2;
+				// if(followData.size() != 0){
+				// }
+				listview.setAdapter(followAdapter);
+				isFirse03 = true;
+				main_top_from.setVisibility(View.GONE);
+				initFollowData("");
+			}
+		});
+
+		search_root.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				GoodLife.this.startActivity(new Intent(GoodLife.this,
+						SearchResultActivity.class));
+			}
+		});
+
+		listview.setOnScrollListener(new OnScrollListener() {
+
+			@Override
+			public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+			}
+
+			@Override
+			public void onScroll(AbsListView view, int firstVisibleItem,
+					int visibleItemCount, int totalItemCount) {
+				if (getScrollY() >= 10 && getScrollY() < 120) {
+					search_btn.setVisibility(View.GONE);
+					search_show_hint.setVisibility(View.GONE);
+					float scale = (float) getScrollY() / downIndex;
+					float alpha = (255 * scale);
+					search_root.setBackgroundColor(Color.argb((int) alpha, 255,
+							201, 201));
+					search_hint.setVisibility(View.GONE);
+					search.setVisibility(View.GONE);
+					search_root.setVisibility(View.VISIBLE);
+					main_gone_hint.setVisibility(View.GONE);
+				} else if (getScrollY() >= 120 && getScrollY() < downIndex) {
+					search_btn.setVisibility(View.GONE);
+					search_show_hint.setVisibility(View.GONE);
+					float scale = (float) getScrollY() / downIndex;
+					float alpha = (255 * scale);
+					search_root.setBackgroundColor(Color.argb((int) alpha, 255,
+							166, 166));
+					search_hint.setVisibility(View.GONE);
+					search.setVisibility(View.GONE);
+					main_gone_hint.setVisibility(View.GONE);
+					search_root.setVisibility(View.VISIBLE);
+				} else if (getScrollY() > downIndex && !search_hint.isShown()) {
+					main_gone_hint.setVisibility(View.VISIBLE);
+					search_btn.setVisibility(View.GONE);
+					search_show_hint.setVisibility(View.GONE);
+					search_root.setVisibility(View.VISIBLE);
+					float scale = (float) getScrollY() / downIndex;
+					float alpha = (255 * scale);
+					search_root.setBackgroundColor(Color.argb((int) 255, 255,
+							103, 103));
+					search_root.setVisibility(View.VISIBLE);
+					TranslateAnimation animation = new TranslateAnimation(800, 0, 0, 0);
+					animation.setDuration(300);
+					search_hint.setVisibility(View.VISIBLE);
+					search.setVisibility(View.VISIBLE);
+					search_hint.startAnimation(animation);
+					search.startAnimation(animation);
+				} else if (downIndex > getScrollY() && search_root.isShown()) {
+					main_gone_hint.setVisibility(View.GONE);
+					search_btn.setVisibility(View.VISIBLE);
+					search_show_hint.setVisibility(View.VISIBLE);
+					TranslateAnimation animation = new TranslateAnimation(0,800, 0, 0);
+					animation.setDuration(300);
+					search_root.startAnimation(animation);
+					search_root.setVisibility(View.GONE);
+				}
+			}
+		});
+
+//		// 发布秀秀or话题
+//		main_add_xiuxiu.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				if ("1".equals(app.getVisitor())) {
+//					app.setVisitor("");
+//					Intent intent = new Intent();
+//					intent.setClass(context, WebLoginActivity.class);
+//					startActivity(intent);
+//				} else {
+//					MainTab.showAddDialog();
+//				}
+//
+//			}
+//		});
+
+		// 秀秀
+		type1.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent();
+				intent.setClass(context, ShowShowMainActivity.class);
+				startActivity(intent);
+			}
+		});
+
+		main_type1.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent();
+				intent.setClass(context, ShowShowMainActivity.class);
+				startActivity(intent);
+			}
+		});
+
+		// 成长记录
+		type2.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent();
+				intent.setClass(context, MainTab.class);
+				intent.putExtra("tabid", 3);
+				startActivity(intent);
+			}
+		});
+
+		main_type2.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent();
+				intent.setClass(context, MainTab.class);
+				intent.putExtra("tabid", 3);
+				startActivity(intent);
+			}
+		});
+
+		// 热点
+		type3.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent();
+				intent.setClass(context, PostBarActivity.class);
+				startActivity(intent);
+			}
+		});
+
+		main_type3.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent();
+				intent.setClass(context, PostBarActivity.class);
+				startActivity(intent);
+			}
+		});
+
+		// 购物
+		type4.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent();
+				intent.setClass(context, BuyActivity.class);
+				startActivity(intent);
+			}
+		});
+
+		main_type4.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent();
+				intent.setClass(context, BuyActivity.class);
+				startActivity(intent);
+			}
+		});
+
+		// 玩乐
+		type5.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(context, MainTab.class);
+				intent.putExtra("tabid", 1);
+				startActivity(intent);
+			}
+		});
+
+		main_type5.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(context, MainTab.class);
+				intent.putExtra("tabid", 1);
+				startActivity(intent);
+			}
+		});
+		// 搜索
+		find.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				sss = 0;
+				search_root.setVisibility(View.VISIBLE);
+				title.setVisibility(View.GONE);
+			}
+		});
+
+		// 轮播图定时更换
+		videoTimer.schedule(imageTask, 5000, 5000);
+
+		// 秀秀搜索
+		search_btn.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				GoodLife.this.startActivity(new Intent(GoodLife.this,
+						SearchResultActivity.class));
+			}
+		});
+
+		// 轮播图点击事件
+		mGallery.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1,
+					int position, long arg3) {
+				imagesClick(position);
+			}
+		});
+
+		mGallery.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view,
+					int position, long id) {
+				showIndex = position;
+				if (myPoints != null && myPoints.length > 0) {
+					for (int i = 0; i < myPoints.length; i++) {
+						if (position == i) {
+							myPoints[i]
+									.setBackgroundResource(R.drawable.dian_hong);
+						} else {
+							myPoints[i]
+									.setBackgroundResource(R.drawable.dian_hui);
+						}
+					}
+				}
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+
+			}
+		});
+
+	}
+
+	TimerTask imageTask = new TimerTask() {
+
+		@Override
+		public void run() {
+			Message message = new Message();
+			message.what = 0;
+			handler.sendMessage(message);
+		}
+	};
+
+	/**
+	 * 初始化轮播图
+	 * */
+	private void initHeadbar() {
+		mRelativeLayout = (RelativeLayout) inflater.inflate(R.layout.square_head, null);
+		main_top_from = (LinearLayout) mRelativeLayout.findViewById(R.id.main_top_from);
+		main_top_01 = (LinearLayout) mRelativeLayout.findViewById(R.id.main_top_01);
+		main_top_02 = (LinearLayout) mRelativeLayout.findViewById(R.id.main_top_02);
+		main_top_img_01 = (RoundAngleImageView) mRelativeLayout.findViewById(R.id.main_top_img_01);
+		main_top_img_02 = (RoundAngleImageView) mRelativeLayout.findViewById(R.id.main_top_img_02);
+		main_top_title_01 = (TextView) mRelativeLayout.findViewById(R.id.main_top_title_01);
+		main_top_des_01 = (TextView) mRelativeLayout.findViewById(R.id.main_top_des_01);
+		main_top_title_02 = (TextView) mRelativeLayout.findViewById(R.id.main_top_title_02);
+		main_top_des_02 = (TextView) mRelativeLayout.findViewById(R.id.main_top_des_02);
+		main_top_more = (TextView) mRelativeLayout.findViewById(R.id.main_top_more);
+		main_item_newest_point = (ImageView) mRelativeLayout.findViewById(R.id.main_item_newest_point);
+		main_item_hot_point = (ImageView) mRelativeLayout.findViewById(R.id.main_item_hot_point);
+		main_item_follow_point = (ImageView) mRelativeLayout.findViewById(R.id.main_item_follow_point);
+		main_item_newest_img = (ImageView) mRelativeLayout.findViewById(R.id.main_item_newest_img);
+		main_item_hot_img = (ImageView) mRelativeLayout.findViewById(R.id.main_item_hot_img);
+		main_item_follow_img = (ImageView) mRelativeLayout.findViewById(R.id.main_item_follow_img);
+		main_item_newest = (LinearLayout) mRelativeLayout.findViewById(R.id.main_item_newest);
+		main_item_hot = (LinearLayout) mRelativeLayout.findViewById(R.id.main_item_hot);
+		main_item_follow = (LinearLayout) mRelativeLayout.findViewById(R.id.main_item_follow);
+		type1 = (LinearLayout) mRelativeLayout.findViewById(R.id.type1);
+		type2 = (LinearLayout) mRelativeLayout.findViewById(R.id.type2);
+		type3 = (LinearLayout) mRelativeLayout.findViewById(R.id.type3);
+		type4 = (LinearLayout) mRelativeLayout.findViewById(R.id.type4);
+		type5 = (LinearLayout) mRelativeLayout.findViewById(R.id.type5);
+		mGallery = (UGallery) mRelativeLayout.findViewById(R.id.gallery);
+		mGroup = (LinearLayout) mRelativeLayout.findViewById(R.id.viewGroup);
+		mGroup.setGravity(Gravity.CENTER);
+		mImageAdapter = new MainImageListApapter(GoodLife.this, headData, windowWidth);
+		mGallery.setAdapter(mImageAdapter);
+	}
+
+	/**
+	 * 添加小圆点图片
+	 */
+	private void addPoint() {
+		myPoints = new ImageView[headData.size()];
+		for (int i = 0; i < headData.size(); i++) {
+			mPointImg = new ImageView(context);
+			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+					LinearLayout.LayoutParams.WRAP_CONTENT,
+					LinearLayout.LayoutParams.WRAP_CONTENT);
+			params.setMargins(7, 0, 7, 0);
+			mPointImg.setLayoutParams(params);
+			myPoints[i] = mPointImg;
+			if (i == 0) {
+				myPoints[i].setBackgroundResource(R.drawable.dian_hong);
+			} else {
+				myPoints[i].setBackgroundResource(R.drawable.dian_hui);
+			}
+			mGroup.addView(myPoints[i]);
+		}
+	}
+
+	/**
+	 * 获取轮播图地址
+	 * */
+	public void getHeadList() {
+
+		SharedPreferences sp_image_list = context.getSharedPreferences("imageList", 0);
+		if (!Config.isConn(context)) { // 没有网络获取缓存
+			// 保存最新图片地址
+			updateImageView(sp_image_list.getString("imageurl", ""));
+			return;
+		}
+
+		updateImageView(sp_image_list.getString("imageurl", ""));
+		AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(context).uid);
+		params.put("mapsign", GPSLocationUtils.getLatitude(context) + "," + GPSLocationUtils.getLongitude(context));
+		ab.setTimeout(5000);
+		ab.get(ServerMutualConfig.HeadListV7 + "&" + params.toString(),
+				new AbStringHttpResponseListener() {
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						updateImageView(content);
+					}
+
+					@Override
+					public void onFinish() {
+						super.onFinish();
+						mPullDownView.RefreshComplete();// 这个事线程安全的 可看源代码
+						mPullDownView.notifyDidMore();
+					}
+
+					@Override
+					public void onFailure(int statusCode, String content,
+							Throwable error) {
+						super.onFailure(statusCode, content, error);
+					}
+				});
+	}
+
+	/**
+	 * 开一个线程执行耗时操作
+	 */
+	private Handler handler = new Handler() {
+
+		@Override
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			switch (msg.what) {
+			case 2:
+				adapter.notifyDataSetChanged();
+				break;
+			case -1:
+				mGroup.removeAllViews();
+				addPoint();
+				break;
+			case 0:
+				if (headData.size() == showIndex) {
+					showIndex = 0;
+				}
+				mGallery.setSelection(showIndex);
+				showIndex += 1;
+				break;
+			}
+		}
+
+	};
+
+	@Override
+	public void onRefresh() {
+
+		isFirse01 = true;
+		isFirse02 = true;
+		isFirse03 = true;
+		
+		/**
+		 * 初始化轮播图
+		 * */
+		getHeadList();
+
+		/**
+		 * 初始化“最新”数据
+		 * */
+		initNewestData("");
+
+		/**
+		 * 初始化“热门”数据
+		 * */
+		initHotData("");
+
+		/**
+		 * 初始化“关注”数据
+		 * */
+		initFollowData("");
+		
+		/**
+		 * 初始化“入口页”数据
+		 * */
+		getHintListData();
+	}
+
+	@Override
+	public void onMore() {
+		if(Config.isConn(context)){
+			if (data.size() == 0) {
+				mPullDownView.notifyDidMore();
+				mPullDownView.RefreshComplete();
+				return;
+			}
+			
+			if (USER_CLICK_INDEX == 0 || USER_CLICK_INDEX == -1) {
+				initNewestData("");
+			} else if (USER_CLICK_INDEX == 1) {
+				initHotData("");
+			} else {
+				initFollowData("");
+			}
+		}
+	}
+
+	
+	/**
+	 * 获取微信支付Key
+	 * 
+	 * */
+	@SuppressLint("NewApi")
+	public static void getWechatApiKey(AbHttpUtil ab) {
+
+		if (null == ab) {
+			return;
+		}
+
+		if (!Constants.API_KEY.isEmpty()) {
+			return;
+		}
+
+		ab.post(ServerMutualConfig.GET_WECHAT_KEY,
+				new AbStringHttpResponseListener() {
+
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						try {
+							JSONObject jsonObj = new JSONObject(content)
+									.getJSONObject("data");
+							if (jsonObj.has("wx_key")) {
+								if (!jsonObj.getString("wx_key").isEmpty()) {
+									Constants.API_KEY = jsonObj
+											.getString("wx_key");
+								}
+							}
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+
+					@Override
+					public void onFinish() {
+						super.onFinish();
+					}
+
+					@Override
+					public void onFailure(int statusCode, String content,
+							Throwable error) {
+						super.onFailure(statusCode, content, error);
+					}
+				});
+	}
+
+	/**
+	 * 缓存并更新图片数组
+	 * */
+	@SuppressLint("NewApi")
+	private void updateImageView(String content) {
+		if (!content.isEmpty()) {
+			headData.clear();
+			mGroup.removeAllViews();
+			try {
+				// 保存最新图片地址
+				SharedPreferences sp_image_list = context.getSharedPreferences(
+						"imageList", 0);
+				Editor ed = sp_image_list.edit();
+				ed.putString("imageurl", content);
+				ed.commit();
+
+				JSONObject json = new JSONObject(content);
+				for (int i = 0; i < json.getJSONArray("data").length(); i++) {
+					HeadListItem item = new HeadListItem();
+					item.fromJson(json.getJSONArray("data").getJSONObject(i),
+							content);
+					headData.add(item);
+				}
+				mImageAdapter.notifyDataSetChanged();
+				handler.sendEmptyMessage(ADD_POINT);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	
+	/**
+	 * 轮播图点击跳转判断
+	 * */
+	private void imagesClick(int position) {
+		if("2".equals(headData.get(position).type)){
+			GroupRelevantUtils.CheckIntent(context, headData.get(position).group_id);
+		}else{
+			Intent intent = new Intent();
+			if ("1".equals(headData.get(position).is_click)) {
+				if ("1".equals(headData.get(position).type)) { // 专题
+					intent.setClass(context, SpecialDetailList.class);
+					intent.putExtra("cate_id", headData.get(position).cate_id);
+					intent.putExtra("cate_name", headData.get(position).cate_name);
+				} else if ("3".equals(headData.get(position).type)) { // 帖子
+					intent.setClass(context, MainItemDetialActivity.class);
+					intent.putExtra("img_id", headData.get(position).img_id);
+				} else if ("4".equals(headData.get(position).type)) { // 相册播放
+					intent.setClass(context, ChangePhotoSize.class);
+					ArrayList<String> imgBig = new ArrayList<String>();
+					ArrayList<String> imaHed = new ArrayList<String>();
+					ArrayList<String> imaWid = new ArrayList<String>();
+					for (int i = 0; i < headData.get(position).imgList.size(); i++) {
+						imgBig.add(headData.get(position).imgList.get(i).img_thumb);
+						imaHed.add(headData.get(position).imgList.get(i).img_thumb_height);
+						imaWid.add(headData.get(position).imgList.get(i).img_thumb_width);
+					}
+					intent.putStringArrayListExtra("imgList", imgBig);
+					intent.putStringArrayListExtra("imaWid", imaWid);
+					intent.putStringArrayListExtra("imaHed", imaHed);
+					intent.putExtra("aotuplay", true);
+				} else if ("5".equals(headData.get(position).type)) { // 值得买
+					intent.setClass(context, WebViewActivity.class);
+					intent.putExtra("webviewurl",
+							headData.get(position).business_url);
+				} else if ("6".equals(headData.get(position).type)) { // 商家
+					intent.setClass(context, BusinessDetailActivity.class);
+					intent.putExtra("business_id",
+							headData.get(position).business_id);
+					intent.putExtra("business_name",
+							headData.get(position).business_name);
+				} else if ("8".equals(headData.get(position).type)) { // 商家
+					PostBarTypeItem bean = new PostBarTypeItem();
+					bean.setImg_id(headData.get(position).img_id);
+					bean.setVideo_url(headData.get(position).video_url);
+					bean.setImg(headData.get(position).imgList.get(0).img_thumb);
+					bean.setImg_thumb_width(headData.get(position).imgList.get(0).img_thumb_width);
+					bean.setImg_thumb_height(headData.get(position).imgList.get(0).img_thumb_height);
+					
+					intent.setClass(context, VideoDetialActivity.class);
+					Bundle bun = new Bundle();
+					bun.putSerializable(VideoDetialActivity.VIIDEO_INFO, bean);
+					intent.putExtras(bun);
+				} else {// 商家列表
+					intent.setClass(context, MainTab.class);
+					intent.putExtra("tabid", 1);
+					intent.putExtra("lat", GPSLocationUtils.getLatitude(context));
+					intent.putExtra("lon", GPSLocationUtils.getLongitude(context));
+				}
+				startActivity(intent);
+			}
+		}
+	}
+
+	/**
+	 * 秀秀搜索
+	 * */
+	private void showSearch() {
+		Config.showProgressDialog(context, false, null);
+		AbRequestParams params = new AbRequestParams();
+		// SearchWord = search.getText().toString().trim();
+		params.put("login_user_id", Config.getUser(context).uid);
+		params.put("search_word", SearchWord);
+		searchData.clear();
+		ab.get(ServerMutualConfig.FindPartUser + "&" + params.toString(),
+				new AbStringHttpResponseListener() {
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						try {
+							JSONObject json = new JSONObject(content);
+							if (json.getBoolean("success")) {
+								data_json = new JSONArray();
+								if (json.getJSONArray("data").length() == 0) {
+									Toast.makeText(context, "未搜索到相关信息",
+											Toast.LENGTH_SHORT).show();
+								} else {
+									for (int i = 0; i < json.getJSONArray(
+											"data").length(); i++) {
+										SearchItem item = new SearchItem();
+										item.fromJson(json.getJSONArray("data")
+												.getJSONObject(i));
+										data_json.put(json.getJSONArray("data")
+												.getJSONObject(i));
+										searchData.add(item);
+									}
+									if (searchData.size() == 0) {
+										Toast.makeText(context, "未搜索到相关信息",
+												Toast.LENGTH_LONG).show();
+										return;
+									}
+									new MainPopWindowsView(context, ly_title,
+											data, searchData, search_root,
+											title);
+									// search.setText("");
+									search_btn.setVisibility(View.GONE);
+									search_cancle.setVisibility(View.VISIBLE);
+								}
+							} else {
+								Toast.makeText(context,
+										json.getString("reMsg"),
+										Toast.LENGTH_SHORT).show();
+							}
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+
+					@Override
+					public void onFinish() {
+						super.onFinish();
+						Config.dismissProgress();
+					}
+
+					@Override
+					public void onFailure(int statusCode, String content,
+							Throwable error) {
+						super.onFailure(statusCode, content, error);
+						Config.showFiledToast(context);
+					}
+				});
+	}
+
+	/**
+	 * 获取滚动距离
+	 * */
+	public int getScrollY() {
+		View c = listview.getChildAt(0);
+		if (c == null) {
+			return 0;
+		}
+		int firstVisiblePosition = listview.getFirstVisiblePosition();
+		int top = c.getTop();
+		int headerHeight = 0;
+
+		if (firstVisiblePosition >= 1) {
+			headerHeight = listview.getHeight();
+		}
+
+		return -top + firstVisiblePosition * c.getHeight() + headerHeight;
+	}
+
+	@Override
+	public void onResume() {
+		
+		// 修改底部栏文字颜色
+		MainTab.iconText.get(0).setTextColor(Color.parseColor("#fe6363"));
+		MainTab.iconText.get(1).setTextColor(Color.parseColor("#000000"));
+		MainTab.iconText.get(3).setTextColor(Color.parseColor("#000000"));
+		MainTab.iconText.get(4).setTextColor(Color.parseColor("#000000"));
+		
+		if (TO_NEWEST) {
+			HindView();
+			USER_CLICK_INDEX = 0;
+			TO_NEWEST = false;
+			initNewestData("");
+		}
+		
+		if (TO_HONT) {
+			main_item_newest_img.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.main_item_newest));
+			main_gone_item_newest_img.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.main_item_newest));
+			main_item_hot_img.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.main_item_hot_down));
+			main_gone_item_hot_img.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.main_item_hot_down));
+			main_item_follow_img.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.main_item_follow));
+			main_gone_item_follow_img.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.main_item_follow));
+			main_item_newest_point.setVisibility(View.INVISIBLE);
+			main_item_hot_point.setVisibility(View.VISIBLE);
+			main_item_follow_point.setVisibility(View.INVISIBLE);
+			main_gone_item_newest_point.setVisibility(View.INVISIBLE);
+			main_gone_item_hot_point.setVisibility(View.VISIBLE);
+			main_gone_item_follow_point.setVisibility(View.INVISIBLE);
+			main_top_from.setVisibility(View.GONE);
+			listview.setAdapter(hotAdapter);
+			HindView();
+			USER_CLICK_INDEX = 1;
+			TO_HONT = false;
+			initHotData("");
+		}
+		
+		if (TO_FOLLOW) {
+			HindView();
+			USER_CLICK_INDEX = 2;
+			TO_FOLLOW = false;
+			initFollowData("");
+		}
+		
+		if (null == data || 0 == data.size()) {
+			onRefresh();
+		}
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
+
+	/**
+	 * 初始化“最新”数据 1.请求地址
+	 * */
+	private void initNewestData(String url) {
+		if (init01Data) {
+			Config.showProgressDialog(context, false, null);
+			return;
+		}
+		// 没有网络情况下获取缓存
+		if(!sp_main_list.getString("goodlist_main_list", "").isEmpty() && !Config.isConn(context)){
+			try {
+				JSONObject json = new JSONObject(sp_main_list.getString("goodlist_main_list", ""));
+				if(json.getBoolean("success")){
+					data.clear();
+					dataIndex = json.getJSONArray("data").length() - 1;
+					for (int i = 0; i < json.getJSONArray("data").length(); i++) {
+						MainListItemBean item = new MainListItemBean();
+						data.add(item.fromJson(json.getJSONArray("data").getJSONObject(i)));
+					}
+					initRecommed();
+					if (data.isEmpty()) {
+						mPullDownView.setVisibility(View.GONE);
+					}
+					adapter.notifyDataSetChanged();
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			return;
+		}
+
+		init01Data = true;
+
+		if (url.isEmpty()) {
+			url = ServerMutualConfig.GET_NEWEST_LIST;
+		}
+
+		final AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(context).uid);
+		if (!isFirse01 && data.size() != 0) {
+			params.put("post_create_time", data.get(data.size() - 1).getImgList().get(data.get(data.size() - 1).getImgList().size() - 1).getPost_create_time());
+		}
+
+		ab.setTimeout(10000);
+		ab.get(url + "&" + params.toString(),
+				new AbStringHttpResponseListener() {
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						Config.dismissProgress();
+						init01Data = false;
+//						Config.save(context, content, fileName);
+						
+						if (isFirse01) {
+							data.clear();
+						}
+						if (!content.isEmpty()) {
+							try {
+								JSONObject json = new JSONObject(content);
+								
+								// 更新缓存
+								if(json.getBoolean("success") && isFirse01){
+									ed_main_list.putString("goodlist_main_list", content);
+									ed_main_list.commit();
+								}
+								for (int i = 0; i < json.getJSONArray("data").length(); i++) {
+									MainListItemBean item = new MainListItemBean();
+									data.add(item.fromJson(json.getJSONArray("data").getJSONObject(i)));
+								}
+								
+								if(isFirse01){
+									initRecommed();
+								}
+								
+								if (USER_CLICK_INDEX == 0 || USER_CLICK_INDEX == -1) {
+									adapter.notifyDataSetChanged();
+								}
+							} catch (JSONException e) {
+								e.printStackTrace();
+							}
+						} else {
+							Config.dismissProgress();
+							Toast.makeText(context, "没有更多了", 3).show();
+						}
+						isFirse01 = false;
+					}
+
+					@Override
+					public void onFinish() {
+						super.onFinish();
+						Config.dismissProgress();
+						mPullDownView.RefreshComplete();// 这个事线程安全的 可看源代码
+						mPullDownView.notifyDidMore();
+					}
+
+					@Override
+					public void onFailure(int statusCode, String content,
+							Throwable error) {
+						super.onFailure(statusCode, content, error);
+					}
+				});
+	}
+
+	/**
+	 * 初始化“热门”数据 1.请求地址
+	 * */
+	private void initHotData(String url) {
+		if(!Config.isConn(context)){
+			return;
+		}
+		if (init02Data) {
+			Config.showProgressDialog(context, false, null);
+			return;
+		}
+
+		init02Data = true;
+
+		if (url.isEmpty()) {
+			url = ServerMutualConfig.GET_HOT_LIST;
+		}
+
+		final AbRequestParams paramsHot = new AbRequestParams();
+		paramsHot.put("login_user_id", Config.getUser(context).uid);
+		if (!isFirse02 && hotData.size() != 0) {
+			paramsHot.put(
+					"post_create_time",
+					hotData.get(hotData.size() - 1)
+							.getImgList()
+							.get(hotData.get(hotData.size() - 1).getImgList()
+									.size() - 1).getPost_create_time());
+		}
+
+		ab.setTimeout(10000);
+		ab.get(url + "&" + paramsHot.toString(),
+				new AbStringHttpResponseListener() {
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						Config.dismissProgress();
+						init02Data = false;
+						if (isFirse02) {
+							hotData.clear();
+						}
+						if (!content.isEmpty()) {
+							try {
+								JSONObject json = new JSONObject(content);
+								for (int i = 0; i < json.getJSONArray("data")
+										.length(); i++) {
+									MainListItemBean item = new MainListItemBean();
+									hotData.add(item.fromJson(json
+											.getJSONArray("data")
+											.getJSONObject(i)));
+								}
+								if (USER_CLICK_INDEX == 1) {
+									// if(isFirse02){
+									// listview.setAdapter(hotAdapter);
+									// }else{
+									hotAdapter.notifyDataSetChanged();
+									// }
+								}
+							} catch (JSONException e) {
+								e.printStackTrace();
+							}
+						} else {
+							Toast.makeText(context, "没有更多了", 3).show();
+						}
+						isFirse02 = false;
+					}
+
+					@Override
+					public void onFinish() {
+						super.onFinish();
+						Config.dismissProgress();
+						mPullDownView.RefreshComplete();// 这个事线程安全的 可看源代码
+						mPullDownView.notifyDidMore();
+					}
+
+					@Override
+					public void onFailure(int statusCode, String content,
+							Throwable error) {
+						super.onFailure(statusCode, content, error);
+					}
+				});
+	}
+
+	/**
+	 * 初始化“关注”数据 1.请求地址
+	 * */
+	private void initFollowData(String url) {
+		if(!Config.isConn(context)){
+			return;
+		}
+		if (init03Data) {
+			Config.showProgressDialog(context, false, null);
+			return;
+		}
+
+		init03Data = true;
+
+		if (url.isEmpty()) {
+			url = ServerMutualConfig.GET_FOLLOW_LIST;
+		}
+
+		final AbRequestParams paramsFollow = new AbRequestParams();
+		paramsFollow.put("login_user_id", Config.getUser(context).uid);
+		if (!isFirse03 && followData.size() != 0) {
+			paramsFollow.put("post_create_time",
+					followData.get(followData.size() - 1).post_create_time);
+		}
+
+		ab.setTimeout(10000);
+		ab.get(url + "&" + paramsFollow.toString(),
+				new AbStringHttpResponseListener() {
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						Config.dismissProgress();
+						init03Data = false;
+						if (isFirse03) {
+							followData.clear();
+						}
+						if (!content.isEmpty()) {
+							try {
+								JSONObject json = new JSONObject(content);
+								for (int i = 0; i < json.getJSONArray("data")
+										.length(); i++) {
+									PictureItem item = new PictureItem();
+									item.fromJson(json.getJSONArray("data")
+											.getJSONObject(i), content);
+									followData.add(item);
+								}
+								if (USER_CLICK_INDEX == 2) {
+									// if(isFirse03){
+									// listview.setAdapter(followAdapter);
+									// }else{
+									followAdapter.notifyDataSetChanged();
+									// }
+								}
+							} catch (JSONException e) {
+								e.printStackTrace();
+							}
+						} else {
+							Toast.makeText(context, "没有更多了", 3).show();
+						}
+						isFirse03 = false;
+					}
+
+					@Override
+					public void onFinish() {
+						super.onFinish();
+						Config.dismissProgress();
+						mPullDownView.RefreshComplete();// 这个事线程安全的 可看源代码
+						mPullDownView.notifyDidMore();
+					}
+
+					@Override
+					public void onFailure(int statusCode, String content,
+							Throwable error) {
+						super.onFailure(statusCode, content, error);
+					}
+				});
+	}
+	
+	/**
+	 * 初始化首页顶部“推荐”
+	 * 
+	 * */
+	private void initRecommed(){
+		data02.clear();
+		data02.addAll(data);
+		data.remove(2);
+		data.remove(1);
+		data.remove(0);
+		
+		final MainListItemBean bean01 = data02.get(0);
+		bean01.setGroupType(true);
+		final MainListItemBean bean02 = data02.get(1);
+		bean02.setGroupType(true);
+		final MainListItemBean bean03 = data02.get(2);
+		bean03.setGroupType(true);
+		
+		main_top_title_01.setText(data02.get(0).getImg_title());
+		main_top_des_01.setText(data02.get(0).getImg_description());
+		if(!data02.get(0).getColor().isEmpty()){
+			main_top_01.setBackgroundColor(Color.parseColor("#"+data02.get(0).getColor()));
+		}
+		MyApplication.getInstance().display(data02.get(0).getImg_thumb(), main_top_img_01, R.drawable.def_head);
+		main_top_01.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				adapter.IntentConsole(bean01);
+			}
+		});
+		
+		
+		main_top_title_02.setText(data02.get(1).getImg_title());
+		main_top_des_02.setText(data02.get(1).getImg_description());
+		if(!data02.get(1).getColor().isEmpty()){
+			main_top_02.setBackgroundColor(Color.parseColor("#"+data02.get(1).getColor()));
+		}
+		MyApplication.getInstance().display(data02.get(1).getImg_thumb(), main_top_img_02, R.drawable.def_head);
+		main_top_02.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				adapter.IntentConsole(bean02);
+			}
+		});
+		
+		main_top_more.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				adapter.IntentConsole(bean03);										
+			}
+		});
+		
+	}
+
+	/**
+	 * 获取引导页数据
+	 * */
+	private void getHintListData(){
+		
+		// 初始化推荐位缓存数据
+		SharedPreferences sp_hint_list = context.getSharedPreferences("hindList", 0);
+		if(!sp_hint_list.getString("hindList", "").isEmpty()){
+			hintList.clear();
+			try {
+				JSONObject json = new JSONObject(sp_hint_list.getString("hindList", ""));
+				for (int i = 0; i < json.getJSONArray("data").length(); i++) {
+					HeadListItem item = new HeadListItem();
+					item.fromJson(json.getJSONArray("data").getJSONObject(i), sp_hint_list.getString("hindList", ""));
+					hintList.add(item);
+				}
+				
+				hintBean01 = new HeadListItem();
+				hintBean01 = hintList.get(0);
+				MyApplication.getInstance().display(hintBean01.imgList.get(0).img_thumb, main_goodleft_img, R.drawable.def_image);
+				main_goodleft_img.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						hintAdapter.IntentConsole(hintBean01);
+					}
+				});
+				
+				hintList.remove(0);
+				hintAdapter.notifyDataSetChanged();
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		final AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(context).uid);
+		params.put("mapsign", GPSLocationUtils.getLongitude(context)+ "," + GPSLocationUtils.getLatitude(context));
+
+		ab.get(ServerMutualConfig.GET_HIND_LIST + "&" + params.toString(), new AbStringHttpResponseListener() {
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						hintList.clear();
+						try {
+							// 保存最新引导数据
+							SharedPreferences sp_hint_list = context.getSharedPreferences("hindList", 0);
+							Editor ed = sp_hint_list.edit();
+							ed.putString("hindList", content);
+							ed.commit();
+							
+							JSONObject json = new JSONObject(content);
+							for (int i = 0; i < json.getJSONArray("data").length(); i++) {
+								HeadListItem item = new HeadListItem();
+								item.fromJson(json.getJSONArray("data").getJSONObject(i), content);
+								hintList.add(item);
+							}
+							
+							hintBean01 = new HeadListItem();
+							hintBean01 = hintList.get(0);
+							MyApplication.getInstance().display(hintBean01.imgList.get(0).img_thumb, main_goodleft_img, R.drawable.def_image);
+							main_goodleft_img.setOnClickListener(new OnClickListener() {
+								
+								@Override
+								public void onClick(View v) {
+									hintAdapter.IntentConsole(hintBean01);
+								}
+							});
+							
+							hintList.remove(0);
+							hintAdapter.notifyDataSetChanged();
+							
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+
+					@Override
+					public void onFinish() {
+						super.onFinish();
+						Config.dismissProgress();
+						mPullDownView.RefreshComplete();// 这个事线程安全的 可看源代码
+						mPullDownView.notifyDidMore();
+					}
+
+					@Override
+					public void onFailure(int statusCode, String content,
+							Throwable error) {
+						super.onFailure(statusCode, content, error);
+					}
+				});
+	}
+	
+	/**
+	 * 展示引导页
+	 * */
+	private void showHindView(){
+		int fromYDelta = (index - 1) * 1300;
+        int toYDelta = index * 1300;
+        TranslateAnimation animation = new TranslateAnimation(0, 0, fromYDelta, toYDelta);
+        animation.setDuration(500);
+        main_hint_page.startAnimation(animation);
+        main_hint_page.setVisibility(View.VISIBLE);
+	}
+	
+	/**
+	 * 展示引导页
+	 * */
+	private void HindView(){
+		int fromYDelta = index * 1300;
+        int toYDelta = (index - 1) * 1300;
+        TranslateAnimation animation = new TranslateAnimation(0, 0, fromYDelta, toYDelta);
+        animation.setDuration(500);
+        main_hint_page.startAnimation(animation);
+        main_hint_page.setVisibility(View.GONE);
+	}
+	
+}

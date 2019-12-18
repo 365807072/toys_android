@@ -1,0 +1,1200 @@
+package com.yyqq.code.grow;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+
+import net.tsz.afinal.FinalHttp;
+import net.tsz.afinal.http.AjaxCallBack;
+import net.tsz.afinal.http.AjaxParams;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.AlertDialog.Builder;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.TextUtils;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
+import android.widget.Toast;
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.Platform.ShareParams;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.onekeyshare.OnekeyShare;
+import cn.sharesdk.onekeyshare.ShareContentCustomizeCallback;
+
+import com.ab.http.AbHttpUtil;
+import com.ab.http.AbRequestParams;
+import com.ab.http.AbStringHttpResponseListener;
+import com.mob.MobSDK;
+import com.umeng.analytics.MobclickAgent;
+import com.yyqq.babyshow.R;
+import com.yyqq.code.main.MainTab;
+import com.yyqq.code.personal.PersonalCenterActivity;
+import com.yyqq.code.personal.UserInfo;
+import com.yyqq.code.photo.ChangePhotoSize;
+import com.yyqq.commen.model.GrowDetailItem;
+import com.yyqq.commen.model.GrowDetailItem.Image;
+import com.yyqq.commen.model.GrowDetailItem.Review;
+import com.yyqq.commen.utils.BimpUtil;
+import com.yyqq.commen.utils.Config;
+import com.yyqq.commen.utils.FaceConversionUtil;
+import com.yyqq.commen.utils.ImageDownloader;
+import com.yyqq.commen.utils.Log;
+import com.yyqq.commen.utils.OnImageDownload;
+import com.yyqq.commen.utils.RoundAngleImageView;
+import com.yyqq.commen.view.MyGridView;
+import com.yyqq.commen.view.PullDownView;
+import com.yyqq.commen.view.PullDownView.OnPullDownListener;
+import com.yyqq.framework.application.MyApplication;
+import com.yyqq.framework.application.ServerMutualConfig;
+
+public class Grow_Detail extends Activity implements OnPullDownListener {
+	private String TAG = "Grow_Detail";
+	private PullDownView mPullDownView;
+	private ListView listview;
+	private TextView title;
+	private Activity context;
+	private ArrayList<GrowDetailItem> dataGrowShow = new ArrayList<GrowDetailItem>();
+	private MyAdapter adapter;
+	private int width, height;
+	private AbHttpUtil ab;
+	private String uid = "";
+	private ImageView share, edit;
+	private String grow_title = "";
+	private String post_img = "";
+	private String singelImg = "";
+	private String singelMsg = "";
+	private String grow_text = "";
+	private int page;
+	private String babyName = "";
+	private String babyBirth = "";
+	private ImageView back;
+	private String imgId = "";
+	private String shareTitle;
+
+	// @Override
+	// public boolean onKeyDown(int keyCode, KeyEvent event) {
+	// if (keyCode == KeyEvent.KEYCODE_BACK) {
+	// // Intent intent = new Intent();
+	// // intent.setClass(context, MainTab.class);
+	// // intent.putExtra(tab, value)
+	// return false;
+	// }
+	// return false;
+	// }
+	
+	public void onCreate(Bundle b) {
+		super.onCreate(b);
+		Config.setActivityState(this);
+		MobSDK.init(this);
+		setContentView(R.layout.grow_detail);
+
+		init();
+		DisplayMetrics DM = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(DM);
+		width = DM.widthPixels;
+		height = DM.heightPixels;
+		mPullDownView = (PullDownView) findViewById(R.id.list);
+		mPullDownView.setOnPullDownListener(this);
+		listview = mPullDownView.getListView();
+		listview.setDivider(null);
+		ab = AbHttpUtil.getInstance(context);
+		ab.setDebug(Log.isDebug);
+		if (adapter == null) {
+			adapter = new MyAdapter();
+		}
+		listview.setAdapter(adapter);
+		// 设置可以自动获取更多 滑到最后一个自动获取 改成false将禁用自动获取更多
+		mPullDownView.enableAutoFetchMore(true, 1);
+		// 隐藏 并禁用尾部
+		// mPullDownView.setHideFooter();
+		// 显示并启用自动获取更多
+		mPullDownView.setShowFooter();
+		// 隐藏并且禁用头部刷新
+		// mPullDownView.setHideHeader();
+		// 显示并且可以使用头部刷新
+		mPullDownView.setShowHeader();
+		Config.showProgressDialog(context, false, null);
+		dataGrowShow.clear();
+		onRefresh();
+	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+	}
+
+	public void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+		context = this;
+	}
+
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onResume(this);
+	}
+
+	private void init() {
+		context = this;
+		uid = "";
+		if (getIntent().hasExtra("user_id")) {
+			uid = getIntent().getStringExtra("user_id");
+		}
+		back = (ImageView) findViewById(R.id.back);
+		back.setOnClickListener(backClick);
+		title = (TextView) findViewById(R.id.title);
+		title.setText(getIntent().getStringExtra("grow_detail_title"));
+		share = (ImageView) findViewById(R.id.share);
+		share.setOnClickListener(ShareClick);
+		edit = (ImageView) findViewById(R.id.edit);
+		edit.setOnClickListener(editClick);
+	}
+
+	@Override
+	public void onRefresh() {
+		page = 1;
+		AbRequestParams params = new AbRequestParams();
+		params.put("user_id", Config.getUser(context).uid);
+		params.put("baby_id", getIntent().getStringExtra("baby_id"));
+		params.put("album_id", getIntent().getStringExtra("album_id"));
+		params.put("page", page + "");
+//		android.util.Log.e("fanfan", ServerMutualConfig.DiaryImgsList + "&"
+//				+ params.toString());
+		ab.get(ServerMutualConfig.DiaryImgsList + "&" + params.toString(),
+				new AbStringHttpResponseListener() {
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						dataGrowShow.clear();
+						try {
+							JSONObject json = new JSONObject(content);
+							for (int i = 0; i < json.getJSONArray("data")
+									.length(); i++) {
+								GrowDetailItem item = new GrowDetailItem();
+								item.fromJson(json.getJSONArray("data")
+										.getJSONObject(i), "");
+								dataGrowShow.add(item);
+							}
+							if (dataGrowShow.isEmpty()) {
+								mPullDownView.setVisibility(View.GONE);
+								Intent intent = new Intent();
+								intent.setClass(context, MainTab.class);
+								intent.putExtra("tabid", 2);
+								startActivity(intent);
+								context.finish();
+							}
+							adapter.notifyDataSetChanged();
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+
+					@Override
+					public void onFinish() {
+						super.onFinish();
+						mPullDownView.notifyDidMore();
+						mPullDownView.RefreshComplete();
+						Config.dismissProgress();
+					}
+
+					@Override
+					public void onFailure(int statusCode, String content,
+							Throwable error) {
+						super.onFailure(statusCode, content, error);
+					}
+
+					@Override
+					public void sendSuccessMessage(int statusCode,
+							String content) {
+						super.sendSuccessMessage(statusCode, content);
+						Config.dismissProgress();
+						mPullDownView.RefreshComplete();// 这个事线程安全的 可看源代码
+						mPullDownView.notifyDidMore();
+					}
+
+				});
+
+	}
+
+	@Override
+	public void onMore() {
+		if (dataGrowShow.size() == 0) {
+			mPullDownView.notifyDidMore();
+			mPullDownView.RefreshComplete();
+			return;
+		}
+		Config.showProgressDialog(context, true, null);
+		AbRequestParams params = new AbRequestParams();
+		params.put("user_id", Config.getUser(context).uid);
+		params.put("baby_id", getIntent().getStringExtra("baby_id"));
+		params.put("album_id", getIntent().getStringExtra("album_id"));
+		params.put("page", (++page) + "");
+		ab.get(ServerMutualConfig.DiaryImgsList + "&" + params.toString(),
+				new AbStringHttpResponseListener() {
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						mPullDownView.RefreshComplete();// 这个事线程安全的 可看源代码
+						mPullDownView.notifyDidMore();
+						try {
+							JSONObject json = new JSONObject(content);
+							for (int i = 0; i < json.getJSONArray("data")
+									.length(); i++) {
+								GrowDetailItem item = new GrowDetailItem();
+								item.fromJson(json.getJSONArray("data")
+										.getJSONObject(i), "");
+								dataGrowShow.add(item);
+							}
+							adapter.notifyDataSetChanged();
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+
+					@Override
+					public void onFinish() {
+						super.onFinish();
+						mPullDownView.notifyDidMore();
+						mPullDownView.RefreshComplete();
+						Config.dismissProgress();
+					}
+
+					@Override
+					public void onFailure(int statusCode, String content,
+							Throwable error) {
+						super.onFailure(statusCode, content, error);
+					}
+				});
+	}
+
+	// 返回
+	public OnClickListener backClick = new View.OnClickListener() {
+
+		@Override
+		public void onClick(View arg0) {
+			finish();
+		}
+	};
+	// 分享
+	public OnClickListener ShareClick = new View.OnClickListener() {
+
+		@Override
+		public void onClick(View arg0) {
+			showShare();
+		}
+	};
+	// 编辑
+	public OnClickListener editClick = new View.OnClickListener() {
+
+		@Override
+		public void onClick(View arg0) {
+			Intent intent = new Intent();
+			intent.setClass(context, GrowEditActivity.class);
+			intent.putExtra("baby_id", getIntent().getStringExtra("baby_id"));
+			intent.putExtra("album_id", getIntent().getStringExtra("album_id"));
+			intent.putExtra("grow_detail_title",
+					getIntent().getStringExtra("grow_detail_title"));
+			intent.putExtra("mTag_name", getIntent()
+					.getStringExtra("mTag_name"));
+			context.startActivity(intent);
+		}
+	};
+
+	private void showShare() {
+		MobSDK.init(this);
+		OnekeyShare oks = new OnekeyShare();
+		// 关闭sso授权
+		oks.disableSSOWhenAuthorize();
+		oks.setSilent(true);
+//		oks.setNotification(R.drawable.icon, getString(R.string.app_name)); // 分享时Notification的图标和文字
+		// 去除注释，演示在九宫格设置自定义的图标
+		Bitmap collect = BitmapFactory.decodeResource(getResources(),
+				R.drawable.to_xiuxiu);
+		Bitmap collectSel = BitmapFactory.decodeResource(getResources(),
+				R.drawable.to_xiuxiu);
+		String label = getResources().getString(R.string.post);
+		OnClickListener listener = new OnClickListener() {
+			public void onClick(View v) {
+				Config.showProgressDialog(context, false, null);
+				FinalHttp fh = new FinalHttp();
+				AjaxParams params = new AjaxParams();
+				params.put("album_id", getIntent().getStringExtra("album_id"));
+				params.put("post_class", "1");
+				// android.util.Log.e("fanfan", params.toString());
+				fh.post(ServerMutualConfig.ShareToListing, params,
+						new AjaxCallBack<String>() {
+
+							@Override
+							public void onFailure(Throwable t, String strMsg) {
+								Config.dismissProgress();
+								Config.showFiledToast(context);
+								super.onFailure(t, strMsg);
+							}
+
+							@Override
+							public void onSuccess(String t) {
+								super.onSuccess(t);
+								Config.dismissProgress();
+								Toast.makeText(context, "已分享到话题", 0).show();
+								String str = "";
+								try {
+									JSONObject json = new JSONObject(t);
+									str = json.getString("reMsg");
+								} catch (JSONException e) {
+									e.printStackTrace();
+								}
+							}
+
+						});
+			}
+		};
+		oks.setCustomerLogo(collect, label, listener);
+		if (TextUtils.isEmpty(grow_title)) {
+			grow_title = "精彩记录宝宝成长每一天";
+		}
+		if (!TextUtils.isEmpty(dataGrowShow.get(0).tag_name)) {
+			shareTitle = dataGrowShow.get(0).tag_name;
+		} else {
+			shareTitle = babyBirth;
+		}
+		oks.setShareContentCustomizeCallback(new ShareContentCustomizeCallback() {
+
+			@Override
+			public void onShare(Platform platform, ShareParams paramsToShare) {
+				if ("Wechat".equals(platform.getName())) {
+					paramsToShare.setShareType(Platform.SHARE_TEXT);
+					paramsToShare.setText(babyName + "@" + shareTitle + ": "
+							+ grow_title);
+					paramsToShare.setShareType(Platform.SHARE_WEBPAGE);
+					if (TextUtils.isEmpty(post_img)) {
+						paramsToShare
+								.setImageUrl("https://api.baobaoshowshow.com/static/defaultimg/0000000_thumb_640.jpg");
+					} else {
+						paramsToShare.setImageUrl(post_img);
+					}
+					paramsToShare
+							.setUrl("http://www.baobaoshowshow.com/share_diary.php?user_id="
+									+ uid
+									+ "&album_id="
+									+ getIntent().getStringExtra("album_id")
+									+ "&baby_id="
+									+ getIntent().getStringExtra("baby_id"));
+				} else if ("SinaWeibo".equals(platform.getName())) {
+					paramsToShare
+							.setText(babyName
+									+ "@"
+									+ shareTitle
+									+ ": "
+									+ grow_title
+									+ "http://www.baobaoshowshow.com/share_diary.php?user_id="
+									+ uid + "&album_id="
+									+ getIntent().getStringExtra("album_id")
+									+ "&baby_id="
+									+ getIntent().getStringExtra("baby_id"));
+					if (TextUtils.isEmpty(post_img)) {
+						paramsToShare
+								.setImageUrl("https://api.baobaoshowshow.com/static/defaultimg/0000000_thumb_640.jpg");
+					} else {
+						paramsToShare.setImageUrl(post_img);
+					}
+				} else if ("QZone".equals(platform.getName())) {
+					paramsToShare.setTitle(""); // title微信、QQ空间
+					paramsToShare
+							.setTitleUrl("http://www.baobaoshowshow.com/share_diary.php?user_id="
+									+ uid
+									+ "&album_id="
+									+ getIntent().getStringExtra("album_id")
+									+ "&baby_id="
+									+ getIntent().getStringExtra("baby_id"));
+					paramsToShare.setSite(getString(R.string.app_name)); // site是分享此内容的网站名称，仅在QQ空间使用
+					paramsToShare.setText(babyName + "@" + shareTitle + ": "
+							+ grow_title);
+					if (TextUtils.isEmpty(post_img)) {
+						paramsToShare
+								.setImageUrl("https://api.baobaoshowshow.com/static/defaultimg/0000000_thumb_640.jpg");
+					} else {
+						paramsToShare.setImageUrl(post_img);
+					}
+					paramsToShare
+							.setSiteUrl("http://www.baobaoshowshow.com/share_diary.php?user_id="
+									+ uid
+									+ "&album_id="
+									+ getIntent().getStringExtra("album_id")
+									+ "&baby_id="
+									+ getIntent().getStringExtra("baby_id")); // siteUrl是分享此内容的网站地址，仅在QQ空间使用
+				} else if ("QQ".equals(platform.getName())) {
+					paramsToShare.setTitle("");
+					paramsToShare
+							.setTitleUrl("http://www.baobaoshowshow.com/share_diary.php?user_id="
+									+ uid
+									+ "&album_id="
+									+ getIntent().getStringExtra("album_id")
+									+ "&baby_id="
+									+ getIntent().getStringExtra("baby_id"));
+					paramsToShare.setText(babyName + "@" + shareTitle + ": "
+							+ grow_title);
+					if (TextUtils.isEmpty(post_img)) {
+						paramsToShare
+								.setImageUrl("https://api.baobaoshowshow.com/static/defaultimg/0000000_thumb_640.jpg");
+					} else {
+						paramsToShare.setImageUrl(post_img);
+					}
+				} else if ("WechatMoments".equals(platform.getName())) {
+					paramsToShare.setShareType(Platform.SHARE_TEXT);
+					paramsToShare.setTitle(babyName + "@" + shareTitle + ": "
+							+ grow_title);
+					paramsToShare.setShareType(Platform.SHARE_WEBPAGE);
+					if (TextUtils.isEmpty(post_img)) {
+						paramsToShare
+								.setImageUrl("https://api.baobaoshowshow.com/static/defaultimg/0000000_thumb_640.jpg");
+					} else {
+						paramsToShare.setImageUrl(post_img);
+					}
+					paramsToShare
+							.setUrl("http://www.baobaoshowshow.com/share_diary.php?user_id="
+									+ uid
+									+ "&album_id="
+									+ getIntent().getStringExtra("album_id")
+									+ "&baby_id="
+									+ getIntent().getStringExtra("baby_id"));
+				}
+				// Log.e("fanfan",
+				// ("http://test.show.baobaoshowshow.com/share_diary.php?user_id="
+				// + uid + "&album_id=" + getIntent()
+				// .getStringExtra("album_id")));
+			}
+		});
+		// 启动分享GUI
+		oks.show(this);
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+	}
+
+	// 详情里的GridView
+	class GridAdapter extends BaseAdapter {
+		MyGridView myGridView;
+		ArrayList<GrowDetailItem.Image> ImageList;
+		private ImageDownloader mDownloader;
+
+		public GridAdapter(ArrayList<GrowDetailItem.Image> ImageList,
+				MyGridView myGridView) {
+			this.ImageList = ImageList;
+			this.myGridView = myGridView;
+		}
+
+		@Override
+		public int getCount() {
+
+			return ImageList.size();
+		}
+
+		@Override
+		public Object getItem(int position) {
+			return ImageList.get(position);
+		}
+
+		@Override
+		public long getItemId(int position) {
+			return 0;
+		}
+
+		@Override
+		public View getView(final int position, View convertView,
+				ViewGroup parent) {
+			LayoutInflater inflater = (LayoutInflater) context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+			ViewHolder holder = null;
+			if (convertView == null) {
+				convertView = inflater
+						.inflate(R.layout.myshow_grida_item, null);
+				holder = new ViewHolder();
+				holder.img = (ImageView) convertView
+						.findViewById(R.id.item_grida_image);
+
+				convertView.setTag(holder);
+			} else {
+				holder = (ViewHolder) convertView.getTag();
+			}
+			GrowDetailItem.Image item = ImageList.get(position);
+			if (mDownloader == null) {
+				mDownloader = new ImageDownloader();
+			}
+
+			holder.img.setTag(ImageList.get(position).img_thumb);
+			if (mDownloader == null) {
+				mDownloader = new ImageDownloader();
+			}
+			if (mDownloader != null) {
+				mDownloader.imageDownload(ImageList.get(position).img_thumb,
+						holder.img, "/Download/cache_files/", context,
+						new OnImageDownload() {
+
+							@Override
+							public void onDownloadSucc(Bitmap bitmap,
+									String c_url, ImageView imageView) {
+								ImageView imageView1 = (ImageView) myGridView
+										.findViewWithTag(c_url);
+								if (imageView1 != null) {
+									imageView1.setImageBitmap(bitmap);
+									imageView1.setTag("");
+								}
+
+							}
+						});
+			}
+			// 大图
+			int newW = 0, newH = 0;
+			if (item.img_thumb_width == item.img_thumb_height) {
+				newW = width;
+				newH = width;
+			} else if (Float.parseFloat(item.img_thumb_width) > Float
+					.parseFloat(item.img_thumb_height)) {
+				float h = 0;
+				float sx = (float) ((float) width / (float) (Integer
+						.parseInt(item.img_thumb_width)));
+				h = (float) ((float) Float.parseFloat(item.img_thumb_height) * (float) sx);
+				newW = width;
+				newH = (int) h;
+			} else {
+				float sx = (float) (width * 0.72)
+						/ (Float.parseFloat(item.img_thumb_width));
+				newW = (int) ((float) (((Float.parseFloat(item.img_thumb_width)) * sx)));
+				newH = (int) ((float) ((Float.parseFloat(item.img_thumb_height)) * sx));
+			}
+			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+					newW, newH);
+			params.addRule(RelativeLayout.BELOW, R.id.head_root);
+			holder.img.setLayoutParams(params);
+			holder.img.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(context, ChangePhotoSize.class);
+
+					ArrayList<String> imgBig = new ArrayList<String>();
+					ArrayList<String> imaHed = new ArrayList<String>();
+					ArrayList<String> imaWid = new ArrayList<String>();
+					for (int i = 0; i < ImageList.size(); i++) {
+						imgBig.add(ImageList.get(i).img);
+						imaHed.add(ImageList.get(i).img_height);
+						imaWid.add(ImageList.get(i).img_width);
+					}
+					intent.putStringArrayListExtra("img_downList", imgBig);
+					intent.putStringArrayListExtra("imgList", imgBig);
+					intent.putStringArrayListExtra("imaWid", imaWid);
+					intent.putStringArrayListExtra("imaHed", imaHed);
+					intent.putExtra("listIndex", position);
+					context.startActivity(intent);
+				}
+			});
+			return convertView;
+		}
+
+	}
+
+	class ViewHolder {
+		TextView growTitle;
+		ImageView more;
+		ImageView img;
+		MyGridView mGridView;
+		TextView name;
+		RoundAngleImageView head;
+		TextView time;
+		TextView msg;
+		TextView review;
+		TextView zan;
+		TextView check_reviewall;
+		ImageView grow_suo;
+	}
+
+	// 详情的adapter
+	@SuppressLint("ResourceAsColor")
+	public class MyAdapter extends BaseAdapter {
+		@Override
+		public int getCount() {
+			return dataGrowShow.size();
+		}
+
+		@Override
+		public Object getItem(int arg0) {
+			return dataGrowShow.get(arg0);
+		}
+
+		@Override
+		public long getItemId(int arg0) {
+			return arg0;
+		}
+
+		@SuppressLint("ResourceAsColor")
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			LayoutInflater inflater = (LayoutInflater) context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			ViewHolder holder = null;
+
+			convertView = inflater.inflate(R.layout.grow_detail_item, null);
+			holder = new ViewHolder();
+			holder.grow_suo = (ImageView) convertView
+					.findViewById(R.id.grow_suo);
+			holder.growTitle = (TextView) convertView
+					.findViewById(R.id.grow_title);
+
+			holder.img = (ImageView) convertView.findViewById(R.id.img);
+			holder.mGridView = (MyGridView) convertView
+					.findViewById(R.id.n_img);
+			holder.more = (ImageView) convertView.findViewById(R.id.more);
+			holder.name = (TextView) convertView.findViewById(R.id.name);
+			holder.time = (TextView) convertView.findViewById(R.id.time);
+			holder.msg = (TextView) convertView.findViewById(R.id.msg);
+			holder.head = (RoundAngleImageView) convertView
+					.findViewById(R.id.head);
+			holder.review = (TextView) convertView.findViewById(R.id.review);
+			holder.review.setVisibility(View.GONE);
+			holder.check_reviewall = (TextView) convertView
+					.findViewById(R.id.check_reviewall);
+			convertView.setTag(holder);
+
+			final GrowDetailItem item = dataGrowShow.get(position);
+			ScrollView scrollview = (ScrollView) convertView
+					.findViewById(R.id.img_ly);
+			if (item.ImageList.size() == 0) {
+				scrollview.setVisibility(View.GONE);
+			}
+			LinearLayout imgLinear = new LinearLayout(context);
+			addImg(scrollview, imgLinear, item.ImageList, position);
+
+			// 标题
+			if (TextUtils.isEmpty(item.img_title)) {
+				holder.growTitle.setVisibility(View.GONE);
+			} else {
+				grow_title = item.img_title;
+				holder.growTitle.setText(grow_title);
+			}
+
+			// 更多操作
+			if (item.user_id.equals(Config.getUser(context).uid)) {
+				holder.more.setTag(item);
+				holder.more.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						imgId = item.img_id;
+						singelImg = (item.ImageList.get(0)).img_thumb;
+						if (TextUtils.isEmpty(item.img_description)) {
+							singelMsg = "精彩记录宝宝成长每一天";
+						} else {
+							singelMsg = item.img_description;
+						}
+						showShare1();
+					}
+				});
+			} else {
+				holder.more.setVisibility(View.GONE);
+			}
+			holder.name.setText(item.user_name);
+			babyName = item.user_name;
+
+			holder.head.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent();
+					if (item.user_id.equals(Config.getUser(context).uid)) {
+						intent.setClass(context, PersonalCenterActivity.class);
+						intent.putExtra("falg_return", true);
+					} else {
+						intent.setClass(context, UserInfo.class);
+						intent.putExtra("uid", item.user_id);
+					}
+					startActivity(intent);
+				}
+			});
+			MyApplication.getInstance().display(item.avatar, holder.head,
+					R.drawable.def_head);
+			// 时间
+			holder.time.setText(item.diaryTime);
+			babyBirth = item.diaryTime;
+
+			// 描述
+			if (item.img_description.equals("")) {
+				holder.msg.setVisibility(View.GONE);
+			} else {
+				SpannableString spannableString = FaceConversionUtil
+						.getInstace().getExpressionString(context,
+								item.img_description);
+				holder.msg.setText(spannableString);
+				grow_text = item.img_description;
+			}
+
+			// 赞
+			final TextView zan = (TextView) convertView.findViewById(R.id.zan);
+			zan.setVisibility(View.GONE);
+			zan.setText(item.diaryAdmire);
+			if (item.isZan) {
+				zan.setBackgroundResource(R.drawable.fabu_zan_sel);
+			} else {
+				zan.setBackgroundResource(R.drawable.fabu_zan);
+			}
+			zan.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Config.showProgressDialog(context, false, null);
+					if (!item.isZan) {
+						AbRequestParams params = new AbRequestParams();
+						params.put("user_id", Config.getUser(context).uid);
+						params.put("admire_id", item.user_id);
+						params.put("img_id", item.img_id);
+						ab.post(ServerMutualConfig.DiaryAdmire, params,
+								new AbStringHttpResponseListener() {
+									@Override
+									public void onSuccess(int statusCode,
+											String content) {
+										super.onSuccess(statusCode, content);
+										item.diaryAdmire = (Integer
+												.parseInt(item.diaryAdmire) + 1)
+												+ "";
+										zan.setText(item.diaryAdmire);
+										item.isZan = true;
+										zan.setBackgroundResource(R.drawable.fabu_zan_sel);
+									}
+
+									@Override
+									public void onFinish() {
+										super.onFinish();
+										Config.dismissProgress();
+									}
+
+									@Override
+									public void onFailure(int statusCode,
+											String content, Throwable error) {
+										super.onFailure(statusCode, content,
+												error);
+										Config.showFiledToast(context);
+									}
+								});
+					} else {
+						AbRequestParams params = new AbRequestParams();
+						params.put("user_id", Config.getUser(context).uid);
+						params.put("admire_id", item.user_id);
+						params.put("img_id", item.img_id);
+						ab.post(ServerMutualConfig.CancelDiaryAdmire, params,
+								new AbStringHttpResponseListener() {
+									@Override
+									public void onSuccess(int statusCode,
+											String content) {
+										super.onSuccess(statusCode, content);
+										item.diaryAdmire = (Integer
+												.parseInt(item.diaryAdmire) - 1)
+												+ "";
+										item.isZan = false;
+										zan.setBackgroundResource(R.drawable.fabu_zan);
+										zan.setText(item.diaryAdmire);
+									}
+
+									@Override
+									public void onFinish() {
+										super.onFinish();
+										Config.dismissProgress();
+									}
+
+									@Override
+									public void onFailure(int statusCode,
+											String content, Throwable error) {
+										super.onFailure(statusCode, content,
+												error);
+										Config.showFiledToast(context);
+									}
+								});
+					}
+				}
+			});
+
+			// 回复
+			holder.review.setText(item.diaryReview);
+			holder.review.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+
+					Intent intent = new Intent(context, GrowReviewList.class);
+					intent.putExtra("img_id", item.img_id);
+					intent.putExtra("owner_id", item.user_id);
+					intent.putExtra("ismy",
+							item.user_id.equals(Config.getUser(context).uid));
+					startActivityForResult(intent, 1);
+				}
+			});
+
+			if (item.reviews.size() > 0) {
+				RelativeLayout reviews_root[] = new RelativeLayout[4];
+				reviews_root[0] = (RelativeLayout) convertView
+						.findViewById(R.id.review_1_root);
+				reviews_root[1] = (RelativeLayout) convertView
+						.findViewById(R.id.review_2_root);
+				reviews_root[2] = (RelativeLayout) convertView
+						.findViewById(R.id.review_3_root);
+				reviews_root[3] = (RelativeLayout) convertView
+						.findViewById(R.id.review_4_root);
+				reviews_root[0].setVisibility(View.GONE);
+				reviews_root[1].setVisibility(View.GONE);
+				reviews_root[2].setVisibility(View.GONE);
+				reviews_root[3].setVisibility(View.GONE);
+				if (item.reviews.size() >= 4) {
+					for (int i = 0; i < item.reviews.size(); i++) {
+						Review reviewitem = item.reviews.get(i);
+						SpannableString spannableString = FaceConversionUtil
+								.getInstace().getExpressionString(context,
+										reviewitem.review);
+						((TextView) (reviews_root[i].getChildAt(0)))
+								.setText(reviewitem.name);
+						((TextView) (reviews_root[i].getChildAt(1)))
+								.setText(spannableString);
+						reviews_root[i].setVisibility(View.VISIBLE);
+					}
+				} else if (item.reviews.size() < 4) {
+					holder.check_reviewall.setVisibility(View.GONE);
+					for (int i = 0; i < item.reviews.size(); i++) {
+						Review reviewitem = item.reviews.get(i);
+						SpannableString spannableString = FaceConversionUtil
+								.getInstace().getExpressionString(context,
+										reviewitem.review);
+						((TextView) (reviews_root[i].getChildAt(0)))
+								.setText(reviewitem.name);
+						((TextView) (reviews_root[i].getChildAt(1)))
+								.setText(spannableString);
+						reviews_root[i].setVisibility(View.VISIBLE);
+					}
+				}
+
+				holder.check_reviewall
+						.setText("查看所有" + item.diaryReview + "评论");
+				holder.check_reviewall
+						.setOnClickListener(new OnClickListener() {
+							@Override
+							public void onClick(View v) {
+								Intent intent = new Intent(context,
+										GrowReviewList.class);
+								intent.putExtra("img_id", item.img_id);
+								intent.putExtra("ismy", item.user_id
+										.equals(Config.getUser(context).uid));
+								startActivity(intent);
+							}
+						});
+			} else {
+				RelativeLayout review_root = (RelativeLayout) convertView
+						.findViewById(R.id.review_root);
+				review_root.setVisibility(View.GONE);
+			}
+
+			return convertView;
+		}
+
+		private void addImg(ScrollView scrollview, LinearLayout imgLinear,
+				final ArrayList<Image> imageList, final int position) {
+			imgLinear.setOrientation(LinearLayout.VERTICAL);
+			imgLinear.setGravity(Gravity.CENTER_HORIZONTAL);
+			imgLinear.setPadding(0, 5, 0, 5);
+			for (int i = 0; i < imageList.size(); i++) {
+				final ImageView img = new ImageView(context);
+				img.setId(i);
+				img.setPadding(0, 5, 0, 5);
+				MyApplication.getInstance().display(imageList.get(i).img_thumb,
+						img, R.drawable.def_image);
+
+				// 大图
+				int newW = 0, newH = 0;
+				if (imageList.size() > 0) {
+					if (imageList.get(i).img_thumb_width == imageList.get(i).img_thumb_height) {
+						newW = width;
+						newH = width;
+					} else if (Float
+							.parseFloat(imageList.get(i).img_thumb_width) > Float
+							.parseFloat(imageList.get(i).img_thumb_height)) {
+						float h = 0;
+						float sx = (float) ((float) width / (float) (Integer
+								.parseInt(imageList.get(i).img_thumb_width)));
+						h = (float) ((float) Float
+								.parseFloat(imageList.get(i).img_thumb_height) * (float) sx);
+						newW = width;
+						newH = (int) h;
+					} else {
+						float sx = (float) (width * 0.72)
+								/ (Float.parseFloat(imageList.get(i).img_thumb_width));
+						newW = (int) ((float) (((Float.parseFloat(imageList
+								.get(i).img_thumb_width)) * sx)));
+						newH = (int) ((float) ((Float.parseFloat(imageList
+								.get(i).img_thumb_height)) * sx));
+					}
+					RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+							newW, newH);
+					params.addRule(RelativeLayout.BELOW, R.id.head_root);
+					img.setLayoutParams(params);
+					img.setScaleType(ScaleType.FIT_XY);
+					imgLinear.addView(img);
+					post_img = imageList.get(0).img_thumb;
+					img.setOnClickListener(new OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+							Intent intent = new Intent(context,
+									ChangePhotoSize.class);
+
+							ArrayList<String> imgBig = new ArrayList<String>();
+							ArrayList<String> imaHed = new ArrayList<String>();
+							ArrayList<String> imaWid = new ArrayList<String>();
+							for (int j = 0; j < imageList.size(); j++) {
+								imgBig.add(imageList.get(j).img_down);
+								imaHed.add(imageList.get(j).img_height);
+								imaWid.add(imageList.get(j).img_width);
+							}
+							intent.putStringArrayListExtra("imgList", imgBig);
+							intent.putStringArrayListExtra("img_downList",
+									imgBig);
+							intent.putStringArrayListExtra("imaWid", imaWid);
+							intent.putStringArrayListExtra("imaHed", imaHed);
+							intent.putExtra("listIndex", img.getId());
+							context.startActivity(intent);
+						}
+					});
+				}
+			}
+			scrollview.addView(imgLinear);
+		}
+
+		/* 单图显示 */
+		private void getImage(String imagePath,
+				final ArrayList<GrowDetailItem.Image> imgList,
+				final ImageView view, final int positon, final View convertView) {
+			view.setTag(imagePath);
+			ImageDownloader mDownloader = null;
+			if (mDownloader == null) {
+				mDownloader = new ImageDownloader();
+			}
+			if (mDownloader != null) {
+				mDownloader.imageDownload(imagePath, view,
+						"/Download/cache_files/", context,
+						new OnImageDownload() {
+							@Override
+							public void onDownloadSucc(Bitmap bitmap,
+									String c_url, ImageView imageView) {
+								ImageView imageView1 = (ImageView) convertView
+										.findViewWithTag(c_url);
+								if (imageView1 != null) {
+									imageView1.setImageBitmap(bitmap);
+									imageView1.setTag("");
+								}
+
+							}
+						});
+			}
+
+			view.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(context, ChangePhotoSize.class);
+					ArrayList<String> list = new ArrayList<String>();
+					list.add(imgList.get(0).img);
+					intent.putExtra("imgList", list);
+					context.startActivity(intent);
+				}
+			});
+		}
+	}
+
+	private boolean isFallBit() {
+
+		if (BimpUtil.drr.size() >= 6) {
+			return false;
+		}
+		return true;
+	}
+
+	private void showShare1() {
+		MobSDK.init(this);
+		OnekeyShare oks = new OnekeyShare();
+		// 关闭sso授权
+		oks.disableSSOWhenAuthorize();
+		oks.setSilent(true);
+//		oks.setNotification(R.drawable.icon, getString(R.string.app_name)); // 分享时Notification的图标和文字
+		// 去除注释，演示在九宫格设置自定义的图标
+		Bitmap collect = BitmapFactory.decodeResource(getResources(),
+				R.drawable.logo_delete);
+		Bitmap collectSel = BitmapFactory.decodeResource(getResources(),
+				R.drawable.logo_delete);
+		String label = getResources().getString(R.string.delete);
+		OnClickListener listener = new OnClickListener() {
+			public void onClick(View v) {
+				Builder builder = new Builder(context);
+				builder.setMessage("确认要删除吗?");
+				builder.setNegativeButton("删除",
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								Config.showProgressDialog(context, false, null);
+								AjaxParams params = new AjaxParams();
+								params.put("user_id",
+										Config.getUser(context).uid);
+								params.put("id", imgId);
+								FinalHttp fh = new FinalHttp();
+								fh.post(ServerMutualConfig.DelDiary, params,
+										new AjaxCallBack<String>() {
+											@Override
+											public void onFailure(Throwable t,
+													String strMsg) {
+												super.onFailure(t, strMsg);
+												Config.dismissProgress();
+												Config.showFiledToast(context);
+											}
+
+											@Override
+											public void onSuccess(String t) {
+												super.onSuccess(t);
+												Config.dismissProgress();
+												try {
+													JSONObject json = new JSONObject(
+															t);
+													Toast.makeText(
+															context,
+															json.getString("reMsg"),
+															Toast.LENGTH_SHORT)
+															.show();
+													onRefresh();
+												} catch (Exception e) {
+												}
+											}
+										});
+							}
+						});
+				builder.setNeutralButton("取消", null);
+				builder.create().show();
+			}
+		};
+
+		// 分享到话题
+		Bitmap collect1 = BitmapFactory.decodeResource(getResources(),
+				R.drawable.to_xiuxiu);
+		Bitmap collectSel1 = BitmapFactory.decodeResource(getResources(),
+				R.drawable.to_xiuxiu);
+		String label1 = getResources().getString(R.string.post);
+		OnClickListener listener1 = new OnClickListener() {
+			public void onClick(View v) {
+				Config.showProgressDialog(context, false, null);
+				FinalHttp fh = new FinalHttp();
+				AjaxParams params = new AjaxParams();
+				params.put("img_id", imgId);
+				// android.util.Log.e("fanfan", params.toString());
+				fh.post(ServerMutualConfig.ShareSingleToPost, params,
+						new AjaxCallBack<String>() {
+
+							@Override
+							public void onFailure(Throwable t, String strMsg) {
+								Config.dismissProgress();
+								Config.showFiledToast(context);
+								super.onFailure(t, strMsg);
+							}
+
+							@Override
+							public void onSuccess(String t) {
+								super.onSuccess(t);
+								Config.dismissProgress();
+								Toast.makeText(context, "已分享到话题", 0).show();
+								String str = "";
+								try {
+									JSONObject json = new JSONObject(t);
+									str = json.getString("reMsg");
+								} catch (JSONException e) {
+									e.printStackTrace();
+								}
+							}
+
+						});
+			}
+		};
+
+		oks.setCustomerLogo(collect, label, listener);
+		oks.setCustomerLogo(collect1, label1, listener1);
+		oks.setShareContentCustomizeCallback(new ShareContentCustomizeCallback() {
+
+			@Override
+			public void onShare(Platform platform, ShareParams paramsToShare) {
+				if ("Wechat".equals(platform.getName())) {
+					paramsToShare.setShareType(Platform.SHARE_TEXT);
+					paramsToShare.setText(babyName + "@" + babyBirth + ":"
+							+ singelMsg);
+					paramsToShare.setShareType(Platform.SHARE_WEBPAGE);
+					paramsToShare.setImageUrl(singelImg);
+					paramsToShare
+							.setUrl("http://www.baobaoshowshow.com/singlediaryshare.php?"
+									+ "img_id=" + imgId + "&user_id=" + uid);
+				} else if ("SinaWeibo".equals(platform.getName())) {
+					paramsToShare
+							.setText(babyName
+									+ "@"
+									+ babyBirth
+									+ ":"
+									+ singelMsg
+									+ "http://www.baobaoshowshow.com/singlediaryshare.php?"
+									+ "img_id=" + imgId + "&user_id=" + uid);
+					paramsToShare.setImageUrl(singelImg);
+				} else if ("QZone".equals(platform.getName())) {
+					paramsToShare.setTitle(""); // title微信、QQ空间
+					paramsToShare
+							.setTitleUrl("http://www.baobaoshowshow.com/singlediaryshare.php?"
+									+ "img_id=" + imgId + "&user_id=" + uid);
+					paramsToShare.setSite(getString(R.string.app_name)); // site是分享此内容的网站名称，仅在QQ空间使用
+					paramsToShare.setText(babyName + "@" + babyBirth + ":"
+							+ singelMsg);
+					paramsToShare.setImageUrl(singelImg);
+					paramsToShare
+							.setSiteUrl("http://www.baobaoshowshow.com/singlediaryshare.php?"
+									+ "img_id=" + imgId + "&user_id=" + uid); // siteUrl是分享此内容的网站地址，仅在QQ空间使用
+				} else if ("QQ".equals(platform.getName())) {
+					paramsToShare.setTitle("");
+					paramsToShare
+							.setTitleUrl("http://www.baobaoshowshow.com/singlediaryshare.php?"
+									+ "img_id=" + imgId + "&user_id=" + uid);
+					paramsToShare.setText(babyName + "@" + babyBirth + ":"
+							+ singelMsg);
+					paramsToShare.setImageUrl(singelImg);
+				} else if ("WechatMoments".equals(platform.getName())) {
+					paramsToShare.setShareType(Platform.SHARE_TEXT);
+					paramsToShare.setTitle(babyName + "@" + babyBirth + ":"
+							+ singelMsg);
+					paramsToShare.setShareType(Platform.SHARE_WEBPAGE);
+					paramsToShare.setImageUrl(singelImg);
+					paramsToShare
+							.setUrl("http://www.baobaoshowshow.com/singlediaryshare.php?"
+									+ "img_id=" + imgId + "&user_id=" + uid);
+				}
+
+			}
+		});
+		// 启动分享GUI
+		oks.show(context);
+	}
+
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+}

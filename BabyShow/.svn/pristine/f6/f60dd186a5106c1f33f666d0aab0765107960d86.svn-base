@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#f5f5f5" >
+
+    <FrameLayout
+        android:id="@+id/ly_head"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <com.yyqq.commen.utils.UGallery
+            android:id="@+id/gallery"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+
+        <LinearLayout
+            android:id="@+id/viewGroup"
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:layout_gravity="bottom"
+            android:orientation="horizontal" >
+        </LinearLayout>
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/main_head_all"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ly_head"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp" >
+
+        <com.yyqq.commen.view.HorizontialListView
+            android:id="@+id/toys_head_list"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:scrollbars="vertical" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/main_head_search"
+        android:layout_width="fill_parent"
+        android:layout_height="27dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_toLeftOf="@+id/lease_main_right"
+        android:background="@drawable/view_to_shape04"
+        android:gravity="left|center_vertical"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/toys_search_text"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="left|center_vertical"
+            android:textColor="#333333"
+            android:textSize="@dimen/text_size_12" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/lease_main_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:visibility="gone" />
+
+</RelativeLayout>

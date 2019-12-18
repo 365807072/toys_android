@@ -1,0 +1,249 @@
+package com.yyqq.commen.model;
+
+import java.util.ArrayList;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class GroupManagerTopicBean {
+
+	private String img_id = "";
+	private String img_title = "";
+	private String img_description = "";
+	private String is_group = "";
+	private String post_create_time = "";
+	private String show_essence_name;
+	
+	private ArrayList<Essence> editList = new ArrayList<Essence>();
+	private ArrayList<Group_class> categoryList = new ArrayList<Group_class>();
+	private ArrayList<Img> imgList = new ArrayList<Img>();
+	
+	public class Essence{
+		String essence_id = "";
+		String essence_name = "";
+		String essence_state = "";
+		
+		public String getEssence_id() {
+			return essence_id;
+		}
+		public void setEssence_id(String essence_id) {
+			this.essence_id = essence_id;
+		}
+		public String getEssence_name() {
+			return essence_name;
+		}
+		public void setEssence_name(String essence_name) {
+			this.essence_name = essence_name;
+		}
+		public String getEssence_state() {
+			return essence_state;
+		}
+		public void setEssence_state(String essence_state) {
+			this.essence_state = essence_state;
+		}
+		@Override
+		public String toString() {
+			return "Essence [essence_id=" + essence_id + ", essence_name="
+					+ essence_name + ", essence_state=" + essence_state + "]";
+		}
+		
+		
+	}
+	
+	public class Group_class{
+		String group_class_id = "";
+		String title = "";
+		String group_class_state = "";
+		
+		public String getGroup_class_id() {
+			return group_class_id;
+		}
+		public void setGroup_class_id(String group_class_id) {
+			this.group_class_id = group_class_id;
+		}
+		public String getTitle() {
+			return title;
+		}
+		public void setTitle(String title) {
+			this.title = title;
+		}
+		public String getGroup_class_state() {
+			return group_class_state;
+		}
+		public void setGroup_class_state(String group_class_state) {
+			this.group_class_state = group_class_state;
+		}
+		@Override
+		public String toString() {
+			return "Group_class [group_class_id=" + group_class_id + ", title="
+					+ title + ", group_class_state=" + group_class_state + "]";
+		}
+		
+		
+	}
+	
+	public class Img{
+		String img_thumb = "";
+		String img_thumb_width = "";
+		String img_thumb_height = "";
+		
+		public String getImg_thumb() {
+			return img_thumb;
+		}
+		public void setImg_thumb(String img_thumb) {
+			this.img_thumb = img_thumb;
+		}
+		public String getImg_thumb_width() {
+			return img_thumb_width;
+		}
+		public void setImg_thumb_width(String img_thumb_width) {
+			this.img_thumb_width = img_thumb_width;
+		}
+		public String getImg_thumb_height() {
+			return img_thumb_height;
+		}
+		public void setImg_thumb_height(String img_thumb_height) {
+			this.img_thumb_height = img_thumb_height;
+		}
+		@Override
+		public String toString() {
+			return "Img [img_thumb=" + img_thumb + ", img_thumb_width="
+					+ img_thumb_width + ", img_thumb_height="
+					+ img_thumb_height + "]";
+		}
+		
+		
+		
+	}
+
+	public String getImg_id() {
+		return img_id;
+	}
+
+	public void setImg_id(String img_id) {
+		this.img_id = img_id;
+	}
+
+	public String getImg_title() {
+		return img_title;
+	}
+
+	public void setImg_title(String img_title) {
+		this.img_title = img_title;
+	}
+
+	public String getImg_description() {
+		return img_description;
+	}
+
+	public void setImg_description(String img_description) {
+		this.img_description = img_description;
+	}
+
+	public String getIs_group() {
+		return is_group;
+	}
+
+	public void setIs_group(String is_group) {
+		this.is_group = is_group;
+	}
+
+	public String getPost_create_time() {
+		return post_create_time;
+	}
+
+	public void setPost_create_time(String post_create_time) {
+		this.post_create_time = post_create_time;
+	}
+
+	public ArrayList<Essence> getEditList() {
+		return editList;
+	}
+
+	public void setEditList(ArrayList<Essence> editList) {
+		this.editList = editList;
+	}
+
+	public ArrayList<Group_class> getCategoryList() {
+		return categoryList;
+	}
+
+	public void setCategoryList(ArrayList<Group_class> categoryList) {
+		this.categoryList = categoryList;
+	}
+
+	public ArrayList<Img> getImgList() {
+		return imgList;
+	}
+
+	public void setImgList(ArrayList<Img> imgList) {
+		this.imgList = imgList;
+	}
+	
+	public String getShow_essence_name() {
+		return show_essence_name;
+	}
+	public void setShow_essence_name(String show_essence_name) {
+		this.show_essence_name = show_essence_name;
+	}
+	
+	@Override
+	public String toString() {
+		return "GroupManagerTopicBean [img_id=" + img_id + ", img_title="
+				+ img_title + ", img_description=" + img_description
+				+ ", is_group=" + is_group + ", post_create_time="
+				+ post_create_time + ", show_essence_name=" + show_essence_name
+				+ ", editList=" + editList + ", categoryList=" + categoryList
+				+ ", imgList=" + imgList + "]";
+	}
+
+	public GroupManagerTopicBean fromJson(JSONObject jsonObj){
+		GroupManagerTopicBean groupManagerTopicBean = new GroupManagerTopicBean();
+		groupManagerTopicBean.getEditList().clear();
+		groupManagerTopicBean.getCategoryList().clear();
+		groupManagerTopicBean.getImgList().clear();
+		
+		try {
+			groupManagerTopicBean.setImg_id(jsonObj.getString("img_id"));
+			groupManagerTopicBean.setImg_title(jsonObj.getString("img_title"));
+			groupManagerTopicBean.setImg_description(jsonObj.getString("img_description"));
+			groupManagerTopicBean.setPost_create_time(jsonObj.getString("post_create_time"));
+			groupManagerTopicBean.setShow_essence_name(jsonObj.getString("show_essence_name"));
+			
+			Essence essence = null;
+			for(int i = 0 ; i < jsonObj.getJSONArray("essence").length() ; i++){
+				JSONObject essObj = jsonObj.getJSONArray("essence").getJSONObject(i);
+				essence = new Essence();
+				essence.setEssence_id(essObj.getString("essence_id"));
+				essence.setEssence_name(essObj.getString("essence_name"));
+				essence.setEssence_state(essObj.getString("essence_state"));
+//				essence.setShow_essence_name(essObj.getString("show_essence_name"));
+				groupManagerTopicBean.getEditList().add(essence);
+			}
+			
+			Group_class group_class = null;
+			for(int i = 0 ; i < jsonObj.getJSONArray("group_class").length() ; i++){
+				JSONObject groupObj = jsonObj.getJSONArray("group_class").getJSONObject(i);
+				group_class = new Group_class();
+				group_class.setTitle(groupObj.getString("title"));
+				group_class.setGroup_class_id(groupObj.getString("group_class_id"));
+				group_class.setGroup_class_state(groupObj.getString("group_class_state"));
+				groupManagerTopicBean.getCategoryList().add(group_class);
+			}
+			
+			Img img = null;
+			for(int i = 0 ; i < jsonObj.getJSONArray("img").length() ; i++){
+				JSONObject imgObj = jsonObj.getJSONArray("img").getJSONObject(i);
+				img = new Img();
+				img.setImg_thumb(imgObj.getString("img_thumb"));
+				img.setImg_thumb_height(imgObj.getString("img_thumb_height"));
+				img.setImg_thumb_width(imgObj.getString("img_thumb_width"));
+				groupManagerTopicBean.getImgList().add(img);
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return groupManagerTopicBean;
+	}
+	
+}

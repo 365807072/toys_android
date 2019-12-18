@@ -1,0 +1,195 @@
+package com.yyqq.commen.adapter;
+
+import java.util.ArrayList;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.yyqq.babyshow.R;
+import com.yyqq.code.business.BusinessDetailActivity;
+import com.yyqq.code.main.GoodLife;
+import com.yyqq.code.main.MainItemDetialActivity;
+import com.yyqq.code.main.MainItemDetialWebActivity;
+import com.yyqq.code.main.MainTab;
+import com.yyqq.code.main.ShowShowMainActivity;
+import com.yyqq.code.postbar.PostBarActivity;
+import com.yyqq.code.toyslease.ToysLeaseMainCategoryActivity;
+import com.yyqq.code.toyslease.ToysLeaseDetailActivity;
+import com.yyqq.code.toyslease.ToysLeaseMainTabActivity;
+import com.yyqq.code.video.VideoDetialActivity;
+import com.yyqq.commen.model.HeadListItem;
+import com.yyqq.commen.model.PostBarTypeItem;
+import com.yyqq.commen.utils.GPSLocationUtils;
+import com.yyqq.commen.utils.GroupRelevantUtils;
+import com.yyqq.commen.view.RoundRectImageView;
+import com.yyqq.framework.application.MyApplication;
+
+public class MainGoodleftHintAdapter extends BaseAdapter {
+
+	private Activity context = null;
+	private LayoutInflater inflater = null;
+	private MyApplication app = null;
+	private ArrayList<HeadListItem> data = null;
+	private int itemHeight = 0;
+	private int itemWidth = 0;
+	
+	public MainGoodleftHintAdapter(Activity context, ArrayList<HeadListItem> data, int itemHeight, int itemWidth) {
+		super();
+		this.context = context;
+		this.data = data;
+		this.itemHeight = itemHeight;
+		this.itemWidth = itemWidth;
+		inflater = (LayoutInflater) context	.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		app = (MyApplication) context.getApplication();
+	}
+
+	@Override
+	public int getCount() {
+		return data.size() > 0 ? data.size() : 0;
+	}
+
+	@Override
+	public Object getItem(int position) {
+		return data.get(position);
+	}
+
+	@Override
+	public long getItemId(int position) {
+		return position;
+	}
+
+	@Override
+	public View getView(final int position, View convertView, ViewGroup parent) {
+		convertView = inflater.inflate(R.layout.item_main_goodleft_hint, null);
+		
+		RoundRectImageView item_goodleft_hint_img = (RoundRectImageView) convertView.findViewById(R.id.item_goodleft_hint_img);
+		MyApplication.getInstance().display(data.get(position).imgList.get(0).img_thumb, item_goodleft_hint_img, R.drawable.def_image);
+		
+		RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) item_goodleft_hint_img.getLayoutParams();
+		params.height = itemHeight;
+		item_goodleft_hint_img.setLayoutParams(params);
+		
+		TextView item_goodleft_hint_name = (TextView) convertView.findViewById(R.id.item_goodleft_hint_name);
+		item_goodleft_hint_name.setText(data.get(position).title);
+		
+		convertView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				IntentConsole(data.get(position));
+			}
+		});
+		return convertView;
+	}
+
+
+	/**
+	 *
+	 *跳转页面控制
+	 * */
+	public void IntentConsole(final HeadListItem bean){
+		if(Integer.parseInt(bean.type) == 32){ // 群详情
+			GroupRelevantUtils.CheckIntent(context, bean.group_id);
+		}else{
+			Intent intent = null;
+			switch (Integer.parseInt(bean.type)) {
+			case 1:
+				// 帖子列表
+				intent = new Intent(context, PostBarActivity.class);
+				intent.putExtra("tag_id", bean.img_id);
+				intent.putExtra("type", bean.type);
+				intent.putExtra("img_title", bean.title);
+				break;
+			case 2:
+				// 帖子详情
+				intent = new Intent(context, MainItemDetialActivity.class);
+				intent.putExtra("img_id", bean.img_id);
+				break;
+			case 3:
+				// 视频详情
+				intent = new Intent(context, VideoDetialActivity.class);
+				PostBarTypeItem postBean = new PostBarTypeItem();
+				postBean.setImg_id(bean.img_id);
+				postBean.setUser_id("");
+				postBean.setVideo_url(bean.video_url);
+				postBean.setImg(bean.imgList.get(0).img_thumb);
+				postBean.setImg_thumb_width(bean.imgList.get(0).img_thumb_width);
+				postBean.setImg_thumb_height(bean.imgList.get(0).img_thumb_height);
+				Bundle bun = new Bundle();
+				bun.putSerializable(VideoDetialActivity.VIIDEO_INFO, postBean);
+				intent.putExtras(bun);
+				break;
+			case 21:
+				// 商家列表
+				intent = new Intent(context, MainTab.class);
+				intent.putExtra("tabid", 1);
+				intent.putExtra("lat", GPSLocationUtils.getLatitude(context));
+				intent.putExtra("lon", GPSLocationUtils.getLongitude(context));
+				break;
+			case 22:
+				// 商家详情
+				intent = new Intent(context, BusinessDetailActivity.class);
+				intent.putExtra("business_id", bean.business_id);
+				intent.putExtra("business_name", bean.business_name);
+				break;
+			case 31:
+				// 群列表
+				intent = new Intent(context, PostBarActivity.class);
+				intent.putExtra("tag_id", bean.img_id);
+				intent.putExtra("type", bean.type);
+				intent.putExtra("img_title", bean.title);
+				intent.putExtra("groupType", false);
+				break;
+			case 41:
+				// 外链
+				intent = new Intent(context, MainItemDetialWebActivity.class);
+				intent.putExtra(MainItemDetialWebActivity.LINK_URL, bean.business_url);
+				break;
+			case 42:
+				// 热门
+				GoodLife.TO_HONT = true;
+				intent = new Intent(context, MainTab.class);
+				intent.putExtra("tabid", 0);
+				break;
+			case 43:
+				// 萌宝
+				intent = new Intent(context, ShowShowMainActivity.class);
+				intent.putExtra(ShowShowMainActivity.TAG_ID_KEY, bean.img_id);
+				intent.putExtra(ShowShowMainActivity.TITLE_TEXT_KEY, bean.title);
+				break;
+			case 44:
+				// 成长记录
+				intent = new Intent(context, MainTab.class);
+				intent.putExtra("tabid", 3);
+				break;
+			case 51:
+				// 玩具首页
+				intent = new Intent(context, ToysLeaseMainTabActivity.class);
+				break;
+			case 52:
+				// 玩具详情
+				intent = new Intent(context, ToysLeaseDetailActivity.class);
+				intent.putExtra(ToysLeaseDetailActivity.TOYS_DETAIL_KEY, bean.img_id);
+				break;
+			case 53:
+				// 玩具分类
+				intent = new Intent(context, ToysLeaseMainCategoryActivity.class);
+				intent.putExtra(ToysLeaseMainCategoryActivity.CATEGORY_ID_KEY, bean.img_id);
+				break;
+			}
+			if(null != intent){
+				context.startActivity(intent);
+			}
+		}
+	}
+	
+}

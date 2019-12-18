@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/import_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:gravity="center"
+        android:text="智能导入照片"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:textColor="#c479dd"
+        android:textSize="19dp" />
+
+    <TextView
+        android:id="@+id/create"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:gravity="center"
+        android:text="新建照片集"
+        android:textColor="#c479dd"
+        android:textSize="19dp" />
+	
+</LinearLayout>

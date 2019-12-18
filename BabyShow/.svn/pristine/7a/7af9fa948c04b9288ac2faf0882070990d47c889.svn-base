@@ -1,0 +1,198 @@
+package com.yyqq.code.toyslease;
+
+import java.util.ArrayList;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.View;
+import android.webkit.JavascriptInterface;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.umeng.analytics.MobclickAgent;
+import com.yyqq.babyshow.R;
+import com.yyqq.commen.utils.MyWebviewUtils;
+import com.yyqq.framework.activity.BaseActivity;
+
+public class ToysLeaseMainTextActivity extends BaseActivity {
+
+	private WebView webView = null;
+	private ArrayList<String> urlList; // 加载过的url记录
+	private LinearLayout web_title;
+	private TextView web_title_center;
+	private ImageView web_title_left;
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_toys_lease_main_text);
+	}
+
+	@Override
+	protected void initView() {
+		web_title = (LinearLayout) findViewById(R.id.web_title);
+		web_title_center = (TextView) findViewById(R.id.web_title_center);
+		web_title_left = (ImageView) findViewById(R.id.web_title_left);
+		
+		urlList = new ArrayList<String>();
+		webView = (WebView) findViewById(R.id.toyslease_webview);
+		MyWebviewUtils.initWebView(this, webView, new JSCallback());
+		// html加载结束再加载js方法，否则js可能会不起作用
+		webView.setWebViewClient(new WebViewClient() { 
+			public boolean shouldOverrideUrlLoading(WebView view, String url) {
+				view.loadUrl(url);
+				checkUrlHistory(url); // 加入url管理集合
+				return true;
+			}
+			
+			@Override
+			public void onPageFinished(WebView view, String url) {
+				super.onPageFinished(view, url);
+			}
+			
+			@Override
+			public void onReceivedError(WebView view, int errorCode,
+					String description, String failingUrl) {
+				Toast.makeText(ToysLeaseMainTextActivity.this, "抱歉！找不到这个网页", Toast.LENGTH_SHORT).show();
+			}
+			
+		});
+		
+		webView.loadUrl("http://www.baobaoshowshow.com/H5/toy/toy.html");
+		urlList.add("http://www.baobaoshowshow.com/H5/toy/toy.html");
+		
+	}
+
+	@Override
+	protected void initData() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void setListener() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	/**
+	 * url历史管理
+	 * */
+	private void checkUrlHistory(String url){
+		if(!urlList.toString().contains(url)){
+			urlList.add(url);
+		}else{
+			for(int i = 0 ; i < urlList.size() ; i++){
+				if(urlList.get(i).equals(url)){
+					urlList.remove(i);
+				}
+			}
+			urlList.add(url);
+		}
+	}
+	
+	/**
+	 * JS回调的原生方法
+	 * */
+	public class JSCallback{
+		
+		/**
+		 * 显示头部栏
+		 * */
+		@JavascriptInterface
+		public void callMethodShowTitle(boolean showLeft, String centerText){
+			web_title.setVisibility(View.VISIBLE);
+			web_title_center.setText(centerText);
+			if(showLeft){
+				web_title_left.setVisibility(View.VISIBLE);
+			}else{
+				web_title_left.setVisibility(View.INVISIBLE);
+			}
+		}
+		
+		/**
+		 * 隐藏头部栏
+		 * */
+		@JavascriptInterface
+		public void callMethodHintTitle(boolean showLeft, String centerText){
+			web_title.setVisibility(View.GONE);
+		}
+		
+		/**
+		 * 退出浏览器
+		 * */
+		@JavascriptInterface
+		public void callMethodFinish(){
+			ToysLeaseMainTextActivity.this.finish();
+		}
+		
+		/**
+		 * JS调用的提示Toast方法
+		 * */
+		@JavascriptInterface
+		public void showToast(String toastStr) {
+			Toast.makeText(ToysLeaseMainTextActivity.this, toastStr, Toast.LENGTH_LONG).show();
+		}
+	}
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		 if ((keyCode == KeyEvent.KEYCODE_BACK) && webView.canGoBack()) {
+			// 返回到上一个网页，没有可返回就退出此Activity
+			if(urlList.size() > 1 ){
+				if(urlList.get(urlList.size()-1).equals("http://www.baobaoshowshow.com/H5/toy/toy.html")){
+					 finishThisPage();
+					 return super.onKeyDown(keyCode, event);
+				}else{
+					urlList.remove(urlList.size()-1);
+					webView.loadUrl(urlList.get(urlList.size()-1));
+					return true;
+				}
+			 }else{
+				 finishThisPage();
+				 return super.onKeyDown(keyCode, event);
+			 }
+		 }else{
+			 finishThisPage();
+			 return super.onKeyDown(keyCode, event);
+		 }       
+	}
+	
+	private void finishThisPage(){
+		 ToysLeaseMainTextActivity.this.finish();
+	}
+	
+	@Override
+	public void startActivity(Intent intent) {
+	    super.startActivity(intent);
+	    overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);
+	}
+
+	@Override
+	public void startActivityForResult(Intent intent, int requestCode) {
+	    super.startActivityForResult(intent, requestCode);
+	    overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);
+	}
+
+	@Override
+	public void finish() {
+		super.finish();
+	    overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+	
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
+}

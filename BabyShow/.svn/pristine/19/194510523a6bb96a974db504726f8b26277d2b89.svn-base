@@ -1,0 +1,319 @@
+package com.yyqq.code.group;
+
+import java.io.File;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.MediaStore;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.ab.http.AbHttpUtil;
+import com.ab.http.AbRequestParams;
+import com.ab.http.AbStringHttpResponseListener;
+import com.yyqq.babyshow.R;
+import com.yyqq.commen.utils.Config;
+import com.yyqq.commen.utils.VideoComperssUtils;
+import com.yyqq.framework.activity.BaseActivity;
+import com.yyqq.framework.application.MyApplication;
+import com.yyqq.framework.application.ServerMutualConfig;
+
+/**
+ * 
+ * 微社区头部信息编辑页
+ * 
+ * @author lyl
+ * 
+ * */
+public class GroupEditHeadActivity extends BaseActivity {
+	
+	public static String GROUP_ID = "";
+	public static String GROUP_IMAGE = "";
+	public static String GROUP_NAME = "";
+	public static String GROUP_DES = "";
+	private final String IMAGE_TYPE = "image/*";
+	private final int IMAGE_CODE = 0;
+	private static final int TAKE_PICTURE = 0x000000;
+	
+	private ImageView group_edit_head_img;
+	private TextView group_edit_head_name;
+	private TextView group_edit_head_des;
+	private RelativeLayout group_edit_img;
+	private RelativeLayout group_edit_name;
+	private RelativeLayout group_edit_des;
+	private ImageView showshow_cancel;
+	
+	private AbHttpUtil ab;
+	private Uri imageUri;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_group_edit_head);
+	}
+
+	@Override
+	protected void initView() {
+		group_edit_head_img = (ImageView) findViewById(R.id.group_edit_head_img);
+		group_edit_head_name = (TextView) findViewById(R.id.group_edit_head_name);
+		group_edit_head_des = (TextView) findViewById(R.id.group_edit_head_des);
+		group_edit_img = (RelativeLayout) findViewById(R.id.group_edit_img);
+		group_edit_name = (RelativeLayout) findViewById(R.id.group_edit_name);
+		group_edit_des = (RelativeLayout) findViewById(R.id.group_edit_des);
+		showshow_cancel = (ImageView) findViewById(R.id.showshow_cancel);
+	}
+
+	@Override
+	protected void initData() {
+		ab = AbHttpUtil.getInstance(this);
+		MyApplication.getInstance().display(GROUP_IMAGE, group_edit_head_img, R.drawable.def_image);
+		group_edit_head_name.setText(GROUP_NAME);
+		group_edit_head_des.setText(GROUP_DES);
+	}
+
+	@Override
+	protected void setListener() {
+		
+		showshow_cancel.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				GroupEditHeadActivity.this.finish();
+			}
+		});
+		
+		group_edit_img.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				AlertDialog.Builder builder = new Builder(GroupEditHeadActivity.this);
+				LayoutInflater inflater = (LayoutInflater) GroupEditHeadActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				View convertView = inflater.inflate(R.layout.image_dialog, null);
+				builder.setTitle("选择");
+				builder.setView(convertView);
+				TextView image = (TextView) convertView.findViewById(R.id.image);
+				TextView camera = (TextView) convertView.findViewById(R.id.camera);
+				image.setOnClickListener(selectImageClick);
+				camera.setOnClickListener(selectCameraClick);
+				dialog = builder.create();
+				dialog.show();
+			}
+		});
+		
+		group_edit_name.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				updateName();
+			}
+		});
+
+		group_edit_des.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				updateDes();
+			}
+		});
+	}
+	
+	Dialog dialog;
+	public OnClickListener selectImageClick = new OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			if (dialog != null && dialog.isShowing()) {
+				Intent getAlbum = new Intent(Intent.ACTION_GET_CONTENT);
+				getAlbum.setType(IMAGE_TYPE);
+				startActivityForResult(getAlbum, IMAGE_CODE);
+				dialog.dismiss();
+			}
+		}
+	};
+	public OnClickListener selectCameraClick = new OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			if (dialog != null && dialog.isShowing()) {
+				Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+				imageUri = Uri.parse("file:///sdcard/yyqq/babyshow/image/temp_image_1.jpg");
+				i.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, imageUri);
+				startActivityForResult(i, TAKE_PICTURE);
+				dialog.dismiss();
+			}
+		}
+	};
+
+	
+	/**
+	 * 更新微社区头部信息
+	 * */
+	private void updateHeadInfo(final boolean isName, final String str){
+		if(str.isEmpty()){
+			Toast.makeText(GroupEditHeadActivity.this, "未输入内容",Toast.LENGTH_SHORT).show();
+			return;
+		}
+		AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(this).uid);
+		params.put("group_id", GROUP_ID);
+		if(isName){
+			params.put("group_name", str);
+			params.put("description", group_edit_head_des.getText().toString().trim());
+		}else{
+			params.put("description", str);
+			params.put("group_name", group_edit_head_name.getText().toString().trim());
+		}
+//		params.put("cover", "");
+		Config.showProgressDialog(GroupEditHeadActivity.this, false, null);
+		ab.post(ServerMutualConfig.editGroupHead, params, new AbStringHttpResponseListener() {
+			
+			@Override
+			public void onSuccess(int statusCode, String content) {
+				super.onSuccess(statusCode, content);
+				Config.dismissProgress();
+				try {
+					JSONObject json = new JSONObject(content);
+					Toast.makeText(GroupEditHeadActivity.this,json.getString("reMsg"),Toast.LENGTH_SHORT).show();
+					if(json.getBoolean("success")){
+						if(isName){
+							group_edit_head_name.setText(str);
+						}else{
+							group_edit_head_des.setText(str);
+						}
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			@Override
+			public void onFinish() {
+				super.onFinish();
+				Config.dismissProgress();
+			}
+			
+			@Override
+			public void onFailure(int statusCode, String content,
+					Throwable error) {
+				super.onFailure(statusCode, content, error);
+			}
+		});
+	}
+	
+	/**
+	 * 修改名称
+	 * */
+	private void updateName(){
+		AlertDialog.Builder builder = new Builder(this);
+		builder.setTitle("请输入新名称");
+		final EditText edit_name = new EditText(this);
+		edit_name.setSingleLine(true);
+		edit_name.setMaxEms(10);
+		builder.setView(edit_name);
+		builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface arg0, int arg1) {
+				arg0.dismiss();
+				updateHeadInfo(true, edit_name.getText().toString().trim());
+			}
+		});
+		builder.setNeutralButton("取消",
+				new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
+		builder.create().show();
+	}
+
+	
+	/**
+	 * 修改简介
+	 * */
+	private void updateDes(){
+		AlertDialog.Builder builder = new Builder(this);
+		builder.setTitle("请输入新简介");
+		final EditText edit_name = new EditText(this);
+		edit_name.setSingleLine(true);
+		edit_name.setMaxEms(10);
+		builder.setView(edit_name);
+		builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface arg0, int arg1) {
+				arg0.dismiss();
+				updateHeadInfo(false, edit_name.getText().toString().trim());
+			}
+		});
+		builder.setNeutralButton("取消",
+				new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
+		builder.create().show();
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == RESULT_OK) {  
+			String imgPath = "";
+			if(null == data){
+				imgPath = VideoComperssUtils.getVideoPath(GroupEditHeadActivity.this, imageUri);
+			}else{
+				imgPath = VideoComperssUtils.getVideoPath(GroupEditHeadActivity.this, data);
+			}
+			Config.showProgressDialog(GroupEditHeadActivity.this, true, null);
+			
+			AbRequestParams params = new AbRequestParams();
+			params.put("login_user_id", Config.getUser(this).uid);
+			params.put("group_id", GROUP_ID);
+			params.put("description", group_edit_head_des.getText().toString().trim());
+			params.put("group_name", group_edit_head_name.getText().toString().trim());
+			params.put("cover", new File(imgPath));
+			ab.post(ServerMutualConfig.editGroupHead, params, new AbStringHttpResponseListener() {
+				
+				@Override
+				public void onSuccess(int statusCode,
+						String content) {
+					super.onSuccess(statusCode, content);
+					Config.dismissProgress();
+					try {
+						JSONObject json = new JSONObject(content);
+						if (json.getBoolean("success")) {
+								MyApplication.getInstance().display(json.getJSONObject("data").getString("cover"), group_edit_head_img, R.drawable.def_image);
+						}
+						Toast.makeText(GroupEditHeadActivity.this,json.getString("reMsg"),Toast.LENGTH_SHORT).show();
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				}
+				
+				@Override
+				public void onFinish() {
+					super.onFinish();
+				}
+				
+				@Override
+				public void onFailure(int statusCode,
+						String content, Throwable error) {
+					super.onFailure(statusCode, content, error);
+				}
+			});
+		}}
+}

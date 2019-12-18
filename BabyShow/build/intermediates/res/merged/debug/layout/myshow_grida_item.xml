@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:background="@color/gridbg" >
+
+    <ImageView
+        android:id="@+id/item_grida_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY" >
+    </ImageView>
+
+    <TextView
+        android:id="@+id/item_grida_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@android:color/black"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:text="10"
+        android:textColor="@android:color/white"
+        android:visibility="gone" >
+    </TextView>
+
+</RelativeLayout>

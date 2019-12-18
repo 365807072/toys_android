@@ -1,0 +1,63 @@
+package com.yyqq.commen.adapter;
+
+import java.util.ArrayList;
+
+import android.app.Activity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.yyqq.babyshow.R;
+import com.yyqq.commen.model.ToysLeaseCartItemBean;
+import com.yyqq.framework.application.MyApplication;
+
+/**
+ * 购物车玩具item
+ * */
+public class ToysLeaseCartItemAdapter extends BaseAdapter {
+
+	private Activity context = null;
+	private LayoutInflater inflater = null;
+	private ArrayList<ToysLeaseCartItemBean> data = null;
+	
+	public ToysLeaseCartItemAdapter(Activity context, LayoutInflater inflater, ArrayList<ToysLeaseCartItemBean> data) {
+		super();
+		this.context = context;
+		this.inflater = inflater;
+		this.data = data;
+	}
+
+	@Override
+	public int getCount() {
+		return data.size() > 0 ? data.size() : 0;
+	}
+
+	@Override
+	public Object getItem(int position) {
+		return data.get(position);
+	}
+
+	@Override
+	public long getItemId(int position) {
+		return position;
+	}
+
+	@Override
+	public View getView(final int position, View convertView, ViewGroup parent) {
+		convertView = inflater.inflate(R.layout.item_cart_type03, null);
+		ImageView item_cart_select = (ImageView) convertView.findViewById(R.id.item_cart_select);
+		ImageView item_cart_img = (ImageView) convertView.findViewById(R.id.item_cart_img);
+		TextView item_cart_name = (TextView) convertView.findViewById(R.id.item_cart_name);
+		TextView item_cart_price = (TextView) convertView.findViewById(R.id.item_cart_price);
+		
+		MyApplication.getInstance().display(data.get(position).getImg_thumb(), item_cart_img, R.drawable.def_image);
+		item_cart_name.setText(data.get(position).getBusiness_title());
+		item_cart_price.setText(data.get(position).getEvery_price());
+		
+		return convertView;
+	}
+	
+}

@@ -1,0 +1,570 @@
+package com.yyqq.code.photo;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import net.tsz.afinal.FinalHttp;
+import net.tsz.afinal.http.AjaxCallBack;
+import net.tsz.afinal.http.AjaxParams;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import com.ab.http.AbHttpUtil;
+import com.ab.http.AbRequestParams;
+import com.ab.http.AbStringHttpResponseListener;
+import com.umeng.analytics.MobclickAgent;
+import com.yyqq.babyshow.R;
+import com.yyqq.commen.utils.Config;
+import com.yyqq.commen.utils.HackyViewPager;
+import com.yyqq.commen.utils.Log;
+import com.yyqq.commen.view.PhotoView;
+import com.yyqq.framework.application.MyApplication;
+import com.yyqq.framework.application.ServerMutualConfig;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.text.InputFilter;
+import android.view.View;
+import android.view.View.OnLongClickListener;
+import android.view.Gravity;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class PhotoBigImage extends Activity {
+	public String TAG = "PhotoBigImage";
+	public Activity context;
+	private AbHttpUtil http;
+	private JSONArray json;
+	private ArrayList<PhotoItem> data = new ArrayList<PhotoBigImage.PhotoItem>();
+	private ArrayList<String> dataImg = new ArrayList<String>();
+	private int index;
+	private TextView share, delete, adddesc, desc;;
+	private ImageView player;
+	private ViewPager mViewPager;
+	private String isShare;
+	private Button savePhoto, savePhone, cancle;
+	private FinalHttp fh;
+	private String filename = "", downurl = "";
+	private String down_filename, down_downurl;
+	private String thum_filename, thum_downurl;
+	private String img_url;
+	public ArrayList<String> ImaWid = new ArrayList<String>();
+	public ArrayList<String> ImaHed = new ArrayList<String>();
+
+	public void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+	
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
+
+	public void onCreate(Bundle b) {
+		super.onCreate(b);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		MyApplication.getInstance().addActivity(this);
+		context = this;
+		mViewPager = new HackyViewPager(this);
+		setContentView(mViewPager);
+
+		http = AbHttpUtil.getInstance(context);
+		http.setDebug(Log.isDebug);
+		index = getIntent().getIntExtra("index", 0);
+		isShare = getIntent().getStringExtra("isShare");
+		try {
+			json = new JSONArray(getIntent().getStringExtra("info"));
+			for (int i = 0; i < json.length(); i++) {
+				PhotoItem item = new PhotoItem();
+				item.fromJson(json.getJSONObject(i));
+				data.add(item);
+				dataImg.add(item.img);
+				ImaWid.add(item.img_width);
+				ImaHed.add(item.img_height);
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		mViewPager.setAdapter(new Myadapter());
+		mViewPager.setCurrentItem(index);
+	}
+
+	public class Myadapter extends PagerAdapter {
+
+		@Override
+		public int getCount() {
+			return data.size();
+		}
+
+		@Override
+		public View instantiateItem(ViewGroup container, int position) {
+			View view = context.getLayoutInflater().inflate(
+					R.layout.photo_big_image_viewpager, null);
+			final RelativeLayout title = (RelativeLayout) view
+					.findViewById(R.id.title);
+			final RelativeLayout bottom_root = (RelativeLayout) view
+					.findViewById(R.id.bottom_root);
+			final PhotoItem item = data.get(position);
+			player = (ImageView) view.findViewById(R.id.player);
+			player.setOnClickListener(playClick);
+			share = (TextView) view.findViewById(R.id.share);
+			delete = (TextView) view.findViewById(R.id.delete);
+			adddesc = (TextView) view.findViewById(R.id.add_desc);
+			desc = (TextView) view.findViewById(R.id.desc);
+			desc.setText(item.desc);
+			final PhotoView photoView = (PhotoView) view.findViewById(R.id.img);
+			if (!getIntent().getBooleanExtra("default", false)
+					&& !getIntent().getBooleanExtra("people", false)) {
+				title.setVisibility(View.VISIBLE);
+				bottom_root.setVisibility(View.VISIBLE);
+			}
+			photoView.setOnLongClickListener(new OnLongClickListener() {
+				@Override
+				public boolean onLongClick(View v) {
+
+					down_filename = item.img_down.substring(
+							item.img_down.lastIndexOf("/") + 1,
+							item.img_down.length());
+					down_downurl = item.img_down;
+					thum_filename = item.img_thumb.substring(
+							item.img_thumb.lastIndexOf("/") + 1,
+							item.img_thumb.length());
+					thum_downurl = item.img_thumb;
+
+					new PopupWindows(context, photoView);
+					return false;
+				}
+			});
+			MyApplication.getInstance().display(item.img, photoView,
+					R.drawable.def_image);
+			share.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent();
+					intent.putExtra("path", item.img);
+
+					android.util.Log.i("fanfan", item.img);
+
+					intent.setClass(context, CropImage.class);
+					startActivity(intent);
+					// Intent intent2 = new Intent();
+					// intent2.setClass(MainTab.this,CropImage.class);
+					// intent2.putExtra("path",currentFilePath);
+					// startActivity(intent2);
+				}
+			});
+			delete.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					AlertDialog.Builder builder = new Builder(context);
+					builder.setMessage("您确定要删除照片吗?");
+					builder.setPositiveButton("删除",
+							new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									dialog.dismiss();
+									Config.showProgressDialog(context, false,
+											null);
+									FinalHttp fh = new FinalHttp();
+									AjaxParams params = new AjaxParams();
+									params.put("user_id",
+											Config.getUser(context).uid);
+									params.put("img_id", item.id);
+									params.put("do_type", 1 + "");
+									fh.post(ServerMutualConfig.DoImg, params,
+											new AjaxCallBack<String>() {
+												@Override
+												public void onFailure(
+														Throwable t,
+														String strMsg) {
+													super.onFailure(t, strMsg);
+													Config.dismissProgress();
+													Config.showFiledToast(context);
+												}
+
+												@Override
+												public void onSuccess(String t) {
+													super.onSuccess(t);
+													JSONObject json;
+													try {
+														json = new JSONObject(t);
+														if (json.getBoolean("success")) {
+															finish();
+														} else {
+															Config.dismissProgress();
+														}
+														Toast.makeText(
+																context,
+																json.getString("reMsg"),
+																Toast.LENGTH_SHORT)
+																.show();
+													} catch (JSONException e) {
+														e.printStackTrace();
+														Config.dismissProgress();
+													}
+												}
+											});
+								}
+							});
+					builder.setNegativeButton("取消",
+							new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									dialog.dismiss();
+								}
+							});
+					builder.create().show();
+				}
+			});
+			adddesc.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					AlertDialog.Builder builder = new Builder(context);
+					final EditText name = new EditText(context);
+					name.setFilters(new InputFilter[] { new InputFilter.LengthFilter(
+							10) });
+					name.setHint("最多10个字");
+					builder.setTitle("添加备注");
+					builder.setView(name);
+					builder.setPositiveButton("确定",
+							new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									if (name.getText().toString().trim()
+											.length() > 0) {
+										Config.showProgressDialog(context,
+												false, null);
+										AbRequestParams params = new AbRequestParams();
+										params.put("user_id",
+												Config.getUser(context).uid);
+										params.put("img_id", item.id);
+										params.put("do_type", "0");
+										params.put("img_name", name.getText()
+												.toString().trim());
+										http.post(
+												ServerMutualConfig.DoImg,
+												params,
+												new AbStringHttpResponseListener() {
+													@Override
+													public void onSuccess(
+															int statusCode,
+															String content) {
+														super.onSuccess(
+																statusCode,
+																content);
+														try {
+															JSONObject json = new JSONObject(
+																	content);
+															Toast.makeText(
+																	context,
+																	json.getString("reMsg"),
+																	Toast.LENGTH_SHORT)
+																	.show();
+															finish();
+														} catch (JSONException e) {
+															e.printStackTrace();
+														}
+													}
+
+													@Override
+													public void onFinish() {
+														super.onFinish();
+														Config.dismissProgress();
+													}
+
+													@Override
+													public void onFailure(
+															int statusCode,
+															String content,
+															Throwable error) {
+														super.onFailure(
+																statusCode,
+																content, error);
+														Config.showFiledToast(context);
+													}
+												});
+									}
+								}
+							});
+					builder.setNegativeButton("取消",
+							new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									dialog.dismiss();
+								}
+							});
+					builder.create().show();
+				}
+			});
+			container.addView(view, LayoutParams.MATCH_PARENT,
+					LayoutParams.MATCH_PARENT);
+			return view;
+		}
+
+		@Override
+		public void destroyItem(ViewGroup container, int position, Object object) {
+			container.removeView((View) object);
+		}
+
+		@Override
+		public boolean isViewFromObject(View view, Object object) {
+			return view == object;
+		}
+	}
+
+	public class PhotoItem {
+		public String id;
+		public String desc;
+		public long time;
+		public String name;
+		public String img_down = "";
+		public String img = "";
+		public String img_width = "";
+		public String img_height = "";
+		public String img_thumb = "";
+		public String img_thumb_width = "";
+		public String img_thumb_height = "";
+
+		public void fromJson(JSONObject json) throws JSONException {
+			if (json.has("img_id")) {
+				id = json.getString("img_id") + "";
+			}
+			if (json.has("img_thumb")) {
+				img_thumb = json.getString("img_thumb");
+			}
+			if (json.has("img_width")) {
+				img_width = json.getString("img_width");
+			}
+			if (json.has("img_height")) {
+				img_height = json.getString("img_height");
+			}
+			if (json.has("img_down")) {
+				img_down = json.getString("img_down");
+			}
+			if (json.has("img")) {
+				img = json.getString("img");
+			}
+			if (json.has("img_thumb_width")) {
+				img_thumb_width = json.getString("img_thumb_width");
+			}
+			if (json.has("img_thumb_height")) {
+				img_thumb_height = json.getString("img_thumb_height");
+			}
+			if (json.has("desc")) {
+				desc = json.getString("description");
+			}
+			if (json.has("name")) {
+				name = json.getString("img_name");
+			}
+
+		}
+	}
+
+	public OnClickListener playClick = new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			Intent intent = new Intent();
+			intent.setClass(context, AnimPlayer.class);
+			intent.putStringArrayListExtra("imgList", dataImg);
+			intent.putStringArrayListExtra("imaWid", ImaWid);
+			intent.putStringArrayListExtra("imaHed", ImaHed);
+			startActivity(intent);
+		}
+
+	};
+
+	class PopupWindows extends PopupWindow {
+		public PopupWindows(Context mContext, View parent) {
+			View view = View.inflate(mContext, R.layout.download_popupwindows,
+					null);
+			savePhoto = (Button) view.findViewById(R.id.savePhoto);
+			savePhone = (Button) view.findViewById(R.id.savePhone);
+			cancle = (Button) view.findViewById(R.id.can);
+			setWidth(LayoutParams.FILL_PARENT);
+			setHeight(LayoutParams.FILL_PARENT);
+			setBackgroundDrawable(new BitmapDrawable());
+			setFocusable(true);
+			setOutsideTouchable(true);
+			setContentView(view);
+			update();
+			showAtLocation(parent, Gravity.BOTTOM, 0, 0);
+
+			// save to the photoAlbum
+			savePhoto.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					dismiss();
+					AlertDialog.Builder dialog = new Builder(context);
+					dialog.setTitle("保存成功");
+
+					if (getIntent().getBooleanExtra("friend", false)) {
+						if ("1".equals(isShare)) {
+							img_url = down_downurl;
+							// Log.i(" fanfan", "==1==========" + img_url);
+						} else {
+							dialog.setMessage("请到相册-其它-下载查看"
+									+ "   这里下载的是缩略图,要下载高清图片,请请求用户分享,到共享相册里面去下载");
+							img_url = thum_downurl;
+							// Log.i(" fanfan", "==2==========" + img_url);
+						}
+					} else {
+						dialog.setMessage("请到相册-其它-下载查看");
+						img_url = down_downurl;
+						// Log.i(" fanfan", "==3==========" + img_url);
+					}
+					dialog.setNegativeButton("好的",
+							new DialogInterface.OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+								}
+
+							});
+					AjaxParams params = new AjaxParams();
+					params.put("user_id", Config.getUser(context).uid);
+					params.put("img_url", img_url);
+
+					fh = new FinalHttp();
+					fh.post(ServerMutualConfig.DownloadImg, params,
+							new AjaxCallBack<String>() {
+
+								@Override
+								public void onFailure(Throwable t, String strMsg) {
+									Config.dismissProgress();
+									super.onFailure(t, strMsg);
+								}
+
+								@Override
+								public void onSuccess(String t) {
+									Config.dismissProgress();
+									super.onSuccess(t);
+								}
+
+							});
+					dialog.create().show();
+				}
+			});
+
+			// save to the phone
+			savePhone.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					dismiss();
+					AlertDialog.Builder dialog = new Builder(context);
+					dialog.setTitle("下载照片");
+					if (getIntent().getBooleanExtra("friend", false)) {
+						if ("1".equals(isShare)) {
+							dialog.setMessage("确定要下载该照片吗?");
+						} else {
+							dialog.setMessage("这里下载的是缩略图,要下载高清图片,请请求用户分享,到共享相册里面去下载");
+						}
+					} else {
+						dialog.setMessage("确定要下载该照片吗?");
+					}
+					dialog.setNegativeButton("确定",
+							new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									Config.showProgressDialog(context, true,
+											null);
+									final String baby_name = getIntent()
+											.getStringExtra("baby_name") + "/";
+									File dir = new File(Config.DownFile
+											+ baby_name);
+									if (!dir.exists()) {
+										dir.mkdirs();
+									}
+									FinalHttp fh = new FinalHttp();
+									// down_filename,down_downurl;
+									// thum_filename,thum_downurl
+									if (getIntent().getBooleanExtra("friend",
+											false)) {
+										if ("1".equals(isShare)) {
+											filename = down_filename;
+											downurl = down_downurl;
+										} else {
+											filename = thum_filename;
+											downurl = thum_downurl;
+										}
+									} else {
+										filename = down_filename;
+										downurl = down_downurl;
+									}
+									fh.download(downurl, Config.DownFile
+											+ baby_name + filename,
+											new AjaxCallBack<File>() {
+												@Override
+												public void onFailure(
+														Throwable t,
+														String strMsg) {
+													super.onFailure(t, strMsg);
+													Config.dismissProgress();
+													Config.showFiledToast(context);
+												}
+
+												@Override
+												public void onSuccess(File t) {
+													super.onSuccess(t);
+													Config.dismissProgress();
+													Toast.makeText(
+															context,
+															"图片已下载到"
+																	+ Config.DownFile
+																	+ baby_name
+																	+ "文件夹中",
+															Toast.LENGTH_LONG)
+															.show();
+												}
+											});
+								}
+							});
+					dialog.setNeutralButton("取消",
+							new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+								}
+							});
+					dialog.create().show();
+				}
+			});
+
+			cancle.setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					dismiss();
+				}
+			});
+		}
+	}
+
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+}

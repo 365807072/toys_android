@@ -1,0 +1,614 @@
+package com.yyqq.code.postbar;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.DisplayMetrics;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.ab.http.AbHttpUtil;
+import com.ab.http.AbRequestParams;
+import com.ab.http.AbStringHttpResponseListener;
+import com.umeng.analytics.MobclickAgent;
+import com.yyqq.babyshow.R;
+import com.yyqq.code.business.BusinessDetailActivity;
+import com.yyqq.code.main.MainItemDetialActivity;
+import com.yyqq.code.video.VideoDetialActivity;
+import com.yyqq.commen.model.PostBarTypeItem;
+import com.yyqq.commen.utils.Config;
+import com.yyqq.commen.utils.GroupRelevantUtils;
+import com.yyqq.commen.utils.VideoComperssUtils;
+import com.yyqq.commen.view.PullDownView;
+import com.yyqq.commen.view.PullDownView.OnPullDownListener;
+import com.yyqq.framework.application.MyApplication;
+import com.yyqq.framework.application.ServerMutualConfig;
+
+public class PostBarType extends Activity implements OnPullDownListener {
+
+	private Activity context;
+	private String TAG = "PostBarType";
+	private AbHttpUtil ab;
+	private PullDownView mPullDownView;
+	private ListView listview;
+	private MyAdapter adapter;
+	ArrayList<PostBarTypeItem> dataPostInterestList = new ArrayList<PostBarTypeItem>();
+	private MyApplication app;
+	private String fileName = "PostBarType.txt";
+	private String post_class;
+	private ImageView img1, img2, img3, img4, img5, img6;
+	// private TextView tv1, tv2, tv3, tv4, tv5;
+	private LinearLayout type1, type2, type3, type4, type5, type6;
+
+	private static int indexitem = 0;// 记录选中的图片位置
+	private boolean indexitemfla;// 记录选中的图片位置
+	public static ImageView upload_icon;
+
+	public void onResume() {
+		super.onResume();
+		if (indexitemfla) {
+			indexitemfla = false;
+			adapter.notifyDataSetChanged();
+			listview.setSelection(indexitem);
+		}
+		
+		PostBarType.this.runOnUiThread(new Runnable() {
+			
+			@Override
+			public void run() {
+				upload_icon = (ImageView) findViewById(R.id.upload_icon);
+				if(VideoComperssUtils.postuploadIcon){
+					upload_icon.setVisibility(View.VISIBLE);
+				}else{
+					upload_icon.setVisibility(View.GONE);
+				}
+			}
+		});
+		
+		MobclickAgent.onResume(this);
+	}
+
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+		}
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		Intent intent = new Intent();
+		intent.setClass(context, PostBarActivity.class);
+		startActivity(intent);
+		context.finish();
+		return false;
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == 1) {
+			indexitemfla = true;
+			listview.setSelection(indexitem);
+		}
+	}
+
+	public void onCreate(Bundle b) {
+		super.onCreate(b);
+		Config.setActivityState(this);
+		context = this;
+		setContentView(R.layout.list);
+		init();
+
+	}
+
+	private void init() {
+		
+		upload_icon = (ImageView) findViewById(R.id.upload_icon);
+		if(VideoComperssUtils.postuploadIcon){
+			upload_icon.setVisibility(View.VISIBLE);
+		}else{
+			upload_icon.setVisibility(View.GONE);
+		}
+
+		DisplayMetrics DM = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(DM);
+		ab = AbHttpUtil.getInstance(context);
+		app = (MyApplication) context.getApplication();
+		mPullDownView = (PullDownView) findViewById(R.id.list);
+		mPullDownView.setOnPullDownListener(this);
+		listview = mPullDownView.getListView();
+		listview.setDivider(null);
+		if (adapter == null) {
+			adapter = new MyAdapter();
+		}
+		listview.setAdapter(adapter);
+		// 设置可以自动获取更多 滑到最后一个自动获取 改成false将禁用自动获取更多
+		mPullDownView.enableAutoFetchMore(true, 1);
+		// 隐藏 并禁用尾部
+		// mPullDownView.setHideFooter();
+		// 显示并启用自动获取更多
+		mPullDownView.setShowFooter();
+		// 隐藏并且禁用头部刷新
+		// mPullDownView.setHideHeader();
+		// listview.addHeaderView(mGallery);
+		// 显示并且可以使用头部刷新
+		mPullDownView.setShowHeader();
+		// mPullDownView.setPadding(0, 0, 0, 0);
+		if (!Config.isConn(context)) {
+			try {
+				getlistData(Config.read(context, fileName));
+			} catch (Exception e) {
+			}
+		}
+		type1 = (LinearLayout) findViewById(R.id.type1);
+		type2 = (LinearLayout) findViewById(R.id.type2);
+		type3 = (LinearLayout) findViewById(R.id.type3);
+		type4 = (LinearLayout) findViewById(R.id.type4);
+		type5 = (LinearLayout) findViewById(R.id.type5);
+		type6 = (LinearLayout) findViewById(R.id.type6);
+		type1.setOnClickListener(typeClick5); // 成长活动
+		type2.setOnClickListener(typeClick1); // 成长活动
+		type3.setOnClickListener(typeClick2); // 育儿知识
+		type4.setOnClickListener(typeClick3); // 时尚情感
+		type5.setOnClickListener(typeClick4); // 辣妈厨房
+		type6.setOnClickListener(typeClick6);
+		img1 = (ImageView) findViewById(R.id.img1);
+		img2 = (ImageView) findViewById(R.id.img2);
+		img3 = (ImageView) findViewById(R.id.img3);
+		img4 = (ImageView) findViewById(R.id.img4);
+		img5 = (ImageView) findViewById(R.id.img5);
+		img6 = (ImageView) findViewById(R.id.img6);
+		// tv1 = (TextView) findViewById(R.id.tv1);
+		// tv2 = (TextView) findViewById(R.id.tv2);
+		// tv3 = (TextView) findViewById(R.id.tv3);
+		// tv4 = (TextView) findViewById(R.id.tv4);
+		// tv5 = (TextView) findViewById(R.id.tv5);
+		post_class = getIntent().getStringExtra("post_class");
+		onRefresh();
+	}
+
+	public OnClickListener typeClick1 = new View.OnClickListener() {
+
+		@Override
+		public void onClick(View arg0) {
+			post_class = "1";
+			onRefresh();
+			
+//			Intent intent = new Intent();
+//			intent.setClass(context, PostBarType.class);
+//			intent.putExtra("post_class", "1");
+//			startActivity(intent);
+//			context.finish();
+		}
+
+	};
+
+	public OnClickListener typeClick2 = new View.OnClickListener() {
+
+		@Override
+		public void onClick(View arg0) {
+			post_class = "2";
+			onRefresh();
+
+			
+//			Intent intent = new Intent();
+//			intent.setClass(context, PostBarType.class);
+//			intent.putExtra("post_class", "2");
+//			startActivity(intent);
+//			context.finish();
+		}
+
+	};
+
+	public OnClickListener typeClick3 = new View.OnClickListener() {
+
+		@Override
+		public void onClick(View arg0) {
+			post_class = "3";
+			onRefresh();
+
+			
+//			Intent intent = new Intent();
+//			intent.setClass(context, PostBarType.class);
+//			intent.putExtra("post_class", "3");
+//			startActivity(intent);
+//			context.finish();
+		}
+
+	};
+
+	public OnClickListener typeClick4 = new View.OnClickListener() {
+
+		@Override
+		public void onClick(View arg0) {
+			post_class = "4";
+			onRefresh();
+			
+//			Intent intent = new Intent();
+//			intent.setClass(context, PostBarType.class);
+//			intent.putExtra("post_class", "4");
+//			startActivity(intent);
+//			context.finish();
+		}
+
+	};
+
+	public OnClickListener typeClick5 = new View.OnClickListener() {
+
+		@Override
+		public void onClick(View arg0) {
+//			post_class = "5";
+//			onRefresh();
+			
+			Intent intent = new Intent();
+			intent.setClass(context, PostBarActivity.class);
+			startActivity(intent);
+			context.finish();
+		}
+
+	};
+	
+	public OnClickListener typeClick6 = new View.OnClickListener() {
+
+		@Override
+		public void onClick(View arg0) {
+			post_class = "5";
+			onRefresh();
+		}
+
+	};
+
+	@SuppressLint("NewApi")
+	@Override
+	public void onRefresh() {
+		
+		img1.setBackgroundResource(R.drawable.xingqu);
+		img2.setBackgroundResource(R.drawable.huodong);
+		img3.setBackgroundResource(R.drawable.zhishi);
+		img4.setBackgroundResource(R.drawable.qinggan);
+		img5.setBackgroundResource(R.drawable.chufang);
+		img6.setBackgroundResource(R.drawable.video_up);
+		
+		Config.showProgressDialog(context, false, null);
+		AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(context).uid);
+		params.put("post_class", post_class);
+		
+		if ("1".equals(post_class)) {
+			img2.setBackgroundResource(R.drawable.huodong_sel);
+			// tv2.setTextColor(Color.parseColor("#9ae382"));
+		} else if ("2".equals(post_class)) {
+			img3.setBackgroundResource(R.drawable.zhishi_sel);
+			// tv3.setTextColor(Color.parseColor("#9ae382"));
+		} else if ("3".equals(post_class)) {
+			img4.setBackgroundResource(R.drawable.qinggan_sel);
+			// tv4.setTextColor(Color.parseColor("#9ae382"));
+		} else if ("4".equals(post_class)) {
+			img5.setBackgroundResource(R.drawable.chufang_sel);
+			// tv5.setTextColor(Color.parseColor("#9ae382"));
+		}else if ("5".equals(post_class)) {
+			img6.setBackgroundResource(R.drawable.video_down);
+			// tv5.setTextColor(Color.parseColor("#9ae382"));
+		}
+//		
+//		if ("1".equals(post_class)) { // 1成长活动
+//			params.put("post_class", "1");
+//		} else if ("2".equals(post_class)) { // 育儿知识
+//			params.put("post_class", "2");
+//		} else if ("3".equals(post_class)) { // 时尚情感
+//			params.put("post_class", "3");
+//		} else if ("4".equals(post_class)) { // 辣妈厨房
+//			params.put("post_class", "4");
+//		}
+//		 Log.e("fanfan", ServerMutualConfig.PostListV6 + "&" +
+//		 params.toString());
+		ab.setTimeout(5000);
+		ab.get(ServerMutualConfig.PostListV6 + "&" + params.toString(),
+				new AbStringHttpResponseListener() {
+
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						Config.dismissProgress();
+						Config.save(context, content, fileName);
+						getlistData(content);
+					}
+
+					@Override
+					public void onFinish() {
+						Config.dismissProgress();
+						super.onFinish();
+					}
+
+					@Override
+					public void onFailure(int statusCode, String content,
+							Throwable error) {
+						super.onFailure(statusCode, content, error);
+					}
+
+					@Override
+					public void sendSuccessMessage(int statusCode,
+							String content) {
+						super.sendSuccessMessage(statusCode, content);
+						Config.dismissProgress();
+						mPullDownView.RefreshComplete();// 这个事线程安全的 可看源代码
+						mPullDownView.notifyDidMore();
+					}
+
+				});
+	}
+
+	@Override
+	public void onMore() {
+		if (dataPostInterestList.size() == 0) {
+			mPullDownView.notifyDidMore();
+			mPullDownView.RefreshComplete();
+			return;
+		}
+		AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(context).uid);
+		params.put(
+				"post_create_time",
+				dataPostInterestList.get(dataPostInterestList.size() - 1).post_create_time
+						+ "");
+		params.put("post_class", post_class);
+		
+//		if ("1".equals(post_class)) {
+//			params.put("post_class", "1");
+//		} else if ("2".equals(post_class)) {
+//			params.put("post_class", "2");
+//		} else if ("3".equals(post_class)) {
+//			params.put("post_class", "3");
+//		} else if ("4".equals(post_class)) {
+//			params.put("post_class", "4");
+//		}
+		// Log.e("fanfan", ServerMutualConfig.PostListV5 + "&" +
+		// params.toString());
+		ab.get(ServerMutualConfig.PostListV6 + "&" + params.toString(),
+				new AbStringHttpResponseListener() {
+
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						Config.dismissProgress();
+						try {
+							JSONObject json = new JSONObject(content);
+							for (int i = 0; i < json.getJSONArray("data")
+									.length(); i++) {
+								PostBarTypeItem item = new PostBarTypeItem();
+								item.fromJson(json.getJSONArray("data")
+										.getJSONObject(i));
+								dataPostInterestList.add(item);
+							}
+							adapter.notifyDataSetChanged();
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+
+					@Override
+					public void sendSuccessMessage(int statusCode,
+							String content) {
+						super.sendSuccessMessage(statusCode, content);
+						Config.dismissProgress();
+						mPullDownView.RefreshComplete();// 这个事线程安全的 可看源代码
+						mPullDownView.notifyDidMore();
+					}
+
+				});
+	}
+
+	class ViewHolder {
+		RelativeLayout tu;
+		ImageView img, img2, qun_biao,video_hint;
+		TextView post_title;
+		TextView visit_num;
+		TextView see_num;
+		TextView msg, msg2;
+	}
+
+	public class MyAdapter extends BaseAdapter {
+
+		@Override
+		public int getCount() {
+			return dataPostInterestList.size();
+		}
+
+		@Override
+		public Object getItem(int arg0) {
+			return dataPostInterestList.get(arg0);
+		}
+
+		@Override
+		public long getItemId(int arg0) {
+			return arg0;
+		}
+
+		@Override
+		public View getView(int index, View convertView, ViewGroup arg2) {
+			LayoutInflater inflater = (LayoutInflater) context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			convertView = inflater.inflate(R.layout.postbar_list_item, null);
+			ViewHolder holder = null;
+			holder = new ViewHolder();
+			holder.tu = (RelativeLayout) convertView.findViewById(R.id.tu);
+			holder.img = (ImageView) convertView.findViewById(R.id.post_img);
+			holder.img2 = (ImageView) convertView.findViewById(R.id.post_img2);
+			holder.video_hint = (ImageView) convertView
+					.findViewById(R.id.video_hint);
+			holder.qun_biao = (ImageView) convertView
+					.findViewById(R.id.qun_biao);
+			holder.post_title = (TextView) convertView
+					.findViewById(R.id.post_title);
+			holder.visit_num = (TextView) convertView
+					.findViewById(R.id.visit_num);
+			holder.see_num = (TextView) convertView.findViewById(R.id.see_num);
+			holder.msg = (TextView) convertView.findViewById(R.id.msg);
+			holder.msg2 = (TextView) convertView.findViewById(R.id.msg2);
+
+			final PostBarTypeItem item = dataPostInterestList.get(index);
+
+			// 图片
+			if ("0".equals(item.is_group)) {
+				holder.img.setVisibility(View.VISIBLE);
+				holder.img2.setVisibility(View.GONE);
+				if (TextUtils.isEmpty(item.img)) {
+					holder.tu.setVisibility(View.GONE);
+				} else {
+					app.display(item.img, holder.img, R.drawable.deft_color);
+				}
+			} else if ("2".equals(item.is_group)) {
+				holder.img.setVisibility(View.VISIBLE);
+				holder.img2.setVisibility(View.GONE);
+				if (TextUtils.isEmpty(item.img)) {
+					holder.tu.setVisibility(View.GONE);
+				} else {
+					app.display(item.img, holder.img, R.drawable.deft_color);
+				}
+			} else if("5".equals(item.is_group)){
+				holder.img.setVisibility(View.VISIBLE);
+				holder.img2.setVisibility(View.GONE);
+				if (TextUtils.isEmpty(item.img)) {
+					holder.tu.setVisibility(View.GONE);
+				} else {
+					app.display(item.img, holder.img, R.drawable.deft_color);
+				}
+			}else {
+				holder.img.setVisibility(View.GONE);
+				holder.img2.setVisibility(View.VISIBLE);
+				if (TextUtils.isEmpty(item.img)) {
+					holder.tu.setVisibility(View.GONE);
+				} else {
+					app.display(item.img, holder.img2, R.drawable.deft_color);
+				}
+			}
+
+			// 群
+			if ("1".equals(item.is_group)) {
+				holder.qun_biao.setVisibility(View.VISIBLE);
+			} else if ("2".equals(item.is_group)) {
+				holder.qun_biao.setVisibility(View.VISIBLE);
+				holder.qun_biao.setBackgroundResource(R.drawable.business_biao);
+			} else {
+				holder.qun_biao.setVisibility(View.GONE);
+			}
+
+			// 标题
+			if ("0".equals(item.is_group)) {// 0是话题
+				if (!TextUtils.isEmpty(item.img_title))
+					holder.post_title.setText(item.img_title);
+			} else if ("1".equals(item.is_group)) {
+				if (!TextUtils.isEmpty(item.group_name))
+					holder.post_title.setText(item.group_name);
+			} else {
+				if (!TextUtils.isEmpty(item.img_title))
+					holder.post_title.setText(item.img_title);
+			}
+
+			// 参与人数
+			if (!TextUtils.isEmpty(item.review_count))
+				holder.visit_num.setText("参与" + item.review_count + "人");
+			// 观看/帖子人数
+			if (!TextUtils.isEmpty(item.post_count)) {
+				if ("0".equals(item.is_group)) {
+					holder.see_num.setText("观看" + item.post_count + "人");
+				} else {
+					holder.see_num.setText("帖子" + item.post_count + "个");
+				}
+			}
+
+			// 描述
+			if ("0".equals(item.is_group)) {
+				holder.msg.setVisibility(View.VISIBLE);
+				holder.msg2.setVisibility(View.GONE);
+				holder.msg.setText(item.description);
+			} else if ("1".equals(item.is_group)) {
+				holder.msg.setVisibility(View.GONE);
+				if ("0".equals(item.is_share)) {// 没有参加
+					holder.msg2.setVisibility(View.VISIBLE);
+				} else {
+					holder.msg2.setVisibility(View.GONE);
+				}
+			} else {
+				holder.msg.setVisibility(View.VISIBLE);
+				holder.msg2.setVisibility(View.GONE);
+				holder.msg.setText(item.description);
+			}
+
+			if("5".equals(item.is_group)){
+				holder.video_hint.setVisibility(View.VISIBLE);
+			}
+				convertView.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						if ("0".equals(item.is_group)) {
+							Intent intent = new Intent(context,
+									MainItemDetialActivity.class);
+							intent.putExtra("user_id", item.user_id);
+							intent.putExtra("img_id", item.img_id);
+							indexitem = listview.getFirstVisiblePosition();
+							context.startActivityForResult(intent, 1);
+						} else if ("1".equals(item.is_group)) {
+//							Intent intent = new Intent(context, GroupMainActivity.class);
+//							intent.putExtra("group_id", item.group_id);
+//							intent.putExtra("group_name", item.group_name);
+//							context.startActivityForResult(intent, 1);
+							
+							GroupRelevantUtils.CheckIntent(context, item.group_id);
+							indexitem = listview.getFirstVisiblePosition();
+						} else if ("5".equals(item.is_group)) {
+							Intent intent = new Intent(context,
+									VideoDetialActivity.class);
+							Bundle bundel = new Bundle();
+							bundel.putSerializable(VideoDetialActivity.VIIDEO_INFO,
+									(Serializable) item);
+							intent.putExtras(bundel);
+							indexitem = listview.getFirstVisiblePosition();
+							context.startActivityForResult(intent, 1);
+						} else {
+							Intent intent = new Intent(context, BusinessDetailActivity.class);
+							intent.putExtra("business_id", item.img_id);
+							indexitem = listview.getFirstVisiblePosition();
+							context.startActivityForResult(intent, 1);
+						}
+					}
+				});
+
+			return convertView;
+		}
+
+	}
+
+	private void getlistData(String content) {
+		try {
+			dataPostInterestList.clear();
+			JSONObject json = new JSONObject(content);
+			for (int i = 0; i < json.getJSONArray("data").length(); i++) {
+				PostBarTypeItem item = new PostBarTypeItem();
+				item.fromJson(json.getJSONArray("data").getJSONObject(i));
+				dataPostInterestList.add(item);
+			}
+			adapter.notifyDataSetChanged();
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+}

@@ -1,0 +1,65 @@
+package com.yyqq.commen.utils;
+
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.view.View;
+import android.webkit.ConsoleMessage;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebSettings.LayoutAlgorithm;
+import android.webkit.WebView;
+
+@SuppressWarnings("deprecation")
+@SuppressLint("SetJavaScriptEnabled")
+public class MyWebviewUtils {
+	
+	// JS方法调用原生方法时使用的对象名称 ， 例如：window.call.method("param");
+	public static String CALL_NAME = "call"; 
+	
+	// 初始化webview的配置项，参数相应为：上下文对象、需要被初始化的webview、实现JS回调方法的接口
+	public static WebView initWebView(Context context, WebView webView, Object JsInteration){
+		if(null != JsInteration){
+			// 添加JS方法的回调
+			webView.addJavascriptInterface(JsInteration, MyWebviewUtils.CALL_NAME);
+		}
+		// 防止不可以alert
+		webView.setWebChromeClient(new WebChromeClient() {});
+		webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
+		webView.setScrollBarStyle(0);
+		webView.getSettings().setDefaultTextEncodingName("utf-8");  
+		webView.getSettings().setJavaScriptEnabled(true);  
+		webView.getSettings().setLoadsImagesAutomatically(true);
+		webView.getSettings().setDomStorageEnabled(true);
+		webView.getSettings().setBuiltInZoomControls(true);
+		webView.getSettings().setUseWideViewPort(true);
+		webView.getSettings().setSavePassword(true);
+		webView.getSettings().setSaveFormData(true);
+		webView.setHorizontalScrollBarEnabled(false);//设置水平滚动条  
+		webView.setVerticalScrollBarEnabled(false);//设置竖直滚动条  
+		webView.getSettings().setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
+		webView.getSettings().setLoadWithOverviewMode(true);
+		
+		// 加载网页的进度回调
+		webView.setWebChromeClient(new WebChromeClient() {
+			
+			@Override
+			public void onProgressChanged(WebView view, int newProgress) {
+				if (newProgress == 100) {
+//					Toast.makeText(MyWebActivity.this, "加载完成", Toast.LENGTH_SHORT).show();
+				}
+			}
+			
+			@Override
+			public void onShowCustomView(View view, CustomViewCallback callback) {
+			}
+			
+			@Override
+			public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
+				return super.onConsoleMessage(consoleMessage);
+			}
+			
+		});
+		return webView;
+	}
+
+}

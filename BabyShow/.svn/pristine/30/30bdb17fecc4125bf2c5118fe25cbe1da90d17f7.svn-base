@@ -1,0 +1,591 @@
+package com.yyqq.code.toyslease;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.webkit.ConsoleMessage;
+import android.webkit.JavascriptInterface;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.webkit.WebChromeClient.CustomViewCallback;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.ab.http.AbHttpUtil;
+import com.ab.http.AbRequestParams;
+import com.ab.http.AbStringHttpResponseListener;
+import com.umeng.analytics.MobclickAgent;
+import com.yyqq.babyshow.R;
+import com.yyqq.code.login.WebLoginActivity;
+import com.yyqq.code.main.MainItemDetialActivity;
+import com.yyqq.commen.model.ToysDetailBean;
+import com.yyqq.commen.service.InviteStartService;
+import com.yyqq.commen.share.GroupSharedUtils;
+import com.yyqq.commen.utils.BadgeView;
+import com.yyqq.commen.utils.Config;
+import com.yyqq.commen.utils.MyWebviewUtils;
+import com.yyqq.commen.utils.ShoppingCartUtils;
+import com.yyqq.commen.view.PullDownView.OnPullDownListener;
+import com.yyqq.framework.activity.BaseActivity;
+import com.yyqq.framework.application.MyApplication;
+import com.yyqq.framework.application.ServerMutualConfig;
+
+/**
+ * 玩具详情
+ * */
+public class ToysLeaseDetailActivity extends BaseActivity implements OnPullDownListener{
+
+	private ImageView main_item_back;
+	private static ImageView lease_detail_cart;
+	private static TextView lease_detail_change;
+	private static TextView lease_detail_add;
+	private static TextView lease_detail_pay;
+	private ImageView toys_detial_shared;
+	private WebView webView = null;
+	private LinearLayout lease_detail_foot_toys;
+	private RelativeLayout lease_detail_foot_cart;
+	private RelativeLayout lease_detail_foot;
+	
+	private static BadgeView badge;
+	private static boolean isCard = false;
+	public static String TOYS_DETAIL_KEY = "toys_detail_key";
+	public static String TOYS_URL_KEY = "toys_url_key";
+	public static ToysLeaseDetailActivity toysLeaseDetailActivity = null;
+	private AbHttpUtil ab;
+	private String business_id = "";
+	private String wayType = "";
+	private String phoneNumber = "";
+	private String shared_img = "";
+	private String shared_des = "";
+	private String shared_title = "";
+	private boolean isToPay = false;
+	private String sharedUrl = "";
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		Config.setActivityState(this);
+		setContentView(R.layout.activity_yoys_lease_detail);
+	}
+
+	@Override
+	protected void initView() {
+		lease_detail_foot = (RelativeLayout) findViewById(R.id.lease_detail_foot);
+		lease_detail_foot_cart = (RelativeLayout) findViewById(R.id.lease_detail_foot_cart);
+		lease_detail_foot_toys = (LinearLayout) findViewById(R.id.lease_detail_foot_toys);
+		lease_detail_change = (TextView) findViewById(R.id.lease_detail_change);
+		lease_detail_add = (TextView) findViewById(R.id.lease_detail_add);
+		lease_detail_cart = (ImageView) findViewById(R.id.lease_detail_cart);
+		badge = new BadgeView(this, lease_detail_cart);
+		ShoppingCartUtils.DrewGouWuCheNumberBitmap(this, lease_detail_cart);
+		toys_detial_shared = (ImageView) findViewById(R.id.toys_detial_shared);
+		main_item_back = (ImageView) findViewById(R.id.main_item_back);
+		lease_detail_pay = (TextView) findViewById(R.id.lease_detail_pay);
+		ShoppingCartUtils.DrewNumberBitmap(this, lease_detail_cart);
+		webView = (WebView) findViewById(R.id.toyslease_webview);
+		MyWebviewUtils.initWebView(this, webView, new JSCallback(), true);
+	}
+
+	@Override
+	protected void initData() {
+		toysLeaseDetailActivity = this;
+		ab = AbHttpUtil.getInstance(ToysLeaseDetailActivity.this);
+	}
+
+	@Override
+	protected void setListener() {
+		
+		lease_detail_cart.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(!MyApplication.getVisitor().equals("0")  || Config.getUser(ToysLeaseDetailActivity.this).uid.equals("")){
+					Intent in = new Intent(ToysLeaseDetailActivity.this, WebLoginActivity.class);
+					startActivity(in);
+				}else{
+					ShoppingCartActivity.isShowBack = true;
+					Intent intent = new Intent(ToysLeaseDetailActivity.this, ShoppingCartActivity.class);
+					startActivity(intent);
+				}
+			}
+		});
+		
+		lease_detail_add.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				ShoppingCartUtils.addToysToCart(ToysLeaseDetailActivity.this, business_id, 0, lease_detail_cart);
+			}
+		});
+		
+		lease_detail_change.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				ShoppingCartUtils.addToysToCart(ToysLeaseDetailActivity.this, business_id, 1, lease_detail_cart);
+			}
+		});
+		
+		toys_detial_shared.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				GroupSharedUtils.groupShareBean bean = new GroupSharedUtils.groupShareBean();
+				bean.setContext(ToysLeaseDetailActivity.this);
+				bean.setShare_img(shared_img);
+				bean.setShare_text(shared_des);
+				bean.setShare_title(shared_title);
+				bean.setShare_url(sharedUrl+"?"+"business_id="+business_id+"&login_user_id="+Config.getUser(ToysLeaseDetailActivity.this).uid);
+				GroupSharedUtils.SharedGroup(bean);
+			}
+		});
+		
+		main_item_back.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				ToysLeaseDetailActivity.this.finish();
+			}
+		});
+		
+		lease_detail_foot_cart.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				ToysLeaseOrderConfirmActivity.createNewOrder(ToysLeaseDetailActivity.this, ToysLeaseOrderConfirmActivity.CONFIRM_BUSINESS_ID, business_id);
+			}
+		});
+		
+		lease_detail_pay.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				if(!isToPay){
+					return;
+				}
+				
+				if(!MyApplication.getVisitor().equals("0")  || Config.getUser(ToysLeaseDetailActivity.this).uid.equals("")){
+					Intent in = new Intent(ToysLeaseDetailActivity.this, WebLoginActivity.class);
+					startActivity(in);
+				}else{
+					if(wayType.equals("")){
+						return;
+					}else{
+						if(wayType.equals("0")){ // 不支持
+							AlertDialog.Builder builder = new Builder(ToysLeaseDetailActivity.this);
+							builder.setTitle("确定联系对方吗？");
+							builder.setPositiveButton("拨号",
+									new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									dialog.dismiss();
+									Intent intent = new Intent(Intent.ACTION_CALL);
+									intent.setData(Uri.parse("tel:" + phoneNumber));
+									startActivity(intent);
+								}
+							});
+							builder.setNegativeButton("取消",
+									new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									dialog.dismiss();
+								}
+							});
+							builder.create().show();
+						}else if(wayType.equals("1")){ // 支持
+							if(!isCard){
+								Intent intent = new Intent(ToysLeaseDetailActivity.this, ToysLeaseOrderConfirmActivity.class);
+								intent.putExtra(ToysLeaseOrderConfirmActivity.CONFIRM_BUSINESS_ID, business_id);
+								startActivity(intent);
+							}else{
+								ToysLeaseOrderConfirmActivity.createNewOrder(ToysLeaseDetailActivity.this, ToysLeaseOrderConfirmActivity.CONFIRM_BUSINESS_ID, business_id);
+							}
+						}
+					}
+				}
+			}
+		});
+	}
+	
+	@Override
+	public void onRefresh() {
+		final AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(ToysLeaseDetailActivity.this).uid);
+		params.put("business_id", getIntent().getStringExtra(TOYS_DETAIL_KEY));
+		ab.get(ServerMutualConfig.GET_TOYS_DETAIL + "&" + params.toString(),new AbStringHttpResponseListener() {
+			@Override
+			public void onSuccess(int statusCode, String content) {
+				super.onSuccess(statusCode, content);
+				try {
+					if(!content.equals("") && new JSONObject(content).getBoolean("success")){
+						initToysDetial(content);
+					}else{
+						Toast.makeText(ToysLeaseDetailActivity.this, new JSONObject(content).getString("reMsg"), 2).show();
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			@Override
+			public void onFinish() {
+				super.onFinish();
+				Config.dismissProgress();
+			}
+			
+			@Override
+			public void onFailure(int statusCode, String content,
+					Throwable error) {
+				super.onFailure(statusCode, content, error);
+			}
+		});
+		
+	}
+
+	@Override
+	public void onMore() {
+	}
+	
+	/**
+	 * 初始化页面数据
+	 * */
+	private void initToysDetial(String resultStr){
+		try {
+			
+			// 解析
+			JSONObject json = new JSONObject(resultStr);
+			ToysDetailBean bean = new ToysDetailBean();
+			bean = bean.fromJson(ToysLeaseDetailActivity.this, json.getJSONObject("data"));
+			
+			// 解析分享相关信息
+			shared_img = json.getJSONObject("data").getJSONObject("detail").getString("img_thumb");
+			shared_des = json.getJSONObject("data").getJSONObject("detail").getString("share_des");
+			shared_title = json.getJSONObject("data").getJSONObject("detail").getString("share_title");
+			business_id = bean.getDetail().getBusiness_id();
+			wayType = bean.getDetail().getIs_support();
+			phoneNumber = bean.getDetail().getBusiness_contact();
+			
+			// 加入购物车按钮
+			if(bean.getDetail().getIs_cart().equals("0")){
+				lease_detail_add.setVisibility(View.VISIBLE);
+			}else{
+				lease_detail_add.setVisibility(View.GONE);
+			}
+			
+			// 购物车按钮
+			if(bean.getDetail().getIs_cart_number().equals("0")){
+				lease_detail_cart.setVisibility(View.VISIBLE);
+				ShoppingCartUtils.DrewNumberBitmap(this, lease_detail_cart);
+			}else{
+				lease_detail_cart.setVisibility(View.GONE);
+			}
+			
+			// 换玩具按钮
+			if(bean.getDetail().getIs_change().equals("0")){
+				lease_detail_change.setVisibility(View.VISIBLE);
+			}else{
+				lease_detail_change.setVisibility(View.GONE);
+			}
+			
+			// 下单按钮
+			if(bean.getDetail().getOrder_status().equals("0")){
+				isCard = false;
+				sharedUrl = "http://www.baobaoshowshow.com/fenxiang/toy_cout.html";
+				lease_detail_foot_cart.setVisibility(View.GONE);
+				lease_detail_foot_toys.setVisibility(View.VISIBLE);
+				if(bean.getDetail().getIs_order().equals("0")){
+					isToPay = true;
+					lease_detail_pay.setVisibility(View.VISIBLE);
+					lease_detail_pay.setText(bean.getPrice().getPrice_button());
+				}else{
+					isToPay = false;
+					lease_detail_pay.setText(bean.getPrice().getPrice_button());
+					lease_detail_pay.setBackgroundDrawable(getResources().getDrawable(R.drawable.toys_detail_no_order));
+				}
+			}else if(bean.getDetail().getOrder_status().equals("2")){
+				isCard = true;
+				sharedUrl = "http://www.baobaoshowshow.com/fenxiang/member_cout.html";
+				lease_detail_foot_cart.setVisibility(View.VISIBLE);
+				lease_detail_foot_toys.setVisibility(View.GONE);
+				if(bean.getDetail().getIs_order().equals("0")){
+					isToPay = true;
+					lease_detail_pay.setVisibility(View.VISIBLE);
+					lease_detail_pay.setText(bean.getPrice().getPrice_button());
+				}else{
+					isToPay = false;
+					lease_detail_pay.setVisibility(View.GONE);
+				}
+			}
+			
+//			// 加载网页的进度回调
+//			webView.setWebChromeClient(new WebChromeClient() {
+//				
+//				@Override
+//				public void onProgressChanged(WebView view, int newProgress) {
+//					if (newProgress == 100) {
+//					
+//					}
+//				}
+//				
+//				@Override
+//				public void onShowCustomView(View view, CustomViewCallback callback) {
+//				}
+//				
+//				@Override
+//				public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
+//					return super.onConsoleMessage(consoleMessage);
+//				}
+//				
+//			});
+			webView.loadUrl(json.getJSONObject("data").getJSONObject("detail").getString("post_url")+"?login_user_id="+Config.getUser(ToysLeaseDetailActivity.this).uid+"&business_id="+getIntent().getStringExtra(TOYS_DETAIL_KEY));
+			
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 更新底部按钮状态
+	 * */
+	public static void updateBottomBtnType(final Context context, String business_id){
+		final AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(context).uid);
+		params.put("business_id", business_id);
+		AbHttpUtil.getInstance(context).get(ServerMutualConfig.GET_TOYS_DETAIL_BOTTOM + "&" + params.toString(),new AbStringHttpResponseListener() {
+			
+			@Override
+			public void onSuccess(int statusCode, String content) {
+				super.onSuccess(statusCode, content);
+				try {
+					if(!content.equals("") && new JSONObject(content).getBoolean("success")){
+						
+						// 立即租按钮是否显示
+						if(new JSONObject(content).getJSONObject("data").getString("order_status").equals("0")){
+							isCard = false;
+							if(new JSONObject(content).getJSONObject("data").getString("is_order").equals("0")){
+								lease_detail_pay.setVisibility(View.VISIBLE);
+								lease_detail_pay.setText(new JSONObject(content).getJSONObject("data").getString("price_button"));
+							}else{
+								lease_detail_pay.setText(new JSONObject(content).getJSONObject("data").getString("price_button"));
+								lease_detail_pay.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.toys_detail_no_order));
+							}
+						}else if(new JSONObject(content).getJSONObject("data").getString("order_status").equals("2")){
+							isCard = true;
+							if(new JSONObject(content).getJSONObject("data").getString("is_order").equals("0")){
+								lease_detail_pay.setVisibility(View.VISIBLE);
+								lease_detail_pay.setText(new JSONObject(content).getJSONObject("data").getString("price_button"));
+							}else{
+								lease_detail_pay.setVisibility(View.GONE);
+							}
+						}
+						
+						// 加入购物车按钮是否显示
+						if(new JSONObject(content).getJSONObject("data").getString("is_cart").equals("0")){
+							lease_detail_add.setVisibility(View.VISIBLE);
+						}else{
+							lease_detail_add.setVisibility(View.GONE);
+						}
+						
+						// 更换按钮是否显示
+						if(new JSONObject(content).getJSONObject("data").getString("is_change").equals("0")){
+							lease_detail_change.setVisibility(View.VISIBLE);
+						}else{
+							lease_detail_change.setVisibility(View.GONE);
+						}
+						
+						// 购物车图标是否显示
+						if(new JSONObject(content).getJSONObject("data").getString("is_cart_number").equals("0")){
+							lease_detail_cart.setVisibility(View.VISIBLE);
+							ShoppingCartUtils.DrewNumberBitmap(context, lease_detail_cart);
+						}else{
+							lease_detail_cart.setVisibility(View.GONE);
+						}
+					}else{
+						Toast.makeText(context, new JSONObject(content).getString("reMsg"), 2).show();
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			@Override
+			public void onFinish() {
+				super.onFinish();
+				Config.dismissProgress();
+			}
+			
+			@Override
+			public void onFailure(int statusCode, String content,
+					Throwable error) {
+				super.onFailure(statusCode, content, error);
+			}
+		});
+	}
+	
+	/**
+	 * 加入更换备选后提示框
+	 * */
+	public static void changeToysSuccess(final Context context){
+		AlertDialog.Builder dialog = new Builder(context);
+		dialog.setTitle("宝贝半径");
+		dialog.setMessage("此玩具已成为备选，最终更换需要到购物车里完成");
+		dialog.setNegativeButton("去购物车", new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						ShoppingCartActivity.isShowBack = true;
+						Intent intent = new Intent(context, ShoppingCartActivity.class);
+						context.startActivity(intent);
+					}});
+		
+		dialog.setPositiveButton("再挑挑", new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface arg0, int arg1) {}});
+		dialog.create().show();
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+		onRefresh();
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+		// 隐藏显示悬浮窗
+		Intent intent = new Intent(ToysLeaseDetailActivity.this, InviteStartService.class);    
+		stopService(intent);   
+	}
+	
+	/**
+	 * JS回调的原生方法
+	 * */
+	public class JSCallback{
+		
+		/**
+		 * 加载结束，显示底部操作按钮
+		 * */
+		@JavascriptInterface
+		public void callMethodPageFinish(){
+		    ToysLeaseDetailActivity.this.runOnUiThread(new Runnable()    
+            {    
+                public void run()    
+                {    
+                	// 显示底部栏
+                    lease_detail_foot.setVisibility(View.VISIBLE);
+                    // 显示邀请好友悬浮窗
+            		Intent intent = new Intent(ToysLeaseDetailActivity.this, InviteStartService.class);    
+            		startService(intent); 
+                }    
+            });    
+		}
+		
+		/**
+		 * 进入登录页面
+		 * */
+		@JavascriptInterface
+		public void callMethodToLoginPage(){
+			Intent intent = new Intent(ToysLeaseDetailActivity.this, WebLoginActivity.class);
+			startActivity(intent);
+		}
+		
+		/**
+		 * 获取用户ID
+		 * */
+		@JavascriptInterface
+		public String callMethodGetLoginUserId(){
+			return Config.getUser(ToysLeaseDetailActivity.this).uid;
+		}
+		
+		/**
+		 * 判断用户是否已经登录
+		 * */
+		@JavascriptInterface
+		public String callMethodIsLogin(){
+			if(!MyApplication.getVisitor().equals("0")  || Config.getUser(ToysLeaseDetailActivity.this).uid.equals("")){
+				return "0"; // 未登录
+			}else{
+				return "1"; // 已登陆
+			}
+		}
+		
+		/**
+		 * 进入玩具详情
+		 * */
+		@JavascriptInterface
+		public void callMethodToToysDetail(String toys_id){
+			if(null == toys_id || toys_id.equals("") || toys_id.equals("undefined")){
+				Toast.makeText(ToysLeaseDetailActivity.this, "找不到这个玩具哦~", 3).show();
+				return;
+			}
+			Intent intent = new Intent(ToysLeaseDetailActivity.this, ToysLeaseDetailActivity.class);
+			intent.putExtra(ToysLeaseDetailActivity.TOYS_DETAIL_KEY, toys_id);
+			startActivity(intent);
+		}
+		
+		/**
+		 * 进入订单详情
+		 * */
+		@JavascriptInterface
+		public void callMethodToToysOrderDetail(String order_id){
+			if(null == order_id || order_id.equals("") || order_id.equals("undefined")){
+				Toast.makeText(ToysLeaseDetailActivity.this, "找不到这个订单哦~", 3).show();
+				return;
+			}
+			Intent intent = new Intent(ToysLeaseDetailActivity.this, ToysLeaseOrderDetailActivity.class);
+			intent.putExtra(ToysLeaseOrderDetailActivity.ORDER_ID_KEY, order_id);
+			startActivity(intent);
+		}
+		
+		/**
+		 * 进入话题详情
+		 * */
+		@JavascriptInterface
+		public void callMethodToPostDetail(String img_id){
+			if(null == img_id || img_id.equals("") || img_id.equals("undefined")){
+				Toast.makeText(ToysLeaseDetailActivity.this, "找不到这个话题哦~", 3).show();
+				return;
+			}
+			Intent intent = new Intent(ToysLeaseDetailActivity.this, MainItemDetialActivity.class);
+			intent.putExtra("img_id", img_id);
+			startActivity(intent);
+		}
+		
+		/**
+		 * 退出浏览器
+		 * */
+		@JavascriptInterface
+		public void callMethodFinish(){
+			ToysLeaseDetailActivity.this.finish();
+		}
+		
+		/**
+		 * JS调用的提示Toast方法
+		 * */
+		@JavascriptInterface
+		public void showToast(String toastStr) {
+			Toast.makeText(ToysLeaseDetailActivity.this, toastStr, Toast.LENGTH_LONG).show();
+		}
+	}
+	
+}

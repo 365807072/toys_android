@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        android:background="@color/title_bg" >
+
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="10dp"
+            android:text="我要同步"
+            android:textColor="#ffffff"
+            android:textSize="20dp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvNotDataTxt"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:gravity="center_horizontal"
+        android:paddingBottom="13dp"
+        android:paddingTop="13dp"
+        android:text="只能同步好友中出生日期一样的宝宝"
+        android:textSize="15dp" />
+
+    <com.yyqq.commen.view.PullDownView
+        android:id="@+id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/tvNotDataTxt"
+        android:background="@drawable/bg"
+        android:cacheColorHint="#FFFFFF"
+        android:divider="#FFFFFF"
+        android:dividerHeight="100dp"
+        android:footerDividersEnabled="false"
+        android:hapticFeedbackEnabled="false"
+        android:listSelector="#FFFFFF" >
+    </com.yyqq.commen.view.PullDownView>
+
+</RelativeLayout>

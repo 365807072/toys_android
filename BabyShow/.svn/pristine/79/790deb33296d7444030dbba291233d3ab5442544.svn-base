@@ -1,0 +1,177 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.yyqq.babyshow"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_lease_main_all"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.6"
+            android:background="#fff"
+            android:orientation="horizontal"
+            android:padding="10dp" >
+
+            <RelativeLayout
+                android:id="@+id/main_item05_lin"
+                android:layout_width="fill_parent"
+                android:layout_height="130dp"
+                android:layout_marginRight="0.5dp"
+                android:layout_weight="1.3"
+                android:background="#fff"
+                android:gravity="center" >
+
+                <ImageView
+                    android:id="@+id/lease_item_img"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/ic_launcher"
+                    android:scaleType="centerCrop" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="130dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1.18"
+                android:background="#fff"
+                android:gravity="left|top"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:gravity="left|top"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/lease_item_name"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:gravity="left|top"
+                        android:maxLines="2"
+                        android:textColor="#333333"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="0.5dp"
+                        android:layout_marginTop="5dp"
+                        android:gravity="left|top"
+                        android:orientation="horizontal"
+                        android:visibility="gone" >
+
+                        <com.yyqq.commen.utils.RoundAngleImageView
+                            android:id="@+id/lease_user_icon"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="2.5dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/def_head"
+                            app:roundHeight="10dp"
+                            app:roundWidth="10dp" />
+
+                        <TextView
+                            android:id="@+id/lease_user_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:textColor="#999999"
+                            android:textSize="@dimen/text_size_12" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:gravity="left|bottom"
+                    android:orientation="horizontal" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:gravity="left|bottom"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/lease_item_suppor"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:gravity="left|bottom"
+                            android:maxLines="1"
+                            android:textColor="#999999"
+                            android:textSize="@dimen/text_size_12"
+                            android:visibility="gone" />
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="0.5dp"
+                            android:layout_marginTop="5dp"
+                            android:gravity="left|bottom"
+                            android:orientation="horizontal" >
+
+                            <TextView
+                                android:id="@+id/lease_item_monery"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:ellipsize="end"
+                                android:maxLines="1"
+                                android:textColor="#FD6363"
+                                android:textSize="@dimen/text_size_16" />
+
+                            <ImageView
+                                android:id="@+id/category_icon_url"
+                                android:layout_width="20dp"
+                                android:layout_marginBottom="3dp"
+                                android:layout_height="20dp"
+                                android:layout_marginLeft="5dp"
+                                android:src="@drawable/ic_launcher"
+                                android:visibility="gone" />
+
+                            <TextView
+                                android:id="@+id/lease_item_state"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:ellipsize="end"
+                                android:gravity="right"
+                                android:maxLines="1"
+                                android:textColor="#999999"
+                                android:textSize="@dimen/text_size_12" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/lease_item_add"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/add_to_cart" />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:background="#e8e8e8" />
+    </LinearLayout>
+
+</RelativeLayout>

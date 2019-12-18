@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.yyqq.commen.view.MyTabHost xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/tabhost"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" >
+        </FrameLayout>
+
+        <TabWidget
+            android:id="@android:id/tabs"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@drawable/tab_bar1" >
+        </TabWidget>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/add_xiuxiu_dialog"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/tab_dialog_bg"
+        android:visibility="gone" >
+
+        <RelativeLayout
+            android:id="@+id/tab_add_cancel"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:background="#fff"
+            android:padding="10dp"
+            android:visibility="invisible" >
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/add_cancel" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/tab_add_huati"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_above="@+id/tab_add_cancel"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="110dp"
+            android:layout_marginRight="68dp"
+            android:src="@drawable/add_huati"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/tab_add_xiuxiu"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_above="@+id/tab_add_cancel"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="110dp"
+            android:layout_marginLeft="78dp"
+            android:src="@drawable/add_xiuxiu" />
+    </RelativeLayout>
+
+</com.yyqq.commen.view.MyTabHost>

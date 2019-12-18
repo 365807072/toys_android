@@ -1,0 +1,995 @@
+package com.yyqq.code.toyslease.version_93;
+
+import java.util.ArrayList;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.ab.http.AbHttpUtil;
+import com.ab.http.AbRequestParams;
+import com.ab.http.AbStringHttpResponseListener;
+import com.umeng.analytics.MobclickAgent;
+import com.yyqq.babyshow.R;
+import com.yyqq.code.login.WebLoginActivity;
+import com.yyqq.code.main.MainItemDetialWebActivity;
+import com.yyqq.code.toyslease.InviteFriendActivity;
+import com.yyqq.code.toyslease.ToysLeaseDetailActivity;
+import com.yyqq.code.toyslease.ToysLeaseMainTabActivity;
+import com.yyqq.code.toyslease.version_92.ToysLeaseMainShoppingCartActivity;
+import com.yyqq.code.toyslease.version_92.ToysLeaseSearchActivity;
+import com.yyqq.commen.adapter.ToysLeaseAllItemAdapter;
+import com.yyqq.commen.adapter.ToysLeaseMainAllAdapter;
+import com.yyqq.commen.adapter.ToysSelectHintApapter;
+import com.yyqq.commen.adapter.ToysSelectHintScreenApapter;
+import com.yyqq.commen.model.ScrollOverListView;
+import com.yyqq.commen.model.ToysAllSelect01Bean;
+import com.yyqq.commen.model.ToysAllSelect01ItemBean;
+import com.yyqq.commen.model.ToysLeaseMainListBean;
+import com.yyqq.commen.utils.Config;
+import com.yyqq.commen.utils.ShoppingCartUtils;
+import com.yyqq.commen.view.PullDownView;
+import com.yyqq.commen.view.PullDownView.OnPullDownListener;
+import com.yyqq.framework.activity.BaseActivity;
+import com.yyqq.framework.application.MyApplication;
+import com.yyqq.framework.application.ServerMutualConfig;
+
+/**
+ * 全部玩具首页
+ * 
+ * */
+public class MainToysAllActivity extends BaseActivity implements OnPullDownListener {
+
+	private PullDownView mPullDownView;
+	private ListView listview;
+	private ImageView lease_main_right;
+	private TextView toys_search_text;
+	private LinearLayout main_head_search;
+	public static RelativeLayout toys_lease_main_all;
+	public static ImageView search_to_cart;
+	public static RelativeLayout search_all;
+	private ImageView lease_back;
+	private RelativeLayout lease_select_all;
+	private RelativeLayout lease_select_all_02;
+	private GridView lease_select_list;
+	private GridView lease_select_list_02;
+	private LinearLayout toys_top_type01;
+	private LinearLayout toys_top_type02;
+	private LinearLayout toys_top_type03;
+	private LinearLayout toys_top_type04;
+	private RelativeLayout lease_select_all_03;
+	private ListView lease_select_list_03;
+	private RelativeLayout lease_select_all_04;
+	private ListView lease_select_list_04;
+	private RelativeLayout lease_screen_all;
+	private TextView lease_select_list01_ok;
+	private TextView lease_select_list02_ok;
+	private TextView lease_select_list04_ok;
+	private TextView toys_top_type01_text;
+	private TextView toys_top_type02_text;
+	private TextView toys_top_type03_text;
+	private TextView toys_top_type04_text;
+	private LinearLayout cart_ntf;
+	private TextView shopping_car_hint_text;
+	
+	public static String TOYS_ALL_KEY = "all_key";
+	public static boolean isShowBack = false;
+	public static String IS_SHOW_CARD = "showCard";
+	private AbHttpUtil ab;
+	private LayoutInflater inflater;
+	private ToysLeaseMainAllAdapter waitAdapter = null;
+	private ArrayList<ToysLeaseMainListBean> data = new ArrayList<ToysLeaseMainListBean>();
+	private boolean isFirse = true;
+	public static MainToysAllActivity toysLeaseMainActivity = null;
+	private SharedPreferences sp_all_list;
+	private Editor ed_all_list;
+	private ToysAllSelect01Bean selectBean01 = new ToysAllSelect01Bean();
+	private ToysAllSelect01Bean selectBean02 = new ToysAllSelect01Bean();
+	private ToysAllSelect01Bean selectBean03 = new ToysAllSelect01Bean();
+	private ArrayList<ToysAllSelect01Bean> selectBean04 = new ArrayList<ToysAllSelect01Bean>();
+	private ToysSelectHintApapter selectAdapter01;
+	private ToysSelectHintApapter selectAdapter02;
+	private ToysLeaseAllItemAdapter selectAdapter03;
+	private ToysSelectHintScreenApapter selectAdapter04;
+	
+	public static String toys_age = "";
+	public static String toys_age_text = "";
+	public static String toys_brand = "";
+	public static String toys_brand_text = "";
+	public static String toys_type = "";
+	public static String toys_type_text = "";
+	public static String toys_rank  = "";
+	public static String toys_rank_text = "";
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		Config.setActivityState(this);
+		setContentView(R.layout.activity_toys_lease_main);
+	}
+
+	@Override
+	protected void initView() {
+		lease_back = (ImageView) findViewById(R.id.lease_back);
+		if (isShowBack) {
+			lease_back.setVisibility(View.VISIBLE);
+			isShowBack = false;
+		} else {
+			lease_back.setVisibility(View.GONE);
+		}
+		cart_ntf = (LinearLayout) findViewById(R.id.cart_ntf);
+		shopping_car_hint_text = (TextView) findViewById(R.id.shopping_car_hint_text);
+		lease_select_list01_ok = (TextView) findViewById(R.id.lease_select_list01_ok);
+		lease_select_list02_ok = (TextView) findViewById(R.id.lease_select_list02_ok);
+		lease_select_list04_ok = (TextView) findViewById(R.id.lease_select_list04_ok);
+		lease_screen_all = (RelativeLayout) findViewById(R.id.lease_screen_all);
+		lease_select_all_04 = (RelativeLayout) findViewById(R.id.lease_select_all_04);
+		lease_select_list_04 = (ListView) findViewById(R.id.lease_select_list_04);
+		lease_select_all_03 = (RelativeLayout) findViewById(R.id.lease_select_all_03);
+		lease_select_list_03 = (ListView) findViewById(R.id.lease_select_list_03);
+		lease_select_all = (RelativeLayout) findViewById(R.id.lease_select_all);
+		lease_select_all_02 = (RelativeLayout) findViewById(R.id.lease_select_all_02);
+		lease_select_list = (GridView) findViewById(R.id.lease_select_list);
+		lease_select_list_02 = (GridView) findViewById(R.id.lease_select_list_02);
+		search_all = (RelativeLayout) findViewById(R.id.toys_lease_main_all);
+		search_to_cart = (ImageView) findViewById(R.id.search_to_cart);
+		search_to_cart.setVisibility(View.VISIBLE);
+		toys_lease_main_all = (RelativeLayout) findViewById(R.id.toys_lease_main_all);
+		lease_main_right = (ImageView) findViewById(R.id.lease_main_right);
+		// add_lease = (ImageView) findViewById(R.id.add_lease);
+		mPullDownView = (PullDownView) findViewById(R.id.lease_main_list);
+		mPullDownView.setOnPullDownListener(this);
+		mPullDownView.setShowHeader();// 显示并且可以使用头部刷新
+		mPullDownView.RefreshComplete();
+		mPullDownView.notifyDidMore();
+		mPullDownView.requestFocus();
+		lease_back = (ImageView) findViewById(R.id.lease_back);
+		toys_search_text = (TextView) findViewById(R.id.toys_search_text);
+		main_head_search = (LinearLayout) findViewById(R.id.main_head_search);
+		toys_top_type01 = (LinearLayout) findViewById(R.id.toys_top_type01);
+		toys_top_type02 = (LinearLayout) findViewById(R.id.toys_top_type02);
+		toys_top_type03 = (LinearLayout) findViewById(R.id.toys_top_type03);
+		toys_top_type04 = (LinearLayout) findViewById(R.id.toys_top_type04);
+		toys_top_type01_text = (TextView) findViewById(R.id.toys_top_type01_text);
+		toys_top_type02_text = (TextView) findViewById(R.id.toys_top_type02_text);
+		toys_top_type03_text = (TextView) findViewById(R.id.toys_top_type03_text);
+		toys_top_type04_text = (TextView) findViewById(R.id.toys_top_type04_text);
+	}
+
+	@Override
+	protected void initData() {
+
+		DisplayMetrics am = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(am);
+
+		// 计算"筛选"弹窗的高度
+		int screenHeight = (int) (am.heightPixels * 0.2);
+		LayoutParams params = lease_select_list.getLayoutParams();
+		params.height = screenHeight;
+		lease_select_list.setLayoutParams(params);
+		lease_select_list_02.setLayoutParams(params);
+		lease_select_list_03.setLayoutParams(params);
+		lease_select_list_04.setLayoutParams(params);
+		
+		// 防止触碰屏幕时，页面再次加载
+		ScrollOverListView.canRefleash = false;
+
+		// 获取缓存信息
+		sp_all_list = getSharedPreferences("toy_all_list", Context.MODE_PRIVATE);
+		ed_all_list = sp_all_list.edit();
+		toysLeaseMainActivity = this;
+		
+		// 初始化页面组件
+		ab = AbHttpUtil.getInstance(MainToysAllActivity.this);
+		inflater = LayoutInflater.from(MainToysAllActivity.this);
+		listview = mPullDownView.getListView();
+		listview.setDivider(null);
+		listview.setVerticalScrollBarEnabled(false); 
+		listview.setFastScrollEnabled(false);
+		waitAdapter = new ToysLeaseMainAllAdapter(MainToysAllActivity.this, inflater, MyApplication.getInstance(), data, 0, ab, (int) ((int) am.widthPixels * 0.45));
+		listview.setAdapter(waitAdapter);
+		mPullDownView.enableAutoFetchMore(true, 1);// 设置可以自动获取更多 滑到最后一个自动获取
+
+		// 加载右上角图片
+		getRightIcon();
+
+		// 获取缓存数据
+		if (!sp_all_list.getString("toy_all_list", "").equals("")) {
+			initMainList(sp_all_list.getString("toy_all_list", ""), false, true); // 获取缓存
+		} else {
+			initWaitData(false);
+		}
+
+		// 初始化筛选区域
+		selectAdapter01 = new ToysSelectHintApapter(this, selectBean01);
+		lease_select_list.setAdapter(selectAdapter01);
+		selectAdapter02 = new ToysSelectHintApapter(this, selectBean02);
+		lease_select_list_02.setAdapter(selectAdapter02);
+		selectAdapter03 = new ToysLeaseAllItemAdapter(this, selectBean03);
+		lease_select_list_03.setAdapter(selectAdapter03);
+		selectAdapter04 = new ToysSelectHintScreenApapter(this, selectBean04);
+		lease_select_list_04.setAdapter(selectAdapter04);
+		getSelectList();
+
+		// 获取搜索框提示语
+		getSearchText();
+
+		// 是否显示购物车按钮
+		if (getIntent().hasExtra(IS_SHOW_CARD)) {
+			ShoppingCartUtils.ADD_FROM = "TOYS_ALL";
+			ShoppingCartUtils.badge = null;
+			ShoppingCartUtils.DrewNumberBitmap(this, search_to_cart);
+			search_to_cart.setVisibility(View.VISIBLE);
+		} else {
+			ShoppingCartUtils.ADD_FROM = "TOYS_LIST";
+			search_to_cart.setVisibility(View.GONE);
+		}
+	}
+
+	@Override
+	protected void setListener() {
+		
+		lease_select_list01_ok.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				toys_age = "";
+				toys_age_text = "";
+				for(int i = 0  ; i < selectBean01.getMain_val().size() ; i++){
+					if(selectBean01.getMain_val().get(i).isClick()){
+						toys_age_text += selectBean01.getMain_val().get(i).getEach_title() + ",";
+						toys_age += selectBean01.getMain_val().get(i).getEach_val() + ",";
+					}
+				}
+				
+				if(!toys_age.equals("")){
+					toys_age = toys_age.substring(0, toys_age.length() - 1);
+					toys_top_type01_text.setText(toys_age_text.substring(0, toys_age_text.length() - 1));
+				}
+				initWaitData(false);
+				
+				lease_select_all_04.setVisibility(View.GONE);
+				lease_select_all_03.setVisibility(View.GONE);
+				lease_select_all_02.setVisibility(View.GONE);
+				lease_select_all.setVisibility(View.GONE);
+				lease_screen_all.setVisibility(View.GONE);
+			}
+		});
+		
+		lease_select_list02_ok.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				toys_brand = "";
+				toys_brand_text = "";
+				for(int i = 0  ; i < selectBean02.getMain_val().size() ; i++){
+					if(selectBean02.getMain_val().get(i).isClick()){
+						toys_brand_text += selectBean02.getMain_val().get(i).getEach_title() + ",";
+						toys_brand += selectBean02.getMain_val().get(i).getEach_val() + ",";
+					}
+				}
+				
+				if(!toys_brand.equals("")){
+					toys_brand = toys_brand.substring(0, toys_brand.length() - 1);
+					toys_top_type02_text.setText(toys_brand_text.substring(0, toys_brand_text.length() - 1));
+				}
+				initWaitData(false);
+				
+				lease_select_all_04.setVisibility(View.GONE);
+				lease_select_all_03.setVisibility(View.GONE);
+				lease_select_all_02.setVisibility(View.GONE);
+				lease_select_all.setVisibility(View.GONE);
+				lease_screen_all.setVisibility(View.GONE);
+			}
+		});
+		 
+		lease_select_list_03.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				for(int i = 0 ; i < selectBean03.getMain_val().size() ; i++){
+					selectBean03.getMain_val().get(i).setClick(false);
+				}
+				toys_rank = selectBean03.getMain_val().get(position).getEach_val();
+				toys_top_type03_text.setText(selectBean03.getMain_val().get(position).getEach_title());
+				selectBean03.getMain_val().get(position).setClick(true);
+				selectAdapter03.notifyDataSetChanged();
+				initWaitData(false);
+				
+				lease_select_all_04.setVisibility(View.GONE);
+				lease_select_all_03.setVisibility(View.GONE);
+				lease_select_all_02.setVisibility(View.GONE);
+				lease_select_all.setVisibility(View.GONE);
+				lease_screen_all.setVisibility(View.GONE);
+			}
+		});
+		
+		lease_select_list04_ok.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				toys_type = "";
+				toys_type_text = "";
+				for(int i = 0 ; i < selectBean04.size() ; i++ ){
+					for(int j = 0 ; j < selectBean04.get(i).getMain_val().size() ; j++){
+						if(selectBean04.get(i).getMain_val().get(j).isClick()){
+							toys_type_text += selectBean04.get(i).getMain_val().get(j).getEach_title() + ",";
+							toys_type += selectBean04.get(i).getMain_val().get(j).getEach_val() + ",";
+						}
+					}
+				}
+				
+				if(!toys_type.equals("")){
+					toys_type = toys_type.substring(0, toys_type.length() -1 );
+					toys_top_type04_text.setText(toys_type_text.substring(0, toys_type_text.length() -1 ));
+				}else{
+					toys_top_type04_text.setText("筛选");
+				}
+				initWaitData(false);
+				
+				lease_select_all_04.setVisibility(View.GONE);
+				lease_select_all_03.setVisibility(View.GONE);
+				lease_select_all_02.setVisibility(View.GONE);
+				lease_select_all.setVisibility(View.GONE);
+				lease_screen_all.setVisibility(View.GONE);
+			}
+		});
+
+		toys_top_type01.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if(lease_screen_all.isShown()){
+					lease_select_all.setVisibility(View.GONE);
+					lease_select_all_02.setVisibility(View.GONE);
+					lease_select_all_03.setVisibility(View.GONE);
+					lease_select_all_04.setVisibility(View.GONE);
+					toys_top_type01_text.setTextColor(Color.parseColor("#666666"));
+					toys_top_type02_text.setTextColor(Color.parseColor("#666666"));
+					toys_top_type03_text.setTextColor(Color.parseColor("#666666"));
+					toys_top_type04_text.setTextColor(Color.parseColor("#666666"));
+					lease_screen_all.setVisibility(View.GONE);
+				}else{
+					toys_top_type01_text.setTextColor(Color.parseColor("#d72722"));
+					toys_top_type02_text.setTextColor(Color.parseColor("#666666"));
+					toys_top_type03_text.setTextColor(Color.parseColor("#666666"));
+					toys_top_type04_text.setTextColor(Color.parseColor("#666666"));
+					lease_select_all.setVisibility(View.VISIBLE);
+					lease_select_all_02.setVisibility(View.GONE);
+					lease_select_all_03.setVisibility(View.GONE);
+					lease_select_all_04.setVisibility(View.GONE);
+					lease_screen_all.setVisibility(View.VISIBLE);
+				}
+			}
+		});
+
+		toys_top_type02.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if(lease_screen_all.isShown()){
+					lease_select_all.setVisibility(View.GONE);
+					lease_select_all_02.setVisibility(View.GONE);
+					lease_select_all_03.setVisibility(View.GONE);
+					lease_select_all_04.setVisibility(View.GONE);
+					toys_top_type01_text.setTextColor(Color.parseColor("#666666"));
+					toys_top_type02_text.setTextColor(Color.parseColor("#666666"));
+					toys_top_type03_text.setTextColor(Color.parseColor("#666666"));
+					toys_top_type04_text.setTextColor(Color.parseColor("#666666"));
+					lease_screen_all.setVisibility(View.GONE);
+				}else{
+					toys_top_type01_text.setTextColor(Color.parseColor("#666666"));
+					toys_top_type02_text.setTextColor(Color.parseColor("#d72722"));
+					toys_top_type03_text.setTextColor(Color.parseColor("#666666"));
+					toys_top_type04_text.setTextColor(Color.parseColor("#666666"));
+					lease_select_all_02.setVisibility(View.VISIBLE);
+					lease_select_all.setVisibility(View.GONE);
+					lease_select_all_03.setVisibility(View.GONE);
+					lease_select_all_04.setVisibility(View.GONE);
+					lease_screen_all.setVisibility(View.VISIBLE);
+				}
+			}
+		});
+		
+		toys_top_type03.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if(lease_screen_all.isShown()){
+					lease_select_all.setVisibility(View.GONE);
+					lease_select_all_02.setVisibility(View.GONE);
+					lease_select_all_03.setVisibility(View.GONE);
+					lease_select_all_04.setVisibility(View.GONE);
+					toys_top_type01_text.setTextColor(Color.parseColor("#666666"));
+					toys_top_type02_text.setTextColor(Color.parseColor("#666666"));
+					toys_top_type03_text.setTextColor(Color.parseColor("#666666"));
+					toys_top_type04_text.setTextColor(Color.parseColor("#666666"));
+					lease_screen_all.setVisibility(View.GONE);
+				}else{
+					toys_top_type01_text.setTextColor(Color.parseColor("#666666"));
+					toys_top_type02_text.setTextColor(Color.parseColor("#666666"));
+					toys_top_type03_text.setTextColor(Color.parseColor("#d72722"));
+					toys_top_type04_text.setTextColor(Color.parseColor("#666666"));
+					lease_select_all_03.setVisibility(View.VISIBLE);
+					lease_select_all_02.setVisibility(View.GONE);
+					lease_select_all.setVisibility(View.GONE);
+					lease_select_all_04.setVisibility(View.GONE);
+					lease_screen_all.setVisibility(View.VISIBLE);
+				}
+			}
+		});
+		
+		toys_top_type04.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if(lease_screen_all.isShown()){
+					lease_select_all.setVisibility(View.GONE);
+					lease_select_all_02.setVisibility(View.GONE);
+					lease_select_all_03.setVisibility(View.GONE);
+					lease_select_all_04.setVisibility(View.GONE);
+					toys_top_type01_text.setTextColor(Color.parseColor("#666666"));
+					toys_top_type02_text.setTextColor(Color.parseColor("#666666"));
+					toys_top_type03_text.setTextColor(Color.parseColor("#666666"));
+					toys_top_type04_text.setTextColor(Color.parseColor("#666666"));
+					lease_screen_all.setVisibility(View.GONE);
+				}else{
+					toys_top_type01_text.setTextColor(Color.parseColor("#666666"));
+					toys_top_type02_text.setTextColor(Color.parseColor("#666666"));
+					toys_top_type03_text.setTextColor(Color.parseColor("#666666"));
+					toys_top_type04_text.setTextColor(Color.parseColor("#d72722"));
+					lease_select_all_04.setVisibility(View.VISIBLE);
+					lease_select_all_03.setVisibility(View.GONE);
+					lease_select_all_02.setVisibility(View.GONE);
+					lease_select_all.setVisibility(View.GONE);
+					lease_screen_all.setVisibility(View.VISIBLE);
+				}
+			}
+		});
+
+		lease_screen_all.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				lease_screen_all.setVisibility(View.GONE);
+				toys_top_type01_text.setTextColor(Color.parseColor("#666666"));
+				toys_top_type02_text.setTextColor(Color.parseColor("#666666"));
+				toys_top_type03_text.setTextColor(Color.parseColor("#666666"));
+				toys_top_type04_text.setTextColor(Color.parseColor("#666666"));
+			}
+		});
+		
+		lease_back.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				MainToysAllActivity.this.finish();
+			}
+		});
+
+		search_to_cart.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				ToysLeaseMainShoppingCartActivity.isShowBack = true;
+				Intent intent = new Intent(MainToysAllActivity.this, ToysLeaseMainShoppingCartActivity.class);
+				startActivity(intent);
+			}
+		});
+
+		main_head_search.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MainToysAllActivity.this,
+						ToysLeaseSearchActivity.class);
+				MainToysAllActivity.this.startActivity(intent);
+			}
+		});
+
+		lease_main_right.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// 检查登录状态
+				if (!MyApplication.getVisitor().equals("0") || Config.getUser(MainToysAllActivity.this).uid.equals("")) {
+					Intent in = new Intent(MainToysAllActivity.this, WebLoginActivity.class);
+					startActivity(in);
+				} else {
+					Intent intent = new Intent(MainToysAllActivity.this, InviteFriendActivity.class);
+					startActivity(intent);
+				}
+			}
+		});
+
+		findViewById(R.id.lease_back).setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				MainToysAllActivity.this.finish();
+			}
+		});
+
+		// add_lease.setOnClickListener(new OnClickListener() {
+		//
+		// @Override
+		// public void onClick(View v) {
+		// // 检查登录状态
+		// if(!MyApplication.getVisitor().equals("0") ||
+		// Config.getUser(ToysLeaseMainAllActivity.this).uid.equals("")){
+		// Intent in = new Intent(ToysLeaseMainAllActivity.this,
+		// WebLoginActivity.class);
+		// startActivity(in);
+		// }else{
+		// Intent intent = new Intent(ToysLeaseMainAllActivity.this,
+		// AddNewToysLeaseActivity.class);
+		// startActivity(intent);
+		// }
+		// }
+		// });
+
+		lease_back.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				MainToysAllActivity.this.finish();
+			}
+		});
+
+
+		listview.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				if (data.get(position - 1).getIs_jump().equals("0")) { // 玩具详情
+					Intent intent = new Intent(MainToysAllActivity.this, ToysLeaseDetailActivity.class);
+					intent.putExtra(ToysLeaseDetailActivity.TOYS_DETAIL_KEY, data.get(position - 1).getBusiness_id());
+					startActivity(intent);
+				} else if (data.get(position - 1).getIs_jump().equals("2")) {
+					Intent intent = new Intent(MainToysAllActivity.this,MainItemDetialWebActivity.class);
+					intent.putExtra(MainItemDetialWebActivity.LINK_URL, data.get(position - 1).getPost_url());
+					MainToysAllActivity.this.startActivity(intent);
+				}
+			}
+		});
+	}
+
+	@Override
+	public void onRefresh() {
+		getSearchText();
+		initWaitData(false);
+	}
+
+	@Override
+	public void onMore() {
+		initWaitData(true);
+	}
+
+	/**
+	 * 初始化列表
+	 * */
+	private void initWaitData(final boolean isMore) {
+		// Config.showProgressDialog(ToysLeaseMainAllActivity.this, false,
+		// null);
+//		if (!isMore) {
+//			if (showPage == 0) {
+//				waitAdapter.notifyDataSetChanged();
+//			} else if (showPage == 1) {
+//				// completeAdapter.notifyDataSetChanged();
+//			} else if (showPage == -1) {
+//				// myselfAdapter.notifyDataSetChanged();
+//			}
+//		}
+		
+		toys_top_type01_text.setTextColor(Color.parseColor("#666666"));
+		toys_top_type02_text.setTextColor(Color.parseColor("#666666"));
+		toys_top_type03_text.setTextColor(Color.parseColor("#666666"));
+		toys_top_type04_text.setTextColor(Color.parseColor("#666666"));
+		
+		final AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(MainToysAllActivity.this).uid);
+		params.put("toys_age", toys_age);
+		params.put("toys_brand", toys_brand);
+		params.put("toys_select", toys_type);
+		params.put("toys_rank", toys_rank);
+		
+		if (isMore && data.size() != 0) {
+			params.put("post_create_time", data.get(data.size() - 1).getPostcreatetime());
+		}
+		
+		ab.get(ServerMutualConfig.GET_LEASE_MAIN_LIST + "&" + params.toString(), new AbStringHttpResponseListener() {
+
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						// Config.dismissProgress();
+						if (!isMore) {
+							data.clear();
+//							waitAdapter.notifyDataSetChanged();
+						}
+						initMainList(content, isMore, false);
+					}
+
+					@Override
+					public void onFinish() {
+						super.onFinish();
+						Config.dismissProgress();
+						mPullDownView.RefreshComplete();// 这个事线程安全的 可看源代码
+						mPullDownView.notifyDidMore();
+					}
+
+					@Override
+					public void onFailure(int statusCode, String content,
+							Throwable error) {
+						super.onFailure(statusCode, content, error);
+					}
+				});
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+
+		// 修改底部栏文字颜色
+		ToysLeaseMainTabActivity.iconText.get(0).setTextColor(Color.parseColor("#000000"));
+		ToysLeaseMainTabActivity.iconText.get(1).setTextColor(Color.parseColor("#fe6363"));
+		ToysLeaseMainTabActivity.iconText.get(2).setTextColor(Color.parseColor("#000000"));
+		ToysLeaseMainTabActivity.iconText.get(3).setTextColor(Color.parseColor("#000000"));
+
+		isFirse = true;
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
+
+	/**
+	 * 初始化列表
+	 * */
+	private void initMainList(String content, boolean isMore, boolean isSave) {
+		try {
+			if (!content.equals("") && new JSONObject(content).getBoolean("success")) {
+				JSONObject json = new JSONObject(content);
+				
+				// 获取公告信息
+				if(json.has("data2")){
+					if(!json.getString("data2").equals("")){
+						cart_ntf.setVisibility(View.VISIBLE);
+						shopping_car_hint_text.setText(json.getString("data2"));
+					}else{
+						cart_ntf.setVisibility(View.GONE);
+					}
+				}
+				
+				if (!isMore) {
+					ed_all_list.putString("toy_all_list", content);
+					ed_all_list.commit();
+					data.clear();
+					mPullDownView.setShowFooter();
+					
+					if (json.getJSONArray("data").length() != 20) {
+						mPullDownView.setHideFooter();
+						if(json.getJSONArray("data").length() == 0){
+							waitAdapter.notifyDataSetChanged();
+							Toast.makeText(MainToysAllActivity.this, "未找到符合您要求的玩具", 2).show();
+							return;
+						}else{
+							Toast.makeText(MainToysAllActivity.this, "已显示所有符合条件的玩具", 2).show();
+						}
+					}else{
+						mPullDownView.setShowFooter();
+					}
+				} else {
+					if (json.getJSONArray("data").length() != 20) {
+						Toast.makeText(MainToysAllActivity.this, "已显示所有符合条件的玩具", 2).show();
+						mPullDownView.setHideFooter();
+					} else {
+						mPullDownView.setShowFooter();
+					}
+				}
+
+				for (int i = 0; i < json.getJSONArray("data").length(); i++) {
+					ToysLeaseMainListBean item = new ToysLeaseMainListBean();
+					data.add(item.fromJson(json.getJSONArray("data").getJSONObject(i)));
+				}
+
+				if(data.size() != 0){
+					waitAdapter.notifyDataSetChanged();
+				}
+				
+//				if (index != -2) {
+//					changeTitlePage(index);
+//					if (index == 0) {
+//						showPage = 0;
+//						listview.setAdapter(waitAdapter);
+//						waitAdapter.notifyDataSetChanged();
+//					} else if (index == 1) {
+//						showPage = 1;
+//						// listview.setAdapter(completeAdapter);
+//						// completeAdapter.notifyDataSetChanged();
+//					} else if (index == -1) {
+//						showPage = -1;
+//						// listview.setAdapter(myselfAdapter);
+//						// myselfAdapter.notifyDataSetChanged();
+//					}
+//					index = -2;
+//				} else {
+//					changeTitlePage(showPage);
+//					if (isMore) {
+//						if (showPage == 0) {
+//							waitAdapter.notifyDataSetChanged();
+//						} else if (showPage == 1) {
+//							// completeAdapter.notifyDataSetChanged();
+//						} else if (showPage == -1) {
+//							// myselfAdapter.notifyDataSetChanged();
+//						}
+//					} else {
+//						if (showPage == 0) {
+//							listview.setAdapter(waitAdapter);
+//							waitAdapter.notifyDataSetChanged();
+//						} else if (showPage == 1) {
+//							// listview.setAdapter(completeAdapter);
+//							// completeAdapter.notifyDataSetChanged();
+//						} else if (showPage == -1) {
+//							// listview.setAdapter(myselfAdapter);
+//							// myselfAdapter.notifyDataSetChanged();
+//						}
+//					}
+//				}
+
+				if (isSave && Config.isConn(this)) {
+					initWaitData(false);
+				}
+
+			} else {
+				Toast.makeText(MainToysAllActivity.this,
+						new JSONObject(content).getString("reMsg"), 2).show();
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 获取搜索提示语
+	 * */
+	private void getSearchText() {
+		AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(this).uid);
+		ab.get(ServerMutualConfig.GET_TOYS_HINT_TEXT + "&" + params.toString(),
+				new AbStringHttpResponseListener() {
+
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						try {
+							if (new JSONObject(content).getBoolean("success")) {
+								toys_search_text.setText("   " + new JSONObject(content).getJSONObject("data").getString("search_name"));
+							}
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+
+					@Override
+					public void onFinish() {
+						super.onFinish();
+					}
+
+					@Override
+					public void onFailure(int statusCode, String content,
+							Throwable error) {
+						super.onFailure(statusCode, content, error);
+					}
+				});
+	}
+
+	/**
+	 * 获取筛选数据
+	 * */
+	private void getSelectList() {
+		AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(this).uid);
+		ab.get(ServerMutualConfig.GET_SELECT_LIST + "&" + params.toString(), new AbStringHttpResponseListener() {
+
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						try {
+							if (new JSONObject(content).getBoolean("success")) {
+								JSONObject data = new JSONObject(content).getJSONObject("data");
+
+								JSONObject selectData01 = data.getJSONObject("toys_age");
+								JSONObject selectData02 = data.getJSONObject("toys_brand");
+								JSONObject selectData03 = data.getJSONObject("toys_all");
+								JSONObject selectData04 = data.getJSONObject("toys_select");
+
+								String ageList[] = null;
+								if(!toys_age.equals("")){
+									ageList = toys_age.split(",");
+								}
+								
+								selectBean01.setMain_title(selectData01.getString("main_title"));
+								toys_top_type01_text.setText(selectBean01.getMain_title());
+								ArrayList<ToysAllSelect01ItemBean> main_val01 = new ArrayList<ToysAllSelect01ItemBean>();
+								for (int i = 0; i < selectData01.getJSONArray("main_val").length(); i++) {
+									ToysAllSelect01ItemBean bean = new ToysAllSelect01ItemBean();
+									bean.setClick(false);
+									bean.setEach_title(selectData01.getJSONArray("main_val").getJSONObject(i).getString("each_title"));
+									bean.setEach_val(selectData01.getJSONArray("main_val").getJSONObject(i).getString("each_val"));
+									
+									// 预设条件初始化
+									if(null != ageList){
+										for(int j = 0 ; j < ageList.length ; j++){
+											if(ageList[j].equals(bean.getEach_val())){
+												bean.setClick(true);
+											}
+										}
+									}
+									main_val01.add(bean);
+								}
+								main_val01.get(0).setClick(true);
+								selectBean01.setMain_val(main_val01);
+								selectAdapter01.notifyDataSetChanged();
+
+								String ageBrand[] = null;
+								if(!toys_brand.equals("")){
+									ageBrand = toys_brand.split(",");
+								}
+								selectBean02.setMain_title(selectData02.getString("main_title"));
+								toys_top_type02_text.setText(selectBean02.getMain_title());
+								ArrayList<ToysAllSelect01ItemBean> main_val02 = new ArrayList<ToysAllSelect01ItemBean>();
+								for (int i = 0; i < selectData02.getJSONArray("main_val").length(); i++) {
+									ToysAllSelect01ItemBean bean = new ToysAllSelect01ItemBean();
+									bean.setClick(false);
+									bean.setEach_title(selectData02.getJSONArray("main_val").getJSONObject(i).getString("each_title"));
+									bean.setEach_val(selectData02.getJSONArray("main_val").getJSONObject(i).getString("each_val"));
+									
+									// 预设条件初始化
+									if(null != ageBrand){
+										for(int j = 0 ; j < ageBrand.length ; j++){
+											if(ageBrand[j].equals(bean.getEach_val())){
+												bean.setClick(true);
+											}
+										}
+									}
+									main_val02.add(bean);
+								}
+								main_val02.get(0).setClick(true);
+								selectBean02.setMain_val(main_val02);
+								selectAdapter02.notifyDataSetChanged();
+								
+								selectBean03.setMain_title(selectData03.getString("main_title"));
+								toys_top_type03_text.setText(selectBean03.getMain_title());
+								ArrayList<ToysAllSelect01ItemBean> main_val03 = new ArrayList<ToysAllSelect01ItemBean>();
+								for (int i = 0; i < selectData03.getJSONArray("main_val").length(); i++) {
+									ToysAllSelect01ItemBean bean = new ToysAllSelect01ItemBean();
+									bean.setClick(false);
+									bean.setEach_title(selectData03.getJSONArray("main_val").getJSONObject(i).getString("each_title"));
+									bean.setEach_val(selectData03.getJSONArray("main_val").getJSONObject(i).getString("each_val"));
+									
+									// 预设条件初始化
+									if(!toys_rank.equals("")){
+										if(toys_rank.equals(bean.getEach_val())){
+											bean.setClick(true);
+										}
+									}
+									main_val03.add(bean);
+								}
+								main_val03.get(0).setClick(true);
+								selectBean03.setMain_val(main_val03);
+								selectAdapter03.notifyDataSetChanged();
+								
+								String strType[] = null;
+								if(!toys_type.equals("")){
+									strType = toys_type.split(",");
+								}
+								selectBean04.clear();
+								ToysAllSelect01Bean itemBean = null;
+								toys_top_type04_text.setText(selectData04.getString("main_title"));
+								for(int j = 0 ; j < selectData04.getJSONArray("main_val").length() ; j++){
+									itemBean = new ToysAllSelect01Bean();
+									itemBean.setMain_title(selectData04.getJSONArray("main_val").getJSONObject(j).getString("main_title_son"));
+									ArrayList<ToysAllSelect01ItemBean> itemList = new ArrayList<ToysAllSelect01ItemBean>();
+									for(int i = 0 ; i < selectData04.getJSONArray("main_val").getJSONObject(j).getJSONArray("main_val_son").length() ; i++){
+										ToysAllSelect01ItemBean bean = new ToysAllSelect01ItemBean();
+										bean.setClick(false);
+										bean.setEach_title(selectData04.getJSONArray("main_val").getJSONObject(j).getJSONArray("main_val_son").getJSONObject(i).getString("each_title_son"));
+										bean.setEach_val(selectData04.getJSONArray("main_val").getJSONObject(j).getJSONArray("main_val_son").getJSONObject(i).getString("each_val_son"));
+										
+										// 预设条件初始化
+										if(null != strType){
+											for(int k = 0 ; k < strType.length ; k++){
+												if(strType[k].equals(bean.getEach_val())){
+													bean.setClick(true);
+												}
+											}
+										}
+										itemList.add(bean);
+									}
+									itemBean.setMain_val(itemList);
+									selectBean04.add(itemBean);
+								}
+								selectAdapter04.notifyDataSetChanged();
+								
+							}
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+
+					@Override
+					public void onFinish() {
+						super.onFinish();
+					}
+
+					@Override
+					public void onFailure(int statusCode, String content,
+							Throwable error) {
+						super.onFailure(statusCode, content, error);
+					}
+				});
+	}
+
+	/**
+	 * 获取右上角图标
+	 * */
+	private void getRightIcon() {
+		AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(this).uid);
+		ab.get(ServerMutualConfig.GET_RIGHT_ICON + "&" + params.toString(),
+				new AbStringHttpResponseListener() {
+
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						try {
+							if (new JSONObject(content).getBoolean("success")) {
+								// 加载右上角图片
+								MyApplication.getInstance().display(new JSONObject(content).getJSONObject("data").getString("icon_img"), lease_main_right, R.drawable.def_image);
+							}
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+
+					@Override
+					public void onFinish() {
+						super.onFinish();
+					}
+
+					@Override
+					public void onFailure(int statusCode, String content,
+							Throwable error) {
+						super.onFailure(statusCode, content, error);
+					}
+				});
+	}
+
+}

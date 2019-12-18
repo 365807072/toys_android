@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/choosearea_bg_mid"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/search_root"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/general_ly"
+            android:background="#f7f7f7"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:visibility="gone" >
+
+            <EditText
+                android:id="@+id/search_input"
+                android:layout_width="fill_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="left|center_vertical"
+                android:layout_weight="1"
+                android:background="#e3e4e6"
+                android:drawableLeft="@drawable/search_input_icon"
+                android:drawablePadding="10dp"
+                android:hint="搜索商家名称"
+                android:imeOptions="actionSearch"
+                android:padding="5dp"
+                android:textColor="#666666"
+                android:textColorHint="#666666"
+                android:textSize="13sp" />
+
+            <requestFocus />
+
+            <ImageView
+                android:id="@+id/search_start"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/search_start" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="380dp"
+            android:orientation="horizontal" >
+
+            <ListView
+                android:id="@+id/listView"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#ffffff"
+                android:cacheColorHint="#00000000"
+                android:divider="#dcdcdc"
+                android:dividerHeight="1px"
+                android:paddingLeft="4dp"
+                android:scrollbars="none" >
+            </ListView>
+
+            <ListView
+                android:id="@+id/listView2"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#f4f4f4"
+                android:cacheColorHint="#00000000"
+                android:divider="@null"
+                android:paddingRight="4dp" >
+            </ListView>
+        </LinearLayout>
+    </LinearLayout>
+
+</merge>

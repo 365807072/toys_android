@@ -1,0 +1,385 @@
+package com.yyqq.commen.utils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.animation.Animator;
+import android.animation.ValueAnimator;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.graphics.BitmapFactory;
+import android.graphics.Path;
+import android.graphics.PathMeasure;
+import android.view.View;
+import android.view.animation.LinearInterpolator;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
+
+import com.ab.http.AbHttpUtil;
+import com.ab.http.AbRequestParams;
+import com.ab.http.AbStringHttpResponseListener;
+import com.yyqq.babyshow.R;
+import com.yyqq.code.login.WebLoginActivity;
+import com.yyqq.code.toyslease.ToysLeaseDetailActivity;
+import com.yyqq.code.toyslease.ToysLeaseMainTabActivity;
+import com.yyqq.code.toyslease.version_92.ToysLeaseCategoryActivity;
+import com.yyqq.code.toyslease.version_92.ToysLeaseMainAllActivity;
+import com.yyqq.code.toyslease.version_92.ToysLeaseSearchActivity;
+import com.yyqq.framework.application.MyApplication;
+import com.yyqq.framework.application.ServerMutualConfig;
+
+/**
+ * 玩具世界购物车相关utils
+ * 
+ * */
+public class ShoppingCartUtils {
+	
+	/**
+	 * 加入购物车操作来源
+	 * 
+	 * TOYS_LIST = 全部玩具列表（首页）
+	 * TOYS_SEARCH = 玩具搜索页
+	 * TOYS_CATEGORY = 玩具分类页
+	 * TOYS_ALL = 全部玩具列表（换玩具）
+	 * */
+	public static String ADD_FROM = "TOYS_LIST";
+	
+	/**
+	 * 加入购物车动画
+	 */
+	private static PathMeasure mPathMeasure;
+	private static float[] mCurrentPosition = new float[2];
+	
+	/**
+	 * 存储购物车数量SharedPreferences文件名q
+	 * */ 
+	private static final String SP_NAME = "babyshow_cart_count";
+	
+	/**
+	 * 购物车数字角标
+	 * */ 
+	public static MyBadgeView badge;
+	
+	/**
+	 * 获取购物车数量
+	 * */
+	public static int getCartNumber(Context context){
+		SharedPreferences sp = context.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
+		return sp.getInt("count", 0);
+	}
+	
+	/**
+	 * 保存购物车数量
+	 * */
+	public static void setCartNumber(Context context, int count){
+		SharedPreferences sp = context.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
+		Editor ed = sp.edit();
+		ed.putInt("count", count);
+		ed.commit();
+	}
+	
+	/**
+	 * 更新购物车数量
+	 * */
+	public static void updateShoppingCartNumber(final Context context){
+		updateShoppingCartNumber(context, false);
+	}
+	
+	
+	/**
+	 * 绘制购物车数字角标
+	 * */
+	public static void DrewGouWuCheNumberBitmap(Context context, View view){
+		badge = new MyBadgeView(context, view);
+		if(ShoppingCartUtils.getCartNumber(context) > 0 && null != view && null != context){
+			badge.setText(ShoppingCartUtils.getCartNumber(context)+"");
+			badge.show();
+		}else{
+			badge.hide();
+		}
+	}
+	
+	/**
+	 * 绘制其他View数字角标
+	 * */
+	public static void DrewNumberBitmap(Context context, View view){
+		if(null == badge){
+			badge = new MyBadgeView(context, view);
+		}
+		if(ShoppingCartUtils.getCartNumber(context) > 0 && null != view && null != context){
+			badge.setText(ShoppingCartUtils.getCartNumber(context)+"");
+			badge.show();
+		}else{
+			badge.hide();
+		}
+	}
+	
+	/**
+	 * 更新购物车数量
+	 * 
+	 * isRefresh：是否更新玩具世界首页中，购物车角标
+	 * */
+	public static void updateShoppingCartNumber(final Context context, final boolean isRefresh){
+		AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(context).uid);
+		AbHttpUtil.getInstance(context).get(ServerMutualConfig.GET_CART_NUMBER + "&" + params.toString(), new AbStringHttpResponseListener() {
+			
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						try {
+							if(new JSONObject(content).getBoolean("success")){
+							
+								// 保存玩具数量
+								setCartNumber(context, Integer.parseInt(new JSONObject(content).getJSONObject("data").getString("cart_number")));
+								
+								if(getCartNumber(context) != 0){
+									// 更新玩具世界首页中，购物车角标
+									if(isRefresh){
+										ToysLeaseMainTabActivity.newMessage.setVisibility(View.VISIBLE);
+										ToysLeaseMainTabActivity.newMessage.setText(getCartNumber(context)+"");
+									}
+								}
+							}else{
+								Toast.makeText(context, new JSONObject(content).getString("reMsg"), 3).show();
+							}
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+
+					@Override
+					public void onFinish() {
+						super.onFinish();
+					}
+
+					@Override
+					public void onFailure(int statusCode, String content,
+							Throwable error) {
+						super.onFailure(statusCode, content, error);
+					}
+				});
+	}
+	
+	/**
+	 * （玩具详情）向购物车添加玩具
+	 * 
+	 * business_id：玩具id
+	 * 
+	 * status:0加入购物车【默认】、1更换玩具
+	 * 
+	 * cartIcon：购物车图标（加入后需要更改角标数字）
+	 * 
+	 * */
+	public static void addToysToCart(final Context context, final String business_id, final int status, final ImageView cartIcon){
+	
+		// 未登录
+		if(!MyApplication.getVisitor().equals("0")  || Config.getUser(context).uid.equals("")){
+			Intent intent = new Intent(context, WebLoginActivity.class);
+			context.startActivity(intent);
+			return;
+		}
+		
+		AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(context).uid);
+		params.put("business_id", business_id);
+		params.put("status", status+"");
+		AbHttpUtil.getInstance(context).get(ServerMutualConfig.ADD_TOYS_TO_CART + "&" + params.toString(), new AbStringHttpResponseListener() {
+		
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						try {
+							if(new JSONObject(content).getBoolean("success")){
+								
+								if(!new JSONObject(content).getJSONObject("data").getString("cart_name").isEmpty()){
+									Toast.makeText(context, new JSONObject(content).getJSONObject("data").getString("cart_name"), 3).show();
+								}
+								
+								// 保存购物车数量
+								setCartNumber(context, Integer.parseInt(new JSONObject(content).getJSONObject("data").getString("cart_number")));
+							
+								// 更新角标数字
+//								DrewNumberBitmap(context, cartIcon);
+								
+								// 更新玩具详情页底部按钮
+								ToysLeaseDetailActivity.getToysDetailInfo(context, business_id);
+								
+								// 更换玩具成功
+								if(status == 1){
+									ToysLeaseDetailActivity.changeToysSuccess(context);
+								}
+							}else{
+								Toast.makeText(context, new JSONObject(content).getString("reMsg"), 3).show();
+							}
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+
+					@Override
+					public void onFinish() {
+						super.onFinish();
+					}
+
+					@Override
+					public void onFailure(int statusCode, String content,
+							Throwable error) {
+						super.onFailure(statusCode, content, error);
+					}
+				});
+	}
+	
+	/**
+	 * （玩具列表）向购物车添加玩具
+	 * 
+	 * business_id：玩具id
+	 * 
+	 * */
+	public static void addToysToCart(final Context context, String business_id, final ImageView addView, final RelativeLayout rl, final ImageView img){
+		
+		// 未登录
+		if(!MyApplication.getVisitor().equals("0")  || Config.getUser(context).uid.equals("")){
+			Intent intent = new Intent(context, WebLoginActivity.class);
+			context.startActivity(intent);
+			return;
+		}
+		
+		AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(context).uid);
+		params.put("business_id", business_id);
+		params.put("status", "0");
+		AbHttpUtil.getInstance(context).get(ServerMutualConfig.ADD_TOYS_TO_CART + "&" + params.toString(), new AbStringHttpResponseListener() {
+			
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						try {
+							if(new JSONObject(content).getBoolean("success")){
+								
+								Toast.makeText(context, new JSONObject(content).getJSONObject("data").getString("cart_name"), 3).show();
+								
+								// 保存购物车数量
+								setCartNumber(context, Integer.parseInt(new JSONObject(content).getJSONObject("data").getString("cart_number")));
+								
+								// 判断是否还有库存
+								if(new JSONObject(content).getJSONObject("data").getString("is_cart").equals("1")){
+									addView.setImageBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.add_to_cart_no));
+								}else{
+									addView.setImageBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.add_to_cart));
+								}
+								
+								// 加入购物车动画
+								if(ADD_FROM.equals("TOYS_LIST")){
+									addCart(context, rl, img, ToysLeaseMainTabActivity.cartIcon);
+								}else if(ADD_FROM.equals("TOYS_SEARCH")){
+									addCart(context, ToysLeaseSearchActivity.search_all, img, ToysLeaseSearchActivity.search_to_cart);
+								}else if(ADD_FROM.equals("TOYS_CATEGORY")){
+									addCart(context, ToysLeaseCategoryActivity.search_all, img, ToysLeaseCategoryActivity.search_to_cart);
+								}else if(ADD_FROM.equals("TOYS_ALL")){
+									addCart(context, ToysLeaseMainAllActivity.search_all, img, ToysLeaseMainAllActivity.search_to_cart);
+								}
+							}else{
+								Toast.makeText(context, new JSONObject(content).getString("reMsg"), 3).show();
+							}
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+
+					@Override
+					public void onFinish() {
+						super.onFinish();
+					}
+
+					@Override
+					public void onFailure(int statusCode, String content,
+							Throwable error) {
+						super.onFailure(statusCode, content, error);
+					}
+				});
+	}
+	
+	/**
+	 * 加入购物车动画
+	 * */
+	public static void addCart(final Context context, final RelativeLayout parentView, ImageView fromImg, ImageView toImg) {
+		
+        final ImageView goods = new ImageView(context);
+        goods.setImageDrawable(fromImg.getDrawable());
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(100, 100);
+        parentView.addView(goods, params);
+
+        int[] parentLocation = new int[2];
+        parentView.getLocationInWindow(parentLocation);
+
+        int startLoc[] = new int[2];
+        fromImg.getLocationInWindow(startLoc);
+
+        int endLoc[] = new int[2];
+//        ToysLeaseMainTabActivity.cartIcon.getLocationInWindow(endLoc);
+        toImg.getLocationInWindow(endLoc);
+
+        float startX = startLoc[0] - parentLocation[0] + fromImg.getWidth() / 2;
+        float startY = startLoc[1] - parentLocation[1] + fromImg.getHeight() / 2;
+
+        float toX = endLoc[0] - parentLocation[0] + ToysLeaseMainTabActivity.cartIcon.getWidth() / 5;
+        float toY = endLoc[1] - parentLocation[1];
+
+        Path path = new Path();
+        path.moveTo(startX, startY);
+        path.quadTo((startX + toX) / 2, startY, toX, toY);
+        mPathMeasure = new PathMeasure(path, false);
+
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, mPathMeasure.getLength());
+        valueAnimator.setDuration(800);
+        // 匀速线性插值器
+        valueAnimator.setInterpolator(new LinearInterpolator());
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float value = (Float) animation.getAnimatedValue();
+                mPathMeasure.getPosTan(value, mCurrentPosition, null);//mCurrentPosition此时就是中间距离点的坐标值
+                goods.setTranslationX(mCurrentPosition[0]);
+                goods.setTranslationY(mCurrentPosition[1]);
+            }
+        });
+        valueAnimator.start();
+
+        valueAnimator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            //当动画结束后：
+            @Override
+            public void onAnimationEnd(Animator animation) {
+            	if(ADD_FROM.equals("TOYS_SEARCH")){
+            		ShoppingCartUtils.DrewNumberBitmap(context, ToysLeaseSearchActivity.search_to_cart);
+            	}else if(ADD_FROM.equals("TOYS_LIST")){
+            		ToysLeaseMainTabActivity.newMessage.setVisibility(View.VISIBLE);
+            		ToysLeaseMainTabActivity.newMessage.setText(ShoppingCartUtils.getCartNumber(context)+"");
+            	}else if(ADD_FROM.equals("TOYS_CATEGORY")){
+            		ShoppingCartUtils.DrewNumberBitmap(context, ToysLeaseCategoryActivity.search_to_cart);
+            	}else if(ADD_FROM.equals("TOYS_ALL")){
+            		ShoppingCartUtils.DrewNumberBitmap(context, ToysLeaseMainAllActivity.search_to_cart);
+            	}
+            	parentView.removeView(goods);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+    }
+}

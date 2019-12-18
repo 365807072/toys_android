@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/Users/yanglin/Desktop/workspace/BabyShow/libs/ShareSDK-Core-3.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="5cc73d24252575548ae1786dfb9d2c0ecbfb8e16">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/pre-dexed/release/ShareSDK-Core-3.2.0_a3e1e38bd3be2c5a7dd3c9fd7366365027d2f3d0.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/yanglin/Desktop/workspace/BabyShow/libs/libammsdk.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="47f4993168154fa73377d7470b9f6887d48a8023">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/transforms/dex/debug/folders/1000/2/libammsdk_b08b2af8e261da7a6b07b3b34159ecb974e63f2f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/yanglin/Desktop/workspace/BabyShow/libs/ShareSDK-Core-3.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="5cc73d24252575548ae1786dfb9d2c0ecbfb8e16">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/transforms/dex/debug/folders/1000/2/ShareSDK-Core-3.2.0_a3e1e38bd3be2c5a7dd3c9fd7366365027d2f3d0/classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/yanglin/Desktop/workspace/BabyShow/libs/libammsdk.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="47f4993168154fa73377d7470b9f6887d48a8023">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/pre-dexed/release/libammsdk_b08b2af8e261da7a6b07b3b34159ecb974e63f2f.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/yanglin/Desktop/workspace/BabyShow/libs/umeng-analytics-v6.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="8023cd0713d5cd5bd212b0b6053fec03d133f9d1">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/transforms/dex/debug/folders/1000/2/umeng-analytics-v6.0.0_49955fc1c22c390f17895d437ead87886854f77e/classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/yanglin/Desktop/workspace/BabyShow/libs/imageloading.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="c1e9b91020b617197d12833a5f8a1a066efe7286">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/pre-dexed/release/imageloading_c5dcd009b678c768da68636e733aa7403124abda.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/yanglin/Desktop/workspace/BabyShow/libs/TencentMapSDK_Raster_v1.1.2.15850.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="ffb241eab4cc7d41b9635bd8939ee7c7ae737ac1">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/pre-dexed/release/TencentMapSDK_Raster_v1.1.2.15850_e1c78f3615729790e71f31ea1716b7def32d7c57.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/yanglin/Desktop/workspace/BabyShow/libs/umeng-analytics-v6.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="8023cd0713d5cd5bd212b0b6053fec03d133f9d1">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/pre-dexed/release/umeng-analytics-v6.0.0_49955fc1c22c390f17895d437ead87886854f77e.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/yanglin/Desktop/workspace/BabyShow/libs/mframework.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="25509058b34a5ee08dbf66e57078e3083735d200">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/transforms/dex/debug/folders/1000/2/mframework_61ba806e1c5a8fa24896c85971572867b2f97081/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_e50a42c9a650654ca1d73288b1b2fa38f1fea525/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="31d0dd0c5d8d8fdd50f0fb2039e76173896cd229">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_84283da5bbca59f1e540401296f86d1bc97c9be8/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/yanglin/Desktop/workspace/BabyShow/libs/imageloading.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="c1e9b91020b617197d12833a5f8a1a066efe7286">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/transforms/dex/debug/folders/1000/2/imageloading_c5dcd009b678c768da68636e733aa7403124abda/classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/yanglin/Desktop/workspace/BabyShow/libs/alipaySdk-20151112.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="5ce758768906f045b279735e7cefc0b89160d9d6">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/pre-dexed/release/alipaySdk-20151112_3c4daab2e3a648903fa0182fd0bcdd060f62ff9f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/yanglin/Desktop/workspace/BabyShow/libs/ShareSDK-Wechat-3.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="f93e42df73b5467b3a49b29dae69a0c5f0fd13ad">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/pre-dexed/release/ShareSDK-Wechat-3.2.0_7e0ebbf752400436a8e4d6dcf2b3173dfeb0a6f2.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/yanglin/Desktop/workspace/BabyShow/libs/afinal-0.3.32-bin.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="54417b03f2eb410e2a94428512e4f4218e7fc012">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/transforms/dex/debug/folders/1000/2/afinal-0.3.32-bin_643ce6fb8cc9d1fa1bfd7fc0098efeaadbf721b9/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/yanglin/Desktop/workspace/BabyShow/libs/ShareSDK-Wechat-Moments-3.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="351d0e151987738ad52a1d626bb20af2fc2cdd24">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/transforms/dex/debug/folders/1000/2/ShareSDK-Wechat-Moments-3.2.0_0afaeb83b29985edb347bb3029d8152ab9a4a65e/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/yanglin/Desktop/workspace/BabyShow/libs/alipaySdk-20151112.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="5ce758768906f045b279735e7cefc0b89160d9d6">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/transforms/dex/debug/folders/1000/2/alipaySdk-20151112_3c4daab2e3a648903fa0182fd0bcdd060f62ff9f/classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/yanglin/Desktop/workspace/BabyShow/libs/afinal-0.3.32-bin.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="54417b03f2eb410e2a94428512e4f4218e7fc012">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/pre-dexed/release/afinal-0.3.32-bin_643ce6fb8cc9d1fa1bfd7fc0098efeaadbf721b9.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/yanglin/Desktop/workspace/BabyShow/libs/ShareSDK-Wechat-3.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="f93e42df73b5467b3a49b29dae69a0c5f0fd13ad">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/transforms/dex/debug/folders/1000/2/ShareSDK-Wechat-3.2.0_7e0ebbf752400436a8e4d6dcf2b3173dfeb0a6f2/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/default/libs/MobCommons-2018.0523.1925.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="0b73ba814ca45c34bb56f1ad43c30c3fdc14125c">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/transforms/dex/debug/folders/1000/8/MobCommons-2018.0523.1925_f52bdb612c6959bccdef1196493b3c02f9d8af48/classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/yanglin/Desktop/workspace/BabyShow/libs/ShareSDK-QZone-3.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="d7e328dc4842cf6e69aba0ad472a9d3773a6030c">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/pre-dexed/release/ShareSDK-QZone-3.2.0_4dacbb4c64c3408280f15ad5e18315f4438aa880.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/default/libs/MobCommons-2018.0523.1925.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="0b73ba814ca45c34bb56f1ad43c30c3fdc14125c">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/pre-dexed/release/MobCommons-2018.0523.1925_f52bdb612c6959bccdef1196493b3c02f9d8af48.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/default/libs/MobTools-2018.0523.1923.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="fc3091eaa8827d9c06955d49f2b5b1a6dfe4710f">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/transforms/dex/debug/folders/1000/8/MobTools-2018.0523.1923_1fd795054be1b8d7b9d542aeb42d0191b233f641/classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/yanglin/Desktop/workspace/BabyShow/libs/ShareSDK-SinaWeibo-3.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="bbd4b644b52ee4cf3951eae8b49b508c5f754b77">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/pre-dexed/release/ShareSDK-SinaWeibo-3.2.0_477b7fafd02ef3d1eae64f03ca14eb64f4e5be3f.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/yanglin/Desktop/workspace/BabyShow/libs/ShareSDK-QZone-3.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="d7e328dc4842cf6e69aba0ad472a9d3773a6030c">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/transforms/dex/debug/folders/1000/2/ShareSDK-QZone-3.2.0_4dacbb4c64c3408280f15ad5e18315f4438aa880/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/yanglin/Desktop/workspace/BabyShow/libs/ShareSDK-SinaWeibo-3.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="bbd4b644b52ee4cf3951eae8b49b508c5f754b77">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/transforms/dex/debug/folders/1000/2/ShareSDK-SinaWeibo-3.2.0_477b7fafd02ef3d1eae64f03ca14eb64f4e5be3f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/yanglin/Desktop/workspace/BabyShow/libs/ShareSDK-QQ-3.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="7074bcd3b1a6e73ac671c2748e7a89bb1a95547b">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/transforms/dex/debug/folders/1000/2/ShareSDK-QQ-3.2.0_28de5846d45e2adff7fea148c923ef667896977f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/yanglin/Desktop/workspace/BabyShow/libs/TencentLocationSDK_v4.3.0_r196568_151014_1433.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="0440902e16f4f232c9e3e877fe775f89a293d7af">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/transforms/dex/debug/folders/1000/2/TencentLocationSDK_v4.3.0_r196568_151014_1433_8bd12b51e4f5ebd09f8f48c61223d2a2313e318e/classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/yanglin/Desktop/workspace/BabyShow/libs/ShareSDK-QQ-3.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="7074bcd3b1a6e73ac671c2748e7a89bb1a95547b">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/pre-dexed/release/ShareSDK-QQ-3.2.0_28de5846d45e2adff7fea148c923ef667896977f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/default/libs/MobTools-2018.0523.1923.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="fc3091eaa8827d9c06955d49f2b5b1a6dfe4710f">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/pre-dexed/release/MobTools-2018.0523.1923_1fd795054be1b8d7b9d542aeb42d0191b233f641.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/yanglin/Desktop/workspace/BabyShow/libs/ShareSDK-Wechat-Moments-3.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="351d0e151987738ad52a1d626bb20af2fc2cdd24">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/pre-dexed/release/ShareSDK-Wechat-Moments-3.2.0_0afaeb83b29985edb347bb3029d8152ab9a4a65e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/yanglin/Desktop/workspace/BabyShow/libs/jpush-android-2.0.5.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="f2c821a0d13219a2e70490085c390bab03fb5953">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/pre-dexed/release/jpush-android-2.0.5_7584a2cd5838f5c217dc21db3f64a059a1b6d3c1.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/default/libs/SDKWrapper-2018.0201.1609.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="92129e261ad01e66b120680a141f4d11406ee2ac">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/transforms/dex/debug/folders/1000/8/SDKWrapper-2018.0201.1609_d3c8a38a783fb5bb60f84611dd23f53100e9c488/classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/default/libs/SMSSDK-3.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="208d336c6dc7162e890e35432604397e59d5aef4">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/pre-dexed/release/SMSSDK-3.2.1_595d0a600dd596cf6c55e8c54d785c6c66ac5920.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/yanglin/Desktop/workspace/BabyShow/libs/jpush-android-2.0.5.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="f2c821a0d13219a2e70490085c390bab03fb5953">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/transforms/dex/debug/folders/1000/2/jpush-android-2.0.5_7584a2cd5838f5c217dc21db3f64a059a1b6d3c1/classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/yanglin/Desktop/workspace/BabyShow/libs/TencentLocationSDK_v4.3.0_r196568_151014_1433.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="0440902e16f4f232c9e3e877fe775f89a293d7af">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/pre-dexed/release/TencentLocationSDK_v4.3.0_r196568_151014_1433_8bd12b51e4f5ebd09f8f48c61223d2a2313e318e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/default/libs/SDKWrapper-2018.0201.1609.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="92129e261ad01e66b120680a141f4d11406ee2ac">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/pre-dexed/release/SDKWrapper-2018.0201.1609_d3c8a38a783fb5bb60f84611dd23f53100e9c488.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/default/libs/SMSSDK-3.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="208d336c6dc7162e890e35432604397e59d5aef4">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/transforms/dex/debug/folders/1000/8/SMSSDK-3.2.1_595d0a600dd596cf6c55e8c54d785c6c66ac5920/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/yanglin/Desktop/workspace/BabyShow/libs/ShareSDK-Wechat-Core-3.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="e22e6b80521049b6243eba79d7c4518fa85b82af">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/transforms/dex/debug/folders/1000/2/ShareSDK-Wechat-Core-3.2.0_53100f960fea5b7975fab3de0d625d8ab4263fb4/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/yanglin/Desktop/workspace/BabyShow/libs/TencentMapSDK_Raster_v1.1.2.15850.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="ffb241eab4cc7d41b9635bd8939ee7c7ae737ac1">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/transforms/dex/debug/folders/1000/2/TencentMapSDK_Raster_v1.1.2.15850_e1c78f3615729790e71f31ea1716b7def32d7c57/classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/yanglin/Desktop/workspace/BabyShow/libs/mframework.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="25509058b34a5ee08dbf66e57078e3083735d200">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/pre-dexed/release/mframework_61ba806e1c5a8fa24896c85971572867b2f97081.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/yanglin/Desktop/workspace/AndBase/build/intermediates/bundles/default/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="f2597e5a77b4120901a36ec426c2f2b3039ded60">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/pre-dexed/release/classes_35ed7546164dabaed2fc7c2156ef88d224cd3d5f.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/yanglin/Desktop/workspace/AndBase/build/intermediates/bundles/default/libs/android-support-v4.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="da351fadee6981cb47e9ee685f70924283214fda">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/transforms/dex/debug/folders/1000/8/android-support-v4_b0f86a5e2f4670b447400679592c501b558d9a32/classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/yanglin/Desktop/workspace/SMSSDK/build/intermediates/bundles/default/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="8952947dbd0fd2ea6c572b34a5b6eea61e1ac113">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/pre-dexed/release/classes_a2e64a2e7f381d1a9c85f74aaa7d9185f61bbc4c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/yanglin/Desktop/workspace/AndBase/build/intermediates/bundles/default/libs/android-support-v4.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="da351fadee6981cb47e9ee685f70924283214fda">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/pre-dexed/release/android-support-v4_b0f86a5e2f4670b447400679592c501b558d9a32.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/yanglin/Desktop/workspace/BabyShow/libs/ShareSDK-Wechat-Core-3.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="e22e6b80521049b6243eba79d7c4518fa85b82af">
+        <dex dex="/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/pre-dexed/release/ShareSDK-Wechat-Core-3.2.0_53100f960fea5b7975fab3de0d625d8ab4263fb4.jar" />
+    </item>
+
+</items>

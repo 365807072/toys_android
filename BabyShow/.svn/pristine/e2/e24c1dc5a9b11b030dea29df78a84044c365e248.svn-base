@@ -1,0 +1,284 @@
+package com.yyqq.code.toyslease;
+
+import java.util.ArrayList;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.webkit.JavascriptInterface;
+import android.webkit.WebView;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.ab.http.AbHttpUtil;
+import com.ab.http.AbRequestParams;
+import com.ab.http.AbStringHttpResponseListener;
+import com.yyqq.babyshow.R;
+import com.yyqq.code.login.WebLoginActivity;
+import com.yyqq.commen.adapter.ToysLeaseAllAdapter;
+import com.yyqq.commen.model.ToysLeaseMainListBean;
+import com.yyqq.commen.utils.Config;
+import com.yyqq.commen.utils.MyWebviewUtils;
+import com.yyqq.commen.utils.ShoppingCartUtils;
+import com.yyqq.commen.view.PullDownView;
+import com.yyqq.commen.view.PullDownView.OnPullDownListener;
+import com.yyqq.framework.activity.BaseActivity;
+import com.yyqq.framework.application.MyApplication;
+import com.yyqq.framework.application.ServerMutualConfig;
+
+/**
+ * 玩具搜索页
+ * */
+public class ToysLeaseSearchActivity extends BaseActivity implements OnPullDownListener{
+	
+	private ImageView search_finish;
+	private EditText search_text;
+	private TextView search_title_search;
+	private PullDownView mPullDownView;
+	public static RelativeLayout search_all;
+	public static ImageView search_to_cart;
+	private WebView search_webView;
+	
+	public static ToysLeaseSearchActivity toysLeaseSearchActivity = null;
+	private AbHttpUtil ab;
+	private LayoutInflater inflater;
+	private ListView listview;
+	private ToysLeaseAllAdapter searchAdapter = null;
+	private ArrayList<ToysLeaseMainListBean> data = new ArrayList<ToysLeaseMainListBean>();
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_toys_lease_search);
+	}
+
+	@Override
+	protected void initView() {
+		search_to_cart = (ImageView) findViewById(R.id.search_to_cart);
+		search_to_cart.setVisibility(View.VISIBLE);
+		ShoppingCartUtils.badge = null;
+		ShoppingCartUtils.DrewNumberBitmap(this, search_to_cart);
+		search_all = (RelativeLayout) findViewById(R.id.search_all);
+		search_finish = (ImageView) findViewById(R.id.search_finish);
+		search_text = (EditText) findViewById(R.id.search_text);
+		search_title_search = (TextView) findViewById(R.id.search_title_search);
+		mPullDownView = (PullDownView) findViewById(R.id.list);
+		mPullDownView.setOnPullDownListener(this);
+		mPullDownView.setHideHeader();
+		mPullDownView.setHideFooter();
+		mPullDownView.RefreshComplete();
+		mPullDownView.notifyDidMore();
+		mPullDownView.requestFocus();
+		search_webView = (WebView) findViewById(R.id.search_webView);
+		MyWebviewUtils.initWebView(this, search_webView, new JSCallback(), true);
+		search_webView.loadUrl("http://www.baobaoshowshow.com/H5/toy/search_activity.html");
+		search_webView.setVisibility(View.VISIBLE);
+	}
+
+	@Override
+	protected void initData() {
+		toysLeaseSearchActivity = this;
+		ShoppingCartUtils.ADD_FROM = "TOYS_SEARCH";
+		ab = AbHttpUtil.getInstance(ToysLeaseSearchActivity.this);
+		inflater = LayoutInflater.from(ToysLeaseSearchActivity.this);
+		listview = mPullDownView.getListView();
+		listview.setDivider(null);
+		searchAdapter = new ToysLeaseAllAdapter(ToysLeaseSearchActivity.this, inflater, MyApplication.getInstance(), data, 0);
+		listview.setAdapter(searchAdapter);
+		mPullDownView.enableAutoFetchMore(false, 1);
+		
+		// 获取搜索提示语
+		getSearchText();
+	}
+
+	@Override
+	protected void setListener() {
+		
+		search_to_cart.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(!MyApplication.getVisitor().equals("0")  || Config.getUser(ToysLeaseSearchActivity.this).uid.equals("")){
+					Intent in = new Intent(ToysLeaseSearchActivity.this, WebLoginActivity.class);
+					startActivity(in);
+				}else{
+					ShoppingCartActivity.isShowBack = true;
+					Intent intent = new Intent(ToysLeaseSearchActivity.this, ShoppingCartActivity.class);
+					startActivity(intent);
+				}
+			}
+		});
+		
+		search_text.setOnEditorActionListener(new TextView.OnEditorActionListener() { 
+			public boolean onEditorAction(TextView v, int actionId, KeyEvent event)  {                          
+				if (actionId==EditorInfo.IME_ACTION_SEARCH ||(event!=null&&event.getKeyCode()== KeyEvent.KEYCODE_ENTER)) 
+				{      
+					if(search_text.getText().toString().trim().isEmpty()){
+						Toast.makeText(ToysLeaseSearchActivity.this, "请填写要搜索的玩具名字吧", 3).show();
+						return false;  
+					}else{
+						onRefresh();
+						return true;             
+					}
+				}               
+				return false;           
+			}       
+		});
+		
+		search_finish.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				ToysLeaseSearchActivity.this.finish();
+			}
+		});
+		
+		search_title_search.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(search_text.getText().toString().trim().isEmpty()){
+					Toast.makeText(ToysLeaseSearchActivity.this, "请填写要搜索的玩具名字吧", 3).show();
+				}else{
+					onRefresh();
+				}
+			}
+		});
+		
+		listview.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Intent intnet = new Intent(ToysLeaseSearchActivity.this, ToysLeaseDetailActivity.class);
+				intnet.putExtra(ToysLeaseDetailActivity.TOYS_DETAIL_KEY, data.get(position-1).getBusiness_id());
+				startActivity(intnet);
+			}
+		});
+	}
+	
+	@Override
+	public void onRefresh() {
+		search_webView.setVisibility(View.GONE);
+		InputMethodManager inputMethodManager = (InputMethodManager) ToysLeaseSearchActivity.this.getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+		inputMethodManager.hideSoftInputFromWindow(search_text.getWindowToken(), 0);
+		Config.showProgressDialog(ToysLeaseSearchActivity.this, false, null);
+		final AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(ToysLeaseSearchActivity.this).uid);
+		params.put("search_name", search_text.getText().toString().trim());
+		ab.get(ServerMutualConfig.TOYS_SEARCH + "&" + params.toString(), new AbStringHttpResponseListener() {
+			
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						Config.dismissProgress();
+						try {
+							if(!content.isEmpty() && new JSONObject(content).getBoolean("success")){
+								data.clear();
+								JSONObject json = new JSONObject(content);
+								for (int i = 0; i < json.getJSONArray("data").length(); i++) {
+									ToysLeaseMainListBean item = new ToysLeaseMainListBean();
+									data.add(item.fromJson(json.getJSONArray("data").getJSONObject(i)));
+								}
+								searchAdapter.notifyDataSetChanged();
+							}
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+						
+					}
+
+					@Override
+					public void onFinish() {
+						super.onFinish();
+						Config.dismissProgress();
+						mPullDownView.RefreshComplete();// 这个事线程安全的 可看源代码
+						mPullDownView.notifyDidMore();
+					}
+
+					@Override
+					public void onFailure(int statusCode, String content,
+							Throwable error) {
+						super.onFailure(statusCode, content, error);
+					}
+				});
+	}
+
+	@Override
+	public void onMore() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	/**
+	 * 获取搜索提示语
+	 * */
+	private void getSearchText(){
+		AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(this).uid);
+		ab.get(ServerMutualConfig.GET_TOYS_HINT_TEXT + "&" + params.toString(), new AbStringHttpResponseListener() {
+			
+			@Override
+			public void onSuccess(int statusCode, String content) {
+				super.onSuccess(statusCode, content);
+				try {
+					if(new JSONObject(content).getBoolean("success")){
+						search_text.setHint(new JSONObject(content).getJSONObject("data").getString("search_name"));
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+
+			@Override
+			public void onFinish() {
+				super.onFinish();
+			}
+
+			@Override
+			public void onFailure(int statusCode, String content,
+					Throwable error) {
+				super.onFailure(statusCode, content, error);
+			}
+		});
+	}
+	
+	public class JSCallback{
+		
+		/**
+		 * JS调用的去详情方法
+		 * */
+		@JavascriptInterface
+		public void callMethodToDetail(String business_id) {
+			Intent intent = new Intent(ToysLeaseSearchActivity.this, ToysLeaseDetailActivity.class);
+			intent.putExtra(ToysLeaseDetailActivity.TOYS_DETAIL_KEY, business_id);
+			startActivity(intent);
+		}
+		
+		/**
+		 * JS调用的去分类列表
+		 * */
+		@JavascriptInterface
+		public void callMethodToCategory(String categror_id) {
+			Intent intent = new Intent(ToysLeaseSearchActivity.this, ToysLeaseCategoryActivity.class);
+			intent.putExtra(ToysLeaseCategoryActivity.CATEGORY_ID_KEY, categror_id);
+			startActivity(intent);
+		}
+	}
+
+}

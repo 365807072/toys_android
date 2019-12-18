@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp" >
+
+
+        <ImageView
+            android:id="@+id/photo_defimg"
+            android:layout_width="120dip"
+            android:layout_height="110dip"
+            android:layout_gravity="center"
+            android:background="@drawable/def_head"
+            android:scaleType="centerCrop" />
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/album" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal" >
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="樊樊" />
+
+        <TextView
+            android:id="@+id/photonum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#ea6863"
+            android:gravity="right|center_vertical"
+            android:paddingRight="4dp"
+            android:text="1"
+            android:textColor="#FFFFFF"
+            android:textSize="14dp"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,52 @@
+package com.yyqq.code.group;
+
+import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.widget.ListView;
+
+import com.ab.http.AbHttpUtil;
+import com.yyqq.babyshow.R;
+import com.yyqq.commen.view.PullDownView;
+import com.yyqq.framework.activity.BaseActivity;
+
+/**
+ * 
+ * 微社区话题or帖子管理
+ * 
+ * @author lyl
+ * 
+ * */
+
+public class GroupManagerTopicActivity extends BaseActivity {
+
+	private AbHttpUtil ab;
+	private PullDownView mPullDownView;
+	private ListView listView;
+
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_group_manager_topic);
+	}
+
+	@Override
+	protected void initView() {
+		mPullDownView = (PullDownView) findViewById(R.id.list);
+		ab = AbHttpUtil.getInstance(GroupManagerTopicActivity.this);
+		listView = mPullDownView.getListView();
+		listView.setDivider(null);
+	}
+
+	@Override
+	protected void initData() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void setListener() {
+		// TODO Auto-generated method stub
+		
+	}
+}

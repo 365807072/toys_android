@@ -1,0 +1,74 @@
+package com.yyqq.commen.model;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class Review {
+	public String id = "";
+	public String demand = "";
+	public String user_id = "";
+	public String user_name = "";
+	public String avatar = "";
+	public long create_time;
+	public String level_img = "";
+	
+	//商家评论列表
+	//user_name
+	public String user_time = ""; 
+	public String user_msg = ""; 
+	public String grade3 = "";
+	public String post_create_time = "";
+
+	public void fromJson(JSONObject json) {
+		try {
+			if (json.has("id")) {
+				id = json.getInt("id") + "";
+			}
+			if (json.has("demand")) {
+				demand = json.getString("demand");
+			}
+			if (json.has("user_id")) {
+				user_id = json.getInt("user_id") + "";
+			}
+			if (json.has("user_name")) {
+				user_name = json.getString("user_name");
+			}
+			if (json.has("avatar")) {
+				avatar = json.getString("avatar");
+			}
+			if (json.has("post_create_time")) {
+				create_time = json.getLong("post_create_time");
+			}
+			if (json.has("level_img")) {
+				level_img = json.getString("level_img");
+			}
+			
+			if (json.has("user_time")) {
+				user_time = json.getString("user_time");
+			}
+			if (json.has("user_msg")) {
+				user_msg = json.getString("user_msg");
+			}
+			if (json.has("grade3")) {
+				grade3 = json.getString("grade3");
+			}
+			if (json.has("post_create_time")) {
+				post_create_time = json.getString("post_create_time");
+			}
+
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public String toString() {
+		return "Review [id=" + id + ", demand=" + demand + ", user_id="
+				+ user_id + ", user_name=" + user_name + ", avatar=" + avatar
+				+ ", create_time=" + create_time + ", level_img=" + level_img
+				+ ", user_time=" + user_time + ", user_msg=" + user_msg
+				+ ", grade3=" + grade3 + ", post_create_time="
+				+ post_create_time + "]";
+	}
+	
+}

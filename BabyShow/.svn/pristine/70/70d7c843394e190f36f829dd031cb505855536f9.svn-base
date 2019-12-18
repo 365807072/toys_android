@@ -1,0 +1,163 @@
+package com.yyqq.code.toyslease;
+
+import java.util.ArrayList;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.ab.http.AbHttpUtil;
+import com.ab.http.AbRequestParams;
+import com.ab.http.AbStringHttpResponseListener;
+import com.yyqq.babyshow.R;
+import com.yyqq.commen.adapter.ToysLeaseAllAdapter;
+import com.yyqq.commen.model.ToysLeaseMainListBean;
+import com.yyqq.commen.utils.Config;
+import com.yyqq.commen.view.PullDownView;
+import com.yyqq.commen.view.PullDownView.OnPullDownListener;
+import com.yyqq.framework.activity.BaseActivity;
+import com.yyqq.framework.application.MyApplication;
+import com.yyqq.framework.application.ServerMutualConfig;
+
+/**
+ * 玩具搜索页
+ * */
+public class ToysLeaseSearchActivity extends BaseActivity implements OnPullDownListener{
+
+	
+	private ImageView search_finish;
+	private EditText search_text;
+	private TextView search_title_search;
+	private PullDownView mPullDownView;
+	
+	private AbHttpUtil ab;
+	private LayoutInflater inflater;
+	private ListView listview;
+	private ToysLeaseAllAdapter searchAdapter = null;
+	private ArrayList<ToysLeaseMainListBean> data = new ArrayList<ToysLeaseMainListBean>();
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_toys_lease_search);
+	}
+
+	@Override
+	protected void initView() {
+		search_finish = (ImageView) findViewById(R.id.search_finish);
+		search_text = (EditText) findViewById(R.id.search_text);
+		search_title_search = (TextView) findViewById(R.id.search_title_search);
+		mPullDownView = (PullDownView) findViewById(R.id.list);
+		mPullDownView.setOnPullDownListener(this);
+		mPullDownView.setHideHeader();
+		mPullDownView.RefreshComplete();
+		mPullDownView.notifyDidMore();
+		mPullDownView.requestFocus();
+	}
+
+	@Override
+	protected void initData() {
+		ab = AbHttpUtil.getInstance(ToysLeaseSearchActivity.this);
+		inflater = LayoutInflater.from(ToysLeaseSearchActivity.this);
+		listview = mPullDownView.getListView();
+		listview.setDivider(null);
+		searchAdapter = new ToysLeaseAllAdapter(ToysLeaseSearchActivity.this, inflater, MyApplication.getInstance(), data, 0);
+		listview.setAdapter(searchAdapter);
+		mPullDownView.enableAutoFetchMore(false, 1);
+	}
+
+	@Override
+	protected void setListener() {
+		search_finish.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				ToysLeaseSearchActivity.this.finish();
+			}
+		});
+		
+		search_title_search.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(search_text.getText().toString().trim().isEmpty()){
+					Toast.makeText(ToysLeaseSearchActivity.this, "请填写要搜索的玩具名字吧", 3).show();
+				}else{
+					onRefresh();
+				}
+			}
+		});
+		
+		listview.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Intent intnet = new Intent(ToysLeaseSearchActivity.this, ToysLeaseDetailActivity.class);
+				intnet.putExtra(ToysLeaseDetailActivity.TOYS_DETAIL_KEY, data.get(position-1).getBusiness_id());
+				startActivity(intnet);
+			}
+		});
+	}
+	
+	@Override
+	public void onRefresh() {
+		Config.showProgressDialog(ToysLeaseSearchActivity.this, false, null);
+		final AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(ToysLeaseSearchActivity.this).uid);
+		ab.get(ServerMutualConfig.TOYS_SEARCH + "&" + params.toString(), new AbStringHttpResponseListener() {
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						Config.dismissProgress();
+						try {
+							if(!content.isEmpty() && new JSONObject(content).getBoolean("success")){
+								data.clear();
+								JSONObject json = new JSONObject(content);
+								for (int i = 0; i < json.getJSONArray("data").length(); i++) {
+									ToysLeaseMainListBean item = new ToysLeaseMainListBean();
+									data.add(item.fromJson(json.getJSONArray("data").getJSONObject(i)));
+								}
+								searchAdapter.notifyDataSetChanged();
+							}
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+						
+					}
+
+					@Override
+					public void onFinish() {
+						super.onFinish();
+						Config.dismissProgress();
+						mPullDownView.RefreshComplete();// 这个事线程安全的 可看源代码
+						mPullDownView.notifyDidMore();
+					}
+
+					@Override
+					public void onFailure(int statusCode, String content,
+							Throwable error) {
+						super.onFailure(statusCode, content, error);
+					}
+				});
+	}
+
+	@Override
+	public void onMore() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

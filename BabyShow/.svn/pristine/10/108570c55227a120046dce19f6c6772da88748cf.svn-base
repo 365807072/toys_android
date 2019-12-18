@@ -1,0 +1,109 @@
+package com.yyqq.commen.utils;
+
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.lang.Thread.UncaughtExceptionHandler;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import android.content.Context;
+
+import com.ab.http.AbHttpResponseListener;
+import com.ab.http.AbHttpUtil;
+import com.ab.http.AbRequestParams;
+import com.yyqq.framework.application.ServerMutualConfig;
+
+/**
+ * 异常收集
+ * 
+ * lyl
+ * */
+public class CrashHandlerUtils implements UncaughtExceptionHandler {
+
+	private Map<String, String> infos = new HashMap<String, String>();  
+	public static final String TAG = "CrashHandlerUtils";
+	private static CrashHandlerUtils INSTANCE = new CrashHandlerUtils();
+	private Context mContext;
+	private Thread.UncaughtExceptionHandler mDefaultHandler;
+	private AbHttpUtil ab;
+	private Context context;
+	private Timer timer;
+
+	private CrashHandlerUtils() {
+	}
+
+	public static CrashHandlerUtils getInstance() {
+		return INSTANCE;
+	}
+
+	public void init(Context ctx) {
+		context = ctx;
+		ab = AbHttpUtil.getInstance(ctx);
+		mContext = ctx;
+		mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
+		Thread.setDefaultUncaughtExceptionHandler(this);
+	}
+
+	@Override
+	public void uncaughtException(Thread thread, Throwable ex) {
+		handleException(ex);
+	}
+
+	/**
+	 * 自定义错误处理,收集错误信息 发送错误报告等操作均在此完成.
+	 * 
+	 * @return true:如果处理了该异常信息;否则返回false
+	 */
+	private boolean handleException(Throwable ex) {
+		if (ex == null) {
+			return true;
+		}
+		
+		Writer writer = new StringWriter();  
+		PrintWriter printWriter = new PrintWriter(writer);  
+		ex.printStackTrace(printWriter);  
+		Throwable cause = ex.getCause();  
+		while (cause != null) {  
+			cause.printStackTrace(printWriter);  
+			cause = cause.getCause();  
+		}  
+		printWriter.close();  
+        String result = writer.toString();  
+		
+        ab = AbHttpUtil.getInstance(context);
+        AbRequestParams params = new AbRequestParams();
+        params.put("login_user_id", Config.getUser(context).uid);
+        params.put("app_model", "android");
+        
+//        String str1 = result.replaceAll("\r|\n", "");
+//        String str2 = str1.replaceAll(" ", "-");
+        params.put("title", result);
+        
+		ab.post(ServerMutualConfig.CollectInfo , params, new AbHttpResponseListener(){});
+		
+//		Timer timer = new Timer(true);
+//		timer.schedule(task,3000, 3000); //延时3000ms后执行，3000ms执行一次
+		
+		return false;
+	}
+	
+	
+	TimerTask task = new TimerTask(){  
+		public void run() {  
+			timer.cancel(); // 退出计时器
+			System.exit(0); // 退出应用程序
+		}  
+	};  
+	
+//	public void getUserConsole(String console){
+//        AbRequestParams params = new AbRequestParams();
+//        params.put("login_user_id", Config.getUser(context).uid);
+//        params.put("app_model", "android");
+//        params.put("title", console);
+//		ab.post(ServerMutualConfig.CollectInfo , params, new AbHttpResponseListener(){});
+//	}
+	
+}

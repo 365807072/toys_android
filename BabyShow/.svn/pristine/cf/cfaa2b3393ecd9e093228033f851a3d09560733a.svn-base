@@ -1,0 +1,170 @@
+package com.yyqq.commen.model;
+
+import java.util.ArrayList;
+import org.json.JSONObject;
+
+
+public class People {
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getUid() {
+		return uid;
+	}
+
+	public void setUid(String uid) {
+		this.uid = uid;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getHead_thumb() {
+		return head_thumb;
+	}
+
+	public void setHead_thumb(String head_thumb) {
+		this.head_thumb = head_thumb;
+	}
+
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
+	}
+
+	public String getUser_role() {
+		return user_role;
+	}
+
+	public void setUser_role(String user_role) {
+		this.user_role = user_role;
+	}
+
+	public String nickname = "";
+	public String username = "";
+	public String uid = "";
+	public String email = "";
+	public String head_thumb = "";
+	public String source = "";
+	public String level_img = "";
+	public String user_role = "";
+	public String my_message_count = "";
+	public String friends_message_count = "";
+	public String babys_idol_count = "";
+	public String mobile = "";
+
+	public ArrayList<Baby> babys = new ArrayList<Baby>();
+	public ArrayList<String> signs = new ArrayList<String>();
+	/**
+	 * 0 = 陌生人 1 = 已经关注 2=互相关注,3 = 对方关注我
+	 */
+	public int relation = 0;
+	public String idol_count = "0";
+	public String funs_count = "0";
+	public String show_count = "0";
+	public String latest_total_count = "0";
+	public String share_me_count = "0";
+	public String my_share_count = "0";
+	public String post_count = "0";
+
+	public void fromJson(JSONObject json) {
+		try {
+			JSONObject userInfo = json.getJSONObject("data");
+			if (userInfo.has("relation")) {
+				relation = userInfo.getInt("relation");
+			}
+			if (userInfo.has("funs_count")) {
+				funs_count = userInfo.getInt("funs_count") + "";
+			}
+			if (userInfo.has("post_count")) {
+				post_count = userInfo.getInt("post_count") + "";
+			}
+			if (userInfo.has("idol_count")) {
+				// 因为两个合并在一起了
+				idol_count = userInfo.getInt("idol_count")
+						+ userInfo.getInt("funs_count") + "";
+			}
+			if (userInfo.has("latest_total_count")) {
+				latest_total_count = userInfo.getInt("latest_total_count") + "";
+			}
+			if (userInfo.has("show_count")) {
+				show_count = userInfo.getInt("show_count") + "";
+			}
+			if (userInfo.has("share_me_count")) {
+				share_me_count = userInfo.getInt("share_me_count") + "";
+			}
+			if (userInfo.has("my_share_count")) {
+				// my_share_count = userInfo.getInt("my_share_count") + "";
+				// 因为两个合并在一起了
+				my_share_count = userInfo.getInt("my_share_count")
+						+ userInfo.getInt("share_me_count") + "";
+			}
+			if (userInfo.has("signature")) {
+				signs.clear();
+				for (int i = 0; i < userInfo.getJSONArray("signature").length(); i++) {
+					signs.add(userInfo.getJSONArray("signature").getString(i));
+				}
+			}
+			if (userInfo.has("user_name")) {
+				username = (String) userInfo.get("user_name");
+			}
+			if (userInfo.has("user_id")) {
+				uid = userInfo.get("user_id") + "";
+			}
+			if (userInfo.has("nick_name")) {
+				nickname = userInfo.get("nick_name") + "";
+			}
+			if (userInfo.has("email")) {
+				email = userInfo.get("email") + "";
+			}
+			if (userInfo.has("avatar")) {
+				head_thumb = userInfo.get("avatar") + "";
+			}
+			if (userInfo.has("source")) {
+				source = userInfo.get("source") + "";
+			}
+			if (userInfo.has("level_img")) {
+				level_img = userInfo.get("level_img") + "";
+			}
+			if (userInfo.has("user_role")) {
+				user_role = userInfo.get("user_role") + "";
+			}
+			if (userInfo.has("my_message_count")) {
+				my_message_count = userInfo.get("my_message_count") + "";
+			}
+			if (userInfo.has("friends_message_count")) {
+				friends_message_count = userInfo.get("friends_message_count")
+						+ "";
+			}
+			if (userInfo.has("babys_idol_count")) {
+				babys_idol_count = userInfo.get("babys_idol_count") + "";
+			}
+			if (userInfo.has("mobile")) {
+				mobile = userInfo.get("mobile") + "";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+}

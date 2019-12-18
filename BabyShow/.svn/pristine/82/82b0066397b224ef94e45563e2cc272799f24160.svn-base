@@ -1,0 +1,202 @@
+package com.yyqq.commen.adapter;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.yyqq.babyshow.R;
+import com.yyqq.code.business.BusinessDetailActivity;
+import com.yyqq.code.group.GroupMainActivity;
+import com.yyqq.code.main.MainItemDetialActivity;
+import com.yyqq.code.video.VideoDetialActivity;
+import com.yyqq.commen.model.PostBarTypeItem;
+import com.yyqq.framework.application.MyApplication;
+
+public class SearchPostBarAdapter extends BaseAdapter {
+
+	private Context context;
+	private ArrayList<PostBarTypeItem> dataPostInterestList;
+
+	public SearchPostBarAdapter(Context context,
+			ArrayList<PostBarTypeItem> dataPostInterestList) {
+		super();
+		this.context = context;
+		this.dataPostInterestList = dataPostInterestList;
+	}
+
+	@Override
+	public int getCount() {
+		return dataPostInterestList.size();
+	}
+
+	@Override
+	public Object getItem(int arg0) {
+		return dataPostInterestList.get(arg0);
+	}
+
+	@Override
+	public long getItemId(int arg0) {
+		return arg0;
+	}
+
+	@Override
+	public View getView(int index, View convertView, ViewGroup arg2) {
+		LayoutInflater inflater = (LayoutInflater) context
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		convertView = inflater.inflate(R.layout.postbar_list_item, null);
+		ViewHolder holder = null;
+		holder = new ViewHolder();
+		holder.tu = (RelativeLayout) convertView.findViewById(R.id.tu);
+		holder.img = (ImageView) convertView.findViewById(R.id.post_img);
+		holder.img2 = (ImageView) convertView.findViewById(R.id.post_img2);
+		holder.video_hint = (ImageView) convertView
+				.findViewById(R.id.video_hint);
+		holder.qun_biao = (ImageView) convertView.findViewById(R.id.qun_biao);
+		holder.post_title = (TextView) convertView
+				.findViewById(R.id.post_title);
+		holder.visit_num = (TextView) convertView.findViewById(R.id.visit_num);
+		holder.see_num = (TextView) convertView.findViewById(R.id.see_num);
+		holder.msg = (TextView) convertView.findViewById(R.id.msg);
+		holder.msg2 = (TextView) convertView.findViewById(R.id.msg2);
+
+		final PostBarTypeItem item = dataPostInterestList.get(index);
+
+		// 图片 0帖子、1群、2商家、3群中商家、4群中商家列表、5视频
+		if ("0".equals(item.is_group) || "5".equals(item.is_group)) {
+			holder.img.setVisibility(View.VISIBLE);
+			holder.img2.setVisibility(View.GONE);
+			if (TextUtils.isEmpty(item.img)) {
+				holder.tu.setVisibility(View.GONE);
+			} else {
+				MyApplication.getInstance().display(item.img, holder.img,
+						R.drawable.deft_color);
+			}
+		} else if ("2".equals(item.is_group)) {
+			holder.img.setVisibility(View.VISIBLE);
+			holder.img2.setVisibility(View.GONE);
+			if (TextUtils.isEmpty(item.img)) {
+				holder.tu.setVisibility(View.GONE);
+			} else {
+				MyApplication.getInstance().display(item.img, holder.img,
+						R.drawable.deft_color);
+			}
+		} else {
+			holder.img.setVisibility(View.GONE);
+			holder.img2.setVisibility(View.VISIBLE);
+			if (TextUtils.isEmpty(item.img)) {
+				holder.tu.setVisibility(View.GONE);
+			} else {
+				MyApplication.getInstance().display(item.img, holder.img2,
+						R.drawable.deft_color);
+			}
+		}
+
+		// 群
+		if ("1".equals(item.is_group)) {
+			holder.qun_biao.setVisibility(View.VISIBLE);
+		} else if ("2".equals(item.is_group)) {
+			holder.qun_biao.setVisibility(View.VISIBLE);
+			holder.qun_biao.setBackgroundResource(R.drawable.business_biao);
+		} else {
+			holder.qun_biao.setVisibility(View.GONE);
+		}
+
+		// 标题
+		if ("0".equals(item.is_group)) {// 0是话题
+			if (!TextUtils.isEmpty(item.img_title))
+				holder.post_title.setText(item.img_title);
+		} else if ("1".equals(item.is_group)) {
+			if (!TextUtils.isEmpty(item.group_name))
+				holder.post_title.setText(item.group_name);
+		} else {
+			if (!TextUtils.isEmpty(item.img_title))
+				holder.post_title.setText(item.img_title);
+		}
+
+		// 参与人数
+		if (!TextUtils.isEmpty(item.review_count))
+			holder.visit_num.setText("参与" + item.review_count + "人");
+		// 观看/帖子人数
+		if (!TextUtils.isEmpty(item.post_count)) {
+			if ("0".equals(item.is_group)) {
+				holder.see_num.setText("观看" + item.post_count + "人");
+			} else {
+				holder.see_num.setText("帖子" + item.post_count + "个");
+			}
+		}
+
+		// 描述
+		if ("0".equals(item.is_group)) {
+			holder.msg.setVisibility(View.VISIBLE);
+			holder.msg2.setVisibility(View.GONE);
+			holder.msg.setText(item.description);
+		} else if ("1".equals(item.is_group)) {
+			holder.msg.setVisibility(View.GONE);
+			if ("0".equals(item.is_share)) {// 没有参加
+				holder.msg2.setVisibility(View.VISIBLE);
+			} else {
+				holder.msg2.setVisibility(View.GONE);
+			}
+		} else {
+			holder.msg.setVisibility(View.VISIBLE);
+			holder.msg2.setVisibility(View.GONE);
+			holder.msg.setText(item.description);
+		}
+
+		if ("5".equals(item.is_group)) {
+			holder.video_hint.setVisibility(View.VISIBLE);
+		}
+
+		convertView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if ("0".equals(item.is_group)) {
+					Intent intent = new Intent(context, MainItemDetialActivity.class);
+					intent.putExtra("user_id", item.user_id);
+					intent.putExtra("img_id", item.img_id);
+					context.startActivity(intent);
+				} else if ("1".equals(item.is_group)) {
+					Intent intent = new Intent(context, GroupMainActivity.class);
+					intent.putExtra("group_id", item.group_id);
+					intent.putExtra("group_name", item.group_name);
+					context.startActivity(intent);
+				} else if ("5".equals(item.is_group)) {
+					Intent intent = new Intent(context, VideoDetialActivity.class);
+					Bundle bundel = new Bundle();
+					bundel.putSerializable(VideoDetialActivity.VIIDEO_INFO,(Serializable) item);
+					intent.putExtras(bundel);
+					context.startActivity(intent);
+				} else {
+					Intent intent = new Intent(context, BusinessDetailActivity.class);
+					intent.putExtra("business_id", item.img_id);
+					context.startActivity(intent);
+				}
+			}
+		});
+
+		return convertView;
+	}
+
+	class ViewHolder {
+		RelativeLayout tu;
+		ImageView img, img2, qun_biao, video_hint;
+		TextView post_title;
+		TextView visit_num;
+		TextView see_num;
+		TextView msg, msg2;
+	}
+
+}

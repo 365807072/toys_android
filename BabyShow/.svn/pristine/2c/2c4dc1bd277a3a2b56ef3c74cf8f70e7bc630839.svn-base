@@ -1,0 +1,495 @@
+package com.yyqq.code.photo;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import net.tsz.afinal.FinalHttp;
+import net.tsz.afinal.http.AjaxCallBack;
+import net.tsz.afinal.http.AjaxParams;
+import org.json.JSONException;
+import org.json.JSONObject;
+import com.ab.http.AbHttpUtil;
+import com.ab.http.AbRequestParams;
+import com.ab.http.AbStringHttpResponseListener;
+import com.ab.view.listener.AbOnListViewListener;
+import com.ab.view.pullview.AbPullGridView;
+import com.umeng.analytics.MobclickAgent;
+import com.yyqq.babyshow.R;
+import com.yyqq.code.photo.PhotoList;
+import com.yyqq.code.photo.TestPicActivity;
+import com.yyqq.commen.utils.Config;
+import com.yyqq.commen.utils.Log;
+import com.yyqq.framework.application.MyApplication;
+import com.yyqq.framework.application.ServerMutualConfig;
+
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.LinearLayout.LayoutParams;
+
+public class PeoplePhotoManager extends Activity implements
+		AbOnListViewListener {
+	int width, height;
+	public String TAG = "PeoplePhotoManager";
+	Activity context;
+	private TextView title;
+	AbHttpUtil http;
+	ArrayList<PhotoItem> data = new ArrayList<PeoplePhotoManager.PhotoItem>();
+	AbPullGridView mAbPullGridView;
+	GridView mGridView;
+	MyAdapter adapter;
+	ImageView more;
+	RelativeLayout share;
+	String isShare;
+	
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
+
+
+	public void onCreate(Bundle b) {
+		super.onCreate(b);
+		Config.setActivityState(this);
+		setContentView(R.layout.photo_manager);
+		share = (RelativeLayout) findViewById(R.id.share);
+		context = this;
+		title = (TextView) findViewById(R.id.title);
+		// title.setText(getIntent().getStringExtra("userName"));
+		title.setText("TA的相册");
+		DisplayMetrics DM = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(DM);
+		width = DM.widthPixels;
+		height = DM.heightPixels;
+		http = AbHttpUtil.getInstance(context);
+		http.setDebug(Log.isDebug);
+		mAbPullGridView = (AbPullGridView) findViewById(R.id.list);
+		mAbPullGridView.setPullRefreshEnable(true);
+		mAbPullGridView.setPullLoadEnable(false);
+
+		// 设置进度条的样式
+		mAbPullGridView.getHeaderView().setHeaderProgressBarDrawable(
+				this.getResources().getDrawable(R.drawable.progress_circular));
+		mAbPullGridView.getFooterView().setFooterProgressBarDrawable(
+				this.getResources().getDrawable(R.drawable.progress_circular));
+		mGridView = mAbPullGridView.getGridView();
+		// mGridView.setColumnWidth(150);
+		mGridView.setGravity(Gravity.CENTER);
+		mGridView.setHorizontalSpacing(3);
+		mGridView.setNumColumns(2);
+		mGridView.setPadding(5, 5, 5, 5);
+		mGridView.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
+		mGridView.setVerticalSpacing(3);
+		adapter = new MyAdapter();
+		mAbPullGridView.setAdapter(adapter);
+		mAbPullGridView.setAbOnListViewListener(this);
+	}
+
+	public OnClickListener shareClick = new OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			Config.showProgressDialog(context, true, null);
+			AjaxParams params = new AjaxParams();
+			params.put("user_id", Config.getUser(context).uid);
+			params.put("share_id", getIntent().getStringExtra("uid"));
+			params.put("share_type", "0");
+			FinalHttp fh = new FinalHttp();
+//			android.util.Log.e("fanfan", params.toString());
+			fh.post(ServerMutualConfig.DoShare, params,
+					new AjaxCallBack<String>() {
+						@Override
+						public void onFailure(Throwable t, String strMsg) {
+							super.onFailure(t, strMsg);
+							Config.dismissProgress();
+							Config.showFiledToast(context);
+						}
+
+						@Override
+						public void onSuccess(String t) {
+							super.onSuccess(t);
+							try {
+								JSONObject json = new JSONObject(t);
+								if (json.getBoolean("success")) {
+									onRefresh();
+								}
+								Toast.makeText(context,
+										json.getString("reMsg"),
+										Toast.LENGTH_SHORT).show();
+							} catch (JSONException e) {
+								e.printStackTrace();
+							}
+							Config.dismissProgress();
+						}
+					});
+		}
+	};
+
+	public void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+		onRefresh();
+	}
+
+	public OnClickListener importImageClick = new OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			if (dialog != null && dialog.isShowing()) {
+				dialog.dismiss();
+			}
+			Intent intent = new Intent(context, TestPicActivity.class);
+			startActivity(intent);
+		}
+	};
+	public OnClickListener moreClick = new OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			// AlertDialog.Builder builder = new Builder(context);
+			LayoutInflater inflater = (LayoutInflater) context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			View view = inflater.inflate(R.layout.photo_more, null);
+			TextView import_image = (TextView) view
+					.findViewById(R.id.import_image);
+			import_image.setOnClickListener(importImageClick);
+			// builder.setView(view);
+			// dialog = builder.create();
+			// dialog.show();
+			dialog = new Dialog(context);
+			setDialogLayoutParams(dialog, 40, Gravity.CENTER);
+			dialog.setContentView(view, new LayoutParams(width - 40,
+					LayoutParams.WRAP_CONTENT));
+			showDialog(0);
+		}
+	};
+	Dialog dialog;
+
+	public void getAlbum() {
+		Config.showProgressDialog(context, false, null);
+		AbRequestParams params = new AbRequestParams();
+		params.put("user_id", getIntent().getStringExtra("uid"));
+		params.put("login_user_id", Config.getUser(context).uid);
+//		android.util.Log.e("fanfan", ServerMutualConfig.AlbumList + "&" + params.toString());
+		http.get(ServerMutualConfig.AlbumList + "&" + params.toString(),
+				new AbStringHttpResponseListener() {
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						mAbPullGridView.stopRefresh();
+						try {
+							JSONObject json = new JSONObject(content);
+							if (json.getBoolean("success")) {
+								isShare = json.getString("isShare");
+								if (json.getInt("isShare") == 0) {
+									share.setVisibility(View.VISIBLE);
+									share.setOnClickListener(shareClick);
+								} else {
+									share.setVisibility(View.GONE);
+								}
+								mAbPullGridView.setVisibility(View.VISIBLE);
+								data.clear();
+								for (int i = 0; i < json.getJSONArray("data")
+										.length(); i++) {
+									PhotoItem item = new PhotoItem();
+									item.fromJson(json.getJSONArray("data")
+											.getJSONObject(i));
+									data.add(item);
+								}
+								adapter.notifyDataSetChanged();
+							} else {
+								Toast.makeText(context,
+										json.getString("reMsg"),
+										Toast.LENGTH_SHORT).show();
+							}
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+
+					@Override
+					public void onFinish() {
+						super.onFinish();
+						Config.dismissProgress();
+					}
+
+					@Override
+					public void onFailure(int statusCode, String content,
+							Throwable error) {
+						super.onFailure(statusCode, content, error);
+						Config.showFiledToast(context);
+					}
+				});
+	}
+
+	public class PhotoItem {
+		public String id = "";
+		public String album_name = "";
+		public String album_cover = "";
+		public long create_time = 0;
+		public String img_count;
+		public int is_default;
+		public String is_show_album = "";
+		public String is_video = "";
+
+		public void fromJson(JSONObject json) throws JSONException {
+			if (json.has("id")) {
+				id = json.getInt("id") + "";
+			}
+			if (json.has("album_name")) {
+				album_name = json.getString("album_name");
+			}
+			if (json.has("album_cover")) {
+				album_cover = json.getString("album_cover");
+			}
+			if (json.has("create_time")) {
+				create_time = json.getLong("create_time");
+			}
+			if (json.has("img_count")) {
+				img_count = json.getInt("img_count") + "";
+			}
+			if (json.has("is_default")) {
+				is_default = json.getInt("is_default");
+			}
+			if (json.has("is_show_album")) {
+				is_show_album = json.getString("is_show_album") + "";
+			}
+			if (json.has("is_video")) {
+				is_video = json.getString("is_video") + "";
+			}
+		}
+	}
+
+	public class MyAdapter extends BaseAdapter {
+		@Override
+		public int getCount() {
+			return data.size();
+		}
+
+		@Override
+		public Object getItem(int arg0) {
+			return data.get(arg0);
+		}
+
+		@Override
+		public long getItemId(int arg0) {
+			return arg0;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			LayoutInflater inflater = (LayoutInflater) context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			convertView = inflater.inflate(R.layout.photo_grid_item, null);
+			final PhotoItem item = data.get(position);
+			ImageView defImage = (ImageView) convertView
+					.findViewById(R.id.photo_defimg);
+			MyApplication.getInstance().display(item.album_cover, defImage,
+					R.drawable.def_head);
+			TextView name = (TextView) convertView.findViewById(R.id.name);
+			name.setText(item.album_name);
+//			TextView num = (TextView) convertView.findViewById(R.id.photonum);
+//			num.setText(item.num);
+			convertView.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent();
+					intent.putExtra("album_id", item.id);
+					intent.putExtra("baby_name", item.album_name);
+					if (!"0".equals(item.is_video)) {
+						intent.setClass(context, VideoList.class);
+						intent.putExtra("uid", Config.getUser(context).uid);
+					}else if (item.is_default == 0) {
+						intent.putExtra("people", true);
+						intent.putExtra("uid", getIntent()
+								.getStringExtra("uid"));
+						intent.putExtra("flag_share", true);
+						intent.putExtra("friend",
+								getIntent().getBooleanExtra("friend", false));
+						intent.setClass(context, PhotoList.class);
+					} else if ("主题相册".equals(item.album_name)) {
+						intent.putExtra("name", item.album_name);
+						intent.putExtra("default", true);
+						intent.putExtra("uid", getIntent()
+								.getStringExtra("uid"));
+						intent.putExtra("isShare", isShare);
+						intent.putExtra("friend",
+								getIntent().getBooleanExtra("friend", false));
+						intent.setClass(PeoplePhotoManager.this,
+								PhotoThem.class);
+					} else {
+						intent.putExtra("name", item.album_name);
+						intent.putExtra("default", true);
+						intent.putExtra("isShare", isShare);
+						intent.putExtra("uid", getIntent()
+								.getStringExtra("uid"));
+						intent.putExtra("friend",
+								getIntent().getBooleanExtra("friend", false));
+						intent.setClass(PeoplePhotoManager.this,
+								PhotoDetail.class);
+					}
+					// else {
+					// intent.putExtra("name",item.name);
+					// intent.putExtra("default",true);
+					// intent.putExtra("uid",getIntent().getStringExtra("uid"));
+					// intent.putExtra("friend",getIntent().getBooleanExtra("friend",false));
+					// intent.setClass(PeoplePhotoManager.this,PhotoThem.class);
+					// }
+					startActivity(intent);
+				}
+			});
+			// final PhotoItem item = data.get(position);
+			// ImageView defImage = (ImageView) convertView
+			// .findViewById(R.id.photo_defimg);
+			// MyApplication.getInstance().display(item.defImage, defImage,
+			// R.drawable.def_head);
+			// TextView name = (TextView) convertView.findViewById(R.id.name);
+			// TextView num = (TextView)
+			// convertView.findViewById(R.id.photonum);
+			// num.setText(item.num);
+			// convertView.setOnClickListener(new OnClickListener() {
+			// @Override
+			// public void onClick(View v) {
+			// // Intent intent = new Intent();
+			// // intent.putExtra("album_id",item.id);
+			// // intent.putExtra("name",item.name);
+			// // intent.setClass(PhotoManager.this,PhotoDetail.class);
+			// // startActivity(intent);
+			// Intent intent = new Intent();
+			// intent.putExtra("album_id", item.id);
+			// if (item.isDefault == 0) {
+			// intent.putExtra("people", true);
+			// intent.putExtra("uid", getIntent()
+			// .getStringExtra("uid"));
+			// intent.putExtra("baby_name", item.name);
+			// intent.putExtra("friend",
+			// getIntent().getBooleanExtra("friend", false));
+			// intent.setClass(context, PhotoList.class);
+			// } else {
+			// intent.putExtra("name", item.name);
+			// intent.putExtra("default", true);
+			// intent.putExtra("uid", getIntent()
+			// .getStringExtra("uid"));
+			// intent.putExtra("baby_name", item.name);
+			// intent.putExtra("friend",
+			// getIntent().getBooleanExtra("friend", false));
+			// intent.setClass(PeoplePhotoManager.this,
+			// PhotoDetail.class);
+			// }
+			// startActivity(intent);
+			// }
+			// });
+			return convertView;
+		}
+	}
+
+	@Override
+	public void onRefresh() {
+		getAlbum();
+	}
+
+	@Override
+	public void onLoadMore() {
+		if (data.isEmpty()) {
+			mAbPullGridView.stopLoadMore();
+			return;
+		}
+		Config.showProgressDialog(context, false, null);
+		AbRequestParams params = new AbRequestParams();
+		params.put("user_id", getIntent().getStringExtra("uid"));
+		params.put("login_user_id", Config.getUser(context).uid);
+		params.put("last_id", data.get(data.size() - 1).id);
+		http.get(ServerMutualConfig.AlbumList + "&" + params.toString(),
+				new AbStringHttpResponseListener() {
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						mAbPullGridView.stopLoadMore();
+						try {
+							JSONObject json = new JSONObject(content);
+							if (json.getBoolean("success")) {
+								{
+									for (int i = 0; i < json.getJSONArray(
+											"data").length(); i++) {
+										PhotoItem item = new PhotoItem();
+										item.fromJson(json.getJSONArray("data")
+												.getJSONObject(i));
+										data.add(item);
+									}
+								}
+								adapter.notifyDataSetChanged();
+							} else {
+								Toast.makeText(context,
+										json.getString("reMsg"),
+										Toast.LENGTH_SHORT).show();
+							}
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+
+					@Override
+					public void onFinish() {
+						super.onFinish();
+						Config.dismissProgress();
+					}
+
+					@Override
+					public void onFailure(int statusCode, String content,
+							Throwable error) {
+						super.onFailure(statusCode, content, error);
+						Config.showFiledToast(context);
+					}
+				});
+	}
+
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
+	/**
+	 * 描述：设置弹出Dialog的属性.
+	 * 
+	 * @param dialog
+	 *            弹出Dialog
+	 * @param dialogPadding
+	 *            如果Dialog不是充满屏幕，要设置这个值
+	 * @param gravity
+	 *            the gravity
+	 */
+	private void setDialogLayoutParams(Dialog dialog, int dialogPadding,
+			int gravity) {
+		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		Window window = dialog.getWindow();
+		WindowManager.LayoutParams lp = window.getAttributes();
+		// 此处可以设置dialog显示的位置
+		window.setGravity(gravity);
+		// 设置宽度
+		lp.width = width - dialogPadding;
+		lp.type = WindowManager.LayoutParams.TYPE_APPLICATION_ATTACHED_DIALOG;
+		// 背景透明
+		// lp.screenBrightness = 0.2f;
+		// lp.alpha = 0.8f;
+		lp.dimAmount = 0f;
+		window.setAttributes(lp);
+		// 添加动画
+		window.setWindowAnimations(android.R.style.Animation_Dialog);
+		// 设置点击屏幕Dialog不消失
+		dialog.setCanceledOnTouchOutside(true);
+	}
+
+	@Override
+	protected Dialog onCreateDialog(int id) {
+		return dialog;
+	}
+}

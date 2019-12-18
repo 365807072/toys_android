@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="100dp"
+    android:layout_height="30dp"
+    android:background="#fff"
+    android:orientation="horizontal" >
+
+    <View
+        android:layout_width="0.5dp"
+        android:layout_height="fill_parent"
+        android:background="#000" />
+
+    <TextView
+        android:id="@+id/item_group_catagory"
+        android:layout_width="98dp"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:text="分类"
+        android:textColor="#000"
+        android:textSize="@dimen/text_size_16" />
+
+    <View
+        android:layout_width="0.5dp"
+        android:layout_height="fill_parent"
+        android:background="#000" />
+
+</LinearLayout>

@@ -1,0 +1,428 @@
+package com.yyqq.framework.application;
+
+public class ServerMutualConfig {
+	public static String BASEURL = "http://api.baobaoshowshow.com/index.php?r=BabyShowV12/";
+	public static String BASEURL_NEW = "http://api.baobaoshowshow.com/index.php?r=BabyShow/"; // 正式环境
+	public static String BASEURL_V1 = "http://api.baobaoshowshow.com/index.php?r=BabyShowV1/"; // 新版正式环境
+	
+//	public static String BASEURL_V1 = "http://test.show.baobaoshowshow.com/index.php?r=BabyShowV1/"; // 测试环境
+
+//	public static String BASEURL_NEW = "http://api.baobaoshowshow.com/index.php?r=BabyShowV17/"; // 测试环境
+	// public static String BASEURL =
+	// "http://test.show.baobaoshowshow.com/index.php?r=BabyShowV12/";
+	// public static String BASEURL_NEW =
+	// "http://test.show.baobaoshowshow.com/index.php?r=BabyShow/";
+	/**
+	 *首页
+	 */
+	public static final String BabyHomeV3 = BASEURL_V1 + "BabyHomeV3"; // 首页
+
+	/**
+	 * 专题 7
+	 */
+	public static final String SpecialListV2 = BASEURL_NEW + "SpecialListV2"; // 专题列表
+	public static final String SpecialDetailList = BASEURL_NEW
+			+ "SpecialDetailList"; // 专题详情
+	public static final String SpecialDetailGridV2 = BASEURL_NEW
+			+ "SpecialDetailGridV2"; // 专题相片墙
+	public static final String ShowPlazaList = BASEURL_NEW + "ShowPlazaList"; // 热门专题
+	public static final String HeadListV7 = BASEURL_NEW + "HeadListV7"; // 首页banner
+	public static final String DelSpecial = BASEURL_NEW + "DelSpecial"; // 删除专题秀秀
+	public static final String FindSpecialUser = BASEURL_NEW
+			+ "FindSpecialUser"; // 照片墙搜索
+
+	/**
+	 * 秀秀 12
+	 */
+	public static final String NewThemeV1 = BASEURL_V1 + "NewThemeV1"; // 最新
+	public static final String Admire = BASEURL_NEW + "Admire"; // 赞
+	public static final String CancelAdmire = BASEURL_NEW + "CancelAdmire"; // 取消赞
+	public static final String ReviewV1 = BASEURL_NEW + "ReviewV1"; // 秀秀评论
+	public static final String ReviewList = BASEURL_NEW + "ReviewList"; // 秀秀评论列表
+	public static final String DelReview = BASEURL_NEW + "DelReview"; // 删除秀秀评论
+	public static final String FindPartUser = BASEURL_NEW + "FindPartUser"; // 秀秀搜索
+	public static final String CheckWeibo = BASEURL_NEW + "CheckWeibo";
+	public static final String ImgShowV3 = BASEURL_V1 + "ImgShowV3"; // 发帖子
+	public static final String GoToPost = BASEURL_NEW + "GoToPost"; // 来自话题跳转
+	public static final String HotImgList = BASEURL_NEW + "HotImgList"; // 相册展播
+
+	/**
+	 * 热点 25
+	 */
+	public static final String PostReplyListV1 = BASEURL_NEW
+			+ "PostReplyListV1"; // 话题详情
+	
+	public static final String POST_DETIAL = BASEURL_V1 + "ListingDetail";  // 话题详情 
+	public static final String PostMasterV1 = BASEURL_NEW + "PostMasterV1"; // 楼主
+	public static final String SavePost = BASEURL_NEW + "SavePost"; // 帖子收藏
+	public static final String CancelPost = BASEURL_NEW + "CancelPost"; // 帖子取消收藏
+	public static final String DelListingShow = BASEURL_V1 + "DelListingShow"; // 删除帖子
+	public static final String PostMyInterestListV4 = BASEURL_V1 + "PostMyInterestListV4"; // 我的兴趣
+	public static final String PostListV6 = BASEURL_V1 + "PostListV6";
+	public static final String GroupDetailListing = BASEURL_V1
+			+ "GroupDetailListing"; // 圈子详情
+	public static final String GroupDetailListingV1 = BASEURL_V1
+			+ "GroupDetailListingV1"; // 群管理
+	public static final String GetGroupHead = BASEURL_V1 + "GetGroupHead";//群头部
+	public static final String PostIdol = BASEURL_NEW + "PostIdol";
+	public static final String CancelPostIdol = BASEURL_NEW + "CancelPostIdol";
+	public static final String PublicPost = BASEURL_V1 + "PublicPost"; // 话题发帖
+	public static final String PublicGroupPost = BASEURL_V1
+			+ "PublicGroupPost"; // 群里发帖
+	public static final String NoticeGroupListing = BASEURL_V1
+			+ "NoticeGroupListing"; // 群主权限---设置公告
+	public static final String EssenceGroupListing = BASEURL_V1
+			+ "EssenceGroupListing"; // 群主权限---设置精华
+	public static final String TopGroupListing = BASEURL_V1 + "TopGroupListing"; // 群主权限---置顶帖子
+	public static final String DelGroupListing = BASEURL_V1 + "DelGroupListing"; // 群主权限---删除帖子
+	public static final String UpGroup = BASEURL_NEW + "UpGroup"; // 群主权限---修改群名
+	public static final String PostMyInterestList = BASEURL_NEW
+			+ "PostMyInterestList"; // 我的兴趣详情
+	public static final String NoticeRecGroupList = BASEURL_NEW
+			+ "NoticeRecGroupList"; // 公告/精华列表
+	public static final String PostMyInterestBusiness = BASEURL_NEW
+			+ "PostMyInterestBusiness"; // 热点附近
+	public static final String SearchGroup = BASEURL_NEW + "SearchGroup"; // 群组搜索
+	public static final String PostCoverListV1 = BASEURL_NEW
+			+ "PostCoverListV1"; // 话题banner
+	public static final String GetGroupList = BASEURL_NEW + "GetGroupList"; // 群列表
+
+	/**
+	 * 商家 12
+	 */
+	public static final String SearchBusiness = BASEURL_V1 + "SearchBusiness";
+	
+	// 搜索商家
+	public static final String SearchBusinessList = BASEURL_V1 + "SearchBusinessListV1";
+	   
+	public static final String PublicOrderComment = BASEURL_NEW
+			+ "PublicOrderComment"; // 商家评论
+	public static final String BusinessCommentList = BASEURL_NEW
+			+ "BusinessCommentList"; // 商家评论列表
+	public static final String BusinessCityList = BASEURL_NEW
+			+ "BusinessCityList"; // 筛选列表
+	public static final String PacketList = BASEURL_NEW + "PacketList"; // 红包列表
+	public static final String CheckPacket = BASEURL_NEW + "CheckPacket"; // 检测红包
+	public static final String OrderShareState = BASEURL_V1 + "OrderShareState"; // 检测红包分享状态
+	/**
+	 * 正式环境
+	 */
+	public static final String UserOrderList = BASEURL_V1 + "UserOrderListV1"; // 用户订单
+	public static final String PublicOrder = BASEURL_NEW + "PublicOrder"; // 支付订单
+	public static final String OrderDetailV1  = BASEURL_V1 + "OrderDetailV1"; // 订单详情
+	public static final String BusinessOrderList = BASEURL_V1 + "BusinessOrderListV1"; // 商家订单
+	public static final String BusinessOrderDETAIL = BASEURL_V1 + "SearchCompletedOrder"; // 商家订单
+	public static final String RefundOrder = BASEURL_NEW + "RefundOrder"; // 退款
+	public static final String PayOrder = BASEURL_NEW + "PayOrder"; // 支付
+	public static final String BusinessVerification = BASEURL_NEW
+			+ "BusinessVerification"; // 验证验证码
+	public static final String searchVerification = BASEURL_NEW
+			+ "SearchVerification"; // 验证商家订单验证码
+	/**
+	 * 商家运营
+	 */
+	// public static final String WebGetBusinessList = BASEURL_NEW
+	// + "WebGetBusinessList";
+	// public static final String WebBusinessDetail = BASEURL_NEW
+	// + "WebBusinessDetail";
+	// public static final String WebUserOrderList = BASEURL_NEW
+	// + "WebUserOrderList";
+	// public static final String WebPublicOrder = BASEURL_NEW +
+	// "WebPublicOrder";
+	// public static final String WebOrderDetail = BASEURL_NEW +
+	// "WebOrderDetail";
+	// public static final String WebBusinessOrderList = BASEURL_NEW
+	// + "WebBusinessOrderList";
+	// public static final String WebRefundOrder = BASEURL_NEW +
+	// "WebRefundOrder";
+	// public static final String WebPayOrder = BASEURL_NEW + "WebPayOrder";
+	// public static final String WebBusinessVerification = BASEURL_NEW
+	// + "WebBusinessVerification";
+	// public static final String WebSearchVerification = BASEURL_NEW
+	// + "WebSearchVerification";
+
+	/**
+	 * 值得买新版 6
+	 */
+	public static final String ShowBuyNewList = BASEURL_NEW + "ShowBuyNewList";
+	public static final String BuyNewList = BASEURL_NEW + "BuyNewList";
+	public static final String BuyDetailList = BASEURL_NEW + "BuyDetailList";
+	public static final String BuyImageNew = BASEURL_NEW + "BuyImageNew";
+	public static final String BusinessListV6 = BASEURL_NEW + "BusinessListV6";
+	public static final String MarkBuyUrl = BASEURL_NEW + "MarkBuyUrl"; // 记录值得买点击链接
+
+	/**
+	 * 登录 7
+	 */
+	public static final String Login = BASEURL_V1 + "Login"; // 登录
+	public static final String LoginV1 = BASEURL_V1 + "LoginV1"; // 第三方登录
+	public static final String RegistMobile = BASEURL_V1 + "RegistMobile"; // 注册
+	public static final String VisitorRegist = BASEURL_V1 + "VisitorRegist"; // 游客模式
+	public static final String BindShowUserList = BASEURL_NEW
+			+ "BindShowUserList"; // 绑定列表
+	public static final String CancelBind = BASEURL_NEW + "CancelBind"; // 取消绑定
+	public static final String BindShowUser = BASEURL_NEW + "BindShowUser"; // 绑定
+	public static final String EditMobile = BASEURL_NEW + "EditMobile"; // 绑定手机
+	public static final String MobileInfo = BASEURL_NEW + "MobileInfo"; // 手机信息
+	public static final String CheckMobile = BASEURL_NEW + "CheckMobile"; // 更换手机
+	public static final String AddMobile = BASEURL_NEW + "AddMobile"; // 手机号合并
+	public static final String CheckMobileInfo = BASEURL_NEW
+			+ "CheckMobileInfo"; // 找回密码，检测手机号
+	public static final String EditPassword = BASEURL_NEW + "EditPassword"; // 修改密码
+
+	/**
+	 * 成长记录 22-5=17
+	 */
+	public static final String DiaryAlbumList = BASEURL_NEW + "DiaryAlbumList";
+	public static final String DiaryImgsList = BASEURL_NEW + "DiaryImgsList";
+	public static final String DiaryTagListV1 = BASEURL_NEW + "DiaryTagListV1";
+	public static final String DiaryAdmire = BASEURL_NEW + "DiaryAdmire";
+	public static final String CancelDiaryAdmire = BASEURL_NEW
+			+ "CancelDiaryAdmire";
+	public static final String DiaryReview = BASEURL_NEW + "DiaryReview";
+	public static final String DiaryReviewList = BASEURL_NEW
+			+ "DiaryReviewList";
+	public static final String DelDiaryReview = BASEURL_NEW + "DelDiaryReview";
+	public static final String DelDiary = BASEURL_NEW + "DelDiary";
+	public static final String UpdateDiaryList = BASEURL_NEW
+			+ "UpdateDiaryList";
+	public static final String UpDiary = BASEURL_NEW + "UpDiary";
+	public static final String DelDiaryAlbum = BASEURL_NEW + "DelDiaryAlbum";
+	public static final String AddBabyAvatar = BASEURL_NEW + "AddBabyAvatar";
+	public static final String ShareToPost = BASEURL_NEW + "ShareToPost";
+	public static final String ImportToDiaryNew = BASEURL_NEW
+			+ "ImportToDiaryNew"; // 成长记录上传照片
+	public static final String ImportToDiaryV3 = BASEURL_NEW
+			+ "ImportToDiaryV3"; // 成长记录编辑上传照片
+	public static final String CombineSendMail = BASEURL_NEW
+			+ "CombineSendMail"; // 申请合并成长记录
+	public static final String CombineDiaryV2 = BASEURL_NEW + "CombineDiaryV2"; // 合并成长记录
+	public static final String ShareSingleToPost = BASEURL_NEW
+			+ "ShareSingleToPost"; // 成长记录分享到话题
+	public static final String DiaryCate = BASEURL_NEW + "DiaryCate"; // 设置隐私
+	public static final String CancelDiaryCate = BASEURL_NEW
+			+ "CancelDiaryCate"; // 取消隐私
+	public static final String RecordLoginTime = BASEURL_NEW
+			+ "RecordLoginTime"; // 记录最后登陆时间
+	public static final String PublicGrowth = BASEURL_NEW + "PublicGrowth"; // 增加身高体重
+	public static final String GrowthList = BASEURL_NEW + "GrowthList"; // 身高体重
+	public static final String SearchKindergartenUser = BASEURL_NEW
+			+ "SearchKindergartenUser"; // 搜索
+	public static final String PublicBabysIdol = BASEURL_NEW
+			+ "PublicBabysIdol"; // 关注
+	public static final String BabysIdolCombine = BASEURL_NEW
+			+ "BabysIdolCombine"; // 同步
+
+	/**
+	 * 我的主页 11
+	 */
+	public static final String UserInfo = BASEURL_NEW + "UserInfo";
+	public static final String PostImgInfo = BASEURL_NEW + "PostImgInfo"; // 秀秀详情
+	public static final String MyImgsV5 = BASEURL_V1 + "MyImgsV5"; // 我发布的
+	public static final String NoticeList = BASEURL_NEW + "NoticeList"; // 消息数量
+	public static final String IdolListV2 = BASEURL_NEW + "IdolListV2"; // 好友列表
+	public static final String SpecialRevisionV1 = BASEURL_NEW
+			+ "SpecialRevisionV1"; // 首页
+	public static final String ListingMyMessage = BASEURL_V1 + "ListingMyMessage"; // 我的消息
+	public static final String ListingFriendsMessage = BASEURL_V1
+			+ "ListingFriendsMessage"; // 好友消息
+	public static final String ListingSaveList = BASEURL_V1 + "ListingSaveList"; // 帖子收藏列表
+	public static final String FocusOn = BASEURL_NEW + "FocusOn"; // 关注
+	public static final String CancelFocus = BASEURL_NEW + "CancelFocus"; // 取消关注
+	public static final String BabysIdolList = BASEURL_NEW + "BabysIdolList"; // 成长记录关注
+	public static final String EditBabysIdol = BASEURL_NEW + "EditBabysIdol"; // 同意、取消关注
+	public static final String AddCooperation = BASEURL_NEW + "AddCooperation"; // 商家自主报名
+	/**
+	 * 共享列表 4
+	 */
+	public static final String ShareListV2 = BASEURL_NEW + "ShareListV2";
+	public static final String DoShare = BASEURL_NEW + "DoShare";
+	public static final String CancelShare = BASEURL_NEW + "CancelShare";
+	public static final String MyShareList = BASEURL_NEW + "MyShareList"; // 合并共享人列表
+	/**
+	 * 添加宝贝 5
+	 */
+	public static final String AddBaby = BASEURL_NEW + "AddBaby"; // 添加宝贝
+	public static final String DoBaby = BASEURL_NEW + "DoBaby"; // 修改宝宝信息
+	public static final String GetBabys = BASEURL_NEW + "GetBabys"; // 获取宝宝信息
+	public static final String UpBabyBirthday = BASEURL_NEW + "UpBabyBirthday"; // 修改宝宝日期
+	public static final String EditUser = BASEURL_NEW + "EditUser"; // 编辑用户信息
+
+	/**
+	 * 相册列表 6
+	 */
+	public static final String AlbumList = BASEURL_V1 + "AlbumList";
+	public static final String ShareAlbum = BASEURL_NEW + "ShareAlbum";
+	public static final String ImgList = BASEURL_NEW + "ImgList";
+	public static final String ImgListV2 = BASEURL_NEW + "ImgListV2";
+	public static final String DoImg = BASEURL_NEW + "DoImg"; // 相册编辑页面的删除
+	public static final String MoveImgs = BASEURL_NEW + "MoveImgs";
+	public static final String GetVideoList = BASEURL_V1 + "GetVideoList";
+	/**
+	 * 图片下载到相册 4
+	 */
+	public static final String DownloadImg = BASEURL_NEW + "DownloadImg";
+	public static final String DoAlbum = BASEURL_NEW + "DoAlbum";
+	public static final String NewAlbum = BASEURL_NEW + "NewAlbum";
+	public static final String UpImgs = BASEURL_NEW + "UpImgs";
+
+	/**
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 未整理
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * */
+
+	/**
+	 * 图片列表
+	 */
+	public static final String ImportImg = BASEURL + "ImportImg";
+	/**
+	 * 邮箱发送验证码
+	 */
+	public static final String SendMail = BASEURL + "SendMail";
+	public static final String VerifyCode = BASEURL + "VerifyCode";
+
+	/**
+	 * 修改/重置密码
+	 */
+	public static final String DoPasswd = BASEURL + "DoPasswd";
+
+	/**
+	 * 删除帖子/帖子评论
+	 */
+	public static final String DelPostReview = BASEURL + "DelPostReview";
+
+	/**
+	 * 共用120个 专题7 秀秀12 热点25 商家12 值得买6 成长记录17 我的主页11 相册10 宝宝5 共享4 登录6 旧文件5
+	 */
+
+	/**
+	 * 检查订单状态
+	 * */
+	public static final String CHECK_ORDERTYPE = BASEURL_V1 + "CheckOrderPay";
+
+	/**
+	 * 初始页图片地址
+	 * */
+	public static final String MAIN_ACTIVITY_IMG = "http://api.baobaoshowshow.com/static/album/main_activity_img.png";
+
+	/**
+	 * 获取微信支付密钥
+	 * */
+	public static final String GET_WECHAT_KEY = BASEURL_V1 + "WeChat";
+	
+	/**
+	 * 获取最新列表数据
+	 * */
+	public static final String GET_NEWEST_LIST = BASEURL_V1 + "ListingNew";
+	
+	/**
+	 * 获取热门列表数据
+	 * */
+	public static final String GET_HOT_LIST = BASEURL_V1 + "getHotListData";
+
+	/**
+	 * 获取关注列表数据
+	 * */
+	public static final String GET_FOLLOW_LIST = BASEURL_V1 + "MyFocusList";
+	
+	/**
+	 * 搜索接口
+	 * */
+	public static final String SEARCH_LIST = BASEURL_V1 + "searchInformation";
+	
+	/**
+	 * 发布话题
+	 * */
+	public static final String ADD_NEW_POSTBAR = BASEURL_V1 + "PublicListing";
+	
+	/**
+	 * 发布话题
+	 * */
+	public static final String ADD_NEW_POSTBAR_IN_QUN = BASEURL_V1 + "PublicGroupListing";
+	
+	/**
+	 * 获取话题列表
+	 * */
+	public static final String GET_POSTBAR_LIST = BASEURL_V1 + "getListingList";
+	
+	/**
+	 * 话题详情
+	 * */
+	public static final String POSTBAR_DETIAL = BASEURL_V1 + "ListingDetail";
+	
+	/**
+	 * 收藏话题
+	 * */
+	public static final String ADD_COLLECTION = BASEURL_V1 + "SaveListing";
+	
+	/**
+	 * 取消收藏话题
+	 * */
+	public static final String CANCEL_COLLECTION = BASEURL_V1 + "CancelListing";
+	
+	/**
+	 * 获取帖子评论列表
+	 * */
+	public static final String POST_COMMENT_DETIAL = BASEURL_V1 + "ListingImgReviews"; 
+	
+	/**
+	 * 发布评论
+	 * */
+	public static final String PostImageNew = BASEURL_V1 + "PublicListingReview";
+	
+	/**
+	 * 获取帖子评论二级列表
+	 * */
+	public static final String PostReviewList = BASEURL_V1 + "getReviewReviewList";
+	
+	/**
+	 * 添加帖子评论二级列表
+	 * */
+	public static final String PostReviewNew = BASEURL_V1 + "PublicReviewReview";
+	
+	/**
+	 * 帖子详情点赞
+	 * */
+	public static final String PostAdmireNew = BASEURL_V1 + "PublicListingAdmire";
+
+	/**
+	 * 帖子详情取消点赞
+	 * */
+	public static final String CancelPostAdmireNew = BASEURL_V1 + "CancelListingAdmire";
+	
+	/**
+	 * 帖子详情评论点赞
+	 * */
+	public static final String PublicListingReviewAdmire = BASEURL_V1 + "PublicListingReviewAdmire";
+	
+	/**
+	 * 帖子详情评论取消点赞
+	 * */
+	public static final String CancelListingReviewAdmire = BASEURL_V1 + "CancelListingReviewAdmire";
+	
+	/**
+	 * 获取商家列表
+	 * */
+	public static final String GetBusinessListV3 = BASEURL_V1 + "GetBusinessListV3";
+	
+	/**
+	 * 获取商家列表
+	 * */
+	public static final String BusinessDetailV8 = BASEURL_V1 + "BusinessDetailV1";
+	
+	/**
+	 * 获取视频详情
+	 * */
+	public static final String VIDEO_DETIAL = BASEURL_V1 + "PostImgVideo";
+}

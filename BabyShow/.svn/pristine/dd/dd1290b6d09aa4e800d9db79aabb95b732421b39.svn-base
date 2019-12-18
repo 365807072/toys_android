@@ -1,0 +1,165 @@
+package com.yyqq.code.group;
+
+import java.util.ArrayList;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
+
+import com.ab.http.AbHttpUtil;
+import com.ab.http.AbRequestParams;
+import com.ab.http.AbStringHttpResponseListener;
+import com.yyqq.babyshow.R;
+import com.yyqq.commen.adapter.GroupManagerTopicAdapter;
+import com.yyqq.commen.model.GroupManagerTopicBean;
+import com.yyqq.commen.utils.Config;
+import com.yyqq.commen.view.PullDownView;
+import com.yyqq.commen.view.PullDownView.OnPullDownListener;
+import com.yyqq.framework.activity.BaseActivity;
+import com.yyqq.framework.application.ServerMutualConfig;
+
+/**
+ * 
+ * 微社区话题or帖子管理
+ * 
+ * @author lyl
+ * 
+ * */
+
+public class GroupManagerTopicActivity extends BaseActivity implements OnPullDownListener{
+
+	private String group_id = "";
+	private AbHttpUtil ab;
+	private LayoutInflater inflater;
+	private GroupManagerTopicAdapter groupManagerTopicAdapter;
+	private ArrayList<GroupManagerTopicBean> groupManagerTopicBeanList = new ArrayList<GroupManagerTopicBean>();
+	
+	private PullDownView mPullDownView;
+	private ListView listView;
+	private ImageView title_cancel;
+	private RelativeLayout group_topic_edit;
+	private ListView group_topic_edit_list;
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_group_manager_topic);
+	}
+
+	@Override
+	protected void initView() {
+		mPullDownView = (PullDownView) findViewById(R.id.list);
+		mPullDownView.setOnPullDownListener(this);
+		mPullDownView.setShowHeader();// 显示并且可以使用头部刷新
+		listView = mPullDownView.getListView();
+		listView.setDivider(null);
+		title_cancel = (ImageView) findViewById(R.id.title_cancel);
+		group_topic_edit = (RelativeLayout) findViewById(R.id.group_topic_edit);
+		group_topic_edit_list = (ListView) findViewById(R.id.group_topic_edit_list);
+	}
+
+	@Override
+	protected void initData() {
+		group_id = getIntent().getStringExtra(GroupMainActivity.GROUP_ID_KEY);
+		ab = AbHttpUtil.getInstance(GroupManagerTopicActivity.this);
+		inflater = LayoutInflater.from(this);
+		
+		if(null == groupManagerTopicAdapter){
+			groupManagerTopicAdapter = new GroupManagerTopicAdapter(group_id, GroupManagerTopicActivity.this, inflater, groupManagerTopicBeanList, ab, group_topic_edit_list, group_topic_edit);
+		}
+		listView.setAdapter(groupManagerTopicAdapter);
+		
+		initGroupManagerInfo();
+	}
+
+	@Override
+	protected void setListener() {
+		title_cancel.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				GroupManagerTopicActivity.this.finish();
+			}
+		});
+		
+		group_topic_edit.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(group_topic_edit.isShown()){
+					group_topic_edit.setVisibility(View.GONE);
+				}else{
+					group_topic_edit.setVisibility(View.VISIBLE);
+				}
+			}
+		});
+	}
+
+	@Override
+	public void onRefresh() {
+		groupManagerTopicBeanList.clear();
+		initGroupManagerInfo();
+	}
+
+	@Override
+	public void onMore() {
+		initGroupManagerInfo();
+	}
+	
+	/**
+	 * 获取头部信息
+	 * */
+	private void initGroupManagerInfo(){
+		final AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(this).uid);
+		params.put("group_id", group_id);
+		if(groupManagerTopicBeanList.size() != 0){
+			params.put("post_create_time", groupManagerTopicBeanList.get(groupManagerTopicBeanList.size()).getPost_create_time());
+		}
+		ab.get(ServerMutualConfig.getGroupManage + "&" + params.toString(), new AbStringHttpResponseListener() {
+			
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						if (!content.isEmpty()) {
+							try {
+								JSONObject json = new JSONObject(content);
+								for (int i = 0; i < json.getJSONArray("data").length(); i++) {
+									GroupManagerTopicBean item = new GroupManagerTopicBean();
+									groupManagerTopicBeanList.add(item.fromJson(json.getJSONArray("data").getJSONObject(i)));
+								}
+								groupManagerTopicAdapter.notifyDataSetChanged();
+							} catch (JSONException e) {
+								e.printStackTrace();
+							}
+						} else {
+							Config.dismissProgress();
+							Toast.makeText(GroupManagerTopicActivity.this, "没有更多了", 3).show();
+						}
+					}
+
+					@Override
+					public void onFinish() {
+						super.onFinish();
+						mPullDownView.RefreshComplete();// 这个事线程安全的 可看源代码
+						mPullDownView.notifyDidMore();
+						Config.dismissProgress();
+					}
+
+					@Override
+					public void onFailure(int statusCode, String content,
+							Throwable error) {
+						super.onFailure(statusCode, content, error);
+					}
+				});
+	}
+	
+}

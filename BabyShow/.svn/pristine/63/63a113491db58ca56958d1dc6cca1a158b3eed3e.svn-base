@@ -1,0 +1,189 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
+<meta content="telephone=no" name="format-detection" /> 
+<meta content="email=no" name="format-detection" />
+<script src="jquery.js" type="text/javascript"></script>
+<title>短信验证</title>
+
+	<style>
+		body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
+			margin:0;
+			padding:0;
+		}
+		
+	#input_phonenumber{
+            width:80%;
+            height:40px;
+			border:none;
+			background-color:#fff;
+			font-size:16px;
+			outline:0;
+                }
+                
+    #input_smscode{
+            width:90%;
+            height:40px;
+			border:none;
+			background-color:#fff;
+			font-size:16px;
+			outline:0;
+                }
+				
+	#btn{
+            width:70px;
+            height:30px; 
+			background-image:url(html_login.png);
+			background-repeat:no-repeat;
+			border:none;
+			-moz-border-radius:5px;      /* Gecko browsers */
+   			-webkit-border-radius:5px;   /* Webkit browsers */
+   			border-radius:5px;            /* W3C syntax */
+			border-color:#fff;
+			color:#a3d8f6;
+			font-size:12px;
+			outline:none;
+            }
+			
+	#reset_Next{
+            width:90%;
+            height:40px; 
+			background-image:url(html_login.png);
+			background-repeat:no-repeat;
+			border:none;
+			-moz-border-radius:5px;      /* Gecko browsers */
+   			-webkit-border-radius:5px;   /* Webkit browsers */
+   			border-radius:5px;            /* W3C syntax */
+			border-color:#fff;
+			color:#a3d8f6;
+			font-size:16px;
+			margin-top:20px;
+			outline:none;
+            }
+	</style>
+    
+
+     <script type="text/javascript" language="javascript">
+  
+  		var phoneType = 0; // 手机类型， android = 1 ; iPhone = 2 ; windowsPhone = 3; outherPhone = 4;
+		
+  		// 获取操作系统类型
+		window.onload=function getSystemType() {
+			var u = navigator.userAgent;
+			if (u.indexOf('Android') > -1 || u.indexOf('Linux') > -1) {//安卓手机
+				phoneType = 1;
+				document.getElementById("ios_title_bg").remove(0);
+			} else if (u.indexOf('iPhone') > -1) {//苹果手机
+				phoneType = 2;
+			} else if (u.indexOf('Windows Phone') > -1) {//winphone手机
+				phoneType = 3;
+			}else{
+				phoneType = 4;
+				}
+		}
+  
+  
+ 
+	// 监听输入框内数据的变化
+  	function checkInputChange(){
+			if(11 != document.getElementById("input_phonenumber").value.length){
+				document.getElementById("btn").disabled = true;
+				document.getElementById("btn").style.color="#a3d8f6";
+				}else{
+					document.getElementById("btn").disabled = false;
+					document.getElementById("btn").style.color="#fff";
+					}
+			if("" != document.getElementById("input_phonenumber").value
+			 && "" != document.getElementById("input_smscode").value 
+			 && document.getElementById("input_smscode").value.length == 4
+			 && document.getElementById("input_phonenumber").value.length == 11){
+				document.getElementById("reset_Next").disabled = false;
+				document.getElementById("reset_Next").style.color="#fff";
+                 }else{
+                     document.getElementById("reset_Next").disabled = true;
+					 document.getElementById("reset_Next").style.color="#a3d8f6";
+                     }
+		}
+	
+	// 获取手机验证码
+	function getSmsCode(){	
+		if("" != document.getElementById("input_phonenumber").value && null != document.getElementById("input_phonenumber").value){
+			if(phoneType == 1){
+				window.call.callMethodSendSms(document.getElementById("input_phonenumber").value+"");
+				}else{
+					callMethodSendSms(document.getElementById("input_phonenumber").value+"");
+					}
+			}else{
+				alert("请输入您的手机号码");
+				}
+		}
+	
+	// 验证输入的验证码是否正确
+	function checkSmsCode(){
+		if(phoneType == 1){
+				window.call.callMethodCheckSms(document.getElementById("input_phonenumber").value+"",document.getElementById("input_smscode").value+"");
+				}else{
+					callMethodCheckSms(document.getElementById("input_phonenumber").value+"",document.getElementById("input_smscode").value+"");
+					}
+		}
+	
+	// 获取短信验证码倒计时
+	 $(function () {
+            $('#btn').click(function () {
+				getSmsCode();
+                var count = 60;
+                var countdown = setInterval(CountDown, 1000);
+ 
+                function CountDown() {
+                    $("#btn").attr("disabled", true);
+                    $("#btn").val("（" + count + " 秒）");
+                    if (count == 0) {
+                        $("#btn").val("重新获取").removeAttr("disabled");
+                        clearInterval(countdown);
+                    }
+                    count--;
+                }
+            })
+ 
+        });
+	
+  </script>  
+</head>
+
+<body background="#000">
+
+	<header>
+    	<!-- 兼容ios状态栏背景颜色，android需要隐藏 -->
+        <div id="ios_title_bg" style="width:100%; height:20px; background:#ff6e6c"></div>
+        <!-- 导航栏 -->
+    	<div style="background:#ff6e6c; width:100%; height:40px;">
+            <div align="center" style="float:left;text-align:center; width:10%; margin-top:11px;"><a href="bbss_login.html"><img src="html_back.png" width="10px" height="15px"/></a></div>
+            <div style="float:left;width:80%; height:40px; text-align:center; line-height:40px; color:#fff;">找回登录密码</div>
+        </div>
+    </header>
+    
+ 	 <div class="phone_Check" style="vertical-align:middle; background-color:#fff;">
+      		<div style=" white-space:nowrap; padding-right:20px; padding-left:20px;">
+            	 <input id="input_phonenumber" oninput="checkInputChange()" type="number" placeholder="请输入您的手机号"/><input type="button" id="btn" value="获取验证码" disabled="true"/><br/>
+            </div>
+            <div style="background-color:#e4e4e4; height:1px; margin-left:10px;"></div>
+            <div style=" white-space:nowrap; margin-left:20px; margin-right:20px;">
+            	 <input id="input_smscode" type="number"  placeholder="请输入短信验证码" oninput="checkInputChange()"/><br/>
+            </div>
+      </div>
+      
+      <center>
+      		<button type="button" id="reset_Next" disabled="true" onClick="checkSmsCode()">下一步</button>
+      </center>
+      <center>
+          <br />
+          <br />
+          <br />
+          <font style="width:100%; text-align:center;">如有问题请联系</font><br/><br/>
+      	  <font style="width:100%; text-align:center;">客服QQ：3087914135</font>
+      </center>
+     
+</body>
+</html>

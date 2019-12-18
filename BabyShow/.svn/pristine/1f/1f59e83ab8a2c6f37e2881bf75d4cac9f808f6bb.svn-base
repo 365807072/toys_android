@@ -1,0 +1,97 @@
+package com.yyqq.code.video;
+
+import android.content.pm.ActivityInfo;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.MediaController;
+import android.widget.VideoView;
+
+import com.yyqq.babyshow.R;
+import com.yyqq.commen.view.PullDownView.OnPullDownListener;
+import com.yyqq.framework.activity.BaseActivity;
+
+/**
+ * 视频全屏播放
+ * 
+ * @author lyl
+ * */
+public class VideoFullScreenActivity extends BaseActivity implements OnPullDownListener{
+	
+	public static String VIDEO_URL = ""; // 要播放的视频地址
+	public static int VIDEO_TIME = 0; // 开始播放时间
+	
+	
+	private com.yyqq.commen.view.myVideoPlayerView video_full_video;
+	
+	/**
+	 * 初始化全屏播放参数
+	 * */
+	public static void setVideoFullPlayInfo(String url, int time){
+		VIDEO_URL = url;
+		VIDEO_TIME = time;
+	}
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+//		 requestWindowFeature(Window.FEATURE_NO_TITLE); //设置无标题
+//		 getWindow().setFlags(WindowManager.LayoutParams.FILL_PARENT, WindowManager.LayoutParams.FILL_PARENT);  //设置全屏 
+		 setContentView(R.layout.activity_video_full_screen);
+
+	}
+
+	@Override
+	protected void initView() {
+		video_full_video = (com.yyqq.commen.view.myVideoPlayerView) findViewById(R.id.video_full_video);
+	}
+
+	@Override
+	protected void initData() {
+		
+	}
+
+	@Override
+	protected void setListener() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	protected void onResume() {
+//		if(getRequestedOrientation()!=ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE){
+//			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+//		}
+		VideoPlay();
+		super.onResume();
+	}
+	
+	/**
+	 * 开始播放
+	 * */
+	private void VideoPlay(){
+		Uri uri = Uri.parse(VIDEO_URL);
+		MediaController mc = new MediaController(this);
+		mc.setVisibility(View.INVISIBLE); // 不使用原生的控制按钮和进度条
+		video_full_video.setMediaController(mc);
+		video_full_video.setVideoURI(uri);
+		video_full_video.requestFocus();
+		video_full_video.start();
+//		video_full_video.seekTo(VIDEO_TIME);
+	}
+
+	@Override
+	public void onRefresh() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onMore() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+}

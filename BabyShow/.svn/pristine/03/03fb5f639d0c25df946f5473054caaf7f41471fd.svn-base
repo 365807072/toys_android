@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#f8f8f8"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/video_player_all"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:orientation="vertical" >
+
+        <include
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/item_video_console_view" />
+
+        <com.yyqq.commen.view.PullDownView
+            android:id="@+id/video_comment"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:cacheColorHint="#FFFFFF"
+            android:divider="@null"
+            android:footerDividersEnabled="false"
+            android:hapticFeedbackEnabled="false"
+            android:listSelector="#FFFFFF"
+            android:scrollbars="none" >
+        </com.yyqq.commen.view.PullDownView>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/item_detial_main_isEnd"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/bottom_root"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/layoutid"
+            android:background="@drawable/input_bg1"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="0.8"
+                android:background="@drawable/new_input"
+                android:ems="10"
+                android:gravity="center_vertical"
+                android:hint="发表评论.."
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textColor="#646464"
+                android:textSize="12sp" >
+            </EditText>
+
+            <LinearLayout
+                android:id="@+id/ly_face"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:gravity="center" >
+
+                <ImageButton
+                    android:id="@+id/picture"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:src="@drawable/new_pic" />
+
+                <ImageButton
+                    android:id="@+id/face"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:src="@drawable/new_face" />
+
+                <ImageButton
+                    android:id="@+id/save_post"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:src="@drawable/main_item_savepost_up" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp" >
+
+                <ImageButton
+                    android:id="@+id/send"
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/gentie_send" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutid"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/bg"
+            android:orientation="vertical" >
+
+            <com.yyqq.commen.view.FaceRelativeLayout
+                android:id="@+id/FaceRelativeLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <RelativeLayout
+                    android:id="@+id/ll_facechoose"
+                    android:layout_width="fill_parent"
+                    android:layout_height="124dip"
+                    android:background="#f6f5f5"
+                    android:visibility="gone" >
+
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/vp_contains"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" >
+                    </android.support.v4.view.ViewPager>
+
+                    <LinearLayout
+                        android:id="@+id/iv_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="6dip"
+                        android:gravity="center"
+                        android:orientation="horizontal" >
+                    </LinearLayout>
+                </RelativeLayout>
+            </com.yyqq.commen.view.FaceRelativeLayout>
+
+            <GridView
+                android:id="@+id/pictureGrideView"
+                android:layout_width="fill_parent"
+                android:layout_height="170dip"
+                android:background="#f6f5f5"
+                android:horizontalSpacing="5dp"
+                android:numColumns="4"
+                android:verticalSpacing="10dp"
+                android:visibility="gone" >
+            </GridView>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/video_finish"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/icon_quxiao_unfocused" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/video_detial_shared"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_margin="10dp"
+        android:background="@drawable/bs_share_bt" />
+
+</RelativeLayout>

@@ -1,0 +1,417 @@
+package com.yyqq.code.toyslease.version_93;
+
+import java.util.ArrayList;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.ab.http.AbHttpUtil;
+import com.ab.http.AbRequestParams;
+import com.ab.http.AbStringHttpResponseListener;
+import com.umeng.analytics.MobclickAgent;
+import com.yyqq.babyshow.R;
+import com.yyqq.code.login.WebLoginActivity;
+import com.yyqq.code.main.MainItemDetialWebActivity;
+import com.yyqq.code.toyslease.InviteFriendActivity;
+import com.yyqq.code.toyslease.ToysLeaseDetailActivity;
+import com.yyqq.code.toyslease.ToysLeaseMainTabActivity;
+import com.yyqq.code.toyslease.version_92.ToysLeaseMainShoppingCartActivity;
+import com.yyqq.code.toyslease.version_92.ToysLeaseSearchActivity;
+import com.yyqq.commen.adapter.ToysLeaseAllItemAdapter;
+import com.yyqq.commen.adapter.ToysLeaseMainAllAdapter;
+import com.yyqq.commen.adapter.ToysSelectHintApapter;
+import com.yyqq.commen.adapter.ToysSelectHintScreenApapter;
+import com.yyqq.commen.model.ScrollOverListView;
+import com.yyqq.commen.model.ToysAllSelect01Bean;
+import com.yyqq.commen.model.ToysAllSelect01ItemBean;
+import com.yyqq.commen.model.ToysLeaseMainListBean;
+import com.yyqq.commen.utils.Config;
+import com.yyqq.commen.utils.ShoppingCartUtils;
+import com.yyqq.commen.view.PullDownView;
+import com.yyqq.commen.view.PullDownView.OnPullDownListener;
+import com.yyqq.framework.activity.BaseActivity;
+import com.yyqq.framework.application.MyApplication;
+import com.yyqq.framework.application.ServerMutualConfig;
+
+/**
+ * 全部玩具首页
+ * 
+ * */
+public class MainToysCategoryActivity extends BaseActivity implements OnPullDownListener {
+
+	private PullDownView mPullDownView;
+	private ListView listview;
+	private ImageView lease_main_right;
+	private TextView toys_search_text;
+	private LinearLayout main_head_search;
+	public static RelativeLayout toys_lease_main_all;
+	public static ImageView search_to_cart;
+	public static RelativeLayout search_all;
+	private ImageView lease_back;
+	private LinearLayout select_root;
+	private LinearLayout cart_ntf;
+	private TextView shopping_car_hint_text;
+	
+	public static String CATEGORY_ID_KEY = "category_id";
+	public static String TOYS_ALL_KEY = "all_key";
+	private AbHttpUtil ab;
+	private LayoutInflater inflater;
+	private ToysLeaseMainAllAdapter waitAdapter = null;
+	private ArrayList<ToysLeaseMainListBean> data = new ArrayList<ToysLeaseMainListBean>();
+	public static MainToysCategoryActivity toysLeaseMainActivity = null;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		Config.setActivityState(this);
+		setContentView(R.layout.activity_toys_lease_main);
+	}
+
+	@Override
+	protected void initView() {
+		lease_back = (ImageView) findViewById(R.id.lease_back);
+		cart_ntf = (LinearLayout) findViewById(R.id.cart_ntf);
+		shopping_car_hint_text = (TextView) findViewById(R.id.shopping_car_hint_text);
+		select_root = (LinearLayout) findViewById(R.id.select_root);
+		select_root.setVisibility(View.GONE);
+		search_all = (RelativeLayout) findViewById(R.id.toys_lease_main_all);
+		search_to_cart = (ImageView) findViewById(R.id.search_to_cart);
+		search_to_cart.setVisibility(View.VISIBLE);
+		toys_lease_main_all = (RelativeLayout) findViewById(R.id.toys_lease_main_all);
+		lease_main_right = (ImageView) findViewById(R.id.lease_main_right);
+		// add_lease = (ImageView) findViewById(R.id.add_lease);
+		mPullDownView = (PullDownView) findViewById(R.id.lease_main_list);
+		mPullDownView.setOnPullDownListener(this);
+		mPullDownView.setShowHeader();// 显示并且可以使用头部刷新
+		mPullDownView.RefreshComplete();
+		mPullDownView.notifyDidMore();
+		mPullDownView.requestFocus();
+		lease_back = (ImageView) findViewById(R.id.lease_back);
+		toys_search_text = (TextView) findViewById(R.id.toys_search_text);
+		main_head_search = (LinearLayout) findViewById(R.id.main_head_search);
+	}
+
+	@Override
+	protected void initData() {
+
+		DisplayMetrics am = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(am);
+
+		// 防止触碰屏幕时，页面再次加载
+		ScrollOverListView.canRefleash = false;
+		toysLeaseMainActivity = this;
+		
+		// 初始化页面组件
+		ab = AbHttpUtil.getInstance(MainToysCategoryActivity.this);
+		inflater = LayoutInflater.from(MainToysCategoryActivity.this);
+		listview = mPullDownView.getListView();
+		listview.setDivider(null);
+		waitAdapter = new ToysLeaseMainAllAdapter(MainToysCategoryActivity.this, inflater, MyApplication.getInstance(), data, 0, ab, (int) ((int) am.widthPixels * 0.45));
+		listview.setAdapter(waitAdapter);
+		mPullDownView.enableAutoFetchMore(true, 1);// 设置可以自动获取更多 滑到最后一个自动获取
+
+		// 加载右上角图片
+		getRightIcon();
+
+		initWaitData(false);
+
+		// 获取搜索框提示语
+		getSearchText();
+
+		ShoppingCartUtils.ADD_FROM = "TOYS_ALL";
+		ShoppingCartUtils.badge = null;
+		ShoppingCartUtils.DrewNumberBitmap(this, search_to_cart);
+		search_to_cart.setVisibility(View.VISIBLE);
+	}
+
+	@Override
+	protected void setListener() {
+		
+		lease_back.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				MainToysCategoryActivity.this.finish();
+			}
+		});
+
+		search_to_cart.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				ToysLeaseMainShoppingCartActivity.isShowBack = true;
+				Intent intent = new Intent(MainToysCategoryActivity.this,
+						ToysLeaseMainShoppingCartActivity.class);
+				startActivity(intent);
+			}
+		});
+
+		main_head_search.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MainToysCategoryActivity.this,
+						ToysLeaseSearchActivity.class);
+				MainToysCategoryActivity.this.startActivity(intent);
+			}
+		});
+
+		lease_main_right.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// 检查登录状态
+				if (!MyApplication.getVisitor().equals("0") || Config.getUser(MainToysCategoryActivity.this).uid.equals("")) {
+					Intent in = new Intent(MainToysCategoryActivity.this, WebLoginActivity.class);
+					startActivity(in);
+				} else {
+					Intent intent = new Intent(MainToysCategoryActivity.this, InviteFriendActivity.class);
+					startActivity(intent);
+				}
+			}
+		});
+
+		findViewById(R.id.lease_back).setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				MainToysCategoryActivity.this.finish();
+			}
+		});
+
+		lease_back.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				MainToysCategoryActivity.this.finish();
+			}
+		});
+
+		listview.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				if (data.get(position - 1).getIs_jump().equals("0")) { // 玩具详情
+					Intent intent = new Intent(MainToysCategoryActivity.this, ToysLeaseDetailActivity.class);
+					intent.putExtra(ToysLeaseDetailActivity.TOYS_DETAIL_KEY, data.get(position - 1).getBusiness_id());
+					startActivity(intent);
+				} else if (data.get(position - 1).getIs_jump().equals("2")) {
+					Intent intent = new Intent(MainToysCategoryActivity.this,MainItemDetialWebActivity.class);
+					intent.putExtra(MainItemDetialWebActivity.LINK_URL, data.get(position - 1).getPost_url());
+					MainToysCategoryActivity.this.startActivity(intent);
+				}
+			}
+		});
+	}
+
+	@Override
+	public void onRefresh() {
+		getSearchText();
+		initWaitData(false);
+	}
+
+	@Override
+	public void onMore() {
+		initWaitData(true);
+	}
+
+	/**
+	 * 初始化列表
+	 * */
+	private void initWaitData(final boolean isMore) {
+		
+		mPullDownView.setHideFooter();
+		
+		final AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(MainToysCategoryActivity.this).uid);
+		params.put("category_id", getIntent().getStringExtra(CATEGORY_ID_KEY));
+		
+		if (isMore && data.size() != 0) {
+			params.put("post_create_time", data.get(data.size() - 1).getPostcreatetime());
+		}
+		
+		ab.get(ServerMutualConfig.GET_CATEGORY_LIST + "&" + params.toString(), new AbStringHttpResponseListener() {
+
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						if (!isMore) {
+							data.clear();
+						}
+						initMainList(content, isMore, false);
+					}
+
+					@Override
+					public void onFinish() {
+						super.onFinish();
+						Config.dismissProgress();
+						mPullDownView.RefreshComplete();// 这个事线程安全的 可看源代码
+						mPullDownView.notifyDidMore();
+					}
+
+					@Override
+					public void onFailure(int statusCode, String content,
+							Throwable error) {
+						super.onFailure(statusCode, content, error);
+					}
+				});
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
+
+	/**
+	 * 初始化列表
+	 * */
+	private void initMainList(String content, boolean isMore, boolean isSave) {
+		try {
+			if (!content.equals("") && new JSONObject(content).getBoolean("success")) {
+				JSONObject json = new JSONObject(content);
+				
+				if(json.has("data2")){
+					if(!json.getString("data2").equals("")){
+						cart_ntf.setVisibility(View.VISIBLE);
+						shopping_car_hint_text.setText(json.getString("data2"));
+					}else{
+						cart_ntf.setVisibility(View.GONE);
+					}
+				}
+				
+				if (!isMore) {
+					data.clear();
+					mPullDownView.setShowFooter();
+					
+					if (json.getJSONArray("data").length() != 20) {
+						Toast.makeText(MainToysCategoryActivity.this, "已显示所有符合条件的玩具", 2).show();
+						mPullDownView.setHideFooter();
+					}else{
+						mPullDownView.setShowFooter();
+					}
+				} else {
+					if (json.getJSONArray("data").length() != 20) {
+						Toast.makeText(MainToysCategoryActivity.this, "已显示所有符合条件的玩具", 2).show();
+						mPullDownView.setHideFooter();
+					} else {
+						mPullDownView.setShowFooter();
+					}
+				}
+
+				for (int i = 0; i < json.getJSONArray("data").length(); i++) {
+					ToysLeaseMainListBean item = new ToysLeaseMainListBean();
+					data.add(item.fromJson(json.getJSONArray("data")
+							.getJSONObject(i)));
+				}
+
+				waitAdapter.notifyDataSetChanged();
+				
+			} else {
+				Toast.makeText(MainToysCategoryActivity.this,
+						new JSONObject(content).getString("reMsg"), 2).show();
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 获取搜索提示语
+	 * */
+	private void getSearchText() {
+		AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(this).uid);
+		ab.get(ServerMutualConfig.GET_TOYS_HINT_TEXT + "&" + params.toString(),
+				new AbStringHttpResponseListener() {
+
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						try {
+							if (new JSONObject(content).getBoolean("success")) {
+								toys_search_text.setText("   " + new JSONObject(content).getJSONObject("data").getString("search_name"));
+							}
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+
+					@Override
+					public void onFinish() {
+						super.onFinish();
+					}
+
+					@Override
+					public void onFailure(int statusCode, String content,
+							Throwable error) {
+						super.onFailure(statusCode, content, error);
+					}
+				});
+	}
+
+	/**
+	 * 获取右上角图标
+	 * */
+	private void getRightIcon() {
+		AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(this).uid);
+		ab.get(ServerMutualConfig.GET_RIGHT_ICON + "&" + params.toString(),
+				new AbStringHttpResponseListener() {
+
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						try {
+							if (new JSONObject(content).getBoolean("success")) {
+								// 加载右上角图片
+								MyApplication.getInstance().display(new JSONObject(content).getJSONObject("data").getString("icon_img"), lease_main_right, R.drawable.def_image);
+							}
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+
+					@Override
+					public void onFinish() {
+						super.onFinish();
+					}
+
+					@Override
+					public void onFailure(int statusCode, String content,
+							Throwable error) {
+						super.onFailure(statusCode, content, error);
+					}
+				});
+	}
+
+}

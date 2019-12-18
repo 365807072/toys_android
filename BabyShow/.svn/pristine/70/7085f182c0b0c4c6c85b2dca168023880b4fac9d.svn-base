@@ -1,0 +1,119 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    tools:context=".InitActivity" >
+
+    <RelativeLayout
+        android:id="@+id/ly_title"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/title_height"
+        android:background="@color/title_bg" >
+
+        <RelativeLayout
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/title_bg" >
+
+            <ImageView
+                android:id="@+id/find"
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/postbar_find"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/post_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="10dp"
+                android:textColor="#ffffff"
+                android:textSize="19dp" />
+
+            <TextView
+                android:id="@+id/send_post"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:text="发帖"
+                android:textColor="#ffffff"
+                android:textSize="16dp"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/search_root"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:orientation="horizontal"
+            android:visibility="gone" >
+
+            <EditText
+                android:id="@+id/search"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/search"
+                android:gravity="left|center_vertical"
+                android:hint="搜索昵称或用户名"
+                android:paddingBottom="5dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="5dp"
+                android:paddingTop="5dp"
+                android:textColorHint="#FFFFFF"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/search_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/search_bt"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/search_cancle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/cancel_sercher" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <com.yyqq.commen.view.PullDownView
+        android:id="@+id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/ly_title"
+        android:cacheColorHint="#FFFFFF"
+        android:footerDividersEnabled="false"
+        android:hapticFeedbackEnabled="false"
+        android:listSelector="#FFFFFF" >
+    </com.yyqq.commen.view.PullDownView>
+
+    <ImageView
+        android:id="@+id/upload_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/ly_title"
+        android:layout_margin="10dp"
+        android:src="@drawable/video_upload_icon"
+        android:visibility="gone" />
+
+</RelativeLayout>

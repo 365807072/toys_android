@@ -1,0 +1,116 @@
+package com.yyqq.code.main;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
+import android.widget.TextView;
+
+import com.ab.http.AbHttpUtil;
+import com.ab.http.AbRequestParams;
+import com.ab.http.AbStringHttpResponseListener;
+import com.yyqq.babyshow.R;
+import com.yyqq.commen.utils.APKUpdataUtils;
+import com.yyqq.framework.activity.BaseActivity;
+import com.yyqq.framework.application.ServerMutualConfig;
+
+public class APKUpdataActivity extends BaseActivity {
+
+	private TextView apk_updata_des;
+	private TextView apk_updata_no;
+	private TextView apk_updata_yes;
+
+	private NotificationManager notificationManager;
+	private Notification notification;
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.activity_apkupdata);
+	}
+
+	@Override
+	protected void initView() {
+		apk_updata_des = (TextView) findViewById(R.id.apk_update_des);
+		apk_updata_no = (TextView) findViewById(R.id.apk_update_no);
+		apk_updata_yes = (TextView) findViewById(R.id.apk_update_yes);
+	}
+
+	@Override
+	protected void initData() {
+		apk_updata_des.setText(getIntent().getStringExtra("des"));
+		// 消息通知
+		notificationManager = (NotificationManager) getSystemService(android.content.Context.NOTIFICATION_SERVICE);
+	}
+
+	@Override
+	protected void setListener() {
+		
+		apk_updata_no.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				APKUpdataActivity.this.finish();
+			}
+		});
+		
+		apk_updata_yes.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				notification = new Notification(R.drawable.icon, "您的安装包正在下载···", System.currentTimeMillis());
+				notification.flags |= Notification.FLAG_ONGOING_EVENT;
+				notification.setLatestEventInfo(APKUpdataActivity.this, "宝贝半径", "您的安装包正在下载···", null);
+				notificationManager.notify(2, notification);
+				new Thread(new Runnable() {
+					
+					@Override
+					public void run() {
+						APKUpdataUtils.downLoadFile(APKUpdataActivity.this, getIntent().getStringExtra("down_url"), notificationManager, notification);
+					}
+				}).start();
+				
+				toUpdata();
+			}
+		});
+	}
+	
+	/**
+	 * 统计下载数量
+	 * */
+	private void toUpdata(){
+		final AbRequestParams params = new AbRequestParams();
+		params.put("version", APKUpdataUtils.getVersionCode(APKUpdataActivity.this)+"");
+		AbHttpUtil.getInstance(APKUpdataActivity.this).get(ServerMutualConfig.TO_UPDATA + "&" + params.toString(),new AbStringHttpResponseListener() {
+			
+			 @Override
+			public void onSuccess(int statusCode, String content) {
+				 super.onSuccess(statusCode, content);
+				 try {
+					 if(!content.equals("") && new JSONObject(content).getBoolean("success")){
+					 }
+				 } catch (JSONException e) {
+					 e.printStackTrace();
+				 }
+			 }
+			 
+			@Override
+			public void onFinish() {
+				super.onFinish();
+				APKUpdataActivity.this.finish();
+			}
+			
+			@Override
+			public void onFailure(int statusCode, String content,
+					Throwable error) {
+				super.onFailure(statusCode, content, error);
+			}
+		});
+	}
+}

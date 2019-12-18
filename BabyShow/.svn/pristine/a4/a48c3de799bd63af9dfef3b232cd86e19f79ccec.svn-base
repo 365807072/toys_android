@@ -1,0 +1,56 @@
+package com.yyqq.commen.adapter;
+
+import java.util.ArrayList;
+
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
+
+import com.yyqq.babyshow.R;
+import com.yyqq.commen.model.ToysLeaseOrderBean;
+
+public class ToysLeaseOrderInfoDetailAdapter extends BaseAdapter {
+
+	private Activity context = null;
+	private LayoutInflater inflater = null;
+	private ArrayList<ToysLeaseOrderBean> bodyList;
+	
+	public ToysLeaseOrderInfoDetailAdapter(Activity context, LayoutInflater inflater, ArrayList<ToysLeaseOrderBean> bodyList) {
+		super();
+		this.context = context;
+		this.inflater = inflater;
+		this.bodyList = bodyList;
+	}
+
+	@Override
+	public int getCount() {
+		return bodyList.size();
+	}
+
+	@Override
+	public Object getItem(int position) {
+		return bodyList.get(position);
+	}
+
+	@Override
+	public long getItemId(int position) {
+		return position;
+	}
+
+	@SuppressLint("NewApi")
+	@Override
+	public View getView(final int position, View convertView, ViewGroup parent) {
+		convertView = inflater.inflate(R.layout.item_lease_order_info_detail, null);
+		TextView item_lease_hint = (TextView) convertView.findViewById(R.id.item_lease_hint);
+		TextView item_lease_number = (TextView) convertView.findViewById(R.id.item_lease_number);
+		item_lease_hint.setText(bodyList.get(position).getHint());
+		item_lease_number.setText(bodyList.get(position).getNumber());
+		return convertView;
+	}
+
+	
+}

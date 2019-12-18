@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">宝贝半径</string>
+    <string name="collect">收藏</string>
+    <string name="post">秀秀</string>
+    <string name="delete">删除</string>
+    <string name="register_username">用户名：</string>
+    <string name="register_password">密码：</string>
+    <string name="mail">邮箱：</string>
+    <string name="phone">请填写手机号</string>
+    <string name="code">输入验证码</string>
+    <string name="nickname">昵称：</string>
+    <string name="register_tip">用户名只能是字母和数字的组合最多10个字符</string>
+    <string name="babyname">宝贝名字：</string>
+    <string name="birthday">出生日期：</string>
+    <string name="register">注册</string>
+    <string name="finish">完成</string>
+    <string name="login">登录</string>
+    <string name="next">下一步</string>
+    <string name="skip">跳过</string>
+    <string name="loading_moreValues">加载更多</string>
+    <string name="hasloading_moreValues">加载中...</string>
+
+    <!-- WXPayEntryActivity -->
+    <string name="pay_result_tip">支付失败</string>
+    <string name="pay_result_callback_msg" formatted="false">微信支付结果：%s</string>
+    <string name="title_activity_web">WebActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_aaatex">AAATexActivity</string>
+    <string name="title_activity_video_play_detail">VideoPlayDetailActivity</string>
+    <string name="title_activity_compression_option">CompressionOptionActivity</string>
+    <string name="title_activity_queue_list">QueueListActivity</string>
+    <string name="banner_ad_unit_id">ca-app-pub-1034436403034197/2005675667</string>
+    <string name="title_activity_add_check">AddCheckActivity</string>
+    <string name="title_activity_search_result">SearchResultActivity</string>
+    <string name="return_str">{"success":true,"reCode":200,"reMsg":"\u83b7\u53d6\u6570\u636e\u6210\u529f","data":[{"img":{"img":[{"img_down":"http:\/\/test.show.baobaoshowshow.com\/static3\/album\/2016\/0811\/d62534ef75c646c0.jpg","img":"http:\/\/test.show.baobaoshowshow.com\/static3\/album\/2016\/0811\/d62534ef75c646c0_thumb_1280.jpg","img_width":640,"img_height":427,"img_thumb":"http:\/\/test.show.baobaoshowshow.com\/static3\/album\/2016\/0811\/d62534ef75c646c0_thumb_320.jpg","img_thumb_width":320,"img_thumb_height":320},{"img_down":"http:\/\/test.show.baobaoshowshow.com\/static3\/album\/2016\/0811\/96f3b693945cc001.jpg","img":"http:\/\/test.show.baobaoshowshow.com\/static3\/album\/2016\/0811\/96f3b693945cc001_thumb_1280.jpg","img_width":640,"img_height":442,"img_thumb":"http:\/\/test.show.baobaoshowshow.com\/static3\/album\/2016\/0811\/96f3b693945cc001_thumb_320.jpg","img_thumb_width":320,"img_thumb_height":320}],"img_id":"77426","user_id":"65937","description":"jkkkw","post_create_time":"1470881215000","level_img":"","is_admire":"0","avatar":"http:\/\/test.show.baobaoshowshow.com\/static\/album\/defaultAvatar_thumb_120.png","user_name":"\u6735\u513f","admire_count":"0","review_count":"1","video_url":""}},{"img":{"img":[{"img_down":"http:\/\/test.show.baobaoshowshow.com\/static3\/album\/2016\/0811\/7352a7d16df12a21.jpg","img":"http:\/\/test.show.baobaoshowshow.com\/static3\/album\/2016\/0811\/7352a7d16df12a21_thumb_1280.jpg","img_width":640,"img_height":407,"img_thumb":"http:\/\/test.show.baobaoshowshow.com\/static3\/album\/2016\/0811\/7352a7d16df12a21_thumb_320.jpg","img_thumb_width":320,"img_thumb_height":320},{"img_down":"http:\/\/test.show.baobaoshowshow.com\/static3\/album\/2016\/0811\/9e727f0c4907b8bc.jpg","img":"http:\/\/test.show.baobaoshowshow.com\/static3\/album\/2016\/0811\/9e727f0c4907b8bc_thumb_1280.jpg","img_width":640,"img_height":428,"img_thumb":"http:\/\/test.show.baobaoshowshow.com\/static3\/album\/2016\/0811\/9e727f0c4907b8bc_thumb_320.jpg","img_thumb_width":320,"img_thumb_height":320}],"img_id":"77424","user_id":"65937","description":"\u7d27\u7d27","post_create_time":"1470881154000","level_img":"","is_admire":"0","avatar":"http:\/\/test.show.baobaoshowshow.com\/static\/album\/defaultAvatar_thumb_120.png","user_name":"\u6735\u513f","admire_count":"0","review_count":"1","video_url":""}},{"img":{"img":[{"img_down":"http:\/\/test.show.baobaoshowshow.com\/static3\/album\/2016\/0811\/33bedba74ce4b69b.jpg","img":"http:\/\/test.show.baobaoshowshow.com\/static3\/album\/2016\/0811\/33bedba74ce4b69b_thumb_1280.jpg","img_width":640,"img_height":407,"img_thumb":"http:\/\/test.show.baobaoshowshow.com\/static3\/album\/2016\/0811\/33bedba74ce4b69b_thumb_320.jpg","img_thumb_width":320,"img_thumb_height":320},{"img_down":"http:\/\/test.show.baobaoshowshow.com\/static3\/album\/2016\/0811\/e7e1044c100c37a8.jpg","img":"http:\/\/test.show.baobaoshowshow.com\/static3\/album\/2016\/0811\/e7e1044c100c37a8_thumb_1280.jpg","img_width":640,"img_height":427,"img_thumb":"http:\/\/test.show.baobaoshowshow.com\/static3\/album\/2016\/0811\/e7e1044c100c37a8_thumb_320.jpg","img_thumb_width":320,"img_thumb_height":320}],"img_id":"77423","user_id":"65937","description":"\u6211\u4eec\u81ea\u5df1","post_create_time":"1470881113000","level_img":"","is_admire":"0","avatar":"http:\/\/test.show.baobaoshowshow.com\/static\/album\/defaultAvatar_thumb_120.png","user_name":"\u6735\u513f","admire_count":"0","review_count":"0","video_url":""}},{"img":{"img":[{"img_down":"http:\/\/test.show.baobaoshowshow.com\/static3\/album\/2016\/0811\/b8a3c773016f2777.jpg","img":"http:\/\/test.show.baobaoshowshow.com\/static3\/album\/2016\/0811\/b8a3c773016f2777_thumb_1280.jpg","img_width":1024,"img_height":682,"img_thumb":"http:\/\/test.show.baobaoshowshow.com\/static3\/album\/2016\/0811\/b8a3c773016f2777_thumb_640.jpg","img_thumb_width":640,"img_thumb_height":490}],"img_id":"77422","user_id":"65937","description":"\u6211\u4eec\u81ea\u5df1","post_create_time":"1470881087000","level_img":"","is_admire":"0","avatar":"http:\/\/test.show.baobaoshowshow.com\/static\/album\/defaultAvatar_thumb_120.png","user_name":"\u6735\u513f","admire_count":"0","review_count":"0","video_url":""}},{"img":{"img":[{"img_down":"http:\/\/test.show.baobaoshowshow.com\/static3\/album\/2016\/0811\/92de9410b2eb9963.jpg","img":"http:\/\/test.show.baobaoshowshow.com\/static3\/album\/2016\/0811\/92de9410b2eb9963_thumb_1280.jpg","img_width":1024,"img_height":684,"img_thumb":"http:\/\/test.show.baobaoshowshow.com\/static3\/album\/2016\/0811\/92de9410b2eb9963_thumb_640.jpg","img_thumb_width":640,"img_thumb_height":490}],"img_id":"77417","user_id":"249650","description":"","post_create_time":"1470879460000","level_img":"","is_admire":"0","avatar":"http:\/\/test.show.baobaoshowshow.com\/static\/album\/defaultAvatar_thumb_120.png","user_name":"","admire_count":"0","review_count":"0","video_url":""}}]}</string>
+    <string name="title_activity_main_item_detial_web">MainItemDetialWebActivity</string>
+
+</resources>

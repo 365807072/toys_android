@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f9f9f9" >
+
+    <!-- 套餐 -->
+
+
+    <!-- 套餐一 -->
+
+    <LinearLayout
+        android:id="@+id/ly_combo1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="35dp"
+            android:background="@android:color/background_light" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="套餐一"
+                android:textColor="#618AFE"
+                android:textSize="13dp" />
+
+            <ImageView
+                android:id="@+id/business_pay1"
+                android:layout_width="58dp"
+                android:layout_height="13dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="19dp"
+                android:background="@drawable/business_go_pay" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/business_combo1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="17dp"
+            android:text="alsjflajfljalfjaljflajflajflajflajflajfljaljaflaj ljlas jlaj flasjflsaj "
+            android:textColor="#020202"
+            android:textSize="12dp" />
+    </LinearLayout>
+
+    <!-- 套餐二 -->
+
+    <LinearLayout
+        android:id="@+id/ly_combo2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ly_combo1"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="35dp"
+            android:background="@android:color/background_light" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="套餐二"
+                android:textColor="#618AFE"
+                android:textSize="13dp" />
+
+            <ImageView
+                android:id="@+id/business_pay2"
+                android:layout_width="58dp"
+                android:layout_height="13dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="19dp"
+                android:background="@drawable/business_go_pay" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/business_combo2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="17dp"
+            android:text="alsjflajfljalfjaljflajflajflajflajflajfljaljaflaj ljlas jlaj flasjflsaj "
+            android:textColor="#020202"
+            android:textSize="12dp" />
+    </LinearLayout>
+
+    <!-- 套餐三 -->
+
+    <LinearLayout
+        android:id="@+id/ly_combo3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ly_combo2"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="35dp"
+            android:background="@android:color/background_light" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="套餐三"
+                android:textColor="#618AFE"
+                android:textSize="13dp" />
+
+            <ImageView
+                android:id="@+id/business_pay3"
+                android:layout_width="58dp"
+                android:layout_height="13dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="19dp"
+                android:background="@drawable/business_go_pay" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/business_combo3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="17dp"
+            android:text="alsjflajfljalfjaljflajflajflajflajflajfljaljaflaj ljlas jlaj flasjflsaj "
+            android:textColor="#020202"
+            android:textSize="12dp" />
+    </LinearLayout>
+
+    <!-- 套餐四 -->
+
+    <LinearLayout
+        android:id="@+id/ly_combo4"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ly_combo3"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="35dp"
+            android:background="@android:color/background_light" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="套餐四"
+                android:textColor="#618AFE"
+                android:textSize="13dp" />
+
+            <ImageView
+                android:id="@+id/business_pay4"
+                android:layout_width="58dp"
+                android:layout_height="13dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="19dp"
+                android:background="@drawable/business_go_pay" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/business_combo4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="17dp"
+            android:text="alsjflajfljalfjaljflajflajflajflajflajfljaljaflaj ljlas jlaj flasjflsaj "
+            android:textColor="#020202"
+            android:textSize="12dp" />
+    </LinearLayout>
+
+</RelativeLayout>

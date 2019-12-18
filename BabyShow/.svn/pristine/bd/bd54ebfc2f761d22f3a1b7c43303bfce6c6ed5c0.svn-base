@@ -1,0 +1,152 @@
+package com.yyqq.commen.share;
+
+import android.content.Context;
+import android.text.TextUtils;
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.Platform.ShareParams;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.onekeyshare.OnekeyShare;
+import cn.sharesdk.onekeyshare.ShareContentCustomizeCallback;
+
+import com.yyqq.babyshow.R;
+
+public class GroupSharedUtils {
+	
+
+	/**
+	 * 分享群
+	 * 
+	 * */
+	public static void SharedGroup(final groupShareBean bean){
+		
+		ShareSDK.initSDK(bean.getContext());
+		OnekeyShare oks = new OnekeyShare();
+		oks.disableSSOWhenAuthorize();
+		oks.setSilent(true);
+		oks.setNotification(R.drawable.icon, (bean.getContext()).getString(R.string.app_name)); // 分享时Notification的图标和文字
+		oks.setShareContentCustomizeCallback(new ShareContentCustomizeCallback() {
+			
+			@Override
+			public void onShare(Platform platform, ShareParams paramsToShare) {
+				if ("Wechat".equals(platform.getName())) {
+					paramsToShare.setShareType(Platform.SHARE_TEXT);
+					if(bean.getShare_title().isEmpty()){
+						paramsToShare.setTitle("宝贝半径");
+					}else{
+						paramsToShare.setTitle(bean.getShare_title());
+					}
+					
+					if(bean.getShare_text().isEmpty()){
+						paramsToShare.setText("精彩宝宝成长美一瞬间");
+					}else{
+						paramsToShare.setText(bean.getShare_text());
+					}
+					
+					paramsToShare.setShareType(Platform.SHARE_WEBPAGE);
+					if (TextUtils.isEmpty(bean.getShare_img())) {
+						paramsToShare.setImageUrl(bean.getShare_defaultImg());
+					} else {
+						paramsToShare.setImageUrl(bean.getShare_img());
+					}
+					paramsToShare.setUrl(bean.getShare_url());
+				} else if ("SinaWeibo".equals(platform.getName())) {
+					paramsToShare.setText(bean.getShare_title()+ bean.getShare_url());
+					if (TextUtils.isEmpty(bean.getShare_img())) {
+						paramsToShare.setImageUrl(bean.getShare_defaultImg());
+					} else {
+						paramsToShare.setImageUrl(bean.getShare_img());
+					}
+				} else if ("QZone".equals(platform.getName())) {
+					paramsToShare.setTitle(bean.getShare_title()); // title微信、QQ空间
+					paramsToShare.setTitleUrl(bean.getShare_url());
+					paramsToShare.setSite((bean.getContext()).getString(R.string.app_name)); // site是分享此内容的网站名称，仅在QQ空间使用
+					paramsToShare.setText(bean.getShare_text());
+					if (TextUtils.isEmpty(bean.getShare_img())) {
+						paramsToShare.setImageUrl(bean.getShare_defaultImg());
+					} else {
+						paramsToShare.setImageUrl(bean.getShare_img());
+					}
+					paramsToShare.setSiteUrl(bean.getShare_url()); // siteUrl是分享此内容的网站地址，仅在QQ空间使用
+				} else if ("QQ".equals(platform.getName())) {
+					paramsToShare.setTitle(bean.getShare_title());
+					paramsToShare.setTitleUrl(bean.getShare_url());
+					paramsToShare.setText(bean.getShare_text());
+					if (TextUtils.isEmpty(bean.getShare_img())) {
+						paramsToShare.setImageUrl(bean.getShare_defaultImg());
+					} else {
+						paramsToShare.setImageUrl(bean.getShare_img());
+					}
+				} else if ("WechatMoments".equals(platform.getName())) {
+					paramsToShare.setShareType(Platform.SHARE_TEXT);
+					paramsToShare.setTitle(bean.getShare_title());
+					paramsToShare.setShareType(Platform.SHARE_WEBPAGE);
+					if (TextUtils.isEmpty(bean.getShare_img())) {
+						paramsToShare.setImageUrl(bean.getShare_defaultImg());
+					} else {
+						paramsToShare.setImageUrl(bean.getShare_img());
+					}
+					paramsToShare.setUrl(bean.getShare_url());
+				}
+				
+			}
+		});
+		// 启动分享GUI
+		oks.show(bean.getContext());
+	}
+	
+	/**
+	 * 分享需要的参数
+	 * 
+	 * */
+	public static class groupShareBean{
+		
+		private Context context;
+		private String share_title = "";
+		private String share_img = "";
+		private String share_text = "";
+		private String share_url = "";
+		private String share_defaultImg = "http://api.baobaoshowshow.com/static/defaultimg/0000000_thumb_640.jpg";
+		
+		public groupShareBean() {
+		}
+		
+		public Context getContext() {
+			return context;
+		}
+		public void setContext(Context context) {
+			this.context = context;
+		}
+		public String getShare_title() {
+			return share_title;
+		}
+		public void setShare_title(String share_title) {
+			this.share_title = share_title;
+		}
+		public String getShare_img() {
+			return share_img;
+		}
+		public void setShare_img(String share_img) {
+			this.share_img = share_img;
+		}
+		public String getShare_text() {
+			return share_text;
+		}
+		public void setShare_text(String share_text) {
+			this.share_text = share_text;
+		}
+		public String getShare_url() {
+			return share_url;
+		}
+		public void setShare_url(String share_url) {
+			this.share_url = share_url;
+		}
+		public String getShare_defaultImg() {
+			return share_defaultImg;
+		}
+		public void setShare_defaultImg(String share_defaultImg) {
+			this.share_defaultImg = share_defaultImg;
+		}
+		
+	}
+	
+}

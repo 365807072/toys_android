@@ -1,0 +1,38 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/view_to_corners" >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_weight="1" >
+
+        <com.yyqq.commen.view.RoundRectImageView
+            android:id="@+id/item_goodleft_hint_img"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_launcher" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:background="#80000000"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/item_goodleft_hint_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="10dp"
+            android:text="命名"
+            android:textColor="#fff"
+            android:textSize="@dimen/text_size_16" />
+    </RelativeLayout>
+
+</LinearLayout>

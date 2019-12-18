@@ -1,0 +1,512 @@
+package com.yyqq.code.photo;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
+import net.tsz.afinal.FinalHttp;
+import net.tsz.afinal.http.AjaxCallBack;
+import net.tsz.afinal.http.AjaxParams;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.media.ExifInterface;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.TextUtils;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.GridView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.umeng.analytics.MobclickAgent;
+import com.yyqq.babyshow.R;
+import com.yyqq.code.buy.BuyShow;
+import com.yyqq.code.grow.GrowEditActivity;
+import com.yyqq.code.main.AddNewActivity;
+import com.yyqq.code.main.AddNewContinueActivity;
+import com.yyqq.code.main.MainItemDetialActivity;
+import com.yyqq.code.main.MainTab;
+import com.yyqq.code.main.ShowShowAddActivity;
+import com.yyqq.code.postbar.PostBarAddActivity;
+import com.yyqq.code.video.VideoDetialActivity;
+import com.yyqq.commen.adapter.ImageGridAdapter;
+import com.yyqq.commen.adapter.ImageGridAdapter.TextCallback;
+import com.yyqq.commen.model.ImageItem;
+import com.yyqq.commen.utils.AlbumHelper;
+import com.yyqq.commen.utils.BimpUtil;
+import com.yyqq.commen.utils.Config;
+import com.yyqq.commen.utils.Log;
+import com.yyqq.framework.application.ServerMutualConfig;
+
+/**
+ * 手机相册内包含的照片详情（二级）
+ * 
+ * lyl
+ * */
+public class PhoneAlbumDetialActivity extends Activity {
+	public String TAG = "ImageGridActivity";
+	public static final String EXTRA_IMAGE_LIST = "imagelist";
+	private List<ImageItem> dataList;
+	private GridView gridView;
+	private ImageGridAdapter adapter;
+	private AlbumHelper helper;
+	private TextView bt;
+	private Activity context;
+	private Intent intent;
+	private Handler mHandler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case 0:
+				Toast.makeText(PhoneAlbumDetialActivity.this,
+						"最多选择" + Config.SELECTEDIMAGECOUNT + "张图片", 400).show();
+				break;
+			default:
+				break;
+			}
+		}
+	};
+	private NotificationManager notificationManager;
+	private Notification notification;
+
+	public void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+	
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
+
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		Config.setActivityState(this);
+		context = this;
+		setContentView(R.layout.activity_image_grid);
+		// 消息通知
+		notificationManager = (NotificationManager) context
+				.getSystemService(android.content.Context.NOTIFICATION_SERVICE);
+		Config.SELECTEDIMAGECOUNT = getIntent().getIntExtra(Config.SELECTNAME,
+				10);
+		helper = new AlbumHelper();
+		helper.init(getApplicationContext());
+		dataList = (List<ImageItem>) getIntent().getSerializableExtra(
+				EXTRA_IMAGE_LIST);
+		initView();
+		bt = (TextView) findViewById(R.id.bt);
+		bt.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				ArrayList<String> list = new ArrayList<String>();
+				ArrayList<String> times = new ArrayList<String>();
+				Set keys = adapter.map.keySet();
+				if (keys != null) {
+					Iterator iterator = keys.iterator();
+					while (iterator.hasNext()) {
+						Object key = iterator.next();
+						list.add(adapter.map.get(key));
+						times.add(adapter.time.get(key));
+					}
+				}
+
+				for (int i = 0; i < list.size(); i++) {
+					if (BimpUtil.drr.size() < Config.SELECTEDIMAGECOUNT) {
+						BimpUtil.drr.add(list.get(i));
+						BimpUtil.time.add(times.get(i));
+					}
+				}
+				if (BimpUtil.act_bool) {
+//					Config.showProgressDialog(context, false, null);
+					int i = 0;
+					if (!TextUtils.isEmpty(getIntent().getStringExtra("tag"))) {
+						Config.SELECTEDIMAGECOUNT = getIntent().getIntExtra(
+								Config.SELECTNAME, 10);
+						if ("isPostBar".equals(getIntent()
+								.getStringExtra("tag"))) {
+							intent = new Intent(PhoneAlbumDetialActivity.this,
+									PostBarAddActivity.class);
+							intent.putExtra("group_id", getIntent()
+									.getStringExtra("group_id"));
+							intent.putExtra("group_name", getIntent()
+									.getStringExtra("group_name"));
+						} else if ("isBuy".equals(getIntent().getStringExtra(
+								"tag"))) {
+							intent = new Intent(PhoneAlbumDetialActivity.this,
+									BuyShow.class);
+						} else if ("gen".equals(getIntent().getStringExtra("tag"))) {
+							if(null != MainItemDetialActivity.mainItemDetialActivity){
+								MainItemDetialActivity.mainItemDetialActivity.finish();
+							}
+							intent = new Intent(PhoneAlbumDetialActivity.this,
+									MainItemDetialActivity.class);
+							intent.putExtra("user_id", getIntent()
+									.getStringExtra("user_id"));
+							intent.putExtra("img_id", getIntent()
+									.getStringExtra("img_id"));
+							intent.putExtra("is_save", getIntent()
+									.getStringExtra("is_save"));
+							intent.putExtra("tan", "tan");
+						}else if ("video".equals(getIntent().getStringExtra("tag"))) {
+							if(null != VideoDetialActivity.videoDetialActivity){
+								VideoDetialActivity.videoDetialActivity.finish();
+							}
+							intent = new Intent(PhoneAlbumDetialActivity.this, VideoDetialActivity.class);
+							intent.putExtra("user_id", getIntent().getStringExtra("user_id"));
+							intent.putExtra("img_id", getIntent().getStringExtra("img_id"));
+							intent.putExtra("is_save", getIntent().getStringExtra("is_save"));
+							intent.putExtra("tan", "tan");
+						} else if ("isGrow".equals(getIntent().getStringExtra(
+								"tag"))) {
+							// 定义Notification的各种属性
+							notification = new Notification(R.drawable.icon,
+									"上传中...", System.currentTimeMillis());
+							notification.flags |= Notification.FLAG_ONGOING_EVENT; // 将此通知放到通知栏的"Ongoing"即"正在运行"组中
+							notification.setLatestEventInfo(context, "成长记录",
+									"相片正在上传", null);
+							// 把Notification传递给NotificationManager
+							notificationManager.notify(0, notification);
+							// Toast.makeText(context,
+							// "相片上传中\n可能需要2-3分钟\n完成后有提示\n先去其他页面看看吧", 1).show();
+							Intent intent = new Intent();
+							intent.setClass(context, MainTab.class);
+							intent.putExtra("tabid", 3);
+							startActivity(intent);
+							new Thread(new Runnable() {
+
+								@Override
+								public void run() {
+									Send();
+								}
+							}).start();
+							return;
+						} else if ("isGrowEdit".equals(getIntent()
+								.getStringExtra("tag"))) {
+							new Thread(new Runnable() {
+
+								@Override
+								public void run() {
+									Send1();
+								}
+							}).start();
+							return;
+						} 
+						if(!AddNewActivity.AddNewActivity_TAG.equals(getIntent().getStringExtra("tag")) && !AddNewContinueActivity.AddNewContinueActivity_TAG.equals(getIntent().getStringExtra("tag")) && !"isPostBar".equals(getIntent().getStringExtra("tag"))){
+							startActivity(intent);
+						}
+						PhoneAlbumDetialActivity.this.finish();
+					} else {
+						Config.SELECTEDIMAGECOUNT = getIntent().getIntExtra(
+								Config.SELECTNAME, 10);
+						uploadImage(i);
+					}
+				}
+			}
+
+			private void setProgressBarIndeterminateVisibility(boolean b) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+	}
+
+	/**
+	 * 成长记录，上传照片
+	 */
+	public void Send() {
+		JSONObject jsonObject = new JSONObject();
+		params.put("user_id", Config.getUser(context).uid);
+		params.put("baby_id", getIntent().getStringExtra("baby_id"));
+		File mFile = null;
+		int filecount = 0;
+		if (BimpUtil.drr.size() > 0) {
+			for (int i = 0; i < BimpUtil.drr.size(); i++) {
+				if (!BimpUtil.drr.get(i).startsWith("http")) {
+					filecount++;
+					// mFile = BitmapCache.getimageyang(Bimp.drr.get(i), "img_"
+					// + i + ".jpg", "duo");
+					try {
+						mFile = BitmapCache.creatNewBitmap(BimpUtil.drr.get(i),
+								"img_" + i + ".png");
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					try {
+						params.put("img" + (i + 1), mFile);
+						ExifInterface exif = new ExifInterface(BimpUtil.drr.get(i));
+						// String date =
+						// exif.getAttribute(ExifInterface.TAG_DATETIME); //拍摄时间
+						// jsonObject.put("img" + (i + 1), date == null ? ""
+						// : date);
+						String date = exif
+								.getAttribute(ExifInterface.TAG_DATETIME); // 拍摄时间
+						String latitude = exif
+								.getAttribute(ExifInterface.TAG_GPS_LATITUDE);// 纬度
+						String longitude = exif
+								.getAttribute(ExifInterface.TAG_GPS_LONGITUDE);// 经度
+						JSONObject js = new JSONObject();
+						js.put("times", date == null ? "" : date);
+						js.put("lat", latitude == null ? "" : latitude);
+						js.put("lng", longitude == null ? "" : longitude);
+						jsonObject.put("img" + (i + 1), js);
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
+					} catch (Exception e) {
+					}
+				}
+			}
+		}
+		params.put("file_count", filecount + "");
+		params.put("imgs", jsonObject.toString());
+		 Log.e("fanfan", params.toString());
+		handler.sendEmptyMessage(2);
+	}
+
+	/**
+	 * 成长记录编辑，上传照片
+	 */
+	public void Send1() {
+		JSONObject jsonObject = new JSONObject();
+		params.put("user_id", Config.getUser(context).uid);
+		params.put("baby_id", getIntent().getStringExtra("baby_id"));
+		params.put("album_id", getIntent().getStringExtra("album_id"));
+		File mFile = null;
+		int filecount = 0;
+		if (BimpUtil.drr.size() > 0) {
+			for (int i = 0; i < BimpUtil.drr.size(); i++) {
+				if (!BimpUtil.drr.get(i).startsWith("http")) {
+					filecount++;
+					// mFile = BitmapCache.getimageyang(Bimp.drr.get(i), "img_"
+					// + i + ".jpg", "duo");
+					try {
+						mFile = BitmapCache.creatNewBitmap(BimpUtil.drr.get(i),
+								"img_" + i + ".png");
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					try {
+						params.put("img" + (i + 1), mFile);
+						ExifInterface exif = new ExifInterface(BimpUtil.drr.get(i));
+						// String date = exif
+						// .getAttribute(ExifInterface.TAG_DATETIME);
+						// jsonObject.put("img" + (i + 1), date == null ? ""
+						// : date);
+						String date = exif
+								.getAttribute(ExifInterface.TAG_DATETIME); // 拍摄时间
+						String latitude = exif
+								.getAttribute(ExifInterface.TAG_GPS_LATITUDE);// 纬度
+						String longitude = exif
+								.getAttribute(ExifInterface.TAG_GPS_LONGITUDE);// 经度
+						JSONObject js = new JSONObject();
+						js.put("times", date == null ? "" : date);
+						js.put("lat", latitude == null ? "" : latitude);
+						js.put("lng", longitude == null ? "" : longitude);
+						jsonObject.put("img" + (i + 1), js);
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
+					} catch (Exception e) {
+					}
+				}
+			}
+		}
+		params.put("file_count", filecount + "");
+		params.put("imgs", jsonObject.toString());
+		// Log.e("fanfan", params.toString());
+		handler.sendEmptyMessage(3);
+	}
+
+	private Handler handler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			if (msg.what == 1) {
+				fh.post(ServerMutualConfig.UpImgs, params,
+						new AjaxCallBack<String>() {
+							@Override
+							public void onFailure(Throwable t, String strMsg) {
+								super.onFailure(t, strMsg);
+								Config.dismissProgress();
+								Config.showFiledToast(context);
+							}
+
+							@Override
+							public void onSuccess(String t) {
+								super.onSuccess(t);
+								JSONObject json;
+								try {
+									json = new JSONObject(t);
+									if (num < BimpUtil.drr.size()) {
+										uploadImage(num);
+									} else {
+										Config.dismissProgress();
+										Toast.makeText(context,
+												json.getString("reMsg"),
+												Toast.LENGTH_SHORT).show();
+										BimpUtil.drr.clear();
+										BimpUtil.time.clear();
+										BimpUtil.bmp.clear();
+										BimpUtil.max = 0;
+										context.finish();
+									}
+								} catch (JSONException e) {
+									e.printStackTrace();
+								}
+							}
+						});
+			} else if (msg.what == 2) {
+				FinalHttp fh = new FinalHttp();
+				fh.post(ServerMutualConfig.ImportToDiaryNew, params,
+						new AjaxCallBack<String>() {
+							@Override
+							public void onFailure(Throwable t, String strMsg) {
+								Config.dismissProgress();
+								super.onFailure(t, strMsg);
+								Toast.makeText(context, "上传失败，请重新上传", 1).show();
+							}
+
+							@Override
+							public void onSuccess(String t) {
+								Config.dismissProgress();
+								super.onSuccess(t);
+								notificationManager.cancel(0);
+								notification = new Notification(
+										R.drawable.icon, "上传成功，请刷新", System
+												.currentTimeMillis());
+								notification.flags |= Notification.FLAG_ONGOING_EVENT; // 将此通知放到通知栏的"Ongoing"即"正在运行"组中
+								notification.setLatestEventInfo(context,
+										"成长记录", "相片上传成功", null);
+								notificationManager.notify(1, notification);
+								notificationManager.cancel(1);
+								// Toast.makeText(context, "上传成功，请刷新",
+								// 0).show();
+								BimpUtil.drr.clear();
+								context.finish();
+							}
+
+						});
+			} else if (msg.what == 3) {
+				FinalHttp fh = new FinalHttp();
+				fh.post(ServerMutualConfig.ImportToDiaryV3, params,
+						new AjaxCallBack<String>() {
+							@Override
+							public void onFailure(Throwable t, String strMsg) {
+								Config.dismissProgress();
+								super.onFailure(t, strMsg);
+								Toast.makeText(context, strMsg, 1).show();
+							}
+
+							@Override
+							public void onSuccess(String t) {
+								Config.dismissProgress();
+								super.onSuccess(t);
+								Intent intent = new Intent();
+								intent.setClass(context, GrowEditActivity.class);
+								intent.putExtra("baby_id", getIntent()
+										.getStringExtra("baby_id"));
+								intent.putExtra("album_id", getIntent()
+										.getStringExtra("album_id"));
+								intent.putExtra(
+										"grow_detail_title",
+										getIntent().getStringExtra(
+												"grow_detail_title"));
+								startActivity(intent);
+								BimpUtil.drr.clear();
+								context.finish();
+							}
+
+						});
+			}
+
+		}
+	};
+	final AjaxParams params = new AjaxParams();
+	final FinalHttp fh = new FinalHttp();
+	int num;
+
+	// 相册上传
+	public void uploadImage(final int i) {
+		if (BimpUtil.drr.size() == 0) {
+			Config.dismissProgress();
+			finish();
+			return;
+		}
+		num = i + 1;
+		params.put("user_id", Config.getUser(context).uid);
+		params.put("is_android", "1");
+		params.put("file_count", 1 + "");
+		params.put("album_id", getIntent().getStringExtra("album_id"));
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				String name = BimpUtil.drr.get(i).substring(
+						BimpUtil.drr.get(i).lastIndexOf("/") + 1,
+						BimpUtil.drr.get(i).length());
+				JSONObject json = new JSONObject();
+				File file = null;
+				try {
+					file = BitmapCache.creatNewBitmap(BimpUtil.drr.get(i), "imgs"
+							+ num + ".png");
+					// FileOutputStream fos = new
+					// FileOutputStream(Bimp.drr.get(i));
+					// mBitmap.compress(CompressFormat.JPEG, 100, fos);
+					// fos.flush();
+					// fos.close();
+
+					json.put(name, BimpUtil.time.get(i));
+					params.put("img", json.toString());
+				} catch (JSONException e1) {
+					e1.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				try {
+					params.put("img1", file);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				handler.sendEmptyMessage(1);
+			}
+		}).start();
+		context.finish();
+
+	}
+
+	private void initView() {
+		gridView = (GridView) findViewById(R.id.gridview);
+		gridView.setSelector(new ColorDrawable(Color.TRANSPARENT));
+		adapter = new ImageGridAdapter(PhoneAlbumDetialActivity.this, dataList,
+				mHandler);
+		gridView.setAdapter(adapter);
+		adapter.setTextCallback(new TextCallback() {
+			public void onListen(int count) {
+				// bt.setText("完成" + "(" + count + ")");
+			}
+		});
+		gridView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				adapter.notifyDataSetChanged();
+			}
+		});
+	}
+}

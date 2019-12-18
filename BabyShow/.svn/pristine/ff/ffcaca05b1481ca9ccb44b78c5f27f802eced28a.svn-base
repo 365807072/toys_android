@@ -1,0 +1,720 @@
+package com.yyqq.code.toyslease;
+
+import java.util.ArrayList;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewTreeObserver;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
+import android.widget.SeekBar;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.ab.http.AbHttpUtil;
+import com.ab.http.AbRequestParams;
+import com.ab.http.AbStringHttpResponseListener;
+import com.umeng.analytics.MobclickAgent;
+import com.yyqq.babyshow.R;
+import com.yyqq.code.login.WebLoginActivity;
+import com.yyqq.code.main.MainItemDetialWebActivity;
+import com.yyqq.commen.adapter.InviteFriendListAdapter;
+import com.yyqq.commen.adapter.InviteSelectToysAdapter;
+import com.yyqq.commen.adapter.InviteToysListAdapter;
+import com.yyqq.commen.model.InviteFriendBean;
+import com.yyqq.commen.model.InviteSelectToysBean;
+import com.yyqq.commen.share.GroupSharedUtils;
+import com.yyqq.commen.utils.Config;
+import com.yyqq.commen.view.HorizontialListView;
+import com.yyqq.commen.view.MyListView;
+import com.yyqq.framework.activity.BaseActivity;
+import com.yyqq.framework.application.MyApplication;
+import com.yyqq.framework.application.ServerMutualConfig;
+
+/**
+ * 邀请页
+ * */
+public class InviteFriendActivity extends BaseActivity {
+
+	private ImageView lease_back;
+	private ImageView invite_main_right;
+	private TextView invite_title_ntf;
+	private ImageView invite_user_icon;
+	private TextView invite_user_name;
+	private TextView invite_user_friend_number;
+	private TextView invite_user_toys_number;
+	private Button invite_user_change_toys;
+	private HorizontialListView invite_user_toys_list;
+	private EditText invite_user_input;
+	private Button invite_user_submit;
+	private Button invite_user_to_shared;
+	private TextView invite_user_info;
+	private MyListView invite_friend_list;
+	private ListView invite_toys_list;
+	private ImageView invite_toys_cancel;
+	private RelativeLayout invite_toys_all;
+	private RelativeLayout invite_all;
+	private SeekBar skbProgress;
+	private RelativeLayout invite_hint;
+	private ImageView invete_number_index;
+	private LinearLayout invete_number_hint;
+	private TextView invete_number_hint_text;
+	private RelativeLayout invite_get_toys_all;
+	private ImageView invite_get_toys_img;
+	private TextView invite_get_toys;
+	private ImageView invite_get_toys_cancel;
+	private ScrollView invite_sc_all;
+	private TextView invite_user_toys_more;
+	
+	private AbHttpUtil ab;
+	private LayoutInflater inflater;
+	private Context context;
+	private String shared_img = "";
+	private String shared_title = "";
+	private String shared_des = "";
+	private InviteSelectToysAdapter selectToysAdapter;
+	private ArrayList<InviteSelectToysBean> prizeList;	
+	private ArrayList<InviteSelectToysBean> selectToysList;
+	private ArrayList<InviteFriendBean> friendList;
+	private InviteFriendListAdapter friendAdapter;
+	private InviteToysListAdapter prizeAdapter;
+	private int windowWidth = 0;
+	private int positionIndex = 0;
+	private float skbHeadIndex = 0.0f;
+	private float skbwidth = 0;
+	private boolean isIntent = false;
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		Config.setActivityState(this);
+		setContentView(R.layout.activity_invite_friend);
+	}
+	
+	@Override
+	protected void initView() {
+		invite_user_toys_more = (TextView) findViewById(R.id.invite_user_toys_more);
+		invite_get_toys_cancel = (ImageView) findViewById(R.id.invite_get_toys_cancel);
+		invite_get_toys = (TextView) findViewById(R.id.invite_get_toys);
+		invite_get_toys_img = (ImageView) findViewById(R.id.invite_get_toys_img);
+		invite_get_toys_all = (RelativeLayout) findViewById(R.id.invite_get_toys_all);
+		invete_number_hint_text = (TextView) findViewById(R.id.invete_number_hint_text);
+		invete_number_hint = (LinearLayout) findViewById(R.id.invete_number_hint);
+		invete_number_index = (ImageView) findViewById(R.id.invete_number_index);
+		invite_hint = (RelativeLayout) findViewById(R.id.invite_hint);
+		skbProgress = (SeekBar) findViewById(R.id.skbProgress);
+		invite_all = (RelativeLayout) findViewById(R.id.invite_all);
+		invite_toys_all = (RelativeLayout) findViewById(R.id.invite_toys_all);
+		lease_back = (ImageView) findViewById(R.id.lease_back);
+		invite_main_right = (ImageView) findViewById(R.id.invite_main_right);
+		invite_title_ntf = (TextView) findViewById(R.id.invite_title_ntf);
+		invite_user_icon = (ImageView) findViewById(R.id.invite_user_icon);
+		invite_user_name = (TextView) findViewById(R.id.invite_user_name);
+		invite_user_friend_number = (TextView) findViewById(R.id.invite_user_friend_number);
+		invite_user_toys_number = (TextView) findViewById(R.id.invite_user_toys_number);
+		invite_user_change_toys = (Button) findViewById(R.id.invite_user_change_toys);
+		invite_user_toys_list = (HorizontialListView) findViewById(R.id.invite_user_toys_list);
+		invite_user_input = (EditText) findViewById(R.id.invite_user_input);
+		invite_user_submit = (Button) findViewById(R.id.invite_user_submit);
+		invite_user_to_shared = (Button) findViewById(R.id.invite_user_to_shared);
+		invite_user_info = (TextView) findViewById(R.id.invite_user_info);
+		invite_friend_list = (MyListView) findViewById(R.id.invite_friend_list);
+		invite_toys_list = (ListView) findViewById(R.id.invite_toys_list);
+		invite_toys_cancel = (ImageView) findViewById(R.id.invite_toys_cancel);
+		invite_sc_all = (ScrollView) findViewById(R.id.invite_sc_all);
+		invite_sc_all.smoothScrollTo(0,0); // scrollView置顶
+		invite_sc_all.requestFocus();
+	}
+
+	@Override
+	protected void initData() {
+		context = this;
+		DisplayMetrics DM = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(DM);
+		windowWidth = DM.widthPixels;
+		ab = AbHttpUtil.getInstance(this);
+		inflater = LayoutInflater.from(this);
+		prizeList = new ArrayList<InviteSelectToysBean>();
+		selectToysList = new ArrayList<InviteSelectToysBean>();
+		friendList = new ArrayList<InviteFriendBean>();
+		selectToysAdapter = new InviteSelectToysAdapter(this, inflater, selectToysList);
+		invite_user_toys_list.setAdapter(selectToysAdapter);
+		friendAdapter = new InviteFriendListAdapter(this, inflater, friendList);
+		invite_friend_list.setAdapter(friendAdapter);
+		prizeAdapter = new InviteToysListAdapter(this, inflater, prizeList);
+		invite_toys_list.setAdapter(prizeAdapter);
+		
+	}
+
+	@Override
+	protected void setListener() {
+		
+		lease_back.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				InviteFriendActivity.this.finish();
+			}
+		});
+		
+		invite_title_ntf.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(InviteFriendActivity.this, MainItemDetialWebActivity.class);
+				intent.putExtra(MainItemDetialWebActivity.LINK_URL, "http://www.baobaoshowshow.com/H5/invite/active_aules.html?login_user_id="+Config.getUser(InviteFriendActivity.this).uid);
+				startActivity(intent);
+			}
+		});
+		
+		invite_get_toys_cancel.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				invite_get_toys_all.setVisibility(View.GONE);
+			}
+		});
+		
+		invite_get_toys_all.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				invite_get_toys_all.setVisibility(View.GONE);
+			}
+		});
+		
+		invite_user_toys_list.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				
+				positionIndex = position;
+				invite_get_toys_all.setVisibility(View.VISIBLE);
+				MyApplication.getInstance().display(selectToysList.get(position).getImg(), invite_get_toys_img, R.drawable.def_image);
+				invite_get_toys.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						addPrize(selectToysList.get(positionIndex));
+					}
+				});
+			}
+		});
+		
+		invite_user_submit.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				submitPhone();
+			}
+		});
+		
+		invite_hint.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				GroupSharedUtils.groupShareBean bean = new GroupSharedUtils.groupShareBean();
+				bean.setContext(InviteFriendActivity.this);
+				bean.setShare_img(shared_img);
+				bean.setShare_text(shared_des);
+				bean.setShare_title(shared_title);
+				bean.setShare_url("http://www.baobaoshowshow.com/H5/invite/invite.html?"+"login_user_id="+Config.getUser(InviteFriendActivity.this).uid);
+				GroupSharedUtils.SharedGroup(bean);
+			}
+		});
+		
+		invite_main_right.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				GroupSharedUtils.groupShareBean bean = new GroupSharedUtils.groupShareBean();
+				bean.setContext(InviteFriendActivity.this);
+				bean.setShare_img(shared_img);
+				bean.setShare_text(shared_des);
+				bean.setShare_title(shared_title);
+				bean.setShare_url("http://www.baobaoshowshow.com/H5/invite/invite.html?"+"login_user_id="+Config.getUser(InviteFriendActivity.this).uid);
+				GroupSharedUtils.SharedGroup(bean);
+			}
+		});
+		
+		invite_user_to_shared.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				GroupSharedUtils.groupShareBean bean = new GroupSharedUtils.groupShareBean();
+				bean.setContext(InviteFriendActivity.this);
+				bean.setShare_img(shared_img);
+				bean.setShare_text(shared_des);
+				bean.setShare_title(shared_title);
+				bean.setShare_url("http://www.baobaoshowshow.com/H5/invite/invite.html?"+"login_user_id="+Config.getUser(InviteFriendActivity.this).uid);
+				GroupSharedUtils.SharedGroup(bean);
+			}
+		});
+		
+		invite_toys_cancel.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				invite_toys_all.setVisibility(View.GONE);
+			}
+		});
+		
+		invite_toys_all.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				invite_toys_all.setVisibility(View.GONE);
+			}
+		});
+		
+		invite_user_change_toys.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				getPrizeList();
+			}
+		});
+		
+		invite_user_toys_more.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				getPrizeList();
+			}
+		});
+		
+		invite_toys_list.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				getToysList(prizeList.get(position));
+			}
+		});
+	}
+	
+	/**
+	 * 获取邀请相关信息
+	 * */
+	private void getInviteInfo(){
+		Config.showProgressDialog(InviteFriendActivity.this, false, null);
+		AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(InviteFriendActivity.this).uid);
+		ab.get(ServerMutualConfig.GET_INVITE_INFO + "&" + params.toString(), new AbStringHttpResponseListener() {
+					
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						try {
+							JSONObject json = new JSONObject(content);
+							if (json.getBoolean("success")) {
+								
+								// 初始化个人信息
+								MyApplication.getInstance().display(json.getJSONObject("data").getString("avatar"), invite_user_icon, R.drawable.def_image);
+								invite_user_name.setText(json.getJSONObject("data").getString("nick_name"));
+								invite_user_toys_number.setText(json.getJSONObject("data").getString("toys_number_des"));
+								if(json.getJSONObject("data").getString("prize_title").length() > 4){
+									invite_user_change_toys.setText(json.getJSONObject("data").getString("prize_title").substring(0, 3));
+								}else{
+									invite_user_change_toys.setText(json.getJSONObject("data").getString("prize_title"));
+								}
+								invite_user_info.setText(json.getJSONObject("data").getString("invitation_description"));
+								int inviteFriendNumber = 0;
+								inviteFriendNumber = Integer.parseInt(json.getJSONObject("data").getString("invitation_number"));
+								invite_user_friend_number.setText(json.getJSONObject("data").getString("invitation_number_des"));
+								invete_number_hint_text.setText("成功邀请："+inviteFriendNumber+"人");
+								int maxNumber = 30;
+								if(!json.getJSONObject("data").getString("more_number").equals("")){
+									maxNumber = Integer.parseInt(json.getJSONObject("data").getString("more_number"));
+								}
+								
+								// 初始化邀请好友进度条相关
+								if(inviteFriendNumber >= 1){
+									skbProgress.setProgress((int)skbProgress.getMax() * inviteFriendNumber / maxNumber);
+									// 进度条总宽度
+									skbwidth = (windowWidth) - (dip2px(context, 20));
+									// 进度条当前所在位置
+									skbHeadIndex = (skbwidth * ((inviteFriendNumber*1f) / (maxNumber*1f)));
+									LinearLayout.LayoutParams indexParams = (LayoutParams) invete_number_index.getLayoutParams();
+									indexParams.setMargins(Math.round(skbHeadIndex), 5, 10, 0);
+									invete_number_index.setLayoutParams(indexParams);
+									ViewTreeObserver vto2 = invete_number_hint.getViewTreeObserver();    
+									vto2.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {  
+										
+										@Override    
+										public void onGlobalLayout() {  
+											invete_number_hint.getViewTreeObserver().removeGlobalOnLayoutListener(this); 
+											int hintWidth = invete_number_hint.getWidth();
+											if(skbHeadIndex <= (hintWidth/2)){ // 居左
+												LinearLayout.LayoutParams indexParams = (LayoutParams) invete_number_hint.getLayoutParams();
+												indexParams.gravity = Gravity.LEFT;
+												invete_number_hint.setLayoutParams(indexParams);
+											}else if(skbHeadIndex >= (hintWidth/2) && ((skbwidth - skbHeadIndex)*0.5) >= (hintWidth/2)){ // 正常
+												LinearLayout.LayoutParams indexParams = (LayoutParams) invete_number_hint.getLayoutParams();
+												indexParams.setMargins(Math.round(skbHeadIndex-(hintWidth*0.45f)), 0, 0, 10);
+												invete_number_hint.setLayoutParams(indexParams);
+											}else if(skbHeadIndex >= (hintWidth/2) && ((skbwidth - skbHeadIndex)*0.5) <= (hintWidth/2)){ // 居右
+												LinearLayout.LayoutParams indexParams = (LayoutParams) invete_number_hint.getLayoutParams();
+												indexParams.gravity = Gravity.RIGHT;
+												invete_number_hint.setLayoutParams(indexParams);
+											}
+										}    
+									});    
+								}
+								
+								// 分享相关
+								shared_des = json.getJSONObject("data").getString("shared_des");
+								shared_img = json.getJSONObject("data").getString("shared_img");
+								shared_title = json.getJSONObject("data").getString("shared_title");
+								
+								// 初始化可选择玩具列表
+								selectToysList.clear();
+								JSONArray prizejson = json.getJSONObject("data").getJSONArray("prizeList");
+								InviteSelectToysBean peizeBean = null;
+								for(int i = 0 ; i < prizejson.length() ; i++){
+									peizeBean = new InviteSelectToysBean();
+									peizeBean.setImg(prizejson.getJSONObject(i).getString("img"));
+									peizeBean.setIs_click(prizejson.getJSONObject(i).getString("is_click"));
+									peizeBean.setPrize_description(prizejson.getJSONObject(i).getString("prize_description"));
+									peizeBean.setPrize_id(prizejson.getJSONObject(i).getString("prize_id"));
+									peizeBean.setPrize_number(prizejson.getJSONObject(i).getString("prize_number"));
+									peizeBean.setPrize_title(prizejson.getJSONObject(i).getString("prize_title"));
+									selectToysList.add(peizeBean);
+								}
+								selectToysAdapter.notifyDataSetChanged();
+								
+								// 初始化邀请历史记录
+								friendList.clear();
+								JSONArray friendjson = json.getJSONObject("data").getJSONArray("invitationList");
+								InviteFriendBean friendBean = null;
+								for(int i = 0 ; i < friendjson.length() ; i++ ){
+									friendBean = new InviteFriendBean();
+									friendBean.setAvatar(friendjson.getJSONObject(i).getString("avatar"));
+									friendBean.setInv_description(friendjson.getJSONObject(i).getString("inv_description"));
+									friendBean.setInvitation_id(friendjson.getJSONObject(i).getString("invitation_id"));
+									friendBean.setNick_name(friendjson.getJSONObject(i).getString("nick_name"));
+									friendBean.setStatus(friendjson.getJSONObject(i).getString("status"));
+									friendBean.setStatus_title(friendjson.getJSONObject(i).getString("status_title"));
+									friendBean.setUser_id(friendjson.getJSONObject(i).getString("user_id"));
+									friendBean.setInv_button(friendjson.getJSONObject(i).getString("inv_button"));
+									friendList.add(friendBean);
+								}
+								friendAdapter.notifyDataSetChanged();
+								if(friendList.size() == 0){
+									invite_hint.setVisibility(View.VISIBLE);
+									invite_friend_list.setVisibility(View.GONE);
+								}else{
+									invite_hint.setVisibility(View.GONE);
+									invite_friend_list.setVisibility(View.VISIBLE);
+								}
+								
+//								invite_sc_all.requestFocus();
+//								invite_sc_all.smoothScrollTo(0,20); 
+								
+							} else {
+								Toast.makeText(InviteFriendActivity.this, json.getString("reMsg"), Toast.LENGTH_SHORT).show();
+							}
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+
+					@Override
+					public void onFinish() {
+						super.onFinish();
+						Config.dismissProgress();
+					}
+
+					@Override
+					public void onFailure(int statusCode, String content,
+							Throwable error) {
+						super.onFailure(statusCode, content, error);
+						Config.dismissProgress();
+					}
+				});
+	}
+	
+	/**
+	 * 获取礼品列表
+	 * */
+	private void getPrizeList(){
+		Config.showProgressDialog(InviteFriendActivity.this, false, null);
+		AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(InviteFriendActivity.this).uid);
+		ab.get(ServerMutualConfig.GET_PRIZE_LIST + "&" + params.toString(), new AbStringHttpResponseListener() {
+					
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						try {
+							JSONObject json = new JSONObject(content);
+							if (json.getBoolean("success")) {
+								
+								prizeList.clear();
+								
+								// 获取玩具列表
+								JSONArray prizejson = json.getJSONArray("data");
+								InviteSelectToysBean peizeBean = null;
+								for(int i = 0 ; i < prizejson.length() ; i++){
+									peizeBean = new InviteSelectToysBean();
+									peizeBean.setImg(prizejson.getJSONObject(i).getString("img"));
+									peizeBean.setIs_click(prizejson.getJSONObject(i).getString("is_click"));
+									peizeBean.setPrize_description(prizejson.getJSONObject(i).getString("prize_description"));
+									peizeBean.setPrize_id(prizejson.getJSONObject(i).getString("prize_id"));
+									peizeBean.setPrize_number(prizejson.getJSONObject(i).getString("prize_number"));
+									peizeBean.setPrize_title(prizejson.getJSONObject(i).getString("prize_title"));
+									prizeList.add(peizeBean);
+								}
+								prizeAdapter.notifyDataSetChanged();
+								invite_toys_all.setVisibility(View.VISIBLE);
+								
+							} else {
+								Toast.makeText(InviteFriendActivity.this, json.getString("reMsg"), Toast.LENGTH_SHORT).show();
+							}
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+
+					@Override
+					public void onFinish() {
+						super.onFinish();
+						Config.dismissProgress();
+					}
+
+					@Override
+					public void onFailure(int statusCode, String content,
+							Throwable error) {
+						super.onFailure(statusCode, content, error);
+						Config.dismissProgress();
+					}
+				});
+	}
+	
+	/**
+	 * 获取详细礼品列表
+	 * */
+	private void getToysList(final InviteSelectToysBean peizeObj){
+		Config.showProgressDialog(InviteFriendActivity.this, false, null);
+		AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(InviteFriendActivity.this).uid);
+		params.put("prize_id", peizeObj.getPrize_id());
+		ab.get(ServerMutualConfig.GET_PRIZE_LIST + "&" + params.toString(), new AbStringHttpResponseListener() {
+			
+			@Override
+			public void onSuccess(int statusCode, String content) {
+				super.onSuccess(statusCode, content);
+				try {
+					JSONObject json = new JSONObject(content);
+					if (json.getBoolean("success")) {
+						
+						invite_user_change_toys.setText(peizeObj.getPrize_title());
+						
+						if(peizeObj.getPrize_title().length() > 4){
+							invite_user_change_toys.setText(peizeObj.getPrize_title().substring(0, 3));
+						}else{
+							invite_user_change_toys.setText(peizeObj.getPrize_title());
+						}
+						
+						invite_toys_all.setVisibility(View.GONE);
+						selectToysList.clear();
+						
+						// 获取玩具列表
+						JSONArray prizejson = json.getJSONArray("data");
+						InviteSelectToysBean peizeBean = null;
+						for(int i = 0 ; i < prizejson.length() ; i++){
+							peizeBean = new InviteSelectToysBean();
+							peizeBean.setImg(prizejson.getJSONObject(i).getString("img"));
+							peizeBean.setIs_click(prizejson.getJSONObject(i).getString("is_click"));
+							peizeBean.setPrize_description(prizejson.getJSONObject(i).getString("prize_description"));
+							peizeBean.setPrize_id(prizejson.getJSONObject(i).getString("prize_id"));
+							peizeBean.setPrize_number(prizejson.getJSONObject(i).getString("prize_number"));
+							peizeBean.setPrize_title(prizejson.getJSONObject(i).getString("prize_title"));
+							selectToysList.add(peizeBean);
+						}
+						selectToysAdapter.notifyDataSetChanged();
+						
+						// 修改listView宽度
+						int listWidth = 75 * selectToysList.size();
+						LinearLayout.LayoutParams params = (LayoutParams) invite_user_toys_list.getLayoutParams();
+						if(listWidth < (windowWidth/2)){
+							params.width = dip2px(InviteFriendActivity.this, listWidth);
+						}else{
+							params.width = LinearLayout.LayoutParams.WRAP_CONTENT;
+						}
+						invite_user_toys_list.setLayoutParams(params);
+						
+					} else {
+						Toast.makeText(InviteFriendActivity.this, json.getString("reMsg"), Toast.LENGTH_SHORT).show();
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			@Override
+			public void onFinish() {
+				super.onFinish();
+				Config.dismissProgress();
+			}
+			
+			@Override
+			public void onFailure(int statusCode, String content,
+					Throwable error) {
+				super.onFailure(statusCode, content, error);
+				Config.dismissProgress();
+			}
+		});
+	}
+	
+	/**
+	 * 提交绑定
+	 * */
+	private void submitPhone(){
+		if(invite_user_input.getText().toString().equals("")){
+			Toast.makeText(this, "请填写好友手机号", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		if(invite_user_input.getText().toString().length() != 11){
+			Toast.makeText(this, "请填写正确的手机号", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		Config.showProgressDialog(InviteFriendActivity.this, false, null);
+		AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(InviteFriendActivity.this).uid);
+		params.put("mobile", invite_user_input.getText().toString().trim());
+		ab.post(ServerMutualConfig.SUBMIT_USER_PHONE, params, new AbStringHttpResponseListener() {
+			
+			@Override
+			public void onSuccess(int statusCode, String content) {
+				super.onSuccess(statusCode, content);
+				try {
+					JSONObject json = new JSONObject(content);
+					if (json.getBoolean("success")) {
+						Toast.makeText(InviteFriendActivity.this, "提交成功，快去告诉她（他）吧！", Toast.LENGTH_SHORT).show();
+						invite_user_input.setText("");
+						getInviteInfo();
+					} else {
+						Toast.makeText(InviteFriendActivity.this, json.getString("reMsg"), Toast.LENGTH_SHORT).show();
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			@Override
+			public void onFinish() {
+				super.onFinish();
+				Config.dismissProgress();
+			}
+			
+			@Override
+			public void onFailure(int statusCode, String content,
+					Throwable error) {
+				super.onFailure(statusCode, content, error);
+				Config.dismissProgress();
+			}
+		});
+	}
+	
+	/**
+	 * 兑换礼品
+	 * */
+	private void addPrize(InviteSelectToysBean bean){
+		Config.showProgressDialog(InviteFriendActivity.this, false, null);
+		AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(InviteFriendActivity.this).uid);
+		params.put("prize_id", bean.getPrize_id());
+		ab.get(ServerMutualConfig.ADD_PRIZE + "&" + params.toString(), new AbStringHttpResponseListener() {
+			
+			@Override
+			public void onSuccess(int statusCode, String content) {
+				super.onSuccess(statusCode, content);
+				try {
+					JSONObject json = new JSONObject(content);
+					if (json.getBoolean("success")) {
+						getInviteInfo();
+						invite_get_toys_all.setVisibility(View.GONE);
+					} else {
+						invite_get_toys_all.setVisibility(View.VISIBLE);
+						Toast.makeText(InviteFriendActivity.this, json.getString("reMsg"), Toast.LENGTH_SHORT).show();
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			@Override
+			public void onFinish() {
+				super.onFinish();
+				Config.dismissProgress();
+			}
+			
+			@Override
+			public void onFailure(int statusCode, String content,
+					Throwable error) {
+				super.onFailure(statusCode, content, error);
+				Config.dismissProgress();
+			}
+		});
+	}
+	
+	/**
+	 * 描述：dip转换为px
+	 */
+	public static int dip2px(Context context, float dipValue) {
+		final float scale = context.getResources().getDisplayMetrics().density;
+		return (int) (dipValue * scale + 0.5f);
+	}
+
+	/**
+	 * 描述：px转换为dip
+	 */
+	public static int px2dip(Context context, float pxValue) {
+		final float scale = context.getResources().getDisplayMetrics().density;
+		return (int) (pxValue / scale + 0.5f);
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+//		invite_sc_all.requestFocus();
+//		invite_sc_all.smoothScrollTo(0,20); 
+		if(isIntent && !MyApplication.getVisitor().equals("0")  || Config.getUser(InviteFriendActivity.this).uid.equals("")){
+			this.finish();
+		}else if(!isIntent && !MyApplication.getVisitor().equals("0")  || Config.getUser(InviteFriendActivity.this).uid.equals("")){
+			isIntent = true;
+			Intent in = new Intent(InviteFriendActivity.this, WebLoginActivity.class);
+			startActivity(in);
+		}else{
+			getInviteInfo();
+		}
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onResume(this);
+	}
+
+}

@@ -1,0 +1,212 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    tools:context=".InitActivity" >
+
+    <RelativeLayout
+        android:id="@+id/general_ly"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        android:background="@color/title_bg" >
+
+        <LinearLayout
+            android:id="@+id/general_ly1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/general_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/grow_detail_backback" />
+
+            <TextView
+                android:id="@+id/general_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textColor="#ffffff"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <com.yyqq.commen.view.ExpandTabView
+            android:id="@+id/expandtab_view"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:id="@+id/bus_title_hint_text"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="1dp"
+            android:gravity="center"
+            android:text="学与玩"
+            android:textColor="#000"
+            android:textSize="18sp" />
+
+        <View
+            android:id="@+id/bus_title_hint_line"
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:layout_alignParentBottom="true"
+            android:background="#b3b3b3" />
+
+        <TextView
+            android:id="@+id/bus_title_right_more"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="1dp"
+            android:gravity="center"
+            android:text="更多"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/search_root"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/general_ly"
+        android:background="#f7f7f7"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:visibility="gone" >
+
+        <EditText
+            android:id="@+id/search"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_vertical"
+            android:layout_weight="1"
+            android:background="@drawable/business_search"
+            android:hint="搜索商家名称"
+            android:paddingBottom="5dp"
+            android:paddingLeft="25dp"
+            android:paddingRight="5dp"
+            android:paddingTop="5dp"
+            android:textColor="#666666"
+            android:textColorHint="#666666"
+            android:textSize="13sp" />
+
+        <ImageView
+            android:id="@+id/search_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/search_bt"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/search_cancle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/cancel_sercher" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/v"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/search_root"
+        android:background="#80000000"
+        android:paddingBottom="5dp"
+        android:paddingLeft="15dp"
+        android:paddingTop="5dp"
+        android:text="有任何问题，请及时拨打宝贝半径客服电话 010-82865072"
+        android:textColor="@color/text_white"
+        android:textSize="10sp"
+        android:visibility="gone" />
+
+    <com.yyqq.commen.view.PullDownView
+        android:id="@+id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/v"
+        android:cacheColorHint="#FFFFFF"
+        android:divider="#FFFFFF"
+        android:footerDividersEnabled="false"
+        android:hapticFeedbackEnabled="false"
+        android:listSelector="#FFFFFF" >
+    </com.yyqq.commen.view.PullDownView>
+
+    <LinearLayout
+        android:id="@+id/ly_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/general_ly"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="74dp"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <ImageView
+            android:layout_width="212dp"
+            android:layout_height="212dp"
+            android:background="@drawable/order_no_bg" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="27dp"
+            android:text="您还没有任何订单哦"
+            android:textColor="#020202"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/more_coupon_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="27dp"
+            android:text="看看还有哪些优惠吧"
+            android:textColor="#666666"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/more_coupon_bt"
+            android:layout_width="127dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/order_more_bt"
+            android:gravity="center"
+            android:text="更多优惠"
+            android:textColor="#020202"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/bt_redBack"
+        android:layout_width="48dp"
+        android:layout_height="51dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/bt_red_back"
+        android:visibility="gone" />
+
+</RelativeLayout>

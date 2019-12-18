@@ -1,0 +1,108 @@
+package com.yyqq.commen.model;
+
+import org.json.JSONObject;
+
+public class OrderItem {
+	public String order_id;
+	public String business_title; // 店铺名称
+	public String business_time; // 过期时间
+	public String business_id; // 商家id
+	public String address; // 地址
+	public String business_package; // 套餐详情
+	public String order_num; // 订单号
+	public String verification; // 验证码
+	public String order_time; // 下单时间
+	public String payment; // 支付方式 1在线支付 2上门支付
+	public String payment_name;
+	public String packages; // 套餐1，2，3，4
+	public String packageName;
+	public String price; // 价格
+	public String number; // 数量
+	public String status; // 支付状态 1未支付 2已支付 3已消费 4退款中 5已退款
+	public long post_create_time;
+	public String need_price; // 订单价格
+	public String check_comment; // 是否评价过
+	public int packet_id; // 红包id
+	public String packet_price; // 红包价格
+	public String order_role; // 红包价格
+	public String business_payment; //支付方式
+
+	public JSONObject json;
+
+	public void fromJson(JSONObject json) {
+		try {
+			this.json = json;
+			if (json.has("order_id")) {
+				order_id = json.getString("order_id");
+			}
+			if (json.has("business_id")) {
+				business_id = json.getString("business_id");
+			}
+			if (json.has("business_title")) {
+				business_title = json.getString("business_title");
+			}
+			if (json.has("business_time")) {
+				business_time = json.getString("business_time");
+			}
+			if (json.has("address")) {
+				address = json.getString("address");
+			}
+			if (json.has("business_package")) {
+				business_package = json.getString("business_package");
+			}
+			if (json.has("order_num")) {
+				order_num = json.getString("order_num");
+			}
+			if (json.has("verification")) {
+				verification = json.getString("verification");
+			}
+			if (json.has("order_time")) {
+				order_time = json.getString("order_time");
+			}
+			if (json.has("payment")) {
+				payment = json.getString("payment");
+			}
+			if (json.has("payment_name")) {
+				payment_name = json.getString("payment_name");
+			}
+			if (json.has("package")) {
+				packages = json.getString("package");
+			}
+			if (json.has("price")) {
+				price = json.getString("price");
+			}
+			if (json.has("number")) {
+				number = json.getString("number");
+			}
+			if (json.has("status")) {
+				status = json.getString("status");
+			}
+			if (json.has("post_create_time")) {
+				post_create_time = json.getLong("post_create_time");
+			}
+			if (json.has("need_price")) {
+				need_price = json.getString("need_price");
+			}
+			if (json.has("check_comment")) {
+				check_comment = json.getString("check_comment");
+			}
+			if (json.has("packet_id")) {
+				packet_id = json.getInt("packet_id");
+			}
+			if (json.has("packet_price")) {
+				packet_price = json.getString("packet_price");
+			}
+			if (json.has("order_role")) {
+				order_role = json.getString("order_role");
+			}
+			if (json.has("business_payment")) {
+				business_payment = json.getString("business_payment");
+			}
+			if (json.has("package_name")) {
+				packageName = json.getString("package_name");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+}

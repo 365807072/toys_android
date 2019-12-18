@@ -1,0 +1,232 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="#ffffff"
+        android:orientation="vertical" >
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#f5f5f5" />
+
+        <LinearLayout
+            android:id="@+id/item_lease_main_all"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="fill_parent"
+                android:background="#f5f5f5" />
+
+            <RelativeLayout
+                android:id="@+id/item_hont_click"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1" >
+
+                <ImageView
+                    android:id="@+id/lease_item_img"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_launcher" />
+
+                <TextView
+                    android:id="@+id/lease_item_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/lease_item_img"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="left|center"
+                    android:maxLines="1"
+                    android:text="TextViewTextViewTextViewTextViewTextViewTextView"
+                    android:textColor="#333333"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/lease_item_monery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/lease_item_name"
+                    android:layout_below="@+id/lease_item_name"
+                    android:layout_marginTop="5dp"
+                    android:text="TextView"
+                    android:textColor="#fd6363"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/item_toys_all_company"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/lease_item_monery"
+                    android:layout_toRightOf="@+id/lease_item_monery"
+                    android:text="TextView"
+                    android:textColor="#fd6363"
+                    android:textSize="12dp" />
+
+                <ImageView
+                    android:id="@+id/category_icon_url"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignBottom="@+id/lease_item_monery"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/item_toys_all_company"
+                    android:src="@drawable/ic_launcher" />
+
+                <TextView
+                    android:id="@+id/item_toys_all_age"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/lease_item_monery"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="tew"
+                    android:textColor="#999999"
+                    android:textSize="12dp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="fill_parent"
+                android:background="#f5f5f5" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#f5f5f5" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="#ffffff"
+        android:orientation="vertical" >
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#f5f5f5" />
+
+        <LinearLayout
+            android:id="@+id/item_lease_main_all_02"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <View
+                android:layout_width="0.25dp"
+                android:layout_height="fill_parent"
+                android:background="#f5f5f5"
+                android:visibility="invisible" />
+
+            <RelativeLayout
+                android:id="@+id/item_hont_click_02"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1" >
+
+                <ImageView
+                    android:id="@+id/lease_item_img_02"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_launcher" />
+
+                <TextView
+                    android:id="@+id/lease_item_name_02"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/lease_item_img_02"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="left|center"
+                    android:maxLines="1"
+                    android:text="TextViewTextViewTextViewTextViewTextViewTextView"
+                    android:textColor="#333333"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/lease_item_monery_02"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/lease_item_name_02"
+                    android:layout_below="@+id/lease_item_name_02"
+                    android:layout_marginTop="5dp"
+                    android:text="TextView"
+                    android:textColor="#fd6363"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/item_toys_all_company_02"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/lease_item_monery_02"
+                    android:layout_toRightOf="@+id/lease_item_monery_02"
+                    android:text="TextView"
+                    android:textColor="#fd6363"
+                    android:textSize="12dp" />
+
+                <ImageView
+                    android:id="@+id/category_icon_url_02"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignBottom="@+id/lease_item_monery_02"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/item_toys_all_company_02"
+                    android:src="@drawable/ic_launcher" />
+
+                <TextView
+                    android:id="@+id/item_toys_all_age_02"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/lease_item_monery_02"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="tew"
+                    android:textColor="#999999"
+                    android:textSize="12dp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="fill_parent"
+                android:background="#f5f5f5" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#f5f5f5" />
+    </LinearLayout>
+
+</LinearLayout>

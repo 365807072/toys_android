@@ -1,0 +1,303 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/page_bg" >
+
+    <RelativeLayout
+        android:id="@+id/general_ly"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        android:background="@color/title_bg" >
+
+        <LinearLayout
+            android:id="@+id/general_ly1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/general_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/grow_detail_backback" />
+
+            <TextView
+                android:id="@+id/general_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textColor="#ffffff"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/title_right_text"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:gravity="center_vertical"
+            android:text="明细"
+            android:textColor="#fff"
+            android:textSize="18sp"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/search_root"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/general_ly"
+        android:background="#f7f7f7"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:visibility="gone" >
+
+        <EditText
+            android:id="@+id/search"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_vertical"
+            android:layout_weight="1"
+            android:background="@drawable/business_search"
+            android:hint="搜索商家名称"
+            android:paddingBottom="5dp"
+            android:paddingLeft="25dp"
+            android:paddingRight="5dp"
+            android:paddingTop="5dp"
+            android:textColor="#666666"
+            android:textColorHint="#666666"
+            android:textSize="13sp" />
+
+        <ImageView
+            android:id="@+id/search_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/search_bt"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/search_cancle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/cancel_sercher" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/order_type"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/search_root"
+        android:background="#fff"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/order_type_01"
+            android:layout_width="fill_parent"
+            android:layout_height="32dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/order_type_bg"
+            android:paddingBottom="2dp"
+            android:text="全部"
+            android:textColor="@color/order_type_color" />
+
+        <Button
+            android:id="@+id/order_type_02"
+            android:layout_width="fill_parent"
+            android:layout_height="32dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/order_type_bg"
+            android:paddingBottom="2dp"
+            android:text="未支付" />
+
+        <Button
+            android:id="@+id/order_type_03"
+            android:layout_width="fill_parent"
+            android:layout_height="32dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/order_type_bg"
+            android:paddingBottom="2dp"
+            android:text="未消费" />
+
+        <Button
+            android:id="@+id/order_type_04"
+            android:layout_width="fill_parent"
+            android:layout_height="32dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/order_type_bg"
+            android:paddingBottom="2dp"
+            android:text="已完成" />
+
+        <Button
+            android:id="@+id/expandtab_view"
+            android:layout_width="fill_parent"
+            android:layout_height="32dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/order_type_bg"
+            android:paddingBottom="2dp"
+            android:text="明细"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/order_type"
+        android:background="#f1f1f1" />
+
+    <com.yyqq.commen.view.PullDownView
+        android:id="@+id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/order_hint"
+        android:layout_below="@+id/view1"
+        android:cacheColorHint="#FFFFFF"
+        android:divider="#FFFFFF"
+        android:footerDividersEnabled="false"
+        android:hapticFeedbackEnabled="false"
+        android:listSelector="#FFFFFF" >
+    </com.yyqq.commen.view.PullDownView>
+
+    <LinearLayout
+        android:id="@+id/ly_no"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/general_ly"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:background="#fff"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <ImageView
+            android:id="@+id/more_coupon_bt"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:src="@drawable/order_no_bg" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/bt_redBack"
+        android:layout_width="48dp"
+        android:layout_height="51dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/bt_red_back"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/order_hint"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:background="#80000000"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/v"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="有任何问题，请及时拨打自由环球租赁客服电话 010-82865072"
+            android:textColor="@color/text_white"
+            android:textSize="10sp" />
+
+        <LinearLayout
+            android:id="@+id/order_info_hint"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:background="#fff"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:visibility="gone" >
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.8"
+                android:src="@drawable/order_number_icon" />
+
+            <TextView
+                android:id="@+id/order_detailde_number"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="#fff"
+                android:gravity="center|left"
+                android:padding="10dp"
+                android:textColor="#333333"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.8"
+                android:src="@drawable/order_monery_icon" />
+
+            <TextView
+                android:id="@+id/order_detailde_monery"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="#fff"
+                android:gravity="center|left"
+                android:padding="10dp"
+                android:textColor="#333333"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/order_detailed"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="100dp"
+        android:background="#50000000"
+        android:orientation="horizontal"
+        android:visibility="gone" >
+
+        <LinearLayout
+            android:id="@+id/order_detailed_option"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <GridView
+                android:id="@+id/order_detail_option_list"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:listSelector="#fff"
+                android:numColumns="4" >
+            </GridView>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

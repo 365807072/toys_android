@@ -1,0 +1,15 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!-- 设置填充颜色 为白色 -->
+    <solid android:color="#ff6d6d" />
+
+    <!-- 设置几何图形四个角的弧度 -->
+    <corners android:radius="15dp" />
+
+    <!-- 设置几何形状绘制边框 红色边框 -->
+    <!-- <stroke
+        android:width="0.5dp"
+        android:color="#d72722" >
+    </stroke> -->
+
+</shape>

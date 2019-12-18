@@ -1,0 +1,32 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:background="#fff"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:padding="10dp" >
+
+        <ImageView
+            android:layout_width="5dp"
+            android:layout_height="fill_parent"
+            android:background="@drawable/toys_main_list_icon" />
+
+        <TextView
+            android:id="@+id/item_cart_type"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:text="玩具类型"
+            android:textColor="#666666"
+            android:textSize="@dimen/text_size_14" />
+    </RelativeLayout>
+
+</LinearLayout>

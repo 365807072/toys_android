@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.yyqq.babyshow"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff8ed" >
+
+    <com.yyqq.commen.utils.RoundAngleImageView
+        android:id="@+id/head"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/def_head"
+        app:roundHeight="25dp"
+        app:roundWidth="25dp" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:text="昵称"
+        android:layout_toRightOf="@id/head"
+        android:textColor="#ea6863"
+        android:textSize="14dp" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:text="6小时"
+        android:textColor="#ADADAD"
+        android:textSize="12dp" />
+
+    <View
+        android:layout_width="1px"
+        android:layout_height="10dp"
+        android:layout_below="@id/head" />
+
+</RelativeLayout>

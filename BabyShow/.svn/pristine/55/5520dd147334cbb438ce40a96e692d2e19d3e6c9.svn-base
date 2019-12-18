@@ -1,0 +1,399 @@
+package com.yyqq.code.postbar;
+
+import java.util.ArrayList;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.ab.http.AbHttpUtil;
+import com.ab.http.AbRequestParams;
+import com.ab.http.AbStringHttpResponseListener;
+import com.umeng.analytics.MobclickAgent;
+import com.yyqq.babyshow.R;
+import com.yyqq.code.business.BusinessDetailActivity;
+import com.yyqq.code.main.MainItemDetialActivity;
+import com.yyqq.commen.model.PostBarTypeItem;
+import com.yyqq.commen.utils.Config;
+import com.yyqq.commen.utils.GroupRelevantUtils;
+import com.yyqq.commen.view.PullDownView;
+import com.yyqq.commen.view.PullDownView.OnPullDownListener;
+import com.yyqq.framework.application.MyApplication;
+import com.yyqq.framework.application.ServerMutualConfig;
+
+
+/**
+ * 弃用
+ * 
+ * 2016.09.26
+ * */
+public class QunList extends Activity implements OnPullDownListener {
+
+	private Activity context;
+	private String TAG = "fanfan_QunList";
+	private AbHttpUtil ab;
+	private PullDownView mPullDownView;
+	private ListView listview;
+	private MyAdapter adapter;
+	ArrayList<PostBarTypeItem> dataPostInterestList = new ArrayList<PostBarTypeItem>();
+	private MyApplication app;
+	private TextView post_title;
+	private static int indexitem = 0;// 记录选中的图片位置
+	private boolean indexitemfla;// 记录选中的图片位置
+	private ImageView find;
+
+	public void onResume() {
+		super.onResume();
+		if (indexitemfla) {
+			indexitemfla = false;
+			adapter.notifyDataSetChanged();
+			listview.setSelection(indexitem);
+		}
+		MobclickAgent.onResume(this);
+	}
+
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == 1) {
+			indexitemfla = true;
+			listview.setSelection(indexitem);
+		}
+	}
+
+	public void onCreate(Bundle b) {
+		super.onCreate(b);
+		Config.setActivityState(this);
+		context = this;
+		setContentView(R.layout.postbar);
+		init();
+	}
+
+	private void init() {
+		
+		find = (ImageView) findViewById(R.id.find);
+		find.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				QunList.this.finish();
+			}
+		});
+		DisplayMetrics DM = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(DM);
+		ab = AbHttpUtil.getInstance(context);
+		app = (MyApplication) context.getApplication();
+		post_title = (TextView) findViewById(R.id.post_title);
+		if(getIntent().hasExtra("img_title")){
+			post_title.setText(getIntent().getStringExtra("img_title"));
+			post_title.setVisibility(View.VISIBLE);
+		}
+		mPullDownView = (PullDownView) findViewById(R.id.list);
+		mPullDownView.setOnPullDownListener(this);
+		listview = mPullDownView.getListView();
+		listview.setDivider(null);
+		if (adapter == null) {
+			adapter = new MyAdapter();
+		}
+		listview.setAdapter(adapter);
+		// 设置可以自动获取更多 滑到最后一个自动获取 改成false将禁用自动获取更多
+		mPullDownView.enableAutoFetchMore(true, 1);
+		// 隐藏 并禁用尾部
+		// mPullDownView.setHideFooter();
+		// 显示并启用自动获取更多
+		mPullDownView.setShowFooter();
+		// 隐藏并且禁用头部刷新
+		// mPullDownView.setHideHeader();
+		// listview.addHeaderView(mGallery);
+		// 显示并且可以使用头部刷新
+		mPullDownView.setShowHeader();
+		// mPullDownView.setPadding(0, 0, 0, 0);
+		onRefresh();
+	}
+
+	@Override
+	public void onRefresh() {
+		AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(context).uid);
+		// Log.e(TAG,
+		// ServerMutualConfig.PostMyInterestList + "&" + params.toString());
+		ab.setTimeout(5000);
+		ab.get(ServerMutualConfig.GetGroupList + "&" + params.toString(),
+				new AbStringHttpResponseListener() {
+
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						try {
+							dataPostInterestList.clear();
+							JSONObject json = new JSONObject(content);
+							for (int i = 0; i < json.getJSONArray("data")
+									.length(); i++) {
+								PostBarTypeItem item = new PostBarTypeItem();
+								item.fromJson(json.getJSONArray("data")
+										.getJSONObject(i));
+								dataPostInterestList.add(item);
+							}
+							adapter.notifyDataSetChanged();
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+
+					@Override
+					public void onFinish() {
+						Config.dismissProgress();
+						super.onFinish();
+					}
+
+					@Override
+					public void onFailure(int statusCode, String content,
+							Throwable error) {
+						super.onFailure(statusCode, content, error);
+					}
+
+					@Override
+					public void sendSuccessMessage(int statusCode,
+							String content) {
+						super.sendSuccessMessage(statusCode, content);
+						Config.dismissProgress();
+						mPullDownView.RefreshComplete();// 这个事线程安全的 可看源代码
+						mPullDownView.notifyDidMore();
+					}
+
+				});
+	}
+
+	@Override
+	public void onMore() {
+		if (dataPostInterestList.size() == 0) {
+			mPullDownView.notifyDidMore();
+			mPullDownView.RefreshComplete();
+			return;
+		}
+		AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(context).uid);
+		params.put(
+				"post_create_time",
+				dataPostInterestList.get(dataPostInterestList.size() - 1).post_create_time
+						+ "");
+		// Log.e(TAG,
+		// ServerMutualConfig.GetGroupList + "&" + params.toString());
+		ab.get(ServerMutualConfig.GetGroupList + "&" + params.toString(),
+				new AbStringHttpResponseListener() {
+
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						Config.dismissProgress();
+						try {
+							JSONObject json = new JSONObject(content);
+							for (int i = 0; i < json.getJSONArray("data")
+									.length(); i++) {
+								PostBarTypeItem item = new PostBarTypeItem();
+								item.fromJson(json.getJSONArray("data")
+										.getJSONObject(i));
+								dataPostInterestList.add(item);
+							}
+							adapter.notifyDataSetChanged();
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+
+					@Override
+					public void sendSuccessMessage(int statusCode,
+							String content) {
+						super.sendSuccessMessage(statusCode, content);
+						Config.dismissProgress();
+						mPullDownView.RefreshComplete();// 这个事线程安全的 可看源代码
+						mPullDownView.notifyDidMore();
+					}
+
+				});
+	}
+
+	class ViewHolder {
+		RelativeLayout tu;
+		ImageView img, img2, qun_biao;
+		TextView post_title;
+		TextView visit_num;
+		TextView see_num;
+		TextView msg, msg2;
+	}
+
+	public class MyAdapter extends BaseAdapter {
+
+		@Override
+		public int getCount() {
+			return dataPostInterestList.size();
+		}
+
+		@Override
+		public Object getItem(int arg0) {
+			return dataPostInterestList.get(arg0);
+		}
+
+		@Override
+		public long getItemId(int arg0) {
+			return arg0;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see android.widget.Adapter#getView(int, android.view.View,
+		 * android.view.ViewGroup)
+		 */
+		@Override
+		public View getView(int index, View convertView, ViewGroup arg2) {
+			LayoutInflater inflater = (LayoutInflater) context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			convertView = inflater.inflate(R.layout.postbar_list_item, null);
+			ViewHolder holder = null;
+			holder = new ViewHolder();
+			holder.tu = (RelativeLayout) convertView.findViewById(R.id.tu);
+			holder.img = (ImageView) convertView.findViewById(R.id.post_img);
+			holder.img2 = (ImageView) convertView.findViewById(R.id.post_img2);
+			holder.qun_biao = (ImageView) convertView
+					.findViewById(R.id.qun_biao);
+			holder.post_title = (TextView) convertView
+					.findViewById(R.id.post_title);
+			holder.visit_num = (TextView) convertView
+					.findViewById(R.id.visit_num);
+			holder.see_num = (TextView) convertView.findViewById(R.id.see_num);
+			holder.msg = (TextView) convertView.findViewById(R.id.msg);
+			holder.msg2 = (TextView) convertView.findViewById(R.id.msg2);
+
+			final PostBarTypeItem item = dataPostInterestList.get(index);
+
+			// 图片
+			if ("0".equals(item.is_group)) {
+				holder.img.setVisibility(View.VISIBLE);
+				holder.img2.setVisibility(View.GONE);
+				if (TextUtils.isEmpty(item.img)) {
+					holder.tu.setVisibility(View.GONE);
+				} else {
+					app.display(item.img, holder.img, R.drawable.deft_color);
+				}
+			} else if ("2".equals(item.is_group)) {
+				holder.img.setVisibility(View.VISIBLE);
+				holder.img2.setVisibility(View.GONE);
+				if (TextUtils.isEmpty(item.img)) {
+					holder.tu.setVisibility(View.GONE);
+				} else {
+					app.display(item.img, holder.img, R.drawable.deft_color);
+				}
+			} else {
+				holder.img.setVisibility(View.GONE);
+				holder.img2.setVisibility(View.VISIBLE);
+				if (TextUtils.isEmpty(item.img)) {
+					holder.tu.setVisibility(View.GONE);
+				} else {
+					app.display(item.img, holder.img2, R.drawable.deft_color);
+				}
+			}
+			// 群
+			// if ("1".equals(item.is_group)) {
+			// holder.qun_biao.setVisibility(View.VISIBLE);
+			// } else if ("2".equals(item.is_group)) {
+			// holder.qun_biao.setVisibility(View.VISIBLE);
+			// holder.qun_biao.setBackgroundResource(R.drawable.business_biao);
+			// } else {
+			// holder.qun_biao.setVisibility(View.GONE);
+			// }
+			// 标题
+			if ("0".equals(item.is_group)) {// 0是话题
+				if (!TextUtils.isEmpty(item.img_title))
+					holder.post_title.setText(item.img_title);
+			} else if ("1".equals(item.is_group)) {
+				if (!TextUtils.isEmpty(item.group_name))
+					holder.post_title.setText(item.group_name);
+			} else {
+				if (!TextUtils.isEmpty(item.img_title))
+					holder.post_title.setText(item.img_title);
+			}
+			// 参与人数
+			if (!TextUtils.isEmpty(item.review_count))
+				holder.visit_num.setText("参与" + item.review_count + "人");
+			// 观看/帖子人数
+			if (!TextUtils.isEmpty(item.post_count)) {
+				if ("0".equals(item.is_group)) {
+					holder.see_num.setText("观看" + item.post_count + "人");
+				} else {
+					holder.see_num.setText("帖子" + item.post_count + "个");
+				}
+			}
+			// 描述
+			if ("0".equals(item.is_group)) {
+				holder.msg.setVisibility(View.VISIBLE);
+				holder.msg2.setVisibility(View.GONE);
+				holder.msg.setText(item.description);
+			} else if ("1".equals(item.is_group)) {
+				holder.msg.setVisibility(View.GONE);
+				if ("0".equals(item.is_share)) {// 没有参加
+					holder.msg2.setVisibility(View.VISIBLE);
+				} else {
+					holder.msg2.setVisibility(View.GONE);
+				}
+			} else {
+				holder.msg.setVisibility(View.VISIBLE);
+				holder.msg2.setVisibility(View.GONE);
+				holder.msg.setText(item.description);
+			}
+
+			convertView.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					if ("0".equals(item.is_group)) {
+						Intent intent = new Intent(context,
+								MainItemDetialActivity.class);
+						intent.putExtra("user_id", item.user_id);
+						intent.putExtra("img_id", item.img_id);
+						indexitem = listview.getFirstVisiblePosition();
+						context.startActivityForResult(intent, 1);
+					} else if ("1".equals(item.is_group)) {
+//						Intent intent = new Intent(context, GroupMainActivity.class);
+//						intent.putExtra("group_id", item.group_id);
+//						intent.putExtra("group_name", item.group_name);
+//						indexitem = listview.getFirstVisiblePosition();
+//						context.startActivityForResult(intent, 1);
+						
+						indexitem = listview.getFirstVisiblePosition();
+						GroupRelevantUtils.CheckIntent(context, item.group_id);
+					} else {
+						Intent intent = new Intent(context, BusinessDetailActivity.class);
+						intent.putExtra("business_id", item.img_id);
+						indexitem = listview.getFirstVisiblePosition();
+						context.startActivityForResult(intent, 1);
+					}
+				}
+			});
+
+			return convertView;
+		}
+
+	}
+
+}

@@ -1,0 +1,101 @@
+package com.yyqq.commen.adapter;
+
+import java.util.ArrayList;
+
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
+
+import com.yyqq.babyshow.R;
+import com.yyqq.code.business.BusinessDetailActivity;
+import com.yyqq.code.group.GroupMainActivity;
+import com.yyqq.code.main.MainItemDetialActivity;
+import com.yyqq.code.video.VideoDetialActivity;
+import com.yyqq.commen.model.MainItemHintBean;
+import com.yyqq.commen.model.PostBarTypeItem;
+import com.yyqq.commen.utils.GroupRelevantUtils;
+
+/**
+ * 帖子详情页的推荐列表
+ * */
+public class MainItemHintAdapter extends BaseAdapter {
+
+	private Activity context = null;
+	private LayoutInflater inflater = null;
+	private ArrayList<MainItemHintBean> cateGoryList;
+
+	public MainItemHintAdapter(Activity context, LayoutInflater inflater, ArrayList<MainItemHintBean> cateGoryList) {
+		super();
+		this.context = context;
+		this.inflater = inflater;
+		this.cateGoryList = cateGoryList;
+	}
+
+	@Override
+	public int getCount() {
+		return cateGoryList.size();
+	}
+
+	@Override
+	public Object getItem(int position) {
+		return cateGoryList.get(position);
+	}
+
+	@Override
+	public long getItemId(int position) {
+		return position;
+	}
+
+	@SuppressLint("NewApi")
+	@Override
+	public View getView(final int position, View convertView, ViewGroup parent) {
+		convertView = inflater.inflate(R.layout.item_main_hint_title, null);
+
+		TextView item_main_hint_title = (TextView) convertView.findViewById(R.id.item_main_hint_title);
+		item_main_hint_title.setText(cateGoryList.get(position).getImg_title());
+
+		convertView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = null;
+				if (cateGoryList.get(position).getIs_group().equals("0")) { // 帖子
+					intent = new Intent(context, MainItemDetialActivity.class);
+					intent.putExtra("img_id", cateGoryList.get(position).getImg_id());
+				} else if (cateGoryList.get(position).getIs_group().equals("1")) { // 群
+//					intent = new Intent(context, GroupMainActivity.class);
+//					intent.putExtra("group_id", cateGoryList.get(position).getImg_id());
+					GroupRelevantUtils.CheckIntent(context, cateGoryList.get(position).getImg_id());
+				} else if (cateGoryList.get(position).getIs_group().equals("2")) { // 商家
+					intent = new Intent(context, BusinessDetailActivity.class);
+					intent.putExtra("business_id", cateGoryList.get(position).getImg_id());
+				} else if (cateGoryList.get(position).getIs_group().equals("5")) { // 视频
+					intent = new Intent(context, VideoDetialActivity.class);
+					PostBarTypeItem postBean = new PostBarTypeItem();
+					postBean.setImg_id(cateGoryList.get(position).getImg_id());
+					postBean.setUser_id(cateGoryList.get(position).getUser_id());
+					postBean.setVideo_url(cateGoryList.get(position).getVideo_url());
+					postBean.setImg(cateGoryList.get(position).getVideo_img());
+					postBean.setImg_thumb_width(cateGoryList.get(position).getWidth());
+					postBean.setImg_thumb_height(cateGoryList.get(position).getHeight());
+					Bundle bun = new Bundle();
+					bun.putSerializable(VideoDetialActivity.VIIDEO_INFO,postBean);
+					intent.putExtras(bun);
+				}
+				if(null != intent){
+					context.startActivity(intent);
+				}
+			}
+		});
+
+		return convertView;
+	}
+
+}

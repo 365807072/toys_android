@@ -1,0 +1,291 @@
+package com.yyqq.code.toyslease;
+
+import java.util.ArrayList;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.ab.http.AbHttpUtil;
+import com.ab.http.AbRequestParams;
+import com.ab.http.AbStringHttpResponseListener;
+import com.umeng.analytics.MobclickAgent;
+import com.yyqq.babyshow.R;
+import com.yyqq.code.login.WebLoginActivity;
+import com.yyqq.code.main.MainItemDetialWebActivity;
+import com.yyqq.commen.adapter.ToysLeaseOrderListAdapter;
+import com.yyqq.commen.model.ToysLeaseOrderListBean;
+import com.yyqq.commen.utils.Config;
+import com.yyqq.commen.view.PullDownView;
+import com.yyqq.commen.view.PullDownView.OnPullDownListener;
+import com.yyqq.framework.activity.BaseActivity;
+import com.yyqq.framework.application.MyApplication;
+import com.yyqq.framework.application.ServerMutualConfig;
+
+
+/**
+ * 玩具订单首页
+ * */
+public class ToysLeaseMainOrderActivity extends BaseActivity implements OnPullDownListener{
+
+	private PullDownView mPullDownView;
+	private ListView listview;
+	private RelativeLayout mRelativeLayout;
+	private RelativeLayout toys_order_myprice;
+	private TextView toys_order_myprice_hint;
+	private TextView toys_order_myprice_monery;
+	private ImageView lease_main_right;
+	private ImageView toys_order_to_main;
+	
+	private boolean isIntent = false;
+	private AbHttpUtil ab;
+	private LayoutInflater inflater;
+	private ToysLeaseOrderListAdapter adapter = null;
+	private ArrayList<ToysLeaseOrderListBean> orderList = new ArrayList<ToysLeaseOrderListBean>();
+	private SharedPreferences sp_main_list;
+	private Editor ed_main_list;
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_toys_lease_order_list);
+	}
+
+	@Override
+	protected void initView() {
+		ab = AbHttpUtil.getInstance(this);
+		inflater = LayoutInflater.from(this);
+		toys_order_to_main = (ImageView) findViewById(R.id.toys_order_to_main);
+		toys_order_myprice = (RelativeLayout) findViewById(R.id.toys_order_myprice);
+		toys_order_myprice_hint = (TextView) findViewById(R.id.toys_order_myprice_hint);
+		toys_order_myprice_monery = (TextView) findViewById(R.id.toys_order_myprice_monery);
+		mPullDownView = (PullDownView) findViewById(R.id.list);
+		mPullDownView.setOnPullDownListener(this);
+		mPullDownView.setShowHeader();// 显示并且可以使用头部刷新
+		listview = mPullDownView.getListView();
+		listview.setDivider(null);
+		if (adapter == null) {
+			adapter = new ToysLeaseOrderListAdapter(this, inflater, orderList, ab);
+		}
+		listview.setAdapter(adapter);
+
+		mPullDownView.enableAutoFetchMore(true, 1);// 设置可以自动获取更多 滑到最后一个自动获取
+		lease_main_right = (ImageView) findViewById(R.id.lease_main_right);
+		
+	}
+
+	@Override
+	protected void initData() {
+		sp_main_list = getSharedPreferences("order_main_list", Context.MODE_PRIVATE);
+		ed_main_list = sp_main_list.edit();
+	}
+
+	@Override
+	protected void setListener() {
+		
+		toys_order_to_main.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				ToysLeaseMainTabActivity.tabHost.setCurrentTab(0);
+			}
+		});
+		
+		lease_main_right.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				 // 检查登录状态
+				if(!MyApplication.getVisitor().equals("0")  || Config.getUser(ToysLeaseMainOrderActivity.this).uid.equals("")){
+					Intent in = new Intent(ToysLeaseMainOrderActivity.this, WebLoginActivity.class);
+					startActivity(in);
+				}else{
+					Intent intent = new Intent(ToysLeaseMainOrderActivity.this, MainItemDetialWebActivity.class);
+					intent.putExtra(MainItemDetialWebActivity.LINK_URL, "http://www.baobaoshowshow.com/question/questionIndex.html?login_user_id="+Config.getUser(ToysLeaseMainOrderActivity.this).uid);
+					startActivity(intent);
+				}
+			}
+		});
+		
+		toys_order_myprice.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(ToysLeaseMainOrderActivity.this, ToysLeaseDepositActivity.class);
+				startActivity(intent);
+			}
+		});
+		
+	}
+
+	@Override
+	public void onRefresh() {
+		getOrderData(false);
+	}
+
+	@Override
+	public void onMore() {
+		getOrderData(true);
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+		
+		if(isIntent && !MyApplication.getVisitor().equals("0")  || Config.getUser(ToysLeaseMainOrderActivity.this).uid.equals("")){
+			if(null != ToysLeaseMainTabActivity.toysLeaseMainTabActivity){
+				ToysLeaseMainTabActivity.toysLeaseMainTabActivity.finish();
+			}
+			Intent in = new Intent(ToysLeaseMainOrderActivity.this, ToysLeaseMainTabActivity.class);
+			startActivity(in);
+			this.finish();
+		}else if(!isIntent && !MyApplication.getVisitor().equals("0")  || Config.getUser(ToysLeaseMainOrderActivity.this).uid.equals("")){
+			isIntent = true;
+			Intent in = new Intent(ToysLeaseMainOrderActivity.this, WebLoginActivity.class);
+			startActivity(in);
+		}else{
+			// 获取缓存
+			if(!sp_main_list.getString("order_main_list", "").isEmpty()){
+				initListData(sp_main_list.getString("order_main_list", ""), false);
+			}
+			// 刷新数据
+			if(Config.isConn(this)){
+				onRefresh();
+			}
+		}
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
+	
+	/**
+	 * 获取订单列表
+	 * */
+	private void getOrderData(final boolean isMore){
+		AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(this).uid);
+		
+		if(isMore && orderList.size() != 0){
+			params.put("post_create_time", orderList.get(orderList.size()-1).getPost_create_time());
+		}else{
+			orderList.clear();
+		}
+		
+		ab.get(ServerMutualConfig.GET_TOYS_ORDER_LIST + "&" + params.toString(), new AbStringHttpResponseListener() {
+			
+			@Override
+			public void onSuccess(int statusCode, String content) {
+				super.onSuccess(statusCode, content);
+				initListData(content, isMore);
+			}
+			
+			@Override
+			public void onFinish() {
+				super.onFinish();
+				mPullDownView.RefreshComplete();// 这个事线程安全的 可看源代码
+				mPullDownView.notifyDidMore();
+			}
+			
+			@Override
+			public void onFailure(int statusCode, String content,
+					Throwable error) {
+				super.onFailure(statusCode, content, error);
+			}
+		});
+	}
+	
+	
+	/**
+	 * 初始化列表数据
+	 * */
+	private void initListData(String content, boolean isMore){
+		try {
+			if(new JSONObject(content).getBoolean("success")){
+				
+				// 更新缓存
+				ed_main_list.putString("order_main_list", content);
+				ed_main_list.commit();
+				
+				JSONArray data = new JSONObject(content).getJSONArray("data");
+				
+				if(data.length() != 0){
+					
+					toys_order_to_main.setVisibility(View.GONE);
+					toys_order_myprice.setVisibility(View.VISIBLE);
+					mPullDownView.setVisibility(View.VISIBLE);
+					
+					if(!isMore){
+						if(data.getJSONObject(0).getString("order_status").equals("1")){
+							toys_order_myprice.setVisibility(View.VISIBLE);
+							toys_order_myprice_hint.setText(data.getJSONObject(0).getString("business_title"));
+							toys_order_myprice_monery.setText(data.getJSONObject(0).getString("sell_price"));
+						}else{
+							toys_order_myprice.setVisibility(View.GONE);
+						}
+					}
+					
+					ToysLeaseOrderListBean bean = null;
+					for(int i = 0 ; i < data.length() ; i++ ){
+						// 如果是押金，则此条数据不加入列表
+						if(!data.getJSONObject(i).getString("order_status").equals("1")){ 
+							bean = new ToysLeaseOrderListBean();
+							bean.setBusiness_id(data.getJSONObject(i).getString("business_id"));
+							bean.setBusiness_title(data.getJSONObject(i).getString("business_title"));
+							bean.setImg_thumb(data.getJSONObject(i).getString("img_thumb"));
+							bean.setIs_reset(data.getJSONObject(i).getString("is_reset"));
+							bean.setOrder_id(data.getJSONObject(i).getString("order_id"));
+							bean.setOrder_status(data.getJSONObject(i).getString("order_status"));
+							bean.setPost_create_time(data.getJSONObject(i).getString("post_create_time"));
+							bean.setSell_price(data.getJSONObject(i).getString("sell_price"));
+							bean.setStatus(data.getJSONObject(i).getString("status"));
+							bean.setIs_del(data.getJSONObject(i).getString("is_del"));
+							bean.setStatus_name(data.getJSONObject(i).getString("status_name"));
+							bean.setIs_Jump(data.getJSONObject(i).getString("is_jump"));
+							bean.setPost_url(data.getJSONObject(i).getString("post_url"));
+							orderList.add(bean);
+						}
+					}
+					adapter.notifyDataSetChanged();
+				}else{
+					// 无订单情况下
+					if(!isMore){
+						toys_order_to_main.setVisibility(View.VISIBLE);
+						toys_order_myprice.setVisibility(View.GONE);
+						mPullDownView.setVisibility(View.GONE);
+					}
+				}
+				
+				if(data.length() < 10){
+					mPullDownView.setHideFooter();
+				}else{
+					mPullDownView.setShowFooter();
+				}
+				
+				if(!ToysLeaseMainTabActivity.order_id.isEmpty()){
+					Intent intent = new Intent(ToysLeaseMainOrderActivity.this, ToysLeaseOrderDetailActivity.class);
+					intent.putExtra(ToysLeaseOrderDetailActivity.ORDER_ID_KEY, ToysLeaseMainTabActivity.order_id);
+					ToysLeaseMainOrderActivity.this.startActivity(intent);
+					ToysLeaseMainTabActivity.order_id = "";
+				}
+				
+			}
+		} catch (Exception e) {
+		}
+	}
+}

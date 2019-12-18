@@ -1,0 +1,66 @@
+package com.yyqq.commen.view;
+
+import java.util.ArrayList;
+
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
+import android.view.View;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
+
+import com.yyqq.babyshow.R;
+import com.yyqq.code.main.GoodLife;
+import com.yyqq.code.main.MyIndex;
+import com.yyqq.code.user.UserInfo;
+import com.yyqq.commen.adapter.MainPopupAdapter;
+import com.yyqq.commen.model.MainListItemBean;
+import com.yyqq.commen.model.SearchItem;
+import com.yyqq.commen.utils.Config;
+
+public class MainPopWindowsView  extends PopupWindow {
+	
+	public MainPopWindowsView(final Context context, View parent, final ArrayList<MainListItemBean> data,
+			final ArrayList<SearchItem> searchData, final RelativeLayout search_root,
+			final RelativeLayout title) {
+		View view = View.inflate(context, R.layout.plaza_popupwindows, null);
+		ListView popList = (ListView) view.findViewById(R.id.popList);
+		setWidth(LayoutParams.FILL_PARENT);
+		setHeight(LayoutParams.FILL_PARENT);
+		setBackgroundDrawable(new BitmapDrawable());
+		setFocusable(true);
+		setOutsideTouchable(true);
+		setContentView(view);
+		showAsDropDown(parent);
+		popList.setAdapter(new MainPopupAdapter(context, data, searchData));
+		popList.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+				Intent intent = new Intent();
+
+				if (data.size() > 0) {
+					if (Config.getUser(context).uid.equals(searchData.get(arg2).id)) {
+						intent.setClass(context, MyIndex.class);
+						intent.putExtra("falg_return", true);
+					} else {
+						intent.setClass(context, UserInfo.class);
+					}
+					intent.putExtra("uid", searchData.get(arg2).id);
+					GoodLife.sss = 0;
+					search_root.setVisibility(View.GONE);
+					title.setVisibility(View.VISIBLE);
+					((Context) context).startActivity(intent);
+				}
+
+			}
+		});
+		update();
+	}
+}

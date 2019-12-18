@@ -1,0 +1,648 @@
+package com.yyqq.code.business;
+
+import java.util.ArrayList;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Paint;
+import android.net.Uri;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.DisplayMetrics;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
+import android.widget.Toast;
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.Platform.ShareParams;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.onekeyshare.OnekeyShare;
+import cn.sharesdk.onekeyshare.ShareContentCustomizeCallback;
+
+import com.ab.http.AbHttpUtil;
+import com.ab.http.AbRequestParams;
+import com.ab.http.AbStringHttpResponseListener;
+import com.umeng.analytics.MobclickAgent;
+import com.yyqq.babyshow.R;
+import com.yyqq.code.login.WebLoginActivity;
+import com.yyqq.code.map.TencetMapActivity;
+import com.yyqq.code.photo.ChangePhotoSize;
+import com.yyqq.commen.adapter.BusinessPackageAdapter;
+import com.yyqq.commen.model.BusinessItem;
+import com.yyqq.commen.model.BusinessPackageBean;
+import com.yyqq.commen.utils.Config;
+import com.yyqq.framework.application.MyApplication;
+import com.yyqq.framework.application.ServerMutualConfig;
+
+/**
+ * 商家详情页
+ * */
+public class BusinessDetailActivity extends Activity {
+
+	private Activity context;
+	private String TAG = "fanfan_Business";
+	private AbHttpUtil ab;
+	private MyApplication app;
+	private BusinessItem item;
+	private RelativeLayout back;
+	private String Business_id = "";
+	private String isBoss = "0";
+	private int windowWidth;
+	private ArrayList<BusinessPackageBean> packageList = new ArrayList<BusinessPackageBean>();
+
+	private RelativeLayout ly_img; // 图片布局
+	private ImageView business_pic2; // 商家图片
+	private TextView picture_size; // 商家数目
+	private TextView business_title; // 商家名称
+	private RelativeLayout ly_position; // 商家地址布局        
+	private TextView business_location; // 商家地址
+	private TextView business_time; // 使用时间
+	private LinearLayout ly_tel; // 商家联系电话
+	private ImageView business_pay1, business_pay2, business_pay3,
+			business_pay4; // 套餐支付
+	private LinearLayout ly_combo1, ly_combo2, ly_combo3, ly_combo4; // 套餐布局
+	private TextView current_price1, current_price2, current_price3,
+			current_price4; // 套餐秀秀价
+	private TextView original_price1, original_price2, original_price3,
+			original_price4; // 套餐市场价
+	private TextView business_combo1, business_combo2, business_combo3,
+			business_combo4; // 套餐详情
+	private TextView business_combo1_times, business_combo2_times,
+			business_combo3_times, business_combo4_times; // 套餐次数
+	private TextView business_combo1_time, business_combo2_time,
+			business_combo3_time, business_combo4_time; // 套餐有效期
+	private TextView business_description; // 商家简介
+	private ImageView grade1; // 综合评价
+	private ImageView grade3; // 用户评价
+	private TextView tv_xiu; // 秀秀用户评价
+	private TextView user_name; // 评论用户
+	private TextView user_time; // 评论时间
+	private TextView user_msg; // 评论内容
+	private LinearLayout ly_ping; // 用户评价布局
+	private RelativeLayout ly_more; // 更多内容
+	private double latitude;
+	private double longitude;
+	private double t_latitude;
+	private double t_longitude;
+	private ImageView bs_share;
+	private String bs_img;
+	private String bs_title;
+	private ListView business_package_list;
+	private ScrollView business_mian_sc;
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		Config.setActivityState(this);
+		setContentView(R.layout.business);
+		ShareSDK.initSDK(this);
+		context = this;
+
+		DisplayMetrics DM = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(DM);
+		windowWidth = DM.widthPixels;
+		ab = AbHttpUtil.getInstance(context);
+		app = (MyApplication) context.getApplication();
+		Business_id = getIntent().getStringExtra("business_id");
+		onRefresh();
+		init(savedInstanceState);
+	}
+
+	private void init(Bundle savedInstanceState) {
+
+		business_package_list = (ListView) findViewById(R.id.business_package_list);
+		// 返回
+		back = (RelativeLayout) findViewById(R.id.ly);
+		back.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				context.finish();
+			}
+		});
+		// 分享
+		bs_share = (ImageView) findViewById(R.id.bs_share);
+		bs_share.setOnClickListener(ShareClick);
+		// 商家图片
+		ly_img = (RelativeLayout) findViewById(R.id.ly_img);
+		picture_size = (TextView) findViewById(R.id.picture_size);
+		business_pic2 = (ImageView) findViewById(R.id.business_pic2);
+		float hi = (float) (windowWidth / 2.5);
+		business_pic2.getLayoutParams().height = (int) hi;
+		business_pic2.setScaleType(ScaleType.CENTER_CROP);
+		// 商家名称
+		business_title = (TextView) findViewById(R.id.business_title);
+		// 商家地址
+		business_location = (TextView) findViewById(R.id.business_location);
+		ly_position = (RelativeLayout) findViewById(R.id.ly_position);
+		// 使用时间
+		business_time = (TextView) findViewById(R.id.business_time);
+		// 商家电话
+		ly_tel = (LinearLayout) findViewById(R.id.ly_tel);
+		// 商家简介
+		business_description = (TextView) findViewById(R.id.business_description);
+		// 套餐
+		ly_combo1 = (LinearLayout) findViewById(R.id.ly_combo1);
+		ly_combo2 = (LinearLayout) findViewById(R.id.ly_combo2);
+		ly_combo3 = (LinearLayout) findViewById(R.id.ly_combo3);
+		ly_combo4 = (LinearLayout) findViewById(R.id.ly_combo4);
+		// 套餐秀秀价
+		current_price1 = (TextView) findViewById(R.id.current_price1);
+		current_price2 = (TextView) findViewById(R.id.current_price2);
+		current_price3 = (TextView) findViewById(R.id.current_price3);
+		current_price4 = (TextView) findViewById(R.id.current_price4);
+		// 套餐市场价
+		original_price1 = (TextView) findViewById(R.id.original_price1);
+		original_price2 = (TextView) findViewById(R.id.original_price2);
+		original_price3 = (TextView) findViewById(R.id.original_price3);
+		original_price4 = (TextView) findViewById(R.id.original_price4);
+		original_price1.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); // 删除线
+		original_price2.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); // 删除线
+		original_price3.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); // 删除线
+		original_price4.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); // 删除线
+		// 套餐详情
+		business_combo1 = (TextView) findViewById(R.id.business_combo1);
+		business_combo2 = (TextView) findViewById(R.id.business_combo2);
+		business_combo3 = (TextView) findViewById(R.id.business_combo3);
+		business_combo4 = (TextView) findViewById(R.id.business_combo4);
+		// 套餐次数
+		business_combo1_times = (TextView) findViewById(R.id.business_combo1_times);
+		business_combo2_times = (TextView) findViewById(R.id.business_combo2_times);
+		business_combo3_times = (TextView) findViewById(R.id.business_combo3_times);
+		business_combo4_times = (TextView) findViewById(R.id.business_combo4_times);
+		// 套餐有效期
+		business_combo1_time = (TextView) findViewById(R.id.business_combo1_time);
+		business_combo2_time = (TextView) findViewById(R.id.business_combo2_time);
+		business_combo3_time = (TextView) findViewById(R.id.business_combo3_time);
+		business_combo4_time = (TextView) findViewById(R.id.business_combo4_time);
+		// 套餐支付
+		business_pay1 = (ImageView) findViewById(R.id.business_pay1);
+		business_pay2 = (ImageView) findViewById(R.id.business_pay2);
+		business_pay3 = (ImageView) findViewById(R.id.business_pay3);
+		business_pay4 = (ImageView) findViewById(R.id.business_pay4);
+
+		ly_combo1.setOnClickListener(payClick1);
+		ly_combo2.setOnClickListener(payClick2);
+		ly_combo3.setOnClickListener(payClick3);
+		ly_combo4.setOnClickListener(payClick4);
+
+		// 评分等级等级
+		grade1 = (ImageView) findViewById(R.id.grade1); // 综合评价
+		grade3 = (ImageView) findViewById(R.id.grade3); // 用户评价
+		// 更多评价
+		ly_more = (RelativeLayout) findViewById(R.id.ly_more);
+		ly_more.setOnClickListener(moreClick);
+		// 用户评价模块
+		tv_xiu = (TextView) findViewById(R.id.tv_xiu);
+		ly_ping = (LinearLayout) findViewById(R.id.ly_ping);
+		user_name = (TextView) findViewById(R.id.user_name);
+		user_time = (TextView) findViewById(R.id.expiration_time);
+		user_msg = (TextView) findViewById(R.id.user_msg);
+	}
+
+	private void getdate() {
+		// 是否免费或者首次体验过 （0 否，1是）
+		if ("1".equals(item.business_free_state1)) {
+			business_pay1.setBackgroundResource(R.drawable.business_no_pay);
+		}
+		if ("1".equals(item.business_free_state2)) {
+			business_pay2.setBackgroundResource(R.drawable.business_no_pay);
+		}
+		if ("1".equals(item.business_free_state3)) {
+			business_pay3.setBackgroundResource(R.drawable.business_no_pay);
+		}
+		if ("1".equals(item.business_free_state4)) {
+			business_pay4.setBackgroundResource(R.drawable.business_no_pay);
+		}
+		isBoss = item.user_role;
+		// 是否是商家
+		if (!TextUtils.isEmpty(item.user_role))
+			isBoss = item.user_role;
+
+		if (!TextUtils.isEmpty(item.business_title))
+			business_title.setText(item.business_title);
+
+		if (!TextUtils.isEmpty(item.business_description))
+			business_description.setText(item.business_description);
+
+		if (!TextUtils.isEmpty(item.listImg.get(0).img_thumb))
+			app.display(item.listImg.get(0).img_thumb, business_pic2,
+					R.drawable.deft_color);
+		picture_size.setText(item.listImg.size() + "张");
+		ly_img.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(context, ChangePhotoSize.class);
+				intent.putExtra("isBuy", "isBuy");
+				intent.putStringArrayListExtra("imgList", item.imaBig);
+				intent.putStringArrayListExtra("imaWid", item.imaWid);
+				intent.putStringArrayListExtra("imaHed", item.imaHed);
+				context.startActivity(intent);
+			}
+		});
+
+		if (!TextUtils.isEmpty(item.grade1))
+			app.getInstance().display(item.grade1, grade1, 0);
+		if (!TextUtils.isEmpty(item.grade3))
+			app.getInstance().display(item.grade3, grade3, 0);
+
+		if (!TextUtils.isEmpty(item.user_name)) {
+			user_name.setText(item.user_name);
+			if (!TextUtils.isEmpty(item.user_time)) {
+				user_time.setText(item.user_time);
+			}
+			if (!TextUtils.isEmpty(item.user_msg)) {
+				user_msg.setText(item.user_msg);
+			}
+		} else {
+			ly_ping.setVisibility(View.GONE);
+			ly_more.setVisibility(View.GONE);
+			tv_xiu.setVisibility(View.GONE);
+		}
+
+		if (!TextUtils.isEmpty(item.business_package1)) {
+			ly_combo1.setVisibility(View.VISIBLE);
+			current_price1.setText("¥" + item.business_babyshow_price1);
+			original_price1.setText("店面价" + item.business_market_price1);
+			business_combo1.setText(item.business_package1);
+			business_combo1.setText(item.business_package1);
+			business_combo1_times.setText(item.business_activity_num1);
+			business_combo1_time.setText(item.business_activity_time1);
+		}
+
+		if (!TextUtils.isEmpty(item.business_package2)) {
+			ly_combo2.setVisibility(View.VISIBLE);
+			current_price2.setText("¥" + item.business_babyshow_price2);
+			original_price2.setText("店面价" + item.business_market_price2);
+			business_combo2.setText(item.business_package2);
+			business_combo2.setText(item.business_package2);
+			business_combo2_times.setText(item.business_activity_num2);
+			business_combo2_time.setText(item.business_activity_time2);
+		}
+
+		if (!TextUtils.isEmpty(item.business_package3)) {
+			ly_combo3.setVisibility(View.VISIBLE);
+			current_price3.setText("¥" + item.business_babyshow_price3);
+			original_price3.setText("店面价" + item.business_market_price3);
+			business_combo3.setText(item.business_package3);
+			business_combo3.setText(item.business_package3);
+			business_combo3_times.setText(item.business_activity_num3);
+			business_combo3_time.setText(item.business_activity_time3);
+		}
+
+		if (!TextUtils.isEmpty(item.business_package4)) {
+			ly_combo4.setVisibility(View.VISIBLE);
+			current_price4.setText("¥" + item.business_babyshow_price4);
+			original_price4.setText("店面价" + item.business_market_price4);
+			business_combo4.setText(item.business_package4);
+			business_combo4.setText(item.business_package4);
+			business_combo4_times.setText(item.business_activity_num4);
+			business_combo4_time.setText(item.business_activity_time4);
+		}
+
+		if (!TextUtils.isEmpty(item.business_location))
+			business_location.setText(item.business_location);
+		latitude = Double.parseDouble(item.lat);
+		longitude = Double.parseDouble(item.log);
+		t_latitude = Double.parseDouble(item.tencent_lat);
+		t_longitude = Double.parseDouble(item.tencent_log);
+		ly_position.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(context, TencetMapActivity.class);
+				intent.putExtra("business_title", item.business_title);
+				intent.putExtra("business_location", item.business_location);
+				intent.putExtra("lat", latitude);
+				intent.putExtra("log", longitude);
+				intent.putExtra("lat1", t_latitude);
+				intent.putExtra("log1", t_longitude);
+				context.startActivity(intent);
+
+			}
+		});
+		if (!TextUtils.isEmpty(item.work_time))
+			business_time.setText(item.work_time);
+		ly_tel.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				AlertDialog.Builder builder = new Builder(context);
+				builder.setTitle("拨打 " + item.business_contact);
+				builder.setPositiveButton("拨号",
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								dialog.dismiss();
+								Intent intent = new Intent(Intent.ACTION_CALL);
+								intent.setData(Uri.parse("tel:"
+										+ item.business_contact));
+								startActivity(intent);
+							}
+						});
+				builder.setNegativeButton("取消",
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								dialog.dismiss();
+							}
+						});
+				builder.create().show();
+			}
+		});
+	}
+
+	// 分享
+	public OnClickListener ShareClick = new View.OnClickListener() {
+
+		@Override
+		public void onClick(View arg0) {
+			showShare();
+		}
+	};
+
+	public View.OnClickListener moreClick = new OnClickListener() {
+
+		@Override
+		public void onClick(View arg0) {
+			Intent intent = new Intent();
+			intent.setClass(context, BusinessReviewList.class);
+			intent.putExtra("business_id", Business_id);
+			startActivity(intent);
+		}
+	};
+
+	public View.OnClickListener payClick1 = new OnClickListener() {
+
+		@Override
+		public void onClick(View arg0) {
+			if ("1".equals(item.business_free_state1)) {
+				return;
+			}
+			if ("1".equals(isBoss)) {
+				Toast.makeText(context, "您是商家，不可以下单哦", 0).show();
+			} else if ("1".equals(app.getVisitor())) {
+				visitor();
+			} else {
+				Intent intent = new Intent();
+				intent.setClass(context, PayActivity.class);
+				intent.putExtra("business_id", Business_id);
+				intent.putExtra("combo1", "1");
+				startActivity(intent);
+			}
+		}
+	};
+
+	public View.OnClickListener payClick2 = new OnClickListener() {
+
+		@Override
+		public void onClick(View arg0) {
+			if ("1".equals(item.business_free_state2)) {
+				return;
+			}
+			if ("1".equals(isBoss)) {
+				Toast.makeText(context, "您是商家，不可以下单哦", 0).show();
+			} else if ("1".equals(app.getVisitor())) {
+				visitor();
+			} else {
+				Intent intent = new Intent();
+				intent.setClass(context, PayActivity.class);
+				intent.putExtra("business_id", Business_id);
+				intent.putExtra("combo1", "2");
+				startActivity(intent);
+			}
+		}
+	};
+
+	public View.OnClickListener payClick3 = new OnClickListener() {
+
+		@Override
+		public void onClick(View arg0) {
+			if ("1".equals(item.business_free_state3)) {
+				return;
+			}
+			if ("1".equals(isBoss)) {
+				Toast.makeText(context, "您是商家，不可以下单哦", 0).show();
+			} else if ("1".equals(app.getVisitor())) {
+				visitor();
+			} else {
+				Intent intent = new Intent();
+				intent.setClass(context, PayActivity.class);
+				intent.putExtra("business_id", Business_id);
+				intent.putExtra("combo1", "3");
+				startActivity(intent);
+			}
+		}
+	};
+
+	public View.OnClickListener payClick4 = new OnClickListener() {
+
+		@Override
+		public void onClick(View arg0) {
+			if ("1".equals(item.business_free_state4)) {
+				return;
+			}
+			if ("1".equals(isBoss)) {
+				Toast.makeText(context, "您是商家，不可以下单哦", 0).show();
+			} else if ("1".equals(app.getVisitor())) {
+				visitor();
+			} else {
+				Intent intent = new Intent();
+				intent.setClass(context, PayActivity.class);
+				intent.putExtra("business_id", Business_id);
+				intent.putExtra("combo1", "4");
+				startActivity(intent);
+			}
+		}
+	};
+
+	public void visitor() {
+		Intent intent = new Intent();
+		intent.setClass(context, WebLoginActivity.class);
+		startActivity(intent);
+		// AlertDialog.Builder dialog = new Builder(context);
+		// dialog.setTitle("宝宝秀秀");
+		// dialog.setMessage("游客不能使用这里哦，请登录");
+		// dialog.setNegativeButton("取消", new DialogInterface.OnClickListener()
+		// {
+		//
+		// @Override
+		// public void onClick(DialogInterface dialog, int which) {
+		// }
+		//
+		// });
+		// dialog.setPositiveButton("登录", new DialogInterface.OnClickListener()
+		// {
+		//
+		// @Override
+		// public void onClick(DialogInterface arg0, int arg1) {
+		// app.visitor = "";
+		// Intent intent = new Intent();
+		// intent.setClass(context, WebLoginActivity.class);
+		// startActivity(intent);
+		// }
+		// });
+		// dialog.create().show();
+	}
+
+	public void onRefresh() {
+		AbRequestParams params = new AbRequestParams();
+		params.put("login_user_id", Config.getUser(context).uid);
+		params.put("business_id", Business_id + "");
+		// Log.e("TAG",
+		// ServerMutualConfig.BusinessDetailV8 + "&" + params.toString());
+		ab.setTimeout(5000);
+		// ab.get(ServerMutualConfig.WebBusinessDetail + "&" +
+		// params.toString(),
+		ab.get(ServerMutualConfig.BusinessDetailV8 + "&" + params.toString(),
+				new AbStringHttpResponseListener() {
+
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						try {
+							JSONObject json = new JSONObject(content);
+							item = new BusinessItem();
+							item.fromJson(json.getJSONObject("data"));
+							getdate();
+							
+							packageList.clear();
+							BusinessPackageBean bean = null;
+							for(int i = 0 ; i < json.getJSONObject("data").getJSONArray("package").length() ; i++){
+								JSONObject packageJson = json.getJSONObject("data").getJSONArray("package").getJSONObject(i);
+								bean = new BusinessPackageBean();
+								bean.setFrequency(packageJson.getString("business_activity_num"));
+								bean.setIsBuy(packageJson.getString("business_free_state"));
+								bean.setOriginalPrice(packageJson.getString("business_market_price"));
+								bean.setPackageCotent(packageJson.getString("business_package"));
+								bean.setPackageId(packageJson.getString("package"));
+								bean.setPackagePrice(packageJson.getString("business_package"));
+								bean.setPresentPrice(packageJson.getString("business_babyshow_price"));
+								bean.setTime("");
+								bean.setValidityPeriod(packageJson.getString("business_activity_time"));
+								bean.setPackageName(packageJson.getString("package_name"));
+								packageList.add(bean);
+							}
+							
+							BusinessPackageAdapter adapter = new BusinessPackageAdapter(context, Business_id, isBoss, packageList, (ScrollView)findViewById(R.id.business_mian_sc));
+							business_package_list.setAdapter(adapter);
+							
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+
+					@Override
+					public void onFinish() {
+						super.onFinish();
+					}
+
+					@Override
+					public void onFailure(int statusCode, String content,
+							Throwable error) {
+						super.onFailure(statusCode, content, error);
+					}
+
+					@Override
+					public void sendSuccessMessage(int statusCode,
+							String content) {
+						super.sendSuccessMessage(statusCode, content);
+					}
+
+				});
+	}
+
+	private void showShare() {
+		// ShareSDK.initSDK(this);
+		OnekeyShare oks = new OnekeyShare();
+		// 关闭sso授权
+		oks.disableSSOWhenAuthorize();
+		oks.setSilent(true);
+		oks.setNotification(R.drawable.icon, getString(R.string.app_name)); // 分享时Notification的图标和文字
+		// 去除注释，演示在九宫格设置自定义的图标
+		bs_img = item.listImg.get(0).img_thumb;
+		bs_title = item.business_title;
+		oks.setShareContentCustomizeCallback(new ShareContentCustomizeCallback() {
+
+			@Override
+			public void onShare(Platform platform, ShareParams paramsToShare) {
+				if ("Wechat".equals(platform.getName())) {
+					paramsToShare.setShareType(Platform.SHARE_TEXT);
+					paramsToShare.setText(bs_title);
+					paramsToShare.setShareType(Platform.SHARE_WEBPAGE);
+					paramsToShare.setImageUrl(bs_img);
+					paramsToShare
+							.setUrl("http://www.baobaoshowshow.com/share_business.php?business_id="
+									+ Business_id + "");
+				} else if ("SinaWeibo".equals(platform.getName())) {
+					paramsToShare
+							.setText(bs_title
+									+ "http://www.baobaoshowshow.com/share_business.php?business_id="
+									+ Business_id + "");
+					paramsToShare.setImageUrl(bs_img);
+				} else if ("QZone".equals(platform.getName())) {
+					paramsToShare.setTitle(""); // title微信、QQ空间
+					paramsToShare
+							.setTitleUrl("http://www.baobaoshowshow.com/share_business.php?business_id="
+									+ Business_id + "");
+					paramsToShare.setSite(getString(R.string.app_name));
+					// site是分享此内容的网站名称，仅在QQ空间使用
+					paramsToShare.setText(bs_title);
+					paramsToShare.setImageUrl(bs_img);
+					paramsToShare
+							.setSiteUrl("http://www.baobaoshowshow.com/share_business.php?business_id="
+									+ Business_id + "");
+					// siteUrl是分享此内容的网站地址，仅在QQ空间使用
+				} else if ("QQ".equals(platform.getName())) {
+					paramsToShare.setTitle("");
+					paramsToShare
+							.setTitleUrl("http://www.baobaoshowshow.com/share_business.php?business_id="
+									+ Business_id + "");
+					paramsToShare.setText(bs_title);
+					paramsToShare.setImageUrl(bs_img);
+				} else if ("WechatMoments".equals(platform.getName())) {
+					paramsToShare.setShareType(Platform.SHARE_TEXT);
+					paramsToShare.setTitle(bs_title);
+					paramsToShare.setShareType(Platform.SHARE_WEBPAGE);
+					paramsToShare.setImageUrl(bs_img);
+					paramsToShare
+							.setUrl("http://www.baobaoshowshow.com/share_business.php?business_id="
+									+ Business_id + "");
+				}
+				// Log.e("fanfan",
+				// ("http://test.show.baobaoshowshow.com/share_diary.php?user_id="
+				// + uid + "&album_id=" + getIntent()
+				// .getStringExtra("album_id")));
+			}
+		});
+		// 启动分享GUI
+		oks.show(this);
+	}
+
+}
