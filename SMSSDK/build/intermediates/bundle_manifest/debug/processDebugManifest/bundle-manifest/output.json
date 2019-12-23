@@ -1,0 +1,1 @@
+[{"outputType":{"type":"BUNDLE_MANIFEST"},"apkData":{"type":"MAIN","splits":[],"versionCode":20,"versionName":"2.0.0","enabled":true,"outputFile":"SMSSDK-debug.apk","fullName":"debug","baseName":"debug"},"path":"AndroidManifest.xml","properties":{"packageId":"cn.smssdk","split":"","minSdkVersion":"1"}}]
