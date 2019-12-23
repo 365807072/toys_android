@@ -1,7 +1,0 @@
-#Tue Nov 19 16:53:18 CST 2019
-base.0=/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_84283da5bbca59f1e540401296f86d1bc97c9be8
-renamed.1=classes.dex
-renamed.0=classes2.dex
-file.1=/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_e50a42c9a650654ca1d73288b1b2fa38f1fea525/classes.dex
-base.1=/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_e50a42c9a650654ca1d73288b1b2fa38f1fea525
-file.0=/Users/yanglin/Desktop/workspace/BabyShow/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_84283da5bbca59f1e540401296f86d1bc97c9be8/classes.dex

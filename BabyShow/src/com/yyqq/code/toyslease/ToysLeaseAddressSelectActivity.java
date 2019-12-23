@@ -1,14 +1,6 @@
 package com.yyqq.code.toyslease;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -38,6 +30,15 @@ import com.yyqq.framework.activity.BaseActivity;
 import com.yyqq.framework.application.ServerMutualConfig;
 import com.yyqq.framework.myinterface.OnWheelChangedListener;
 import com.yyqq.framework.myinterface.OnWheelClickedListener;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -126,6 +127,7 @@ public class ToysLeaseAddressSelectActivity extends BaseActivity implements OnCl
 		initSelectList();
 	}
 
+	@SuppressLint("ClickableViewAccessibility")
 	@Override
 	protected void setListener() {
 		
@@ -247,7 +249,8 @@ public class ToysLeaseAddressSelectActivity extends BaseActivity implements OnCl
 									cityModel.setDistrictList(disList);
 									cityList01.add(cityModel);
 								}
-								provinceModel.setName("北京市");
+//								provinceModel.setName("北京市");
+								provinceModel.setName("");
 								provinceModel.setCityList(cityList01);
 								provinceList.add(provinceModel);
 								

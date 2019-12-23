@@ -1,44 +1,5 @@
 package com.yyqq.code.main;
 
-import java.util.ArrayList;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import com.ab.http.AbHttpUtil;
-import com.ab.http.AbRequestParams;
-import com.ab.http.AbStringHttpResponseListener;
-import com.ab.util.AbStrUtil;
-import com.umeng.analytics.MobclickAgent;
-import com.yyqq.babyshow.R;
-import com.yyqq.babyshow.StartActivity;
-import com.yyqq.code.business.BusinessDetailActivity;
-import com.yyqq.code.business.BusinessList;
-import com.yyqq.code.business.BusinessSelectedListActivity;
-import com.yyqq.code.business.UserOderList;
-import com.yyqq.code.group.SuperGroupActivity;
-import com.yyqq.code.grow.GrowActivity;
-import com.yyqq.code.personal.PersonalCenterActivity;
-import com.yyqq.code.photo.ChangePhotoSize;
-import com.yyqq.code.photo.CropImage;
-import com.yyqq.code.photo.PhotoEdit;
-import com.yyqq.code.postbar.PostBarActivity;
-import com.yyqq.code.toyslease.InviteFriendActivity;
-import com.yyqq.code.toyslease.ToysLeaseDetailActivity;
-import com.yyqq.code.toyslease.ToysLeaseMainTabActivity;
-import com.yyqq.code.toyslease.ToysLeaseOrderDetailActivity;
-import com.yyqq.code.video.VideoDetialActivity;
-import com.yyqq.commen.model.PostBarTypeItem;
-import com.yyqq.commen.service.SystemService;
-import com.yyqq.commen.utils.BimpUtil;
-import com.yyqq.commen.utils.Config;
-import com.yyqq.commen.utils.GPSLocationUtils;
-import com.yyqq.commen.utils.GroupRelevantUtils;
-import com.yyqq.commen.utils.WebViewActivity;
-import com.yyqq.commen.view.MyTabHost;
-import com.yyqq.framework.application.MyApplication;
-import com.yyqq.framework.application.ServerMutualConfig;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -62,15 +23,51 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TabHost;
-import android.widget.Toast;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.ab.http.AbHttpUtil;
+import com.ab.http.AbRequestParams;
+import com.ab.http.AbStringHttpResponseListener;
+import com.ab.util.AbStrUtil;
+import com.umeng.analytics.MobclickAgent;
+import com.yyqq.babyshow.R;
+import com.yyqq.babyshow.StartActivity;
+import com.yyqq.code.business.BusinessDetailActivity;
+import com.yyqq.code.business.BusinessSelectedListActivity;
+import com.yyqq.code.business.UserOderList;
+import com.yyqq.code.group.SuperGroupActivity;
+import com.yyqq.code.grow.GrowActivity;
+import com.yyqq.code.personal.PersonalCenterActivity;
+import com.yyqq.code.photo.CropImage;
+import com.yyqq.code.photo.PhotoEdit;
+import com.yyqq.code.postbar.PostBarActivity;
+import com.yyqq.code.toyslease.InviteFriendActivity;
+import com.yyqq.code.toyslease.ToysLeaseDetailActivity;
+import com.yyqq.code.toyslease.ToysLeaseMainTabActivity;
+import com.yyqq.code.toyslease.ToysLeaseOrderDetailActivity;
+import com.yyqq.code.toyslease.version_94.NewMainToysHomeActivity;
+import com.yyqq.code.video.VideoDetialActivity;
+import com.yyqq.commen.model.PostBarTypeItem;
+import com.yyqq.commen.service.SystemService;
+import com.yyqq.commen.utils.BimpUtil;
+import com.yyqq.commen.utils.Config;
+import com.yyqq.commen.utils.GPSLocationUtils;
+import com.yyqq.commen.utils.GroupRelevantUtils;
+import com.yyqq.commen.view.MyTabHost;
+import com.yyqq.framework.application.MyApplication;
+import com.yyqq.framework.application.ServerMutualConfig;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class MainTab extends TabActivity {
 	public static String TAG = "MainTab";
@@ -226,7 +223,8 @@ public class MainTab extends TabActivity {
 
 	public void setTabs() {
 		iconText.clear();
-		addTab("myshow", R.drawable.main_home_select, "首页", GoodLife.class);
+		addTab("myshow", R.drawable.main_home_select, "首页", NewMainToysHomeActivity.class);
+//		addTab("myshow", R.drawable.main_home_select, "首页", GoodLife.class);
 //		addTab("myshow", R.drawable.main_home_select, "首页", BusinessSelectedListActivity.class);
 //		addTab("play", R.drawable.main_play_select, "学与玩", BusinessList.class);
 		addTab("add", R.drawable.main_tab_toys, "玩具世界", MainToToysMainActivity.class);

@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.yyqq.babyshow"
-    android:versionCode="101"
-    android:versionName="9.0.1"
-    >
-
-    <uses-sdk
-        android:minSdkVersion="19"
-        android:targetSdkVersion="26"/>
+    package="com.yyqq.babyshow">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -22,22 +15,24 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+        tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.REORDER_TASKS" />
     <uses-permission android:name="android.permission.Activity.NOTIFICATION_SERVICE" />
-    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.READ_LOGS"
+        tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
     <uses-permission android:name="android.permission.GET_TASKS" />
-    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL"
+        tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
-    <uses-permission android:name="android.permission.CALL_PHONE" >
-    </uses-permission>
+    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
 
     <!-- 第三方 -->
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
@@ -112,12 +107,12 @@
         android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
 
         <activity
             android:name=".WelcomeActivity"
             android:label="@string/app_name"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -151,8 +146,7 @@
             android:value="9c17c627949764ff03ac1bf2b378891f" />
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="52dfb0fe56240b496d00b0be" >
-        </meta-data>
+            android:value="52dfb0fe56240b496d00b0be"></meta-data>
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="tongyong ID" />
@@ -162,7 +156,7 @@
             android:name="com.mob.tools.MobUIShell"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:windowSoftInputMode="stateHidden|adjustResize" >
+            android:windowSoftInputMode="stateHidden|adjustResize">
 
             <!--
 			如果集成QQ分享，或者使用QQ客户端来进行QQ空间的
@@ -187,7 +181,7 @@
             android:name="cn.jpush.android.ui.PushActivity"
             android:configChanges="orientation|keyboardHidden"
             android:exported="false"
-            android:theme="@android:style/Theme.NoTitleBar" >
+            android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
                 <action android:name="cn.jpush.android.ui.PushActivity" />
 
@@ -205,7 +199,7 @@
         <activity
             android:name="cn.sharesdk.tencent.qq.ReceiveActivity"
             android:launchMode="singleTask"
-            android:noHistory="true" >
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -220,20 +214,18 @@
         <service
             android:name="cn.jpush.android.service.DownloadService"
             android:enabled="true"
-            android:exported="false" >
-        </service>
+            android:exported="false"></service>
         <service
             android:name="cn.jpush.android.service.DaemonService"
             android:enabled="true"
-            android:exported="false" >
-        </service>
+            android:exported="false"></service>
 
         <!-- Required SDK 核心功能 -->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->
         <service
             android:name="cn.jpush.android.service.PushService"
             android:enabled="true"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.REGISTER" />
                 <action android:name="cn.jpush.android.intent.REPORT" />
@@ -246,8 +238,8 @@
         <receiver
             android:name="cn.jpush.android.service.PushReceiver"
             android:enabled="true"
-            android:exported="false" >
-            <intent-filter android:priority="1000" >
+            android:exported="false">
+            <intent-filter android:priority="1000">
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
                 <!-- Required  显示通知栏 -->
                 <category android:name="com.yyqq.babyshow" />
@@ -274,7 +266,7 @@
         <receiver
             android:name="com.yyqq.commen.jpush.MyReceiver"
             android:enabled="true"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.REGISTRATION" />
                 <!-- Required  用户注册SDK的intent -->
@@ -303,106 +295,82 @@
 
         <service
             android:name="com.umeng.update.net.DownloadingService"
-            android:process=":DownloadingService" >
-        </service>
+            android:process=":DownloadingService"></service>
 
         <activity
             android:name="com.umeng.update.UpdateDialogActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        </activity>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
         <activity
             android:name="com.yyqq.code.main.MainTab"
             android:configChanges="orientation|keyboardHidden"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        </activity>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
         <activity
             android:name="com.yyqq.code.main.GoodLife"
-            android:configChanges="orientation|keyboardHidden" >
-        </activity>
-        <activity android:name="com.yyqq.code.main.ShowShowMainActivity" >
-        </activity>
+            android:configChanges="orientation|keyboardHidden"></activity>
+        <activity android:name="com.yyqq.code.main.ShowShowMainActivity"></activity>
         <activity
             android:name="com.yyqq.code.main.SpecialActivity"
-            android:configChanges="orientation|keyboardHidden" >
-        </activity>
+            android:configChanges="orientation|keyboardHidden"></activity>
         <activity
             android:name="com.yyqq.code.main.SpecialDetailList"
-            android:configChanges="orientation|keyboardHidden" >
-        </activity>
+            android:configChanges="orientation|keyboardHidden"></activity>
         <activity
             android:name="com.yyqq.code.main.SpecialDetailGrid"
-            android:configChanges="orientation|keyboardHidden" >
-        </activity>
+            android:configChanges="orientation|keyboardHidden"></activity>
         <activity
             android:name="com.yyqq.code.main.Release"
             android:configChanges="orientation|keyboardHidden" />
         <activity
             android:name="com.yyqq.code.main.Uploadpload"
-            android:configChanges="orientation|keyboardHidden" >
-        </activity>
+            android:configChanges="orientation|keyboardHidden"></activity>
         <activity
             android:name="com.yyqq.code.main.PhotoManager"
-            android:configChanges="orientation|keyboardHidden" >
-        </activity>
+            android:configChanges="orientation|keyboardHidden"></activity>
         <activity
             android:name="com.yyqq.code.personal.PersonalCenterActivity"
-            android:configChanges="orientation|keyboardHidden" >
-        </activity>
+            android:configChanges="orientation|keyboardHidden"></activity>
         <activity
             android:name="com.yyqq.code.personal.MessageList"
-            android:configChanges="orientation|keyboardHidden" >
-        </activity>
+            android:configChanges="orientation|keyboardHidden"></activity>
         <activity
             android:name="com.yyqq.code.personal.GrowList"
-            android:configChanges="orientation|keyboardHidden" >
-        </activity>
+            android:configChanges="orientation|keyboardHidden"></activity>
         <activity
             android:name="com.yyqq.code.personal.MessageFriendList"
-            android:configChanges="orientation|keyboardHidden" >
-        </activity>
+            android:configChanges="orientation|keyboardHidden"></activity>
         <activity
             android:name="com.yyqq.code.main.LoadDeviceImage"
             android:configChanges="orientation|keyboardHidden" />
         <activity
             android:name="com.yyqq.code.photo.PhoneAlbumActivity"
-            android:configChanges="orientation|keyboardHidden" >
-        </activity>
+            android:configChanges="orientation|keyboardHidden"></activity>
         <activity
             android:name="com.yyqq.code.photo.PhoneAlbumDetialActivity"
-            android:configChanges="orientation|keyboardHidden" >
-        </activity>
+            android:configChanges="orientation|keyboardHidden"></activity>
         <activity
             android:name="com.yyqq.code.main.AddNewPostActivity"
-            android:configChanges="orientation|keyboardHidden" >
-        </activity>
+            android:configChanges="orientation|keyboardHidden"></activity>
         <activity
             android:name="com.yyqq.code.main.AddNewPostContinueActivity"
-            android:configChanges="orientation|keyboardHidden" >
-        </activity>
+            android:configChanges="orientation|keyboardHidden"></activity>
         <activity
             android:name="com.yyqq.code.photo.PhotoActivity"
-            android:configChanges="orientation|keyboardHidden" >
-        </activity>
+            android:configChanges="orientation|keyboardHidden"></activity>
         <activity
             android:name="com.yyqq.code.photo.MoveImageList"
-            android:configChanges="orientation|keyboardHidden" >
-        </activity>
+            android:configChanges="orientation|keyboardHidden"></activity>
         <activity
             android:name="com.yyqq.code.photo.MovePhotoList"
-            android:configChanges="orientation|keyboardHidden" >
-        </activity>
+            android:configChanges="orientation|keyboardHidden"></activity>
         <activity
             android:name="com.yyqq.code.main.InitActivity"
-            android:configChanges="orientation|keyboardHidden" >
-        </activity>
+            android:configChanges="orientation|keyboardHidden"></activity>
         <activity
             android:name="com.yyqq.code.login.ChangePhone"
-            android:configChanges="orientation|keyboardHidden" >
-        </activity>
+            android:configChanges="orientation|keyboardHidden"></activity>
         <activity
             android:name="com.yyqq.code.login.ChangePhone2"
-            android:configChanges="orientation|keyboardHidden" >
-        </activity>
+            android:configChanges="orientation|keyboardHidden"></activity>
         <activity
             android:name="com.yyqq.code.login.ChangePwd"
             android:configChanges="orientation|keyboardHidden" />
@@ -425,20 +393,16 @@
             android:configChanges="orientation|keyboardHidden" />
         <activity
             android:name="com.yyqq.code.photo.PhotoDetail"
-            android:configChanges="orientation|keyboardHidden" >
-        </activity>
+            android:configChanges="orientation|keyboardHidden"></activity>
         <activity
             android:name="com.yyqq.code.photo.PhotoList"
-            android:configChanges="orientation|keyboardHidden" >
-        </activity>
+            android:configChanges="orientation|keyboardHidden"></activity>
         <activity
             android:name="com.yyqq.code.photo.PhotoEdit"
-            android:configChanges="orientation|keyboardHidden" >
-        </activity>
+            android:configChanges="orientation|keyboardHidden"></activity>
         <activity
             android:name="com.yyqq.code.photo.PhotoBigImage"
-            android:configChanges="orientation|keyboardHidden" >
-        </activity>
+            android:configChanges="orientation|keyboardHidden"></activity>
         <activity
             android:name="com.yyqq.code.photo.ImageDetail"
             android:configChanges="orientation|keyboardHidden" />
@@ -450,12 +414,10 @@
             android:configChanges="orientation|keyboardHidden" />
         <activity
             android:name="com.yyqq.code.personal.UserInfo"
-            android:configChanges="orientation|keyboardHidden" >
-        </activity>
+            android:configChanges="orientation|keyboardHidden"></activity>
         <activity
             android:name="com.yyqq.code.personal.UserSet"
-            android:configChanges="orientation|keyboardHidden" >
-        </activity>
+            android:configChanges="orientation|keyboardHidden"></activity>
         <activity
             android:name="com.yyqq.code.personal.FriendList"
             android:configChanges="orientation|keyboard" />
@@ -463,16 +425,13 @@
             android:name="com.yyqq.code.personal.EditBaby"
             android:configChanges="orientation|keyboard" />
 
-        <service android:name="com.yyqq.commen.service.SystemService" >
-        </service>
+        <service android:name="com.yyqq.commen.service.SystemService"></service>
         <service
             android:name="com.umeng.common.net.DownloadingService"
-            android:process=":DownloadingService" >
-        </service>
+            android:process=":DownloadingService"></service>
         <service
             android:name="com.yyqq.commen.service.AnimPlayerService"
-            android:process=":DownloadingService" >
-        </service>
+            android:process=":DownloadingService"></service>
 
         <activity
             android:name="com.yyqq.code.photo.ChangePhotoSize"
@@ -486,8 +445,7 @@
         <activity
             android:name="com.yyqq.code.photo.AnimPlayer"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="landscape" >
-        </activity>
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name="com.yyqq.code.business.BusinessCooperateActivity"
             android:configChanges="orientation|keyboardHidden" />
@@ -554,7 +512,7 @@
             android:configChanges="orientation|keyboardHidden" />
         <activity
             android:name="com.yyqq.code.business.PayActivity"
-            android:configChanges="orientation|keyboardHidden" >
+            android:configChanges="orientation|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -621,7 +579,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:windowSoftInputMode="stateHidden|adjustResize" >
+            android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
                 <data android:scheme="tencent100371282" />
 
@@ -644,14 +602,12 @@
             android:name="com.alipay.sdk.app.H5PayActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
-            android:screenOrientation="behind" >
-        </activity>
+            android:screenOrientation="behind"></activity>
         <activity
             android:name="com.alipay.sdk.auth.AuthActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
-            android:screenOrientation="behind" >
-        </activity>
+            android:screenOrientation="behind"></activity>
 
         <!-- 微信支付 -->
         <activity
@@ -660,8 +616,7 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name="com.yyqq.code.map.TencetMapActivity"
-            android:label="@string/app_name" >
-        </activity>
+            android:label="@string/app_name"></activity>
         <!-- 腾讯地图 -->
         <meta-data
             android:name="TencentMapSDK"
@@ -670,247 +625,192 @@
         <activity
             android:name="com.yyqq.code.login.WebLoginActivity"
             android:label="@string/app_name"
-            android:theme="@android:style/Theme.NoTitleBar" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar"></activity>
         <activity
             android:name=".AAATexActivity"
-            android:label="@string/title_activity_aaatex" >
-        </activity>
+            android:label="@string/title_activity_aaatex"></activity>
         <activity
             android:name="com.yyqq.code.main.MainItemDetialActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" >
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"></activity>
         <activity
             android:name="com.yyqq.code.video.VideoDetialActivity"
-            android:configChanges="orientation|keyboardHidden" >
-        </activity>
+            android:configChanges="orientation|keyboardHidden"></activity>
         <activity
             android:name="com.yyqq.code.photo.VideoList"
-            android:configChanges="orientation|keyboardHidden" >
-        </activity>
+            android:configChanges="orientation|keyboardHidden"></activity>
 
         <!-- 视频压缩相关 -->
 
         <activity
             android:name="com.lkland.videocompressor.activities.CompressionOptionActivity"
-            android:label="@string/app_name" >
-        </activity>
+            android:label="@string/app_name"></activity>
 
-        <service android:name="com.lkland.videocompressor.services.CompressionService" >
-        </service>
+        <service android:name="com.lkland.videocompressor.services.CompressionService"></service>
 
         <activity
             android:name="com.yyqq.code.main.AddCheckActivity"
-            android:label="@string/title_activity_add_check" >
-        </activity>
+            android:label="@string/title_activity_add_check"></activity>
         <activity
             android:name="com.yyqq.code.main.SearchResultActivity"
-            android:label="@string/title_activity_search_result" >
-        </activity>
+            android:label="@string/title_activity_search_result"></activity>
         <activity
             android:name="com.yyqq.code.group.GroupMainActivity"
-            android:label="@string/title_activity_group_main" >
-        </activity>
+            android:label="@string/title_activity_group_main"></activity>
         <activity
             android:name="com.yyqq.code.group.GroupDetialActivity"
-            android:label="@string/title_activity_group_main" >
-        </activity>
+            android:label="@string/title_activity_group_main"></activity>
         <activity
             android:name="com.yyqq.code.video.VideoFullScreenActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_video_full_screen"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="com.yyqq.code.group.GroupManagerHeadActivity"
-            android:label="@string/title_activity_group_edit_head" >
-        </activity>
+            android:label="@string/title_activity_group_edit_head"></activity>
         <activity
             android:name="com.yyqq.code.group.GroupManagerCategoryActivity"
-            android:label="@string/title_activity_group_category_manager" >
-        </activity>
+            android:label="@string/title_activity_group_category_manager"></activity>
         <activity
             android:name="com.yyqq.code.group.GroupManagerTopicActivity"
-            android:label="@string/title_activity_group_manager_topic" >
-        </activity>
+            android:label="@string/title_activity_group_manager_topic"></activity>
         <activity
             android:name="com.yyqq.code.group.GroupManagerOptionActivity"
             android:label="@string/title_activity_group_manager_option"
-            android:theme="@style/MyDialogStyleBottom" >
-        </activity>
+            android:theme="@style/MyDialogStyleBottom"></activity>
         <activity
             android:name="com.yyqq.code.main.MyFollowGroupListActivity"
-            android:label="@string/title_activity_group_main" >
-        </activity>
+            android:label="@string/title_activity_group_main"></activity>
         <activity
             android:name="com.yyqq.code.group.AddNewGroupActivity"
-            android:label="@string/title_activity_add_new_group" >
-        </activity>
+            android:label="@string/title_activity_add_new_group"></activity>
         <activity
             android:name="com.yyqq.code.group.SuperGroupActivity"
-            android:label="@string/title_activity_super_group" >
-        </activity>
+            android:label="@string/title_activity_super_group"></activity>
         <activity
             android:name="com.yyqq.code.toyslease.version_92.ToysLeaseMainAllActivity"
-            android:label="@string/title_activity_toys_lease_main" >
-        </activity>
-        <activity android:name="com.yyqq.code.toyslease.ToysLeaseDetailActivity" >
-        </activity>
+            android:label="@string/title_activity_toys_lease_main"></activity>
+        <activity android:name="com.yyqq.code.toyslease.ToysLeaseDetailActivity"></activity>
         <activity
             android:name="com.yyqq.code.toyslease.AddNewToysLeaseActivity"
-            android:label="@string/title_activity_add_toys_lease" >
-        </activity>
+            android:label="@string/title_activity_add_toys_lease"></activity>
         <activity
             android:name="com.yyqq.code.toyslease.ToysLeaseOrderConfirmActivity"
             android:label="@string/title_activity_toys_lease_pay"
-            android:windowSoftInputMode="stateHidden|stateUnchanged" >
-        </activity>
+            android:windowSoftInputMode="stateHidden|stateUnchanged"></activity>
         <activity
             android:name="com.yyqq.code.toyslease.ToysLeasePayConfirmActivity"
-            android:label="@string/title_activity_toys_lease_pay" >
-        </activity>
+            android:label="@string/title_activity_toys_lease_pay"></activity>
         <activity
             android:name="com.yyqq.code.toyslease.ToysLeaseOrderDetailActivity"
-            android:label="@string/title_activity_toys_lease_order_detail" >
-        </activity>
+            android:label="@string/title_activity_toys_lease_order_detail"></activity>
         <activity
             android:name="com.yyqq.code.toyslease.AccountWithdrawalsActivity"
-            android:label="@string/title_activity_account_withdrawals" >
-        </activity>
+            android:label="@string/title_activity_account_withdrawals"></activity>
         <activity
             android:name="com.yyqq.code.main.APKUpdataActivity"
             android:label="@string/title_activity_apkupdata"
-            android:theme="@android:style/Theme.Dialog" >
-        </activity>
+            android:theme="@android:style/Theme.Dialog"></activity>
         <activity
             android:name="com.yyqq.code.toyslease.ToysLeaseDepositActivity"
-            android:label="@string/title_activity_toys_lease_deposit" >
-        </activity>
+            android:label="@string/title_activity_toys_lease_deposit"></activity>
         <activity
             android:name="com.yyqq.code.toyslease.ToysLeaseListActivity"
-            android:label="@string/title_activity_toys_lease_deposit" >
-        </activity>
+            android:label="@string/title_activity_toys_lease_deposit"></activity>
         <activity
             android:name="com.yyqq.code.toyslease.ToysLeaseDepositDetailActivity"
-            android:label="@string/title_activity_toys_lease_deposit_detail" >
-        </activity>
+            android:label="@string/title_activity_toys_lease_deposit_detail"></activity>
         <activity
             android:name="com.yyqq.code.toyslease.version_92.ToysLeaseMainOrderActivity"
-            android:label="@string/title_activity_toys_lease_order_list" >
-        </activity>
+            android:label="@string/title_activity_toys_lease_order_list"></activity>
         <activity
             android:name="com.yyqq.code.toyslease.version_92.ToysLeaseMainHomeActivity"
-            android:label="@string/title_activity_toys_lease_home" >
-        </activity>
+            android:label="@string/title_activity_toys_lease_home"></activity>
         <activity
             android:name="com.yyqq.code.toyslease.ToysLeaseMainTabActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_toys_lease_home"
-            android:launchMode="singleTask" >
-        </activity>
+            android:launchMode="singleTask"></activity>
         <activity
             android:name="com.yyqq.code.toyslease.version_92.ToysLeaseCategoryActivity"
-            android:label="@string/title_activity_toys_lease_home" >
-        </activity>
+            android:label="@string/title_activity_toys_lease_home"></activity>
         <activity
             android:name=".DemoActivity"
-            android:label="@string/title_activity_demo" >
-        </activity>
+            android:label="@string/title_activity_demo"></activity>
         <activity
             android:name="com.yyqq.code.toyslease.version_92.ToysLeaseMainShoppingCartActivity"
-            android:label="@string/title_activity_shopping_cart" >
-        </activity>
+            android:label="@string/title_activity_shopping_cart"></activity>
         <activity
             android:name="com.yyqq.code.toyslease.version_92.ToysLeaseSearchActivity"
-            android:label="@string/title_activity_toys_lease_search" >
-        </activity>
+            android:label="@string/title_activity_toys_lease_search"></activity>
         <activity
             android:name="com.yyqq.code.login.RegisterBandPhoneActivity"
-            android:label="@string/title_activity_toys_lease_search" >
-        </activity>
+            android:label="@string/title_activity_toys_lease_search"></activity>
         <activity
             android:name="com.yyqq.code.toyslease.InviteFriendActivity"
             android:label="@string/title_activity_invite_friend"
-            android:windowSoftInputMode="stateHidden|stateUnchanged" >
-        </activity>
-        <activity android:name="com.yyqq.code.main.MainItemDetialWebActivity" >
-        </activity>
+            android:windowSoftInputMode="stateHidden|stateUnchanged"></activity>
+        <activity android:name="com.yyqq.code.main.MainItemDetialWebActivity"></activity>
         <activity
             android:name="com.yyqq.code.toyslease.InviteFriendWebActivity"
             android:label="@string/title_activity_invite_friend"
-            android:windowSoftInputMode="stateHidden|stateUnchanged" >
-        </activity>
+            android:windowSoftInputMode="stateHidden|stateUnchanged"></activity>
         <activity
             android:name="com.yyqq.code.toyslease.InviteDetailActivity"
-            android:label="@string/title_activity_invite_friend" >
-        </activity>
+            android:label="@string/title_activity_invite_friend"></activity>
 
-        <service android:name="com.yyqq.commen.service.InviteStartService" >
-        </service>
+        <service android:name="com.yyqq.commen.service.InviteStartService"></service>
 
         <activity
             android:name="com.yyqq.code.toyslease.ToysLeaseAddressSelectActivity"
-            android:label="@string/title_activity_toys_lease_address_select" >
-        </activity>
+            android:label="@string/title_activity_toys_lease_address_select"></activity>
         <activity
             android:name="com.yyqq.code.toyslease.ToysLeaseFeedbackActivity"
-            android:label="@string/title_activity_toys_lease_feedback" >
-        </activity>
+            android:label="@string/title_activity_toys_lease_feedback"></activity>
         <activity
             android:name=".Main01Activity"
-            android:label="@string/title_activity_main01" >
-        </activity>
+            android:label="@string/title_activity_main01"></activity>
         <activity
             android:name=".Main02Activity"
-            android:label="@string/title_activity_main02" >
-        </activity>
+            android:label="@string/title_activity_main02"></activity>
         <activity
             android:name="com.yyqq.code.main.MainToToysMainActivity"
-            android:label="@string/title_activity_toys_lease_feedback" >
-        </activity>
+            android:label="@string/title_activity_toys_lease_feedback"></activity>
         <activity
             android:name="com.yyqq.code.toyslease.h5.ToysLeaseHtmlInterstActivity"
-            android:label="@string/title_activity_toys_lease_feedback" >
-        </activity>
+            android:label="@string/title_activity_toys_lease_feedback"></activity>
         <activity
             android:name="com.yyqq.code.toyslease.h5.ToysLeaseHtmlCollectionActivity"
-            android:label="@string/title_activity_toys_lease_feedback" >
-        </activity>
+            android:label="@string/title_activity_toys_lease_feedback"></activity>
         <activity
             android:name="com.yyqq.code.toyslease.ToysLeaseDelayActivity"
-            android:label="@string/title_activity_toys_lease_feedback" >
-        </activity>
+            android:label="@string/title_activity_toys_lease_feedback"></activity>
         <activity
             android:name="com.yyqq.code.toyslease.ToysLeaseMyCardActivity"
-            android:label="@string/title_activity_toys_lease_feedback" >
-        </activity>
+            android:label="@string/title_activity_toys_lease_feedback"></activity>
         <activity
             android:name="com.yyqq.code.toyslease.version_93.MainToysHomeActivity"
-            android:label="@string/title_activity_toys_lease_feedback" >
-        </activity>
+            android:label="@string/title_activity_toys_lease_feedback"></activity>
+        <activity
+            android:name="com.yyqq.code.toyslease.version_94.NewMainToysHomeActivity"
+            android:label="@string/title_activity_toys_lease_feedback"></activity>
         <activity
             android:name="com.yyqq.code.toyslease.version_93.MainToysAllActivity"
-            android:label="@string/title_activity_toys_lease_feedback" >
-        </activity>
+            android:label="@string/title_activity_toys_lease_feedback"></activity>
         <activity
             android:name="com.yyqq.code.toyslease.version_93.MainToysCategoryActivity"
-            android:label="@string/title_activity_toys_lease_feedback" >
-        </activity>
+            android:label="@string/title_activity_toys_lease_feedback"></activity>
         <activity
             android:name="com.yyqq.code.toyslease.version_93.SearchMainActivity"
             android:label="@string/title_activity_toys_lease_feedback"
-            android:windowSoftInputMode="stateVisible|adjustPan" >
-        </activity>
+            android:windowSoftInputMode="stateVisible|adjustPan"></activity>
         <activity
             android:name="com.yyqq.code.toyslease.version_93.SearchResultActivity"
             android:label="@string/title_activity_toys_lease_feedback"
-            android:windowSoftInputMode="stateHidden|adjustPan" >
-        </activity>
+            android:windowSoftInputMode="stateHidden|adjustPan"></activity>
         <activity
             android:name="com.yyqq.code.business.BusinessSelectedListActivity"
-            android:label="@string/title_activity_toys_lease_feedback" >
-        </activity>
+            android:label="@string/title_activity_toys_lease_feedback"></activity>
     </application>
 
 </manifest>

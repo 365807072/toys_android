@@ -1,10 +1,17 @@
-apply plugin: 'android'
-
-
+apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 21
-    buildToolsVersion '25.0.0'
+
+    defaultConfig {
+        applicationId "com.yyqq.babyshow"
+        minSdkVersion 19
+        targetSdkVersion 26
+        versionCode 101
+        versionName "9.0.1"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
@@ -17,7 +24,7 @@ android {
         }
 
         // Move the tests to tests/java, tests/res, etc...
-        instrumentTest.setRoot('tests')
+        androidTest.setRoot('tests')
 
         // Move the build types to build-types/<type>
         // For instance, build-types/debug/java, build-types/debug/AndroidManifest.xml, ...
@@ -36,8 +43,8 @@ android {
     }
 }
 dependencies {
-    compile fileTree(dir: 'libs', include: '*.jar')
-    compile project(':AndBase')
-    compile project(':SMSSDK')
+    implementation fileTree(dir: 'libs', include: '*.jar')
+    implementation project(':AndBase')
+    implementation project(':SMSSDK')
 
 }

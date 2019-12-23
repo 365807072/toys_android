@@ -1,10 +1,5 @@
 package com.yyqq.code.toyslease;
 
-import java.util.ArrayList;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.annotation.SuppressLint;
 import android.app.TabActivity;
 import android.content.Context;
@@ -34,18 +29,21 @@ import com.yyqq.code.business.BusinessDetailActivity;
 import com.yyqq.code.business.BusinessSelectedListActivity;
 import com.yyqq.code.main.MainItemDetialActivity;
 import com.yyqq.code.main.MainItemDetialWebActivity;
-import com.yyqq.code.main.MainTab;
 import com.yyqq.code.toyslease.version_92.ToysLeaseMainOrderActivity;
 import com.yyqq.code.toyslease.version_92.ToysLeaseMainShoppingCartActivity;
 import com.yyqq.code.toyslease.version_93.MainToysAllActivity;
-import com.yyqq.code.toyslease.version_93.MainToysHomeActivity;
-import com.yyqq.commen.service.InviteStartService;
 import com.yyqq.commen.utils.Config;
 import com.yyqq.commen.utils.GroupRelevantUtils;
+import com.yyqq.commen.utils.Log;
 import com.yyqq.commen.utils.ShoppingCartUtils;
 import com.yyqq.commen.view.MyTabHost;
 import com.yyqq.framework.application.MyApplication;
 import com.yyqq.framework.application.ServerMutualConfig;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class ToysLeaseMainTabActivity extends TabActivity {
 	
@@ -143,11 +141,20 @@ public class ToysLeaseMainTabActivity extends TabActivity {
 
 	public void setTabs() {
 		iconText.clear();
-		addTab("toys_home", R.drawable.toys_home_select, "首页", MainToysHomeActivity.class);
+		addTab("toys_home", R.drawable.toys_home_select, "首页", MainToysAllActivity.class);
 		addTab("toys_all", R.drawable.toys_all_select, "全部", MainToysAllActivity.class);
 		addTab("toys_cart", R.drawable.toys_cart_select, "购物车", ToysLeaseMainShoppingCartActivity.class);
 		addTab("toys_order", R.drawable.toys_order_select, "订单", ToysLeaseMainOrderActivity.class);
-		tabHost.setOpenAnimation(true);
+//		tabHost.setOpenAnimation(true);
+		tabHost.setCurrentTab(1);
+		tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+			@Override
+			public void onTabChanged(String tabId) {
+				if(tabId.equals("toys_home")){
+					finish();
+				}
+			}
+		});
 	}
 
 	public static MyTabHost tabHost;
