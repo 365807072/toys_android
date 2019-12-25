@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/background_light" >
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/grow_height_bg" >
+
+        
+        <!-- <ImageView 
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/grow_diary_line_height"/> -->
+        
+        <TextView
+            android:id="@+id/line_xu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:ellipsize="none"
+            android:visibility="gone"
+            android:text="- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+            android:textColor="#fe6c6c" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal" >
+
+            <TextView
+                android:id="@+id/bt_width"
+                android:layout_width="52.5dp"
+                android:layout_height="22dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/grow_weight_bt_sel"
+                android:gravity="center"
+                android:text="身高"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/bt_height"
+                android:layout_width="52.5dp"
+                android:layout_height="22dp"
+                android:background="@drawable/grow_weight_bt"
+                android:gravity="center"
+                android:text="体重"
+                android:textColor="#333333"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/bt_inset"
+            android:layout_width="93dp"
+            android:layout_height="23.5dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="12.5dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/grow_insert_hw" />
+
+        <TextView
+            android:id="@+id/remind_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="12.5dp"
+            android:layout_marginTop="35dp"
+            android:textColor="#d9d9d9"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/scale1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#4b93d3"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/scale2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#4b93d3"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/scale3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#4b93d3"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/scale4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#fe6d6d"
+            android:textSize="19sp" />
+
+        <TextView
+            android:id="@+id/scale5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#fe6d6d"
+            android:textSize="9sp" />
+    </FrameLayout>
+
+</RelativeLayout>

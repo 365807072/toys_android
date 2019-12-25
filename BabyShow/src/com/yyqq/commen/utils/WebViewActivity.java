@@ -1,0 +1,200 @@
+package com.yyqq.commen.utils;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.Platform.ShareParams;
+import cn.sharesdk.onekeyshare.OnekeyShare;
+import cn.sharesdk.onekeyshare.ShareContentCustomizeCallback;
+
+import com.mob.MobSDK;
+import com.yyqq.babyshow.R;
+
+public class WebViewActivity extends Activity {
+
+	private WebView mWebView;
+	private Intent intent;
+	private String url;
+	private String msg;
+	private String img;
+	private TextView fride_title;
+	private ImageView share;
+
+	private String oldUrl = "";
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		Config.setActivityState(this);
+		MobSDK.init(this);
+		setContentView(R.layout.webview);
+		fride_title = (TextView) findViewById(R.id.fride_title);
+		intent = getIntent();
+		if (intent != null) {
+			url = intent.getStringExtra("webviewurl");
+			msg = intent.getStringExtra("msg");
+			img = intent.getStringExtra("img");
+		}
+		if ("webBuy".equals(intent.getStringExtra("webBuy"))) {
+			fride_title.setText("值得买");
+		}
+		mWebView = (WebView) this.findViewById(R.id.webview);
+		share = (ImageView) findViewById(R.id.post_more);
+		share.setOnClickListener(shareClick);
+		WebSettings websetting = mWebView.getSettings();
+		websetting.setJavaScriptEnabled(true);
+
+		websetting.setSupportZoom(true);
+
+		mWebView.requestFocus();
+
+		WebViewClient client = new WebViewClient() {
+
+			@Override
+			public void onPageStarted(WebView view, String url, Bitmap favicon) {
+
+				super.onPageStarted(view, url, favicon);
+
+			}
+			
+			public boolean shouldOverrideUrlLoading(WebView view, String url) {
+				if(url.contains("https://") || url.contains("http://")){
+					oldUrl = url;
+					view.loadUrl(url);
+				}else{
+					view.loadUrl(oldUrl);
+					view.stopLoading();
+				}
+				return true;
+			}
+			
+			@Override
+			public void onPageFinished(WebView view, String url) {
+				super.onPageFinished(view, url);
+			}
+			
+			@Override
+			public void onReceivedError(WebView view, int errorCode,
+					String description, String failingUrl) {
+				Toast.makeText(WebViewActivity.this, "抱歉！找不到这个网页", Toast.LENGTH_SHORT).show();
+			}
+
+		};
+
+		mWebView.setWebViewClient(client);
+
+		if (!TextUtils.isEmpty(url)) {
+			mWebView.loadUrl(url);
+		} else {
+			Toast.makeText(this, "网址有误", 0).show();
+		}
+		mWebView.zoomIn();// 放大界面
+		mWebView.zoomOut();// 缩小界面
+	}
+
+	// 分享
+	public OnClickListener shareClick = new View.OnClickListener() {
+
+		@Override
+		public void onClick(View arg0) {
+			showShare();
+		}
+	};
+
+	private void showShare() {
+		MobSDK.init(this);
+		OnekeyShare oks = new OnekeyShare();
+		// 关闭sso授权
+		oks.disableSSOWhenAuthorize();
+		oks.setSilent(true);
+//		oks.setNotification(R.drawable.icon, getString(R.string.app_name)); // 分享时Notification的图标和文字
+		oks.setShareContentCustomizeCallback(new ShareContentCustomizeCallback() {
+
+			@Override
+			public void onShare(Platform platform, ShareParams paramsToShare) {
+				if ("Wechat".equals(platform.getName())) {
+					paramsToShare.setShareType(Platform.SHARE_TEXT);
+					paramsToShare.setText("抓紧抢，手慢就没了！- " + msg);
+					paramsToShare.setShareType(Platform.SHARE_WEBPAGE);
+					if (TextUtils.isEmpty(img)) {
+						paramsToShare
+								.setImageUrl("https://api.meimei.yihaoss.top/static/defaultimg/0000000_thumb_640.jpg");
+					} else {
+						paramsToShare.setImageUrl(img);
+					}
+					paramsToShare
+							.setUrl("http://baobaoshowshow.com/share_buy.php?post_url="
+									+ url);
+				} else if ("SinaWeibo".equals(platform.getName())) {
+					paramsToShare
+							.setText("抓紧抢，手慢就没了！- "
+									+ msg
+									+ "http://baobaoshowshow.com/share_buy.php?post_url="
+									+ url);
+					if (TextUtils.isEmpty(img)) {
+						paramsToShare
+								.setImageUrl("https://api.meimei.yihaoss.top/static/defaultimg/0000000_thumb_640.jpg");
+					} else {
+						paramsToShare.setImageUrl(img);
+					}
+				} else if ("QZone".equals(platform.getName())) {
+					paramsToShare.setTitle(""); // title微信、QQ空间
+					paramsToShare
+							.setTitleUrl("http://baobaoshowshow.com/share_buy.php?post_url="
+									+ url);
+					paramsToShare.setSite(getString(R.string.app_name)); // site是分享此内容的网站名称，仅在QQ空间使用
+					paramsToShare.setText("抓紧抢，手慢就没了！- " + msg);
+					if (TextUtils.isEmpty(img)) {
+						paramsToShare
+								.setImageUrl("https://api.meimei.yihaoss.top/static/defaultimg/0000000_thumb_640.jpg");
+					} else {
+						paramsToShare.setImageUrl(img);
+					}
+					paramsToShare
+							.setSiteUrl("http://baobaoshowshow.com/share_buy.php?post_url="
+									+ url); // siteUrl是分享此内容的网站地址，仅在QQ空间使用
+				} else if ("QQ".equals(platform.getName())) {
+					paramsToShare.setTitle("");
+					paramsToShare
+							.setTitleUrl("http://baobaoshowshow.com/share_buy.php?post_url="
+									+ url);
+					paramsToShare.setText("抓紧抢，手慢就没了！- " + msg);
+					if (TextUtils.isEmpty(img)) {
+						paramsToShare
+								.setImageUrl("https://api.meimei.yihaoss.top/static/defaultimg/0000000_thumb_640.jpg");
+					} else {
+						paramsToShare.setImageUrl(img);
+					}
+				} else if ("WechatMoments".equals(platform.getName())) {
+					paramsToShare.setShareType(Platform.SHARE_TEXT);
+					paramsToShare.setTitle("抓紧抢，手慢就没了！- " + msg);
+					paramsToShare.setShareType(Platform.SHARE_WEBPAGE);
+					if (TextUtils.isEmpty(img)) {
+						paramsToShare
+								.setImageUrl("https://api.meimei.yihaoss.top/static/defaultimg/0000000_thumb_640.jpg");
+					} else {
+						paramsToShare.setImageUrl(img);
+					}
+					paramsToShare
+							.setUrl("http://baobaoshowshow.com/share_buy.php?post_url="
+									+ url);
+				}
+
+			}
+		});
+		// 启动分享GUI
+		oks.show(this);
+	}
+
+}

@@ -1,0 +1,326 @@
+package com.yyqq.code.login;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.ab.http.AbHttpUtil;
+import com.ab.http.AbRequestParams;
+import com.ab.http.AbStringHttpResponseListener;
+import com.umeng.analytics.MobclickAgent;
+import com.yyqq.babyshow.R;
+import com.yyqq.code.main.MainTab;
+import com.yyqq.commen.model.Baby;
+import com.yyqq.commen.service.SystemService;
+import com.yyqq.commen.utils.Config;
+import com.yyqq.commen.utils.Log;
+import com.yyqq.framework.application.MyApplication;
+import com.yyqq.framework.application.ServerMutualConfig;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class AddBaby extends Activity {
+	private LinearLayout babyRoot;
+	private RelativeLayout addbaby;
+	private Activity context;
+	private Button finish;
+	private TextView skip;
+	private AbHttpUtil ah;
+	private String TAG = "AddBaby";
+
+	public void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
+
+	public void onCreate(Bundle b) {
+		super.onCreate(b);
+		Config.setActivityState(this);
+		setContentView(R.layout.addbaby);
+		skip = (TextView) findViewById(R.id.skip);
+		skip.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				MyApplication.getInstance().stopAll();
+				startService(new Intent(context, SystemService.class));
+				Intent intent = new Intent();
+				intent.setClass(context, MainTab.class);
+				if (!TextUtils
+						.isEmpty(getIntent().getStringExtra("from_index"))) {
+					intent.putExtra("tabid", 2);
+				} else {
+					intent.putExtra("tabid", 0);
+				}
+				startActivity(intent);
+			}
+		});
+		if (!TextUtils.isEmpty(getIntent().getStringExtra("grow"))) {
+			skip.setVisibility(View.GONE);
+		}
+		babyRoot = (LinearLayout) findViewById(R.id.baby_root);
+		addbaby = (RelativeLayout) findViewById(R.id.add_baby);
+		addbaby.setOnClickListener(addBabyClick);
+		context = this;
+		final Calendar c = Calendar.getInstance();
+		mYear = c.get(Calendar.YEAR); // 获取当前年份
+		mMonth = c.get(Calendar.MONTH);// 获取当前月份
+		mDay = c.get(Calendar.DAY_OF_MONTH);// 获取当前月份的日期号码
+		finish = (Button) findViewById(R.id.finish);
+		finish.setOnClickListener(finishClick);
+		babys.clear();
+		ah = AbHttpUtil.getInstance(context);
+		ah.setDebug(Log.isDebug);
+		addBaby();
+	}
+
+	ArrayList<Baby> babys = new ArrayList<Baby>();
+	public OnClickListener finishClick = new OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			babys.clear();
+			boolean hasBaby = false;
+			for (int i = 0; i < babyRoot.getChildCount() - 2; i++) {
+				View view = babyRoot.getChildAt(i);
+				EditText name;
+				TextView birth;
+				TextView sex;
+				name = (EditText) view.findViewById(R.id.babyname);
+				birth = (TextView) view.findViewById(R.id.birthday);
+				sex = (TextView) view.findViewById(R.id.sex);
+				if (name.getText().toString().trim().length() > 0
+						&& (sex.getText().toString().indexOf("男") != -1 || sex
+								.getText().toString().indexOf("女") != -1)) {
+					hasBaby = true;
+					Baby baby = new Baby();
+					baby.name = name.getText().toString().trim();
+					baby.birthDay = birth.getText().toString();
+					if (sex.getText().toString().indexOf("男") != -1) {
+						baby.sex = "0";
+					} else {
+						baby.sex = "1";
+					}
+					babys.add(baby);
+				}
+			}
+			if (!hasBaby) {
+				Toast.makeText(context, "请至少给一个宝宝添加完整信息！", Toast.LENGTH_SHORT)
+						.show();
+			} else {
+				Config.showProgressDialog(context, false, null);
+				AbRequestParams params = new AbRequestParams();
+				params.put("user_id", Config.getUser(context).getUid());
+				params.put("babys", babysToJson().toString());
+				ah.post(ServerMutualConfig.AddBaby, params,
+						new AbStringHttpResponseListener() {
+							@Override
+							public void onSuccess(int statusCode, String content) {
+								super.onSuccess(statusCode, content);
+								JSONObject json;
+								try {
+									json = new JSONObject(content);
+									if (json.getBoolean("success")) {
+										MyApplication.getInstance().stopAll();
+										startService(new Intent(context,
+												SystemService.class));
+										Intent intent = new Intent();
+										intent.setClass(context, MainTab.class);
+										if ("from_index".equals(getIntent()
+												.getStringExtra("from_index"))) {
+											intent.putExtra("tabid", 4);
+										} else if ("grow".equals(getIntent()
+												.getStringExtra("grow"))) {
+											intent.putExtra("tabid", 3);
+										} else {
+											intent.putExtra("tabid", 0);
+										}
+										startActivity(intent);
+									} else {
+										Toast.makeText(context,
+												json.getString("reMsg"),
+												Toast.LENGTH_SHORT).show();
+									}
+								} catch (JSONException e) {
+									e.printStackTrace();
+								}
+							}
+
+							@Override
+							public void onFinish() {
+								super.onFinish();
+								Config.dismissProgress();
+							}
+
+							@Override
+							public void onFailure(int statusCode,
+									String content, Throwable error) {
+								super.onFailure(statusCode, content, error);
+							}
+						});
+			}
+		}
+	};
+
+	public JSONArray babysToJson() {
+		JSONArray array = new JSONArray();
+		for (int i = 0; i < babys.size(); i++) {
+			array.put(babys.get(i).toJson());
+		}
+		return array;
+	}
+
+	public OnFocusChangeListener inputFocus = new OnFocusChangeListener() {
+		@Override
+		public void onFocusChange(View v, boolean hasFocus) {
+			if (hasFocus) {
+				v.setBackgroundResource(R.drawable.input_bg_sel);
+			} else {
+				v.setBackgroundResource(R.drawable.wait_input_bg);
+			}
+		}
+	};
+	public OnClickListener addBabyClick = new OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			addBaby();
+		}
+	};
+	private int mYear;
+	private int mMonth;
+	private int mDay;
+
+	public void addBaby() {
+		LayoutInflater inflater = (LayoutInflater) context
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		View view = inflater.inflate(R.layout.add_baby_info, null);
+		final EditText name;
+		TextView birth;
+		name = (EditText) view.findViewById(R.id.babyname);
+		name.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+				if (Config.getMsgNum(s.toString()) < 0) {
+					name.setText(s.subSequence(0, s.length() - count));
+					Toast.makeText(context, "宝宝名称最多7个汉字或者14个字母",
+							Toast.LENGTH_SHORT).show();
+				}
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+			}
+		});
+		birth = (TextView) view.findViewById(R.id.birthday);
+		name.setOnFocusChangeListener(inputFocus);
+		birth.setOnFocusChangeListener(inputFocus);
+		birth.setText(mYear + "-" + (mMonth + 1) + "-" + mDay);
+		birth.setOnClickListener(birthClick);
+		if (babyRoot.getChildCount() - 2 != 0) {
+			view.findViewById(R.id.line).setVisibility(View.VISIBLE);
+		}
+		final TextView sex = (TextView) view.findViewById(R.id.sex);
+		sex.setText("男");
+		sex.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				AlertDialog.Builder builder = new Builder(context);
+				builder.setMessage("选择宝宝性别");
+				builder.setNegativeButton("男",
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								sex.setText("男");
+							}
+						});
+				builder.setNeutralButton("女",
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								sex.setText("女");
+							}
+						});
+				builder.create().show();
+			}
+		});
+		babyRoot.addView(view, babyRoot.getChildCount() - 2);
+	}
+
+	public OnClickListener birthClick = new OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			currentEditBirth = (TextView) v;
+			showDialog(0);
+		}
+	};
+	TextView currentEditBirth;
+
+	@Override
+	protected Dialog onCreateDialog(int id) {
+		switch (id) {
+		case 0:
+			return new DatePickerDialog(this, mDateSetListener, mYear, mMonth,
+					mDay);
+		}
+		return null;
+	}
+
+	private DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+		@Override
+		public void onDateSet(DatePicker view, int year, int monthOfYear,
+				int dayOfMonth) {
+			if (year > Calendar.getInstance().get(Calendar.YEAR)) {
+				year = Calendar.getInstance().get(Calendar.YEAR);
+			}
+			AddBaby.this.year = year;
+			AddBaby.this.month = monthOfYear + 1;
+			AddBaby.this.day = dayOfMonth;
+			String tempMonth = month + "", tempDay = day + "";
+			if (month < 10) {
+				tempMonth = "0" + month;
+			}
+			if (day < 10) {
+				tempDay = "0" + day;
+			}
+			currentEditBirth.setText(AddBaby.this.year + "-" + tempMonth + "-"
+					+ tempDay);
+		}
+	};
+	int year, month, day;
+}

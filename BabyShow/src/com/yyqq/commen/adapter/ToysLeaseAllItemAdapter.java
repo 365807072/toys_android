@@ -1,0 +1,83 @@
+package com.yyqq.commen.adapter;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.ab.http.AbRequestParams;
+import com.ab.http.AbStringHttpResponseListener;
+import com.yyqq.babyshow.R;
+import com.yyqq.code.login.WebLoginActivity;
+import com.yyqq.code.toyslease.h5.ToysLeaseHtmlInterstActivity;
+import com.yyqq.code.toyslease.version_92.ToysLeaseMainAllActivity;
+import com.yyqq.commen.model.ToysAllSelect01Bean;
+import com.yyqq.commen.model.ToysLeaseMainListBean;
+import com.yyqq.commen.utils.Config;
+import com.yyqq.commen.utils.ShoppingCartUtils;
+import com.yyqq.framework.application.MyApplication;
+import com.yyqq.framework.application.ServerMutualConfig;
+
+public class ToysLeaseAllItemAdapter extends BaseAdapter {
+
+	private Activity context;
+	private ToysAllSelect01Bean selectData01;
+	
+	public ToysLeaseAllItemAdapter(Activity context, ToysAllSelect01Bean selectData01) {
+		super();
+		this.selectData01 = selectData01;
+		this.context = context;
+	}
+
+	@Override
+	public int getCount() {
+		return selectData01.getMain_val().size() == 0 ? 0 : selectData01.getMain_val().size();
+	}
+
+	@Override
+	public Object getItem(int position) {
+		return position;
+	}
+
+	@Override
+	public long getItemId(int position) {
+		return position;
+	}
+
+
+	@Override
+	public View getView(final int position, View convertView, ViewGroup parent) {
+		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		convertView = inflater.inflate(R.layout.item_toys_all_select_02, null);
+		
+		TextView item_search_hint_text = (TextView) convertView.findViewById(R.id.item_search_hint_text);
+		item_search_hint_text.setText(selectData01.getMain_val().get(position).getEach_title());
+		
+		if(selectData01.getMain_val().get(position).isClick()){
+			item_search_hint_text.setTextColor(Color.parseColor("#ff6d6d"));
+		}else{
+			item_search_hint_text.setTextColor(Color.parseColor("#666666"));
+		}
+		
+		return convertView;
+	}
+	
+	
+
+}

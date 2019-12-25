@@ -1,0 +1,96 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#f5f5f5" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp" >
+
+        
+        <RelativeLayout
+            android:id="@+id/main_item05_lin"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginRight="0.5dp" >
+
+            <ImageView
+                android:id="@+id/lease_toys_pay_img"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:scaleType="centerCrop" />
+
+            <ImageView
+                android:id="@+id/category_icon_url"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="0dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="70dp"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/lease_toys_pay_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_weight="0.9"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="正在加载···"
+                android:textColor="#333333"
+                android:textSize="@dimen/text_size_14" />
+
+            <TextView
+                android:id="@+id/lease_toys_pay_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lease_toys_pay_title"
+                android:layout_marginTop="1dp"
+                android:layout_weight="1.2"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="正在加载···"
+                android:textColor="#999999"
+                android:textSize="@dimen/text_size_12" />
+
+            <TextView
+                android:id="@+id/lease_toys_pay_monery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_weight="1.2"
+                android:ellipsize="end"
+                android:gravity="bottom"
+                android:maxLines="1"
+                android:text="正在加载···"
+                android:textColor="#fc6262"
+                android:textSize="@dimen/text_size_14" />
+
+            <TextView
+                android:id="@+id/lease_toys_pay_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/lease_toys_pay_monery"
+                android:layout_alignParentRight="true"
+                android:ellipsize="end"
+                android:gravity="right|bottom"
+                android:text="正在加载···"
+                android:textColor="#fc6262"
+                android:textSize="@dimen/text_size_12" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

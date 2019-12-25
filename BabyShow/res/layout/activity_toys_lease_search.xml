@@ -1,0 +1,154 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/search_all"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#f9f9f9" >
+
+    <LinearLayout
+        android:id="@+id/search_main"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/title"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/title_height"
+            android:background="#ffffff" >
+
+            <ImageView
+                android:id="@+id/title_back"
+                android:layout_width="20dp"
+                android:layout_height="25dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:padding="5dp"
+                android:src="@drawable/main_home_back" />
+
+            <TextView
+                android:id="@+id/lease_main_right"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:text="搜索"
+                android:textColor="#d72722"
+                android:textSize="@dimen/title_text_size_corner" />
+
+            <EditText
+                android:id="@+id/search_main_ed"
+                android:layout_width="fill_parent"
+                android:layout_height="28dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toLeftOf="@+id/lease_main_right"
+                android:layout_toRightOf="@+id/title_back"
+                android:background="@drawable/view_to_shape05"
+                android:ems="10"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingLeft="10dp"
+                android:textColor="#333333"
+                android:textColorHint="#ffffff"
+                android:textSize="@dimen/text_size_14" >
+            </EditText>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/search_main_hot_hint_all"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp" >
+
+            <TextView
+                android:id="@+id/search_main_hot_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="历史记录"
+                android:textColor="#333333"
+                android:textSize="@dimen/text_size_16"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/toys_search_main_delete"
+                android:layout_width="40dp"
+                android:layout_height="15dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/search_main_hot_hint"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/toys_search_delete_icon" />
+        </RelativeLayout>
+
+        <GridView
+            android:id="@+id/search_main_hint"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:listSelector="#f9f9f9"
+            android:numColumns="3"
+            android:scrollbars="none" >
+        </GridView>
+
+        <View
+            android:id="@+id/search_hint_line"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="#e3e3e3" />
+
+        <RelativeLayout
+            android:id="@+id/search_hint_all"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:id="@+id/search_main_own_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="热门推荐"
+                android:textColor="#333333"
+                android:textSize="@dimen/text_size_16"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/search_context_list"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            android:listSelector="#f9f9f9"
+            android:scrollbars="none" >
+        </ListView>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/search_to_cart"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/search_cart_icon" />
+
+</RelativeLayout>

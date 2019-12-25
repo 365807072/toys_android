@@ -1,0 +1,1604 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.yyqq.babyshow"
+4    android:versionCode="102"
+5    android:versionName="9.0.2" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="19"
+8-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml
+9        android:targetSdkVersion="26" />
+9-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+11-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:6:5-81
+11-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:6:22-78
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:7:5-67
+12-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:7:22-64
+13    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+13-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:8:5-79
+13-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:8:22-76
+14
+15    <!-- GPS定位 -->
+16    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+16-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:11:5-79
+16-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:11:22-76
+17    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+17-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:12:5-81
+17-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:12:22-78
+18    <!-- 连接互联网Internet权限 -->
+19    <uses-permission android:name="android.permission.INTERNET" />
+19-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:7:5-67
+19-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:7:22-64
+20    <uses-permission android:name="android.permission.VIBRATE" />
+20-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:15:5-66
+20-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:15:22-63
+21    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+21-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:8:5-79
+21-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:8:22-76
+22    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+22-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:6:5-81
+22-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:6:22-78
+23    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+23-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:18:5-20:47
+23-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:19:9-68
+24    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+24-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:21:5-76
+24-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:21:22-73
+25    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+25-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:22:5-76
+25-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:22:22-73
+26    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+26-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:23:5-75
+26-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:23:22-72
+27    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+27-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:24:5-81
+27-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:24:22-78
+28    <uses-permission android:name="android.permission.REORDER_TASKS" />
+28-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:25:5-72
+28-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:25:22-69
+29    <uses-permission android:name="android.permission.Activity.NOTIFICATION_SERVICE" />
+29-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:26:5-88
+29-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:26:22-85
+30    <uses-permission android:name="android.permission.READ_LOGS" />
+30-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:27:5-29:47
+30-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:28:9-52
+31    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+31-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:30:5-78
+31-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:30:22-75
+32    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
+32-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:31:5-80
+32-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:31:22-77
+33    <uses-permission android:name="android.permission.GET_TASKS" />
+33-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:32:5-68
+33-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:32:22-65
+34    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
+34-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:33:5-35:47
+34-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:34:9-69
+35    <uses-permission android:name="android.permission.READ_CONTACTS" />
+35-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:36:5-72
+35-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:36:22-69
+36    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+36-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:37:5-73
+36-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:37:22-70
+37    <uses-permission android:name="android.permission.CALL_PHONE" />
+37-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:38:5-85
+37-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:38:22-66
+38
+39    <!-- 第三方 -->
+40    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+40-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:41:5-74
+40-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:41:22-71
+41    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+41-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:42:5-71
+41-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:42:22-68
+42
+43    <!-- 腾讯地图定位 -->
+44    <!-- 通过GPS得到精确位置 -->
+45    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+45-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:11:5-79
+45-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:11:22-76
+46    <!-- 通过网络得到粗略位置 -->
+47    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+47-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:12:5-81
+47-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:12:22-78
+48    <!-- 访问网络. 某些位置信息需要从网络服务器获取 -->
+49    <uses-permission android:name="android.permission.INTERNET" />
+49-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:7:5-67
+49-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:7:22-64
+50    <!-- 访问WiFi状态. 需要WiFi信息用于网络定位 -->
+51    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+51-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:21:5-76
+51-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:21:22-73
+52    <!-- 修改WiFi状态. 发起WiFi扫描, 需要WiFi信息用于网络定位 -->
+53    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+53-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:22:5-76
+53-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:22:22-73
+54    <!-- 访问网络状态, 检测网络的可用性. 需要网络运营商相关信息用于网络定位 -->
+55    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+55-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:8:5-79
+55-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:8:22-76
+56    <!-- 访问网络的变化, 需要某些信息用于网络定位 -->
+57    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+57-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:58:5-79
+57-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:58:22-76
+58    <!-- 访问手机当前状态, 需要某些信息用于网络定位 -->
+59    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+59-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:23:5-75
+59-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:23:22-72
+60
+61    <!-- 手机注册 -->
+62    <uses-permission android:name="android.permission.READ_CONTACTS" />
+62-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:36:5-72
+62-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:36:22-69
+63    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+63-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:23:5-75
+63-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:23:22-72
+64    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+64-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:6:5-81
+64-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:6:22-78
+65    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+65-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:8:5-79
+65-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:8:22-76
+66    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+66-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:21:5-76
+66-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:21:22-73
+67    <uses-permission android:name="android.permission.INTERNET" />
+67-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:7:5-67
+67-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:7:22-64
+68    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+68-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:69:5-70
+68-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:69:22-67
+69    <uses-permission android:name="android.permission.GET_TASKS" />
+69-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:32:5-68
+69-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:32:22-65
+70    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+70-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:11:5-79
+70-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:11:22-76
+71
+72    <!-- Required -->
+73    <permission
+73-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:74:5-76:47
+74        android:name="com.yyqq.babyshow.permission.JPUSH_MESSAGE"
+74-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:75:9-66
+75        android:protectionLevel="signature" />
+75-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:76:9-44
+76
+77    <!-- Required  一些系统要求的权限，如访问网络等 -->
+78    <uses-permission android:name="com.yyqq.babyshow.permission.JPUSH_MESSAGE" />
+78-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:79:5-82
+78-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:79:22-79
+79    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+79-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:80:5-79
+79-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:80:22-76
+80    <uses-permission android:name="android.permission.INTERNET" />
+80-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:7:5-67
+80-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:7:22-64
+81    <uses-permission android:name="android.permission.WAKE_LOCK" />
+81-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:82:5-68
+81-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:82:22-65
+82    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+82-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:23:5-75
+82-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:23:22-72
+83    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+83-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:6:5-81
+83-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:6:22-78
+84    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+84-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:85:5-80
+84-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:85:22-77
+85    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+85-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:86:5-88:47
+85-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:87:9-57
+86    <uses-permission android:name="android.permission.VIBRATE" />
+86-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:15:5-66
+86-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:15:22-63
+87    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+87-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:18:5-20:47
+87-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:19:9-68
+88    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+88-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:8:5-79
+88-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:8:22-76
+89    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+89-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:21:5-76
+89-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:21:22-73
+90    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+90-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:30:5-78
+90-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:30:22-75
+91
+92    <!-- Optional for location -->
+93    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+93-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:12:5-81
+93-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:12:22-78
+94    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+94-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:22:5-76
+94-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:22:22-73
+95    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+95-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:11:5-79
+95-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:11:22-76
+96    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+96-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:101:5-89
+96-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:101:22-86
+97    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+97-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:58:5-79
+97-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:58:22-76
+98
+99    <!-- 支付宝 -->
+100    <uses-permission android:name="android.permission.INTERNET" />
+100-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:7:5-67
+100-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:7:22-64
+101    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+101-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:8:5-79
+101-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:8:22-76
+102    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+102-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:21:5-76
+102-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:21:22-73
+103    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+103-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:23:5-75
+103-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:23:22-72
+104    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+104-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:6:5-81
+104-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:6:22-78
+105
+106    <application
+106-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:111:5-818:19
+107        android:name="com.yyqq.framework.application.MyApplication"
+107-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:112:9-68
+108        android:allowBackup="true"
+108-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:113:9-35
+109        android:icon="@drawable/icon"
+109-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:114:9-38
+110        android:label="@string/app_name"
+110-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:115:9-41
+111        android:largeHeap="true"
+111-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:116:9-33
+112        android:theme="@style/AppTheme" >
+112-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:117:9-40
+113        <activity
+113-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:119:9-136:20
+114            android:name="com.yyqq.babyshow.WelcomeActivity"
+114-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:120:13-44
+115            android:label="@string/app_name"
+115-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:121:13-45
+116            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+116-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:122:13-72
+117            <intent-filter>
+117-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:123:13-127:29
+118                <action android:name="android.intent.action.MAIN" />
+118-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:124:17-69
+118-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:124:25-66
+119
+120                <category android:name="android.intent.category.LAUNCHER" />
+120-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:126:17-77
+120-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:126:27-74
+121            </intent-filter>
+122            <intent-filter>
+122-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:128:13-135:29
+123                <action android:name="android.intent.action.VIEW" />
+123-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:129:17-69
+123-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:129:25-66
+124
+125                <category android:name="android.intent.category.DEFAULT" />
+125-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:131:17-76
+125-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:131:27-73
+126                <category android:name="android.intent.category.BROWSABLE" />
+126-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:132:17-78
+126-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:132:27-75
+127
+128                <data android:scheme="znn" />
+128-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:134:17-46
+128-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:134:23-43
+129            </intent-filter>
+130        </activity>
+131        <activity
+131-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:137:9-140:75
+132            android:name="com.yyqq.babyshow.StartActivity"
+132-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:138:13-42
+133            android:label="@string/app_name"
+133-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:139:13-45
+134            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+134-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:140:13-72
+135
+136        <!-- 支持全面屏 -->
+137        <meta-data
+137-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:143:9-145:35
+138            android:name="android.max_aspect"
+138-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:144:13-46
+139            android:value="2.1" />
+139-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:145:13-32
+140
+141        <!-- 手机注册 -->
+142        <meta-data
+142-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:148:9-150:44
+143            android:name="Mob-AppKey"
+143-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:149:13-38
+144            android:value="e429567eaf24" />
+144-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:150:13-41
+145        <meta-data
+145-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:151:9-153:64
+146            android:name="Mob-AppSecret"
+146-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:152:13-41
+147            android:value="9c17c627949764ff03ac1bf2b378891f" />
+147-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:153:13-61
+148        <meta-data
+148-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:154:9-156:66
+149            android:name="UMENG_APPKEY"
+149-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:155:13-40
+150            android:value="52dfb0fe56240b496d00b0be" />
+150-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:156:13-53
+151        <meta-data
+151-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:157:9-159:43
+152            android:name="UMENG_CHANNEL"
+152-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:158:13-41
+153            android:value="tongyong ID" />
+153-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:159:13-40
+154        <!-- tongyong ID -->
+155        <!-- 手机注册 -->
+156        <activity
+156-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:162:9-184:20
+157            android:name="com.mob.tools.MobUIShell"
+157-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:163:13-52
+158            android:configChanges="keyboardHidden|orientation|screenSize"
+158-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:164:13-74
+159            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+159-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:165:13-72
+160            android:windowSoftInputMode="stateHidden|adjustResize" >
+160-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:166:13-67
+161
+162            <!--
+163			如果集成QQ分享，或者使用QQ客户端来进行QQ空间的
+164			分享，须要在此处添加一个对ACTION_VIEW事件的过滤器，
+165			其中的scheme是“tencent”前缀再开发者应用的加上appId。
+166			如果此过滤器不设置，则分享结束以后不能得到正确的回调
+167            -->
+168            <intent-filter>
+168-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:176:13-183:29
+169                <data android:scheme="tencent1101220810" />
+169-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:134:17-46
+169-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:134:23-43
+170
+171                <action android:name="android.intent.action.VIEW" />
+171-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:129:17-69
+171-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:129:25-66
+172
+173                <category android:name="android.intent.category.DEFAULT" />
+173-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:131:17-76
+173-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:131:27-73
+174                <category android:name="android.intent.category.BROWSABLE" />
+174-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:132:17-78
+174-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:132:27-75
+175            </intent-filter>
+176        </activity>
+177
+178        <!-- Required SDK核心功能 -->
+179        <activity
+179-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:187:9-198:20
+180            android:name="cn.jpush.android.ui.PushActivity"
+180-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:188:13-60
+181            android:configChanges="orientation|keyboardHidden"
+181-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:189:13-63
+182            android:exported="false"
+182-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:190:13-37
+183            android:theme="@android:style/Theme.NoTitleBar" >
+183-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:191:13-60
+184            <intent-filter>
+184-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:192:13-197:29
+185                <action android:name="cn.jpush.android.ui.PushActivity" />
+185-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:193:17-75
+185-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:193:25-72
+186
+187                <category android:name="android.intent.category.DEFAULT" />
+187-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:131:17-76
+187-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:131:27-73
+188                <category android:name="com.yyqq.babyshow" />
+188-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:196:17-62
+188-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:196:27-59
+189            </intent-filter>
+190        </activity>
+191
+192        <!--
+193             （3.1.0版本之后（包含3.1.0）才需要注册此Activity）如果集成QQ分享，或者使用QQ客户端来进行QQ空间的分享，
+194        	须要在此处添加一个回调activity，对ACTION_VIEW事件的过滤器，其中的scheme是“tencent”前缀再开发者应用的加上appId。
+195        	如果此Activity和过滤器不设置，则分享结束以后不能得到正确的回调。
+196        -->
+197        <activity
+197-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:206:9-218:20
+198            android:name="cn.sharesdk.tencent.qq.ReceiveActivity"
+198-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:207:13-66
+199            android:launchMode="singleTask"
+199-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:208:13-44
+200            android:noHistory="true" >
+200-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:209:13-37
+201            <intent-filter>
+201-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:176:13-183:29
+202                <action android:name="android.intent.action.VIEW" />
+202-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:129:17-69
+202-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:129:25-66
+203
+204                <category android:name="android.intent.category.DEFAULT" />
+204-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:131:17-76
+204-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:131:27-73
+205                <category android:name="android.intent.category.BROWSABLE" />
+205-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:132:17-78
+205-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:132:27-75
+206
+207                <data android:scheme="tencent1101220810" />
+207-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:134:17-46
+207-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:134:23-43
+208            </intent-filter>
+209        </activity>
+210
+211        <!-- Required  SDK核心功能 -->
+212        <service
+212-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:221:9-224:48
+213            android:name="cn.jpush.android.service.DownloadService"
+213-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:222:13-68
+214            android:enabled="true"
+214-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:223:13-35
+215            android:exported="false" />
+215-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:224:13-37
+216        <service
+216-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:225:9-228:48
+217            android:name="cn.jpush.android.service.DaemonService"
+217-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:226:13-66
+218            android:enabled="true"
+218-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:227:13-35
+219            android:exported="false" />
+219-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:228:13-37
+220
+221        <!-- Required SDK 核心功能 -->
+222        <!-- 可配置android:process参数将PushService放在其他进程中 -->
+223        <service
+223-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:232:9-242:19
+224            android:name="cn.jpush.android.service.PushService"
+224-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:233:13-64
+225            android:enabled="true"
+225-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:234:13-35
+226            android:exported="false" >
+226-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:235:13-37
+227            <intent-filter>
+227-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:236:13-241:29
+228                <action android:name="cn.jpush.android.intent.REGISTER" />
+228-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:237:17-75
+228-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:237:25-72
+229                <action android:name="cn.jpush.android.intent.REPORT" />
+229-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:238:17-73
+229-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:238:25-70
+230                <action android:name="cn.jpush.android.intent.PushService" />
+230-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:239:17-78
+230-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:239:25-75
+231                <action android:name="cn.jpush.android.intent.PUSH_TIME" />
+231-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:240:17-76
+231-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:240:25-73
+232            </intent-filter>
+233        </service>
+234
+235        <!-- Required SDK核心功能 -->
+236        <receiver
+236-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:245:9-265:20
+237            android:name="cn.jpush.android.service.PushReceiver"
+237-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:246:13-65
+238            android:enabled="true"
+238-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:247:13-35
+239            android:exported="false" >
+239-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:248:13-37
+240            <intent-filter android:priority="1000" >
+240-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:249:13-253:29
+240-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:249:28-51
+241                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
+241-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:250:17-94
+241-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:250:25-91
+242                <!-- Required  显示通知栏 -->
+243                <category android:name="com.yyqq.babyshow" />
+243-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:196:17-62
+243-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:196:27-59
+244            </intent-filter>
+245            <intent-filter>
+245-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:254:13-257:29
+246                <action android:name="android.intent.action.USER_PRESENT" />
+246-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:255:17-77
+246-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:255:25-74
+247                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+247-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:256:17-79
+247-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:256:25-76
+248            </intent-filter>
+249            <!-- Optional -->
+250            <intent-filter>
+250-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:259:13-264:29
+251                <action android:name="android.intent.action.PACKAGE_ADDED" />
+251-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:260:17-78
+251-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:260:25-75
+252                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+252-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:261:17-80
+252-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:261:25-77
+253
+254                <data android:scheme="package" />
+254-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:134:17-46
+254-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:134:23-43
+255            </intent-filter>
+256        </receiver>
+257
+258        <!-- Required SDK核心功能 -->
+259        <receiver
+259-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:268:9-270:40
+260            android:name="cn.jpush.android.service.AlarmReceiver"
+260-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:269:13-66
+261            android:exported="false" />
+261-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:270:13-37
+262
+263        <!-- User defined.  For test only  用户自定义的广播接收器 -->
+264        <receiver
+264-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:273:9-293:20
+265            android:name="com.yyqq.commen.jpush.MyReceiver"
+265-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:274:13-60
+266            android:enabled="true"
+266-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:275:13-35
+267            android:exported="false" >
+267-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:276:13-37
+268            <intent-filter>
+268-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:277:13-292:29
+269                <action android:name="cn.jpush.android.intent.REGISTRATION" />
+269-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:278:17-79
+269-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:278:25-76
+270                <!-- Required  用户注册SDK的intent -->
+271                <action android:name="cn.jpush.android.intent.UNREGISTRATION" />
+271-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:280:17-81
+271-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:280:25-78
+272                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
+272-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:281:17-83
+272-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:281:25-80
+273                <!-- Required  用户接收SDK消息的intent -->
+274                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" />
+274-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:283:17-88
+274-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:283:25-85
+275                <!-- Required  用户接收SDK通知栏信息的intent -->
+276                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
+276-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:285:17-86
+276-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:285:25-83
+277                <!-- Required  用户打开自定义通知栏的intent -->
+278                <action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK" />
+278-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:287:17-91
+278-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:287:25-88
+279                <!-- Optional 用户接受Rich Push Javascript 回调函数的intent -->
+280                <action android:name="cn.jpush.android.intent.CONNECTION" />
+280-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:289:17-77
+280-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:289:25-74
+281                <!-- 接收网络变化 连接/断开 since 1.6.3 -->
+282                <category android:name="com.yyqq.babyshow" />
+282-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:196:17-62
+282-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:196:27-59
+283            </intent-filter>
+284        </receiver>
+285
+286        <meta-data
+286-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:295:9-297:49
+287            android:name="JPUSH_CHANNEL"
+287-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:296:13-41
+288            android:value="developer-default" />
+288-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:297:13-46
+289        <!-- Required. AppKey copied from Portal -->
+290        <meta-data
+290-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:299:9-301:56
+291            android:name="JPUSH_APPKEY"
+291-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:300:13-40
+292            android:value="3a1f80e8353c45353a9cdc8a" />
+292-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:301:13-53
+293
+294        <service
+294-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:303:9-305:61
+295            android:name="com.umeng.update.net.DownloadingService"
+295-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:304:13-67
+296            android:process=":DownloadingService" />
+296-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:305:13-50
+297
+298        <activity
+298-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:307:9-309:84
+299            android:name="com.umeng.update.UpdateDialogActivity"
+299-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:308:13-65
+300            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+300-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:309:13-72
+301        <activity
+301-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:310:9-313:84
+302            android:name="com.yyqq.code.main.MainTab"
+302-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:311:13-54
+303            android:configChanges="orientation|keyboardHidden"
+303-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:312:13-63
+304            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+304-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:313:13-72
+305        <activity
+305-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:314:9-316:75
+306            android:name="com.yyqq.code.main.GoodLife"
+306-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:315:13-55
+307            android:configChanges="orientation|keyboardHidden" />
+307-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:316:13-63
+308        <activity android:name="com.yyqq.code.main.ShowShowMainActivity" />
+308-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:317:9-85
+308-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:317:19-73
+309        <activity
+309-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:318:9-320:75
+310            android:name="com.yyqq.code.main.SpecialActivity"
+310-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:319:13-62
+311            android:configChanges="orientation|keyboardHidden" />
+311-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:320:13-63
+312        <activity
+312-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:321:9-323:75
+313            android:name="com.yyqq.code.main.SpecialDetailList"
+313-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:322:13-64
+314            android:configChanges="orientation|keyboardHidden" />
+314-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:323:13-63
+315        <activity
+315-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:324:9-326:75
+316            android:name="com.yyqq.code.main.SpecialDetailGrid"
+316-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:325:13-64
+317            android:configChanges="orientation|keyboardHidden" />
+317-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:326:13-63
+318        <activity
+318-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:327:9-329:66
+319            android:name="com.yyqq.code.main.Release"
+319-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:328:13-54
+320            android:configChanges="orientation|keyboardHidden" />
+320-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:329:13-63
+321        <activity
+321-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:330:9-332:75
+322            android:name="com.yyqq.code.main.Uploadpload"
+322-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:331:13-58
+323            android:configChanges="orientation|keyboardHidden" />
+323-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:332:13-63
+324        <activity
+324-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:333:9-335:75
+325            android:name="com.yyqq.code.main.PhotoManager"
+325-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:334:13-59
+326            android:configChanges="orientation|keyboardHidden" />
+326-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:335:13-63
+327        <activity
+327-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:336:9-338:75
+328            android:name="com.yyqq.code.personal.PersonalCenterActivity"
+328-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:337:13-73
+329            android:configChanges="orientation|keyboardHidden" />
+329-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:338:13-63
+330        <activity
+330-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:339:9-341:75
+331            android:name="com.yyqq.code.personal.MessageList"
+331-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:340:13-62
+332            android:configChanges="orientation|keyboardHidden" />
+332-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:341:13-63
+333        <activity
+333-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:342:9-344:75
+334            android:name="com.yyqq.code.personal.GrowList"
+334-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:343:13-59
+335            android:configChanges="orientation|keyboardHidden" />
+335-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:344:13-63
+336        <activity
+336-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:345:9-347:75
+337            android:name="com.yyqq.code.personal.MessageFriendList"
+337-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:346:13-68
+338            android:configChanges="orientation|keyboardHidden" />
+338-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:347:13-63
+339        <activity
+339-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:348:9-350:66
+340            android:name="com.yyqq.code.main.LoadDeviceImage"
+340-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:349:13-62
+341            android:configChanges="orientation|keyboardHidden" />
+341-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:350:13-63
+342        <activity
+342-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:351:9-353:75
+343            android:name="com.yyqq.code.photo.PhoneAlbumActivity"
+343-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:352:13-66
+344            android:configChanges="orientation|keyboardHidden" />
+344-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:353:13-63
+345        <activity
+345-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:354:9-356:75
+346            android:name="com.yyqq.code.photo.PhoneAlbumDetialActivity"
+346-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:355:13-72
+347            android:configChanges="orientation|keyboardHidden" />
+347-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:356:13-63
+348        <activity
+348-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:357:9-359:75
+349            android:name="com.yyqq.code.main.AddNewPostActivity"
+349-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:358:13-65
+350            android:configChanges="orientation|keyboardHidden" />
+350-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:359:13-63
+351        <activity
+351-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:360:9-362:75
+352            android:name="com.yyqq.code.main.AddNewPostContinueActivity"
+352-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:361:13-73
+353            android:configChanges="orientation|keyboardHidden" />
+353-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:362:13-63
+354        <activity
+354-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:363:9-365:75
+355            android:name="com.yyqq.code.photo.PhotoActivity"
+355-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:364:13-61
+356            android:configChanges="orientation|keyboardHidden" />
+356-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:365:13-63
+357        <activity
+357-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:366:9-368:75
+358            android:name="com.yyqq.code.photo.MoveImageList"
+358-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:367:13-61
+359            android:configChanges="orientation|keyboardHidden" />
+359-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:368:13-63
+360        <activity
+360-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:369:9-371:75
+361            android:name="com.yyqq.code.photo.MovePhotoList"
+361-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:370:13-61
+362            android:configChanges="orientation|keyboardHidden" />
+362-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:371:13-63
+363        <activity
+363-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:372:9-374:75
+364            android:name="com.yyqq.code.main.InitActivity"
+364-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:373:13-59
+365            android:configChanges="orientation|keyboardHidden" />
+365-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:374:13-63
+366        <activity
+366-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:375:9-377:75
+367            android:name="com.yyqq.code.login.ChangePhone"
+367-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:376:13-59
+368            android:configChanges="orientation|keyboardHidden" />
+368-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:377:13-63
+369        <activity
+369-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:378:9-380:75
+370            android:name="com.yyqq.code.login.ChangePhone2"
+370-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:379:13-60
+371            android:configChanges="orientation|keyboardHidden" />
+371-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:380:13-63
+372        <activity
+372-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:381:9-383:66
+373            android:name="com.yyqq.code.login.ChangePwd"
+373-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:382:13-57
+374            android:configChanges="orientation|keyboardHidden" />
+374-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:383:13-63
+375        <activity
+375-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:384:9-386:66
+376            android:name="com.yyqq.code.login.ResetPwd"
+376-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:385:13-56
+377            android:configChanges="orientation|keyboardHidden" />
+377-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:386:13-63
+378        <!-- 添加宝贝 -->
+379        <activity
+379-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:388:9-390:66
+380            android:name="com.yyqq.code.login.AddBaby"
+380-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:389:13-55
+381            android:configChanges="orientation|keyboardHidden" />
+381-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:390:13-63
+382        <activity
+382-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:391:9-393:66
+383            android:name="com.yyqq.code.personal.Bind"
+383-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:392:13-55
+384            android:configChanges="orientation|keyboardHidden" />
+384-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:393:13-63
+385        <!-- 拍照后显示图片为了旋转 -->
+386        <activity
+386-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:395:9-397:66
+387            android:name="com.yyqq.code.photo.CropImage"
+387-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:396:13-57
+388            android:configChanges="orientation|keyboardHidden" />
+388-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:397:13-63
+389        <activity
+389-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:398:9-400:66
+390            android:name="com.yyqq.code.main.ReviewList"
+390-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:399:13-57
+391            android:configChanges="orientation|keyboardHidden" />
+391-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:400:13-63
+392        <activity
+392-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:401:9-403:75
+393            android:name="com.yyqq.code.photo.PhotoDetail"
+393-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:402:13-59
+394            android:configChanges="orientation|keyboardHidden" />
+394-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:403:13-63
+395        <activity
+395-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:404:9-406:75
+396            android:name="com.yyqq.code.photo.PhotoList"
+396-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:405:13-57
+397            android:configChanges="orientation|keyboardHidden" />
+397-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:406:13-63
+398        <activity
+398-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:407:9-409:75
+399            android:name="com.yyqq.code.photo.PhotoEdit"
+399-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:408:13-57
+400            android:configChanges="orientation|keyboardHidden" />
+400-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:409:13-63
+401        <activity
+401-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:410:9-412:75
+402            android:name="com.yyqq.code.photo.PhotoBigImage"
+402-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:411:13-61
+403            android:configChanges="orientation|keyboardHidden" />
+403-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:412:13-63
+404        <activity
+404-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:413:9-415:66
+405            android:name="com.yyqq.code.photo.ImageDetail"
+405-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:414:13-59
+406            android:configChanges="orientation|keyboardHidden" />
+406-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:415:13-63
+407        <activity
+407-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:416:9-418:66
+408            android:name="com.yyqq.code.photo.PeoplePhotoList"
+408-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:417:13-63
+409            android:configChanges="orientation|keyboardHidden" />
+409-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:418:13-63
+410        <activity
+410-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:419:9-421:66
+411            android:name="com.yyqq.code.photo.PeoplePhotoManager"
+411-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:420:13-66
+412            android:configChanges="orientation|keyboardHidden" />
+412-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:421:13-63
+413        <activity
+413-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:422:9-424:75
+414            android:name="com.yyqq.code.personal.UserInfo"
+414-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:423:13-59
+415            android:configChanges="orientation|keyboardHidden" />
+415-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:424:13-63
+416        <activity
+416-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:425:9-427:75
+417            android:name="com.yyqq.code.personal.UserSet"
+417-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:426:13-58
+418            android:configChanges="orientation|keyboardHidden" />
+418-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:427:13-63
+419        <activity
+419-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:428:9-430:60
+420            android:name="com.yyqq.code.personal.FriendList"
+420-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:429:13-61
+421            android:configChanges="orientation|keyboard" />
+421-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:430:13-57
+422        <activity
+422-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:431:9-433:60
+423            android:name="com.yyqq.code.personal.EditBaby"
+423-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:432:13-59
+424            android:configChanges="orientation|keyboard" />
+424-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:433:13-57
+425
+426        <service android:name="com.yyqq.commen.service.SystemService" />
+426-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:435:9-81
+426-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:435:18-70
+427        <service
+427-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:436:9-438:61
+428            android:name="com.umeng.common.net.DownloadingService"
+428-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:437:13-67
+429            android:process=":DownloadingService" />
+429-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:438:13-50
+430        <service
+430-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:439:9-441:61
+431            android:name="com.yyqq.commen.service.AnimPlayerService"
+431-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:440:13-69
+432            android:process=":DownloadingService" />
+432-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:441:13-50
+433
+434        <activity
+434-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:443:9-445:60
+435            android:name="com.yyqq.code.photo.ChangePhotoSize"
+435-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:444:13-63
+436            android:configChanges="orientation|keyboard" />
+436-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:445:13-57
+437        <activity
+437-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:446:9-448:60
+438            android:name="com.yyqq.code.personal.SharedList"
+438-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:447:13-61
+439            android:configChanges="orientation|keyboard" />
+439-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:448:13-57
+440        <activity
+440-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:449:9-451:66
+441            android:name="com.yyqq.code.photo.PhotoThem"
+441-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:450:13-57
+442            android:configChanges="orientation|keyboardHidden" />
+442-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:451:13-63
+443        <activity
+443-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:452:9-455:62
+444            android:name="com.yyqq.code.photo.AnimPlayer"
+444-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:453:13-58
+445            android:configChanges="orientation|keyboardHidden|screenSize"
+445-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:454:13-74
+446            android:screenOrientation="landscape" />
+446-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:455:13-50
+447        <activity
+447-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:456:9-458:66
+448            android:name="com.yyqq.code.business.BusinessCooperateActivity"
+448-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:457:13-76
+449            android:configChanges="orientation|keyboardHidden" />
+449-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:458:13-63
+450        <activity
+450-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:459:9-461:66
+451            android:name="com.yyqq.code.photo.Plaza_Detail"
+451-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:460:13-60
+452            android:configChanges="orientation|keyboardHidden" />
+452-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:461:13-63
+453
+454        <!-- 热点 -->
+455        <activity android:name="com.yyqq.code.postbar.PostBarActivity" />
+455-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:464:9-74
+455-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:464:19-71
+456        <activity
+456-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:465:9-467:77
+457            android:name="com.yyqq.code.postbar.QunActivity"
+457-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:466:13-61
+458            android:configChanges="orientation|keyboardHidden|navigation" />
+458-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:467:13-74
+459        <activity
+459-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:468:9-470:77
+460            android:name="com.yyqq.code.postbar.QunList"
+460-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:469:13-57
+461            android:configChanges="orientation|keyboardHidden|navigation" />
+461-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:470:13-74
+462        <activity
+462-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:471:9-473:77
+463            android:name="com.yyqq.code.postbar.PostMyInterestDetail"
+463-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:472:13-70
+464            android:configChanges="orientation|keyboardHidden|navigation" />
+464-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:473:13-74
+465        <activity
+465-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:474:9-476:77
+466            android:name="com.yyqq.code.postbar.PostGongGaoActivity"
+466-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:475:13-69
+467            android:configChanges="orientation|keyboardHidden|navigation" />
+467-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:476:13-74
+468        <activity
+468-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:477:9-479:77
+469            android:name="com.yyqq.code.postbar.QunManageActivity"
+469-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:478:13-67
+470            android:configChanges="orientation|keyboardHidden|navigation" />
+470-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:479:13-74
+471        <activity android:name="com.yyqq.code.postbar.PostBarType" />
+471-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:480:9-70
+471-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:480:19-67
+472        <activity
+472-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:481:9-483:66
+473            android:name="com.yyqq.code.postbar.PostBarDetail"
+473-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:482:13-63
+474            android:configChanges="orientation|keyboardHidden" />
+474-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:483:13-63
+475        <activity
+475-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:484:9-486:66
+476            android:name="com.yyqq.code.postbar.PostBarAddActivity"
+476-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:485:13-68
+477            android:configChanges="orientation|keyboardHidden" />
+477-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:486:13-63
+478        <activity
+478-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:487:9-489:66
+479            android:name="com.yyqq.commen.view.MyCollection"
+479-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:488:13-61
+480            android:configChanges="orientation|keyboardHidden" />
+480-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:489:13-63
+481        <activity
+481-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:490:9-492:66
+482            android:name="com.yyqq.code.postbar.PostReviewList"
+482-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:491:13-64
+483            android:configChanges="orientation|keyboardHidden" />
+483-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:492:13-63
+484        <activity
+484-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:493:9-495:66
+485            android:name="com.yyqq.code.business.BusinessDetailActivity"
+485-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:494:13-73
+486            android:configChanges="orientation|keyboardHidden" />
+486-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:495:13-63
+487        <activity
+487-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:496:9-498:66
+488            android:name="com.yyqq.code.business.BusinessMsg"
+488-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:497:13-62
+489            android:configChanges="orientation|keyboardHidden" />
+489-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:498:13-63
+490        <activity
+490-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:499:9-501:66
+491            android:name="com.yyqq.code.business.BusinessList"
+491-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:500:13-63
+492            android:configChanges="orientation|keyboardHidden" />
+492-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:501:13-63
+493        <activity
+493-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:502:9-504:66
+494            android:name="com.yyqq.code.business.BusinessOderList"
+494-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:503:13-67
+495            android:configChanges="orientation|keyboardHidden" />
+495-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:504:13-63
+496        <activity
+496-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:505:9-507:66
+497            android:name="com.yyqq.code.business.RedPacket"
+497-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:506:13-60
+498            android:configChanges="orientation|keyboardHidden" />
+498-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:507:13-63
+499        <activity
+499-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:508:9-510:66
+500            android:name="com.yyqq.code.personal.PersonalBandPhoneActivity"
+500-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:509:13-76
+501            android:configChanges="orientation|keyboardHidden" />
+501-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:510:13-63
+502        <activity
+502-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:511:9-513:66
+503            android:name="com.yyqq.code.business.BusinessReviewList"
+503-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:512:13-69
+504            android:configChanges="orientation|keyboardHidden" />
+504-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:513:13-63
+505        <activity
+505-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:514:9-516:66
+506            android:name="com.yyqq.code.business.UserOderList"
+506-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:515:13-63
+507            android:configChanges="orientation|keyboardHidden" />
+507-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:516:13-63
+508        <activity
+508-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:517:9-519:66
+509            android:name="com.yyqq.code.business.OderDetail"
+509-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:518:13-61
+510            android:configChanges="orientation|keyboardHidden" />
+510-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:519:13-63
+511        <activity
+511-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:520:9-530:20
+512            android:name="com.yyqq.code.business.PayActivity"
+512-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:521:13-62
+513            android:configChanges="orientation|keyboardHidden" >
+513-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:522:13-63
+514            <intent-filter>
+514-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:523:13-529:29
+515                <action android:name="android.intent.action.VIEW" />
+515-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:129:17-69
+515-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:129:25-66
+516
+517                <category android:name="android.intent.category.DEFAULT" />
+517-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:131:17-76
+517-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:131:27-73
+518
+519                <data android:scheme="wx631dfb79434545dc" />
+519-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:134:17-46
+519-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:134:23-43
+520            </intent-filter>
+521        </activity>
+522        <!-- 值得买 -->
+523        <activity
+523-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:532:9-534:66
+524            android:name="com.yyqq.code.buy.BuyDetailFragment"
+524-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:533:13-63
+525            android:configChanges="orientation|keyboardHidden" />
+525-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:534:13-63
+526        <activity
+526-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:535:9-537:66
+527            android:name="com.yyqq.code.buy.BuyActivity"
+527-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:536:13-57
+528            android:configChanges="orientation|keyboardHidden" />
+528-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:537:13-63
+529        <activity
+529-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:538:9-540:66
+530            android:name="com.yyqq.code.buy.BuyDetailList"
+530-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:539:13-59
+531            android:configChanges="orientation|keyboardHidden" />
+531-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:540:13-63
+532        <activity
+532-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:541:9-543:66
+533            android:name="com.yyqq.code.buy.BuyShow"
+533-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:542:13-53
+534            android:configChanges="orientation|keyboardHidden" />
+534-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:543:13-63
+535        <activity
+535-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:544:9-546:66
+536            android:name="com.yyqq.commen.utils.WebViewActivity"
+536-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:545:13-65
+537            android:configChanges="orientation|keyboardHidden" />
+537-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:546:13-63
+538        <activity
+538-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:547:9-549:66
+539            android:name="com.yyqq.code.personal.BindList"
+539-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:548:13-59
+540            android:configChanges="orientation|keyboardHidden" />
+540-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:549:13-63
+541        <activity
+541-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:550:9-552:66
+542            android:name="com.yyqq.code.grow.InsertHWActivity"
+542-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:551:13-63
+543            android:configChanges="orientation|keyboardHidden" />
+543-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:552:13-63
+544        <activity
+544-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:553:9-555:66
+545            android:name="com.yyqq.code.grow.GrowSearch"
+545-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:554:13-57
+546            android:configChanges="orientation|keyboardHidden" />
+546-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:555:13-63
+547        <activity
+547-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:556:9-558:66
+548            android:name="com.yyqq.code.grow.GrowAttention"
+548-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:557:13-60
+549            android:configChanges="orientation|keyboardHidden" />
+549-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:558:13-63
+550        <activity
+550-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:559:9-561:66
+551            android:name="com.yyqq.code.grow.GrowAttention2"
+551-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:560:13-61
+552            android:configChanges="orientation|keyboardHidden" />
+552-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:561:13-63
+553        <activity
+553-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:562:9-564:66
+554            android:name="com.yyqq.code.grow.GrowActivity"
+554-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:563:13-59
+555            android:configChanges="orientation|keyboardHidden" />
+555-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:564:13-63
+556        <activity
+556-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:565:9-567:66
+557            android:name="com.yyqq.code.grow.Grow_Detail"
+557-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:566:13-58
+558            android:configChanges="orientation|keyboardHidden" />
+558-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:567:13-63
+559        <activity
+559-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:568:9-570:66
+560            android:name="com.yyqq.code.grow.Grow_Synchronize"
+560-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:569:13-63
+561            android:configChanges="orientation|keyboardHidden" />
+561-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:570:13-63
+562        <activity
+562-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:571:9-573:66
+563            android:name="com.yyqq.commen.utils.Rank"
+563-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:572:13-54
+564            android:configChanges="orientation|keyboardHidden" />
+564-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:573:13-63
+565        <activity
+565-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:574:9-576:66
+566            android:name="com.yyqq.code.grow.MyShareList"
+566-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:575:13-58
+567            android:configChanges="orientation|keyboardHidden" />
+567-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:576:13-63
+568        <activity
+568-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:577:9-579:66
+569            android:name="com.yyqq.code.grow.GrowReviewList"
+569-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:578:13-61
+570            android:configChanges="orientation|keyboardHidden" />
+570-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:579:13-63
+571        <activity
+571-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:580:9-583:55
+572            android:name="com.yyqq.code.grow.GrowEditActivity"
+572-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:581:13-63
+573            android:configChanges="orientation|keyboardHidden"
+573-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:582:13-63
+574            android:windowSoftInputMode="adjustPan" />
+574-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:583:13-52
+575        <activity
+575-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:584:9-598:20
+576            android:name="cn.sharesdk.framework.ShareSDKUIShell"
+576-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:585:13-65
+577            android:configChanges="keyboardHidden|orientation|screenSize"
+577-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:586:13-74
+578            android:screenOrientation="portrait"
+578-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:587:13-49
+579            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+579-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:588:13-72
+580            android:windowSoftInputMode="stateHidden|adjustResize" >
+580-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:589:13-67
+581            <intent-filter>
+581-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:590:13-597:29
+582                <data android:scheme="tencent100371282" />
+582-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:134:17-46
+582-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:134:23-43
+583
+584                <action android:name="android.intent.action.VIEW" />
+584-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:129:17-69
+584-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:129:25-66
+585
+586                <category android:name="android.intent.category.BROWSABLE" />
+586-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:132:17-78
+586-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:132:27-75
+587                <category android:name="android.intent.category.DEFAULT" />
+587-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:131:17-76
+587-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:131:27-73
+588            </intent-filter>
+589        </activity>
+590        <!-- 微信分享回调 -->
+591        <activity
+591-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:600:9-605:75
+592            android:name="com.yyqq.babyshow.wxapi.WXEntryActivity"
+592-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:601:13-50
+593            android:configChanges="keyboardHidden|orientation|screenSize"
+593-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:602:13-74
+594            android:exported="true"
+594-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:603:13-36
+595            android:screenOrientation="portrait"
+595-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:604:13-49
+596            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+596-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:605:13-72
+597
+598        <!-- 支付宝 -->
+599        <activity
+599-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:608:9-612:59
+600            android:name="com.alipay.sdk.app.H5PayActivity"
+600-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:609:13-60
+601            android:configChanges="orientation|keyboardHidden|navigation"
+601-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:610:13-74
+602            android:exported="false"
+602-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:611:13-37
+603            android:screenOrientation="behind" />
+603-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:612:13-47
+604        <activity
+604-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:613:9-617:59
+605            android:name="com.alipay.sdk.auth.AuthActivity"
+605-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:614:13-60
+606            android:configChanges="orientation|keyboardHidden|navigation"
+606-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:615:13-74
+607            android:exported="false"
+607-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:616:13-37
+608            android:screenOrientation="behind" />
+608-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:617:13-47
+609
+610        <!-- 微信支付 -->
+611        <activity
+611-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:620:9-623:75
+612            android:name="com.yyqq.babyshow.wxapi.WXPayEntryActivity"
+612-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:621:13-53
+613            android:exported="true"
+613-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:622:13-36
+614            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+614-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:623:13-72
+615        <activity
+615-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:624:9-626:57
+616            android:name="com.yyqq.code.map.TencetMapActivity"
+616-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:625:13-63
+617            android:label="@string/app_name" />
+617-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:626:13-45
+618        <!-- 腾讯地图 -->
+619        <meta-data
+619-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:628:9-630:67
+620            android:name="TencentMapSDK"
+620-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:629:13-41
+621            android:value="2QTBZ-QFC24-D6AU5-DMELL-N33P6-LGFUE" />
+621-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:630:13-64
+622
+623        <activity
+623-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:632:9-635:72
+624            android:name="com.yyqq.code.login.WebLoginActivity"
+624-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:633:13-64
+625            android:label="@string/app_name"
+625-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:634:13-45
+626            android:theme="@android:style/Theme.NoTitleBar" />
+626-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:635:13-60
+627        <activity
+627-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:636:9-638:70
+628            android:name="com.yyqq.babyshow.AAATexActivity"
+628-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:637:13-43
+629            android:label="@string/title_activity_aaatex" />
+629-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:638:13-58
+630        <activity
+630-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:639:9-642:85
+631            android:name="com.yyqq.code.main.MainItemDetialActivity"
+631-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:640:13-69
+632            android:configChanges="orientation|keyboardHidden"
+632-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:641:13-63
+633            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+633-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:642:13-73
+634        <activity
+634-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:643:9-645:75
+635            android:name="com.yyqq.code.video.VideoDetialActivity"
+635-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:644:13-67
+636            android:configChanges="orientation|keyboardHidden" />
+636-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:645:13-63
+637        <activity
+637-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:646:9-648:75
+638            android:name="com.yyqq.code.photo.VideoList"
+638-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:647:13-57
+639            android:configChanges="orientation|keyboardHidden" />
+639-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:648:13-63
+640
+641        <!-- 视频压缩相关 -->
+642
+643        <activity
+643-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:652:9-654:57
+644            android:name="com.lkland.videocompressor.activities.CompressionOptionActivity"
+644-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:653:13-91
+645            android:label="@string/app_name" />
+645-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:654:13-45
+646
+647        <service android:name="com.lkland.videocompressor.services.CompressionService" />
+647-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:656:9-98
+647-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:656:18-87
+648
+649        <activity
+649-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:658:9-660:73
+650            android:name="com.yyqq.code.main.AddCheckActivity"
+650-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:659:13-63
+651            android:label="@string/title_activity_add_check" />
+651-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:660:13-61
+652        <activity
+652-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:661:9-663:77
+653            android:name="com.yyqq.code.main.SearchResultActivity"
+653-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:662:13-67
+654            android:label="@string/title_activity_search_result" />
+654-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:663:13-65
+655        <activity
+655-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:664:9-666:74
+656            android:name="com.yyqq.code.group.GroupMainActivity"
+656-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:665:13-65
+657            android:label="@string/title_activity_group_main" />
+657-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:666:13-62
+658        <activity
+658-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:667:9-669:74
+659            android:name="com.yyqq.code.group.GroupDetialActivity"
+659-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:668:13-67
+660            android:label="@string/title_activity_group_main" />
+660-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:669:13-62
+661        <activity
+661-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:670:9-674:61
+662            android:name="com.yyqq.code.video.VideoFullScreenActivity"
+662-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:671:13-71
+663            android:configChanges="orientation|keyboardHidden"
+663-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:672:13-63
+664            android:label="@string/title_activity_video_full_screen"
+664-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:673:13-69
+665            android:screenOrientation="portrait" />
+665-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:674:13-49
+666        <activity
+666-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:675:9-677:79
+667            android:name="com.yyqq.code.group.GroupManagerHeadActivity"
+667-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:676:13-72
+668            android:label="@string/title_activity_group_edit_head" />
+668-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:677:13-67
+669        <activity
+669-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:678:9-680:86
+670            android:name="com.yyqq.code.group.GroupManagerCategoryActivity"
+670-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:679:13-76
+671            android:label="@string/title_activity_group_category_manager" />
+671-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:680:13-74
+672        <activity
+672-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:681:9-683:83
+673            android:name="com.yyqq.code.group.GroupManagerTopicActivity"
+673-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:682:13-73
+674            android:label="@string/title_activity_group_manager_topic" />
+674-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:683:13-71
+675        <activity
+675-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:684:9-687:67
+676            android:name="com.yyqq.code.group.GroupManagerOptionActivity"
+676-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:685:13-74
+677            android:label="@string/title_activity_group_manager_option"
+677-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:686:13-72
+678            android:theme="@style/MyDialogStyleBottom" />
+678-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:687:13-55
+679        <activity
+679-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:688:9-690:74
+680            android:name="com.yyqq.code.main.MyFollowGroupListActivity"
+680-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:689:13-72
+681            android:label="@string/title_activity_group_main" />
+681-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:690:13-62
+682        <activity
+682-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:691:9-693:77
+683            android:name="com.yyqq.code.group.AddNewGroupActivity"
+683-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:692:13-67
+684            android:label="@string/title_activity_add_new_group" />
+684-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:693:13-65
+685        <activity
+685-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:694:9-696:75
+686            android:name="com.yyqq.code.group.SuperGroupActivity"
+686-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:695:13-66
+687            android:label="@string/title_activity_super_group" />
+687-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:696:13-63
+688        <activity
+688-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:697:9-699:79
+689            android:name="com.yyqq.code.toyslease.version_92.ToysLeaseMainAllActivity"
+689-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:698:13-87
+690            android:label="@string/title_activity_toys_lease_main" />
+690-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:699:13-67
+691        <activity android:name="com.yyqq.code.toyslease.ToysLeaseDetailActivity" />
+691-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:700:9-93
+691-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:700:19-81
+692        <activity
+692-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:701:9-703:78
+693            android:name="com.yyqq.code.toyslease.AddNewToysLeaseActivity"
+693-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:702:13-75
+694            android:label="@string/title_activity_add_toys_lease" />
+694-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:703:13-66
+695        <activity
+695-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:704:9-707:81
+696            android:name="com.yyqq.code.toyslease.ToysLeaseOrderConfirmActivity"
+696-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:705:13-81
+697            android:label="@string/title_activity_toys_lease_pay"
+697-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:706:13-66
+698            android:windowSoftInputMode="stateHidden|stateUnchanged" />
+698-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:707:13-69
+699        <activity
+699-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:708:9-710:78
+700            android:name="com.yyqq.code.toyslease.ToysLeasePayConfirmActivity"
+700-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:709:13-79
+701            android:label="@string/title_activity_toys_lease_pay" />
+701-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:710:13-66
+702        <activity
+702-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:711:9-713:87
+703            android:name="com.yyqq.code.toyslease.ToysLeaseOrderDetailActivity"
+703-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:712:13-80
+704            android:label="@string/title_activity_toys_lease_order_detail" />
+704-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:713:13-75
+705        <activity
+705-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:714:9-716:83
+706            android:name="com.yyqq.code.toyslease.AccountWithdrawalsActivity"
+706-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:715:13-78
+707            android:label="@string/title_activity_account_withdrawals" />
+707-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:716:13-71
+708        <activity
+708-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:717:9-720:68
+709            android:name="com.yyqq.code.main.APKUpdataActivity"
+709-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:718:13-64
+710            android:label="@string/title_activity_apkupdata"
+710-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:719:13-61
+711            android:theme="@android:style/Theme.Dialog" />
+711-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:720:13-56
+712        <activity
+712-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:721:9-723:82
+713            android:name="com.yyqq.code.toyslease.ToysLeaseDepositActivity"
+713-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:722:13-76
+714            android:label="@string/title_activity_toys_lease_deposit" />
+714-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:723:13-70
+715        <activity
+715-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:724:9-726:82
+716            android:name="com.yyqq.code.toyslease.ToysLeaseListActivity"
+716-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:725:13-73
+717            android:label="@string/title_activity_toys_lease_deposit" />
+717-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:726:13-70
+718        <activity
+718-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:727:9-729:89
+719            android:name="com.yyqq.code.toyslease.ToysLeaseDepositDetailActivity"
+719-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:728:13-82
+720            android:label="@string/title_activity_toys_lease_deposit_detail" />
+720-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:729:13-77
+721        <activity
+721-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:730:9-732:85
+722            android:name="com.yyqq.code.toyslease.version_92.ToysLeaseMainOrderActivity"
+722-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:731:13-89
+723            android:label="@string/title_activity_toys_lease_order_list" />
+723-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:732:13-73
+724        <activity
+724-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:733:9-735:79
+725            android:name="com.yyqq.code.toyslease.version_92.ToysLeaseMainHomeActivity"
+725-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:734:13-88
+726            android:label="@string/title_activity_toys_lease_home" />
+726-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:735:13-67
+727        <activity
+727-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:736:9-740:56
+728            android:name="com.yyqq.code.toyslease.ToysLeaseMainTabActivity"
+728-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:737:13-76
+729            android:configChanges="orientation|keyboardHidden"
+729-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:738:13-63
+730            android:label="@string/title_activity_toys_lease_home"
+730-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:739:13-67
+731            android:launchMode="singleTask" />
+731-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:740:13-44
+732        <activity
+732-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:741:9-743:79
+733            android:name="com.yyqq.code.toyslease.version_92.ToysLeaseCategoryActivity"
+733-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:742:13-88
+734            android:label="@string/title_activity_toys_lease_home" />
+734-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:743:13-67
+735        <activity
+735-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:744:9-746:68
+736            android:name="com.yyqq.babyshow.DemoActivity"
+736-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:745:13-41
+737            android:label="@string/title_activity_demo" />
+737-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:746:13-56
+738        <activity
+738-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:747:9-749:77
+739            android:name="com.yyqq.code.toyslease.version_92.ToysLeaseMainShoppingCartActivity"
+739-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:748:13-96
+740            android:label="@string/title_activity_shopping_cart" />
+740-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:749:13-65
+741        <activity
+741-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:750:9-752:81
+742            android:name="com.yyqq.code.toyslease.version_92.ToysLeaseSearchActivity"
+742-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:751:13-86
+743            android:label="@string/title_activity_toys_lease_search" />
+743-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:752:13-69
+744        <activity
+744-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:753:9-755:81
+745            android:name="com.yyqq.code.login.RegisterBandPhoneActivity"
+745-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:754:13-73
+746            android:label="@string/title_activity_toys_lease_search" />
+746-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:755:13-69
+747        <activity
+747-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:756:9-759:81
+748            android:name="com.yyqq.code.toyslease.InviteFriendActivity"
+748-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:757:13-72
+749            android:label="@string/title_activity_invite_friend"
+749-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:758:13-65
+750            android:windowSoftInputMode="stateHidden|stateUnchanged" />
+750-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:759:13-69
+751        <activity android:name="com.yyqq.code.main.MainItemDetialWebActivity" />
+751-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:760:9-90
+751-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:760:19-78
+752        <activity
+752-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:761:9-764:81
+753            android:name="com.yyqq.code.toyslease.InviteFriendWebActivity"
+753-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:762:13-75
+754            android:label="@string/title_activity_invite_friend"
+754-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:763:13-65
+755            android:windowSoftInputMode="stateHidden|stateUnchanged" />
+755-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:764:13-69
+756        <activity
+756-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:765:9-767:77
+757            android:name="com.yyqq.code.toyslease.InviteDetailActivity"
+757-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:766:13-72
+758            android:label="@string/title_activity_invite_friend" />
+758-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:767:13-65
+759
+760        <service android:name="com.yyqq.commen.service.InviteStartService" />
+760-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:769:9-86
+760-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:769:18-75
+761
+762        <activity
+762-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:771:9-773:89
+763            android:name="com.yyqq.code.toyslease.ToysLeaseAddressSelectActivity"
+763-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:772:13-82
+764            android:label="@string/title_activity_toys_lease_address_select" />
+764-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:773:13-77
+765        <activity
+765-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:774:9-776:83
+766            android:name="com.yyqq.code.toyslease.ToysLeaseFeedbackActivity"
+766-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:775:13-77
+767            android:label="@string/title_activity_toys_lease_feedback" />
+767-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:776:13-71
+768        <activity
+768-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:777:9-779:70
+769            android:name="com.yyqq.babyshow.Main01Activity"
+769-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:778:13-43
+770            android:label="@string/title_activity_main01" />
+770-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:779:13-58
+771        <activity
+771-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:780:9-782:70
+772            android:name="com.yyqq.babyshow.Main02Activity"
+772-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:781:13-43
+773            android:label="@string/title_activity_main02" />
+773-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:782:13-58
+774        <activity
+774-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:783:9-785:83
+775            android:name="com.yyqq.code.main.MainToToysMainActivity"
+775-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:784:13-69
+776            android:label="@string/title_activity_toys_lease_feedback" />
+776-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:785:13-71
+777        <activity
+777-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:786:9-788:83
+778            android:name="com.yyqq.code.toyslease.h5.ToysLeaseHtmlInterstActivity"
+778-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:787:13-83
+779            android:label="@string/title_activity_toys_lease_feedback" />
+779-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:788:13-71
+780        <activity
+780-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:789:9-791:83
+781            android:name="com.yyqq.code.toyslease.h5.ToysLeaseHtmlCollectionActivity"
+781-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:790:13-86
+782            android:label="@string/title_activity_toys_lease_feedback" />
+782-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:791:13-71
+783        <activity
+783-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:792:9-794:83
+784            android:name="com.yyqq.code.toyslease.ToysLeaseDelayActivity"
+784-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:793:13-74
+785            android:label="@string/title_activity_toys_lease_feedback" />
+785-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:794:13-71
+786        <activity
+786-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:795:9-797:83
+787            android:name="com.yyqq.code.toyslease.ToysLeaseMyCardActivity"
+787-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:796:13-75
+788            android:label="@string/title_activity_toys_lease_feedback" />
+788-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:797:13-71
+789        <activity
+789-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:798:9-800:83
+790            android:name="com.yyqq.code.toyslease.version_93.MainToysHomeActivity"
+790-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:799:13-83
+791            android:label="@string/title_activity_toys_lease_feedback" />
+791-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:800:13-71
+792        <activity
+792-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:801:9-803:83
+793            android:name="com.yyqq.code.toyslease.version_93.MainToysAllActivity"
+793-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:802:13-82
+794            android:label="@string/title_activity_toys_lease_feedback" />
+794-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:803:13-71
+795        <activity
+795-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:804:9-806:83
+796            android:name="com.yyqq.code.toyslease.version_93.MainToysCategoryActivity"
+796-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:805:13-87
+797            android:label="@string/title_activity_toys_lease_feedback" />
+797-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:806:13-71
+798        <activity
+798-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:807:9-810:77
+799            android:name="com.yyqq.code.toyslease.version_93.SearchMainActivity"
+799-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:808:13-81
+800            android:label="@string/title_activity_toys_lease_feedback"
+800-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:809:13-71
+801            android:windowSoftInputMode="stateVisible|adjustPan" />
+801-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:810:13-65
+802        <activity
+802-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:811:9-814:76
+803            android:name="com.yyqq.code.toyslease.version_93.SearchResultActivity"
+803-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:812:13-83
+804            android:label="@string/title_activity_toys_lease_feedback"
+804-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:813:13-71
+805            android:windowSoftInputMode="stateHidden|adjustPan" />
+805-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:814:13-64
+806        <activity
+806-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:815:9-817:83
+807            android:name="com.yyqq.code.business.BusinessSelectedListActivity"
+807-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:816:13-79
+808            android:label="@string/title_activity_toys_lease_feedback" />
+808-->/Users/doopaa/AndroidStudioProjects/babyshow-android/BabyShow/AndroidManifest.xml:817:13-71
+809    </application>
+810
+811</manifest>

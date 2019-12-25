@@ -1,0 +1,23 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/doopaa/AndroidStudioProjects/babyshow-android/AndBase/AndroidManifest.xml:2:1-7:12
+INJECTED from /Users/doopaa/AndroidStudioProjects/babyshow-android/AndBase/AndroidManifest.xml:2:1-7:12
+INJECTED from /Users/doopaa/AndroidStudioProjects/babyshow-android/AndBase/AndroidManifest.xml:2:1-7:12
+INJECTED from /Users/doopaa/AndroidStudioProjects/babyshow-android/AndBase/AndroidManifest.xml:2:1-7:12
+INJECTED from /Users/doopaa/AndroidStudioProjects/babyshow-android/AndBase/AndroidManifest.xml:2:1-7:12
+INJECTED from /Users/doopaa/AndroidStudioProjects/babyshow-android/AndBase/AndroidManifest.xml:2:1-7:12
+INJECTED from /Users/doopaa/AndroidStudioProjects/babyshow-android/AndBase/AndroidManifest.xml:2:1-7:12
+	package
+		ADDED from /Users/doopaa/AndroidStudioProjects/babyshow-android/AndBase/AndroidManifest.xml:3:5-21
+		INJECTED from /Users/doopaa/AndroidStudioProjects/babyshow-android/AndBase/AndroidManifest.xml
+		INJECTED from /Users/doopaa/AndroidStudioProjects/babyshow-android/AndBase/AndroidManifest.xml
+	android:versionName
+		ADDED from /Users/doopaa/AndroidStudioProjects/babyshow-android/AndBase/AndroidManifest.xml:5:5-32
+		INJECTED from /Users/doopaa/AndroidStudioProjects/babyshow-android/AndBase/AndroidManifest.xml
+		INJECTED from /Users/doopaa/AndroidStudioProjects/babyshow-android/AndBase/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/doopaa/AndroidStudioProjects/babyshow-android/AndBase/AndroidManifest.xml:2:11-69
+	android:versionCode
+		ADDED from /Users/doopaa/AndroidStudioProjects/babyshow-android/AndBase/AndroidManifest.xml:4:5-29
+		INJECTED from /Users/doopaa/AndroidStudioProjects/babyshow-android/AndBase/AndroidManifest.xml
+		INJECTED from /Users/doopaa/AndroidStudioProjects/babyshow-android/AndBase/AndroidManifest.xml

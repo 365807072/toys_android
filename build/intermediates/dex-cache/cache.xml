@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/Users/fanying/Desktop/babyshow-android/BabyShow/libs/alipaySdk-20151112.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="5ce758768906f045b279735e7cefc0b89160d9d6">
+        <dex dex="/Users/fanying/Desktop/babyshow-android/BabyShow/build/intermediates/pre-dexed/release/alipaySdk-20151112_70db2523d6f9f1292dd58faefdb7a9aece9f49ad.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/fanying/Desktop/babyshow-android/SMSSDK/build/intermediates/bundles/default/libs/MobCommons-2018.0523.1925.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="0b73ba814ca45c34bb56f1ad43c30c3fdc14125c">
+        <dex dex="/Users/fanying/Desktop/babyshow-android/BabyShow/build/intermediates/pre-dexed/release/MobCommons-2018.0523.1925_ee1dacadad97342935e5c273762e2548e8b95e21.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/fanying/Desktop/babyshow-android/SMSSDK/build/intermediates/bundles/default/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="8952947dbd0fd2ea6c572b34a5b6eea61e1ac113">
+        <dex dex="/Users/fanying/Desktop/babyshow-android/BabyShow/build/intermediates/pre-dexed/release/classes_6badd7e68f3bec65e4f4bd2ba1f94766d7ca12df.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/fanying/Desktop/babyshow-android/SMSSDK/build/intermediates/bundles/default/libs/SMSSDK-3.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="208d336c6dc7162e890e35432604397e59d5aef4">
+        <dex dex="/Users/fanying/Desktop/babyshow-android/BabyShow/build/intermediates/pre-dexed/release/SMSSDK-3.2.1_427c85bf1d1da51dcb1edc62eb9d28b4aa14f5d5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/fanying/Desktop/babyshow-android/BabyShow/libs/ShareSDK-Core-3.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="5cc73d24252575548ae1786dfb9d2c0ecbfb8e16">
+        <dex dex="/Users/fanying/Desktop/babyshow-android/BabyShow/build/intermediates/pre-dexed/release/ShareSDK-Core-3.2.0_c5309f9325ed3d1400e387773d1cdecccabfcd9b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/fanying/Desktop/babyshow-android/BabyShow/libs/ShareSDK-QQ-3.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="7074bcd3b1a6e73ac671c2748e7a89bb1a95547b">
+        <dex dex="/Users/fanying/Desktop/babyshow-android/BabyShow/build/intermediates/pre-dexed/release/ShareSDK-QQ-3.2.0_c6a078693520e51e5f246d5fc47614c793e5c8e3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/fanying/Desktop/babyshow-android/BabyShow/libs/imageloading.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="c1e9b91020b617197d12833a5f8a1a066efe7286">
+        <dex dex="/Users/fanying/Desktop/babyshow-android/BabyShow/build/intermediates/pre-dexed/release/imageloading_60baf4271f41ecd16623ebdaedc413e43fb860e4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/fanying/Desktop/babyshow-android/BabyShow/libs/ShareSDK-SinaWeibo-3.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="bbd4b644b52ee4cf3951eae8b49b508c5f754b77">
+        <dex dex="/Users/fanying/Desktop/babyshow-android/BabyShow/build/intermediates/pre-dexed/release/ShareSDK-SinaWeibo-3.2.0_4959adc6d3a8ec8f140c1ad732fd92a640b73a2c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/fanying/Desktop/babyshow-android/BabyShow/libs/afinal-0.3.32-bin.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="54417b03f2eb410e2a94428512e4f4218e7fc012">
+        <dex dex="/Users/fanying/Desktop/babyshow-android/BabyShow/build/intermediates/pre-dexed/release/afinal-0.3.32-bin_7252f04233747e8aee2ad9139762fa8a55455aef.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/fanying/Desktop/babyshow-android/BabyShow/libs/mframework.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="25509058b34a5ee08dbf66e57078e3083735d200">
+        <dex dex="/Users/fanying/Desktop/babyshow-android/BabyShow/build/intermediates/pre-dexed/release/mframework_ed8e4800c5a0a1629abc329c08e864460019118a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/fanying/Desktop/babyshow-android/BabyShow/libs/jpush-android-2.0.5.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="f2c821a0d13219a2e70490085c390bab03fb5953">
+        <dex dex="/Users/fanying/Desktop/babyshow-android/BabyShow/build/intermediates/pre-dexed/release/jpush-android-2.0.5_188512fbc09fb48e312d20c479167432f17c8219.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/fanying/Desktop/babyshow-android/BabyShow/libs/umeng-analytics-v6.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="8023cd0713d5cd5bd212b0b6053fec03d133f9d1">
+        <dex dex="/Users/fanying/Desktop/babyshow-android/BabyShow/build/intermediates/pre-dexed/release/umeng-analytics-v6.0.0_219818ad78790fc758bb57f6a7f33ab8ec0ce1f7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/fanying/Desktop/babyshow-android/AndBase/build/intermediates/bundles/default/libs/android-support-v4.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="da351fadee6981cb47e9ee685f70924283214fda">
+        <dex dex="/Users/fanying/Desktop/babyshow-android/BabyShow/build/intermediates/pre-dexed/release/android-support-v4_31ce782427bd40b4a3db11527d726db3ee08281b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/fanying/Desktop/babyshow-android/AndBase/build/intermediates/bundles/default/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="4f59f44faeac2cbf63c2ed2f64c426a43feb75bb">
+        <dex dex="/Users/fanying/Desktop/babyshow-android/BabyShow/build/intermediates/pre-dexed/release/classes_fd27b16293df50f12e7418aea96a04cdc2c85a6c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/fanying/Desktop/babyshow-android/BabyShow/libs/ShareSDK-QZone-3.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="d7e328dc4842cf6e69aba0ad472a9d3773a6030c">
+        <dex dex="/Users/fanying/Desktop/babyshow-android/BabyShow/build/intermediates/pre-dexed/release/ShareSDK-QZone-3.2.0_0595a9459ece93c638e1b35d642ae2b9946a9404.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/fanying/Desktop/babyshow-android/BabyShow/libs/libammsdk.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="47f4993168154fa73377d7470b9f6887d48a8023">
+        <dex dex="/Users/fanying/Desktop/babyshow-android/BabyShow/build/intermediates/pre-dexed/release/libammsdk_84bf25f79de749b4c18d982941a328318d1e3953.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/fanying/Desktop/babyshow-android/BabyShow/libs/ShareSDK-Wechat-3.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="f93e42df73b5467b3a49b29dae69a0c5f0fd13ad">
+        <dex dex="/Users/fanying/Desktop/babyshow-android/BabyShow/build/intermediates/pre-dexed/release/ShareSDK-Wechat-3.2.0_21bd73850e72e8e974d80d40a809c0ab8f6cdaa4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/fanying/Desktop/babyshow-android/BabyShow/libs/TencentLocationSDK_v4.3.0_r196568_151014_1433.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="0440902e16f4f232c9e3e877fe775f89a293d7af">
+        <dex dex="/Users/fanying/Desktop/babyshow-android/BabyShow/build/intermediates/pre-dexed/release/TencentLocationSDK_v4.3.0_r196568_151014_1433_4a4969de685c144a74d3813a2c152ac1daf6b780.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/fanying/Desktop/babyshow-android/BabyShow/libs/ShareSDK-Wechat-Moments-3.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="351d0e151987738ad52a1d626bb20af2fc2cdd24">
+        <dex dex="/Users/fanying/Desktop/babyshow-android/BabyShow/build/intermediates/pre-dexed/release/ShareSDK-Wechat-Moments-3.2.0_4a4fa9fbea0d105523f38dd04a92c5b384f5a12e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/fanying/Desktop/babyshow-android/SMSSDK/build/intermediates/bundles/default/libs/MobTools-2018.0523.1923.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="fc3091eaa8827d9c06955d49f2b5b1a6dfe4710f">
+        <dex dex="/Users/fanying/Desktop/babyshow-android/BabyShow/build/intermediates/pre-dexed/release/MobTools-2018.0523.1923_67d90a7e2b36714b25c290222d3e246e0cf590b6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/fanying/Desktop/babyshow-android/SMSSDK/build/intermediates/bundles/default/libs/SDKWrapper-2018.0201.1609.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="92129e261ad01e66b120680a141f4d11406ee2ac">
+        <dex dex="/Users/fanying/Desktop/babyshow-android/BabyShow/build/intermediates/pre-dexed/release/SDKWrapper-2018.0201.1609_e1834f6bf2b3a37bee0c2b78f291dff74624478f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/fanying/Desktop/babyshow-android/BabyShow/libs/TencentMapSDK_Raster_v1.1.2.15850.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="ffb241eab4cc7d41b9635bd8939ee7c7ae737ac1">
+        <dex dex="/Users/fanying/Desktop/babyshow-android/BabyShow/build/intermediates/pre-dexed/release/TencentMapSDK_Raster_v1.1.2.15850_4273eff75a10f3ab81a755c769d07d6bf7db79c5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/fanying/Desktop/babyshow-android/BabyShow/libs/ShareSDK-Wechat-Core-3.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="e22e6b80521049b6243eba79d7c4518fa85b82af">
+        <dex dex="/Users/fanying/Desktop/babyshow-android/BabyShow/build/intermediates/pre-dexed/release/ShareSDK-Wechat-Core-3.2.0_2f2cb6571252173adb8544524852ab5540c60646.jar" />
+    </item>
+
+</items>

@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="/Users/fanying/Desktop/babyshow-android/AndBase/assets"/><source path="/Users/fanying/Desktop/babyshow-android/AndBase/build/generated/assets/shaders/release"/></dataSet><dataSet config="release"><source path="/Users/fanying/Desktop/babyshow-android/AndBase/build-types/release/assets"/></dataSet></merger>

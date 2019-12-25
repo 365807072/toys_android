@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f1f1f1" >
+
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        android:background="@color/title_bg" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="10dp"
+            android:text="编辑身高体重"
+            android:textColor="#ffffff"
+            android:textSize="18dp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ly"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:background="#ffffff"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#ffffff"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="30dp"
+                android:text="身高"
+                android:textColor="#333333"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/my_height"
+                android:layout_width="85.5dp"
+                android:layout_height="32.5dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/input_bg_wh"
+                android:gravity="center"
+                android:numeric="decimal"
+                android:singleLine="true"
+                android:textColor="#69b1e1"
+                android:textColorHint="#A5A5A5"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="30dp"
+                android:text="cm"
+                android:textColor="#333333"
+                android:textSize="15dp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:background="#f1f1f1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#ffffff"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="30dp"
+                android:text="体重"
+                android:textColor="#333333"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/my_weight"
+                android:layout_width="85.5dp"
+                android:layout_height="32.5dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/input_bg_wh"
+                android:gravity="center"
+                android:numeric="decimal"
+                android:singleLine="true"
+                android:textColor="#69b1e1"
+                android:textColorHint="#A5A5A5"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="30dp"
+                android:text="kg"
+                android:textColor="#333333"
+                android:textSize="15dp" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginBottom="10dp"
+                android:background="#f1f1f1" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ly1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/ly"
+        android:layout_marginTop="10dp"
+        android:background="#ffffff"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="30dp"
+            android:text="日期"
+            android:textColor="#333333"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="30dp"
+            android:textColor="#666666"
+            android:textSize="15dp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/fin"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/ly1"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bt_inset_wh"
+        android:gravity="center"
+        android:text="完成"
+        android:textColor="#ffffff"
+        android:textSize="17sp" />
+
+</RelativeLayout>

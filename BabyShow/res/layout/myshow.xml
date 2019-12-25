@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.yyqq.commen.view.PullDownView
+        android:id="@+id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:cacheColorHint="#FFFFFF"
+        android:divider="#FFFFFF"
+        android:footerDividersEnabled="false"
+        android:hapticFeedbackEnabled="false"
+        android:listSelector="#FFFFFF" />
+
+    <RelativeLayout
+        android:id="@+id/none"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:visibility="gone" >
+
+        <ImageView
+            android:id="@+id/none_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/none" />
+
+        <TextView
+            android:id="@+id/none_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/none_img"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="你的秀秀还没有信息哦，快去广场关注别人吧"
+            android:textColor="#c6a886" />
+    </RelativeLayout>
+
+</RelativeLayout>
